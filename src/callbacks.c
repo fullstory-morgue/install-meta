@@ -67,15 +67,19 @@ void search_metapackages_names()
       printf( "The file %s was not opened\n", temp_create_packages);
    else
    {
-      fprintf( temp_create_packages_list, "%s\n\n%s\n\n%s%s%s\n\n%s%s%s%s\n", 
+      fprintf( temp_create_packages_list, "%s\n\n%s\n\n%s%s%s\n\n%s%s%s\n%s%s%s\n%s%s\n", 
 "#!/bin/bash",
 ". /etc/default/distro",
 "for i in $(ls ",
 INSTALL_PACKAGES_CONF_DIR,
 "/*.conf); do source ${i}; done > /dev/null",
-"set | grep ",
+"VAR=$(set | grep ",
 BEGIN_OF_PACKAGES_VAR,
-" | cut -d= -f1 | cut -d_ -f3,4 | grep _ > ",
+" | cut -d= -f1 | cut -d_ -f3,4 | grep _ | xargs)",
+"VAR=$(for i in $VAR; do echo ",
+BEGIN_OF_PACKAGES_VAR,
+"${i}[@];done)",
+"for i in $VAR; do echo $(echo ${i} | cut -d_ -f3,4 | sed 's/\\[@\\]//'):$(echo ${!i} | sed 's/ /,/g'); done > ",
 temp_file_packagelist
       );
 
@@ -171,7 +175,7 @@ on_window1_configure_event             (GtkWidget       *widget,
                                         gpointer         user_data)
 {
  FILE *temp_file_package;
- char *ptr_option, *ptr_confdir, shorttext[STDLINE];
+ char *ptr_option, *ptr_confdir, longtext[MAXLINE], *shorttext_p, *longtext_p;
 
  if( do_it_at_first_time < 1 ) {
 
@@ -198,8 +202,8 @@ on_window1_configure_event             (GtkWidget       *widget,
    cell = gtk_cell_renderer_text_new();
 
    device     = gtk_tree_view_column_new_with_attributes("", toggle, "active", COL_SELECTED, NULL);
-   fs         = gtk_tree_view_column_new_with_attributes("Package", cell, "text", 1, NULL);
-   mointpoint = gtk_tree_view_column_new_with_attributes("Description", cell, "text", 2, NULL);
+   fs         = gtk_tree_view_column_new_with_attributes("MetaPackage", cell, "text", 1, NULL);
+   mointpoint = gtk_tree_view_column_new_with_attributes("Packages", cell, "text", 2, NULL);
 
    gtk_tree_view_append_column(GTK_TREE_VIEW(treeview1), GTK_TREE_VIEW_COLUMN(device));
    gtk_tree_view_append_column(GTK_TREE_VIEW(treeview1), GTK_TREE_VIEW_COLUMN(fs));
@@ -243,11 +247,18 @@ on_window1_configure_event             (GtkWidget       *widget,
 
      // appand to treeview
      fseek( temp_file_package, 0L, SEEK_SET );
-     while (fscanf(temp_file_package, "%s", shorttext) != EOF) {
+     while (fscanf(temp_file_package, "%s", longtext) != EOF) {
+
+             shorttext_p = strtok(longtext, ":");
+             longtext_p = strtok(NULL, ":");
+
+             //strncpy(shorttext, shorttext_p, STDLINE );
+             //strncpy(longtext, longtext_p, MAXLINE );
+
              gtk_list_store_append ( GTK_LIST_STORE (model), &iter_tb);
              gtk_list_store_set ( GTK_LIST_STORE (model), &iter_tb,
-                         COL_SHORT_TEXT, shorttext,
-                         COL_LONG_TEXT, "",
+                         COL_SHORT_TEXT, shorttext_p,
+                         COL_LONG_TEXT, longtext_p,
                          -1);
              counter++;
             }
@@ -339,9 +350,9 @@ temp_file_packagelist,
    system(system_call);
 
 
-  // remove the tempfile
-  unlink(temp_file_packagelist);
-  unlink(temp_file_aptgetcall);
+   // remove the tempfile
+   unlink(temp_file_packagelist);
+   unlink(temp_file_aptgetcall);
 
 }
 

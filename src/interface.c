@@ -34,11 +34,6 @@ create_window1 (void)
   GtkWidget *fixed1;
   GtkWidget *scrolledwindow1;
   GtkWidget *treeview1;
-  GtkWidget *button_install;
-  GtkWidget *alignment4;
-  GtkWidget *hbox4;
-  GtkWidget *image7;
-  GtkWidget *label12;
   GtkWidget *label_install;
   GtkWidget *image8;
   GtkWidget *exit;
@@ -46,6 +41,11 @@ create_window1 (void)
   GtkWidget *hbox2;
   GtkWidget *image5;
   GtkWidget *label10;
+  GtkWidget *button_install;
+  GtkWidget *alignment4;
+  GtkWidget *hbox4;
+  GtkWidget *image7;
+  GtkWidget *label12;
 
   window1 = gtk_window_new (GTK_WINDOW_TOPLEVEL);
   gtk_window_set_title (GTK_WINDOW (window1), _("Install metapackages"));
@@ -71,28 +71,8 @@ create_window1 (void)
   gtk_widget_show (treeview1);
   gtk_container_add (GTK_CONTAINER (scrolledwindow1), treeview1);
   gtk_widget_set_size_request (treeview1, 248, 136);
+  gtk_tree_view_set_hover_selection (GTK_TREE_VIEW (treeview1), TRUE);
   gtk_tree_view_set_hover_expand (GTK_TREE_VIEW (treeview1), TRUE);
-
-  button_install = gtk_button_new ();
-  gtk_widget_show (button_install);
-  gtk_fixed_put (GTK_FIXED (fixed1), button_install, 592, 512);
-  gtk_widget_set_size_request (button_install, 110, 28);
-
-  alignment4 = gtk_alignment_new (0.5, 0.5, 0, 0);
-  gtk_widget_show (alignment4);
-  gtk_container_add (GTK_CONTAINER (button_install), alignment4);
-
-  hbox4 = gtk_hbox_new (FALSE, 2);
-  gtk_widget_show (hbox4);
-  gtk_container_add (GTK_CONTAINER (alignment4), hbox4);
-
-  image7 = gtk_image_new_from_stock ("gtk-apply", GTK_ICON_SIZE_BUTTON);
-  gtk_widget_show (image7);
-  gtk_box_pack_start (GTK_BOX (hbox4), image7, FALSE, FALSE, 0);
-
-  label12 = gtk_label_new_with_mnemonic (_("Install"));
-  gtk_widget_show (label12);
-  gtk_box_pack_start (GTK_BOX (hbox4), label12, FALSE, FALSE, 0);
 
   label_install = gtk_label_new (_("Install additional metapackages"));
   gtk_widget_show (label_install);
@@ -108,7 +88,7 @@ create_window1 (void)
   exit = gtk_button_new ();
   gtk_widget_show (exit);
   gtk_fixed_put (GTK_FIXED (fixed1), exit, 32, 512);
-  gtk_widget_set_size_request (exit, 110, 28);
+  gtk_widget_set_size_request (exit, 150, 28);
 
   alignment2 = gtk_alignment_new (0.5, 0.5, 0, 0);
   gtk_widget_show (alignment2);
@@ -126,17 +106,38 @@ create_window1 (void)
   gtk_widget_show (label10);
   gtk_box_pack_start (GTK_BOX (hbox2), label10, FALSE, FALSE, 0);
 
+  button_install = gtk_button_new ();
+  gtk_widget_show (button_install);
+  gtk_fixed_put (GTK_FIXED (fixed1), button_install, 552, 512);
+  gtk_widget_set_size_request (button_install, 150, 28);
+
+  alignment4 = gtk_alignment_new (0.5, 0.5, 0, 0);
+  gtk_widget_show (alignment4);
+  gtk_container_add (GTK_CONTAINER (button_install), alignment4);
+
+  hbox4 = gtk_hbox_new (FALSE, 2);
+  gtk_widget_show (hbox4);
+  gtk_container_add (GTK_CONTAINER (alignment4), hbox4);
+
+  image7 = gtk_image_new_from_stock ("gtk-apply", GTK_ICON_SIZE_BUTTON);
+  gtk_widget_show (image7);
+  gtk_box_pack_start (GTK_BOX (hbox4), image7, FALSE, FALSE, 0);
+
+  label12 = gtk_label_new_with_mnemonic (_("Install"));
+  gtk_widget_show (label12);
+  gtk_box_pack_start (GTK_BOX (hbox4), label12, FALSE, FALSE, 0);
+
   g_signal_connect ((gpointer) window1, "configure_event",
                     G_CALLBACK (on_window1_configure_event),
                     NULL);
   g_signal_connect ((gpointer) window1, "delete_event",
                     G_CALLBACK (on_window1_delete_event),
                     NULL);
-  g_signal_connect ((gpointer) button_install, "clicked",
-                    G_CALLBACK (on_button_install_clicked),
-                    NULL);
   g_signal_connect ((gpointer) exit, "clicked",
                     G_CALLBACK (on_exit_clicked),
+                    NULL);
+  g_signal_connect ((gpointer) button_install, "clicked",
+                    G_CALLBACK (on_button_install_clicked),
                     NULL);
 
   /* Store pointers to all widgets, for use by lookup_widget(). */
@@ -144,11 +145,6 @@ create_window1 (void)
   GLADE_HOOKUP_OBJECT (window1, fixed1, "fixed1");
   GLADE_HOOKUP_OBJECT (window1, scrolledwindow1, "scrolledwindow1");
   GLADE_HOOKUP_OBJECT (window1, treeview1, "treeview1");
-  GLADE_HOOKUP_OBJECT (window1, button_install, "button_install");
-  GLADE_HOOKUP_OBJECT (window1, alignment4, "alignment4");
-  GLADE_HOOKUP_OBJECT (window1, hbox4, "hbox4");
-  GLADE_HOOKUP_OBJECT (window1, image7, "image7");
-  GLADE_HOOKUP_OBJECT (window1, label12, "label12");
   GLADE_HOOKUP_OBJECT (window1, label_install, "label_install");
   GLADE_HOOKUP_OBJECT (window1, image8, "image8");
   GLADE_HOOKUP_OBJECT (window1, exit, "exit");
@@ -156,6 +152,11 @@ create_window1 (void)
   GLADE_HOOKUP_OBJECT (window1, hbox2, "hbox2");
   GLADE_HOOKUP_OBJECT (window1, image5, "image5");
   GLADE_HOOKUP_OBJECT (window1, label10, "label10");
+  GLADE_HOOKUP_OBJECT (window1, button_install, "button_install");
+  GLADE_HOOKUP_OBJECT (window1, alignment4, "alignment4");
+  GLADE_HOOKUP_OBJECT (window1, hbox4, "hbox4");
+  GLADE_HOOKUP_OBJECT (window1, image7, "image7");
+  GLADE_HOOKUP_OBJECT (window1, label12, "label12");
 
   return window1;
 }
