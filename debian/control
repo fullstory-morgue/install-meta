@@ -1,0 +1,14 @@
+Source: install-meta
+Section: unknown
+Priority: extra
+Maintainer: Horst Tritremmel <peter_weber69@gmx.at>
+Build-Depends: debhelper (>= 5), autotools-dev, libgtk2.0-dev, libglade2-dev
+Standards-Version: 3.7.2
+
+Package: install-meta
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}, x-terminal-emulator
+Description: install metapackages
+ Install additonal metapackages to sidux.
+ Put the <metapackage-description-files>.conf to /usr/share/install-meta/
+ or use the --dir=<dir> option

@@ -1,0 +1,6 @@
+install-meta (0.0.1-1) unstable; urgency=low
+
+  * Initial release (Closes: #nnnn)  <nnnn is the bug number of your ITP>
+
+ -- Horst Tritremmel <peter_weber69@gmx.at>  Tue, 30 Jan 2007 13:56:20 +0000
+
