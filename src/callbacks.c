@@ -15,8 +15,6 @@
 #define MAXLINE 1024
 #define STDLINE 80
 
-#define BEGIN_OF_PACKAGES_VAR "FLL_PACKAGES_"
-#define DESCRIPTION_VAR "FLL_DESCRITION"
 #define DEFAULT_CONF_DIR "/usr/share/install-meta"
 #define APT_GET_CALL "apt-get install"
 
@@ -78,7 +76,7 @@ void search_metapackages_names()
                "for modul in $(ls *.bm); do",
                "   source ${modul}",
                "   echo $(echo ${modul} | cut -d. -f1):${FLL_DESCRIPTION}",
-               "   unset FLL_PACKAGES FLL_PACKAGE_DEPMODS;",
+               "   unset -f FLL_PACKAGES FLL_PACKAGE_DEPMODS FLL_DESCRITION",
                "done > ",temp_file_packagelist
       );
 
@@ -252,8 +250,7 @@ on_window1_configure_event             (GtkWidget       *widget,
 
      // appand to treeview
      fseek( temp_file_package, 0L, SEEK_SET );
-     while (fscanf(temp_file_package, "%s", longtext) != EOF) {
-
+     while (fscanf(temp_file_package, "%[^\n]\n", longtext) != EOF) {
              shorttext_p = strtok(longtext, ":");
              longtext_p = strtok(NULL, ":");
 
@@ -344,7 +341,7 @@ on_button_install_clicked              (GtkButton       *button,
                "echo start installation for ${modul}",
                "echo --------------------------------------",
                    APT_GET_CALL," ${FLL_PACKAGES[@]}",
-               "   unset FLL_PACKAGES FLL_PACKAGE_DEPMODS;",
+               "   unset FLL_PACKAGES FLL_PACKAGE_DEPMODS FLL_DESCRITION",
                "done",
                "echo; echo ======================================",
                "echo; echo Hit a key; read key"
