@@ -76,7 +76,7 @@ void search_metapackages_names()
                "for modul in $(ls *.bm); do",
                "   source ${modul}",
                "   echo $(echo ${modul} | cut -d. -f1):${FLL_DESCRIPTION}",
-               "   unset -f FLL_PACKAGES FLL_PACKAGE_DEPMODS FLL_DESCRITION",
+               "   unset FLL_PACKAGES FLL_PACKAGE_DEPMODS FLL_DESCRIPTION",
                "done > ",temp_file_packagelist
       );
 
@@ -341,7 +341,7 @@ on_button_install_clicked              (GtkButton       *button,
                "echo start installation for ${modul}",
                "echo --------------------------------------",
                    APT_GET_CALL," ${FLL_PACKAGES[@]}",
-               "   unset FLL_PACKAGES FLL_PACKAGE_DEPMODS FLL_DESCRITION",
+               "   unset FLL_PACKAGES FLL_PACKAGE_DEPMODS FLL_DESCRIPTION",
                "done",
                "echo; echo ======================================",
                "echo; echo Hit a key; read key"

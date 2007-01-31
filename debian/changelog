@@ -1,3 +1,9 @@
+install-meta (0.0.1-6) unstable; urgency=low
+
+  * second FLL_DESCRIPTION Variable fixes 
+
+ -- Horst Tritremmel <peter_weber69@gmx.at>  Wed, 31 Jan 2007 22:22:10 +0100
+
 install-meta (0.0.1-5) unstable; urgency=low
 
   * FLL_DESCRIPTION Variable fixes 
