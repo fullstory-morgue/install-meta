@@ -20,7 +20,7 @@
 #define APT_GET_CALL "apt-get install"
 
 
-FILE *temp_create_packages_list;
+FILE *temp_create_package_list_sh_fd;
 char INSTALL_PACKAGES_CONF_DIR[MAXLINE];  // = extern variable argv[1] in main.c
 char temp_file_packagelist[STDLINE];
 int  do_it_at_first_time = 0;
@@ -40,16 +40,16 @@ void search_metapackages_names()
     // put the search_metapackages_names in a tempfile
 
    int fd;
-   char temp_create_packages[STDLINE];
+   char temp_create_package_list_sh[STDLINE];
    char system_call[STDLINE];
 
    //  create first tempfile for the packages search
-   strncpy(temp_create_packages, "/tmp/temp_create_packages_list.XXXXXX", STDLINE);
-   fd = mkstemp(temp_create_packages);  // make a tempfile
+   strncpy(temp_create_package_list_sh, "/tmp/temp_create_package_list_sh_fd.XXXXXX", STDLINE);
+   fd = mkstemp(temp_create_package_list_sh);  // make a tempfile
    if( fd )
       close(fd);
    else
-      printf("mkstemp(temp_create_packages)\n");
+      printf("mkstemp(temp_create_package_list_sh)\n");
 
 
    //  create second tempfile for the packages list
@@ -62,38 +62,32 @@ void search_metapackages_names()
 
 
    // fill the first tempfile 
-   temp_create_packages_list = fopen( temp_create_packages, "w+" );
-   if( temp_create_packages_list == NULL )
-      printf( "The file %s was not opened\n", temp_create_packages);
+   temp_create_package_list_sh_fd = fopen( temp_create_package_list_sh, "w+" );
+   if( temp_create_package_list_sh_fd == NULL )
+      printf( "The file %s was not opened\n", temp_create_package_list_sh);
    else
    {
-      fprintf( temp_create_packages_list, "%s\n\n%s\n\n%s%s%s\n\n%s%s%s\n%s%s%s\n%s%s\n", 
-"#!/bin/bash",
-". /etc/default/distro",
-"for i in $(ls ",
-INSTALL_PACKAGES_CONF_DIR,
-"/*.conf); do source ${i}; done > /dev/null",
-"VAR=$(set | grep ",
-BEGIN_OF_PACKAGES_VAR,
-" | cut -d= -f1 | cut -d_ -f3,4 | grep _ | xargs)",
-"VAR=$(for i in $VAR; do echo ",
-BEGIN_OF_PACKAGES_VAR,
-"${i}[@];done)",
-"for i in $VAR; do echo $(echo ${i} | cut -d_ -f3,4 | sed 's/\\[@\\]//'):$(echo ${!i} | sed 's/ /,/g'); done > ",
-temp_file_packagelist
+      // build the script who creates the packagelist
+      fprintf( temp_create_package_list_sh_fd, "%s\n\n%s\n\n%s%s%s\n\n%s%s%s\n%s%s%s\n%s%s\n", 
+               "#!/bin/bash",
+               ". /etc/default/distro",
+               "for i in $(ls ",INSTALL_PACKAGES_CONF_DIR,"/*.conf); do source ${i}; done > /dev/null",
+               "VAR=$(set | grep ",BEGIN_OF_PACKAGES_VAR," | cut -d= -f1 | cut -d_ -f3,4 | grep _ | xargs)",
+               "VAR=$(for i in $VAR; do echo ",BEGIN_OF_PACKAGES_VAR,"${i}[@];done)",
+               "for i in $VAR; do echo $(echo ${i} | cut -d_ -f3,4 | sed 's/\\[@\\]//'):$(echo ${!i} | sed 's/ /,/g'); done > ",temp_file_packagelist
       );
 
-   fclose( temp_create_packages_list );
+   fclose( temp_create_package_list_sh_fd );
    }
 
 
-   // fill the second temp file with the name of packages
+   // fill the second temp file with the name of packages (start the script above)
    strncpy(system_call, "sh ", STDLINE);
-   strncat(system_call, temp_create_packages, STDLINE);
+   strncat(system_call, temp_create_package_list_sh, STDLINE);
    system(system_call);
 
    /* remove the tempfile */
-   unlink(temp_create_packages);
+   unlink(temp_create_package_list_sh);
 }
 
 
@@ -101,6 +95,7 @@ void toggle_selected (GtkCellRendererToggle *toggle,
                       const gchar           *path_str,
                       gpointer data)
 {
+   // store the toggle selection if it is selected
    GtkTreeModel *model;
    GtkTreePath  *path;
    GtkTreeIter   iter;
@@ -131,6 +126,7 @@ foreach_func (GtkTreeModel *model,
               GtkTreeIter  *iter,
               gpointer      user_data)
 {
+  // read each line in the treeview and create the packagelist tempfile for selected metapackages
   gboolean *toggle;
   gchar *short_text, *long_text;
 
@@ -142,10 +138,11 @@ foreach_func (GtkTreeModel *model,
                       COL_SHORT_TEXT, &short_text,
                       COL_LONG_TEXT, &long_text,
                       -1);
-
+  // if the metapackage was selected
   if ( toggle )
-      fprintf( temp_create_packages_list, "%s%s[@]\n", BEGIN_OF_PACKAGES_VAR, short_text);
-      //g_print ("%s, %s\n", short_text, long_text);
+      fprintf( temp_create_package_list_sh_fd, "%s%s[@]\n", 
+                                               BEGIN_OF_PACKAGES_VAR, short_text);
+
 
   g_free(short_text);  /* the strings for us when retrieving them */
   g_free(long_text);
@@ -157,6 +154,7 @@ foreach_func (GtkTreeModel *model,
 void
 no_file_dialog(GtkWidget *widget)
 {
+   //Error dialog window
 
    // hide the main window
    GtkWidget *window1 = lookup_widget(GTK_WIDGET(widget),"window1");
@@ -176,6 +174,13 @@ on_window1_configure_event             (GtkWidget       *widget,
 {
  FILE *temp_file_package;
  char *ptr_option, *ptr_confdir, longtext[MAXLINE], *shorttext_p, *longtext_p;
+ GtkWidget *treeview1;
+ GtkListStore *model;
+ GtkCellRenderer *toggle, *cell;
+ GtkTreeViewColumn *mointpoint, *fs, *device;
+ GtkTreeIter iter_tb;
+ long counter = 0;
+
 
  if( do_it_at_first_time < 1 ) {
 
@@ -186,12 +191,6 @@ on_window1_configure_event             (GtkWidget       *widget,
   /* ================================================== *
    *                   set treeviev                     *
    * ================================================== */
-   GtkWidget *treeview1;
-   GtkListStore *model;
-   GtkCellRenderer *toggle, *cell;
-   GtkTreeViewColumn *mointpoint, *fs, *device;
-   GtkTreeIter iter_tb;
-   long counter = 0;
 
    /* treeview */
    treeview1   = lookup_widget (GTK_WIDGET (widget), "treeview1");
@@ -235,7 +234,7 @@ on_window1_configure_event             (GtkWidget       *widget,
    }
 
 
-   // put the search_metapackages_names in a tempfile
+   // put the metapackages_names in a tempfile
    search_metapackages_names();
 
    // read the temp_file_packagelist temp file and fill the treeview
@@ -251,9 +250,6 @@ on_window1_configure_event             (GtkWidget       *widget,
 
              shorttext_p = strtok(longtext, ":");
              longtext_p = strtok(NULL, ":");
-
-             //strncpy(shorttext, shorttext_p, STDLINE );
-             //strncpy(longtext, longtext_p, MAXLINE );
 
              gtk_list_store_append ( GTK_LIST_STORE (model), &iter_tb);
              gtk_list_store_set ( GTK_LIST_STORE (model), &iter_tb,
@@ -282,8 +278,8 @@ on_button_install_clicked              (GtkButton       *button,
                                         gpointer         user_data)
 {
 
-   FILE* temp_file_aptgetcall_fd;
-   char temp_file_aptgetcall[STDLINE];
+   FILE* temp_file_aptgetcall_sh_fd;
+   char temp_file_aptgetcall_sh[STDLINE];
    int fd;
 
    // read the treeview1 (mountpoint) list
@@ -301,58 +297,54 @@ on_button_install_clicked              (GtkButton       *button,
 
 
    // create apt-get systemcall tempfile
-   strncpy(temp_file_aptgetcall, "/tmp/temp_aptgetcall.XXXXXX", STDLINE);
-   fd = mkstemp(temp_file_aptgetcall);  // make a tempfile
+   strncpy(temp_file_aptgetcall_sh, "/tmp/temp_aptgetcall.XXXXXX", STDLINE);
+   fd = mkstemp(temp_file_aptgetcall_sh);  // make a tempfile
    if( fd )
       close(fd);
    else
-      printf("mkstemp(temp_file_aptgetcall)\n");
+      printf("mkstemp(temp_file_aptgetcall_sh)\n");
  
 
    // fill the tempfile with apt-get system call 
-   temp_create_packages_list = fopen( temp_file_packagelist, "w+" );
-   if( temp_create_packages_list == NULL )
+   temp_create_package_list_sh_fd = fopen( temp_file_packagelist, "w+" );
+   if( temp_create_package_list_sh_fd == NULL )
       printf( "The file %s was not opened\n", temp_file_packagelist);
    else
    {
       gtk_tree_model_foreach(GTK_TREE_MODEL(model), foreach_func, NULL);  // put the selected meta packages to the tempfile
-      fclose( temp_create_packages_list );
+      fclose( temp_create_package_list_sh_fd );
    }
 
 
-   // install the packages via apt-get
-   temp_file_aptgetcall_fd = fopen( temp_file_aptgetcall, "w+" );
-   if( temp_file_aptgetcall_fd == NULL )
-       printf( "The file %s was not opened\n", temp_file_aptgetcall);
+   // install the packages via apt-get, create the bash file to do that
+   temp_file_aptgetcall_sh_fd = fopen( temp_file_aptgetcall_sh, "w+" );
+   if( temp_file_aptgetcall_sh_fd == NULL )
+       printf( "The file %s was not opened\n", temp_file_aptgetcall_sh);
    else {
-       fprintf( temp_file_aptgetcall_fd, "%s\n\n%s\n\n%s\n\n%s\n%s%s%s\n\n%s\n\n%s%s%s%s\n\n%s\n",
-"#!/bin/bash",
-"apt-get update",
-". /etc/default/distro",
-"echo; echo ======================================",
-"for i in $(ls ",
-INSTALL_PACKAGES_CONF_DIR,
-"/*.conf); do source ${i}; done",
-"echo; echo ======================================",
-APT_GET_CALL,
-" $(for i in $(cat ",
-temp_file_packagelist,
-"); do echo ${!i}; done | xargs)",
-"echo; echo Hit a key; read key"
+       //  create the bash file for install the packages
+       fprintf( temp_file_aptgetcall_sh_fd, "%s\n\n%s\n\n%s\n\n%s\n%s%s%s\n\n%s\n\n%s%s%s%s\n\n%s\n",
+                "#!/bin/bash",
+                "apt-get update",
+                ". /etc/default/distro",
+                "echo; echo ======================================",
+                "for i in $(ls ",INSTALL_PACKAGES_CONF_DIR,"/*.conf); do source ${i}; done",
+                "echo; echo ======================================",
+                APT_GET_CALL," $(for i in $(cat ",temp_file_packagelist,"); do echo ${!i}; done | xargs)",
+                "echo; echo Hit a key; read key"
        );
 
-       fclose( temp_file_aptgetcall_fd );
+       fclose( temp_file_aptgetcall_sh_fd );
    }
 
-   // run apt-get
+   // run apt-get, (start the script above)
    strncpy(system_call, "x-terminal-emulator -e sh ", STDLINE);
-   strncat(system_call, temp_file_aptgetcall, STDLINE);
+   strncat(system_call, temp_file_aptgetcall_sh, STDLINE);
    system(system_call);
 
 
    // remove the tempfile
    unlink(temp_file_packagelist);
-   unlink(temp_file_aptgetcall);
+   unlink(temp_file_aptgetcall_sh);
 
 }
 
