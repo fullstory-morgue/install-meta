@@ -16,6 +16,7 @@
 #define STDLINE 80
 
 #define BEGIN_OF_PACKAGES_VAR "FLL_PACKAGES_"
+#define DESCRIPTION_VAR "FLL_DESCRITION"
 #define DEFAULT_CONF_DIR "/usr/share/install-meta"
 #define APT_GET_CALL "apt-get install"
 
@@ -68,13 +69,17 @@ void search_metapackages_names()
    else
    {
       // build the script who creates the packagelist
-      fprintf( temp_create_package_list_sh_fd, "%s\n\n%s\n\n%s%s%s\n\n%s%s%s\n%s%s%s\n%s%s\n", 
+     fprintf( temp_create_package_list_sh_fd, "%s\n%s\n%s\n%s\n%s%s\n%s\n%s\n%s\n%s\n%s%s\n", 
                "#!/bin/bash",
-               ". /etc/default/distro",
-               "for i in $(ls ",INSTALL_PACKAGES_CONF_DIR,"/*.conf); do source ${i}; done > /dev/null",
-               "VAR=$(set | grep ",BEGIN_OF_PACKAGES_VAR," | cut -d= -f1 | cut -d_ -f3,4 | grep _ | xargs)",
-               "VAR=$(for i in $VAR; do echo ",BEGIN_OF_PACKAGES_VAR,"${i}[@];done)",
-               "for i in $VAR; do echo $(echo ${i} | cut -d_ -f3,4 | sed 's/\\[@\\]//'):$(echo ${!i} | sed 's/ /,/g'); done > ",temp_file_packagelist
+               "set -e",
+               "DPKG_ARCH=$(dpkg --print-installation-architecture)",
+               "source /etc/default/distro",
+               "cd ", INSTALL_PACKAGES_CONF_DIR,
+               "for modul in $(ls *.bm); do",
+               "   source ${modul}",
+               "   echo $(echo ${modul} | cut -d. -f1):${FLL_DESCRIPTION}",
+               "   unset FLL_PACKAGES FLL_PACKAGE_DEPMODS;",
+               "done > ",temp_file_packagelist
       );
 
    fclose( temp_create_package_list_sh_fd );
@@ -88,6 +93,8 @@ void search_metapackages_names()
 
    /* remove the tempfile */
    unlink(temp_create_package_list_sh);
+
+
 }
 
 
@@ -140,8 +147,8 @@ foreach_func (GtkTreeModel *model,
                       -1);
   // if the metapackage was selected
   if ( toggle )
-      fprintf( temp_create_package_list_sh_fd, "%s%s[@]\n", 
-                                               BEGIN_OF_PACKAGES_VAR, short_text);
+      fprintf( temp_create_package_list_sh_fd, "%s.bm\n", 
+                                                short_text);
 
 
   g_free(short_text);  /* the strings for us when retrieving them */
@@ -184,7 +191,6 @@ on_window1_configure_event             (GtkWidget       *widget,
 
  if( do_it_at_first_time < 1 ) {
 
-
    do_it_at_first_time = 1;  // only at start
 
 
@@ -202,7 +208,7 @@ on_window1_configure_event             (GtkWidget       *widget,
 
    device     = gtk_tree_view_column_new_with_attributes("", toggle, "active", COL_SELECTED, NULL);
    fs         = gtk_tree_view_column_new_with_attributes("MetaPackage", cell, "text", 1, NULL);
-   mointpoint = gtk_tree_view_column_new_with_attributes("Packages", cell, "text", 2, NULL);
+   mointpoint = gtk_tree_view_column_new_with_attributes("Description", cell, "text", 2, NULL);
 
    gtk_tree_view_append_column(GTK_TREE_VIEW(treeview1), GTK_TREE_VIEW_COLUMN(device));
    gtk_tree_view_append_column(GTK_TREE_VIEW(treeview1), GTK_TREE_VIEW_COLUMN(fs));
@@ -322,15 +328,26 @@ on_button_install_clicked              (GtkButton       *button,
        printf( "The file %s was not opened\n", temp_file_aptgetcall_sh);
    else {
        //  create the bash file for install the packages
-       fprintf( temp_file_aptgetcall_sh_fd, "%s\n\n%s\n\n%s\n\n%s\n%s%s%s\n\n%s\n\n%s%s%s%s\n\n%s\n",
-                "#!/bin/bash",
-                "apt-get update",
-                ". /etc/default/distro",
-                "echo; echo ======================================",
-                "for i in $(ls ",INSTALL_PACKAGES_CONF_DIR,"/*.conf); do source ${i}; done",
-                "echo; echo ======================================",
-                APT_GET_CALL," $(for i in $(cat ",temp_file_packagelist,"); do echo ${!i}; done | xargs)",
-                "echo; echo Hit a key; read key"
+       fprintf( temp_file_aptgetcall_sh_fd, "%s\n%s\n%s\n%s%s\n%s\n%s%s%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s%s\n%s\n%s\n%s\n%s\n",
+               "#!/bin/bash",
+               "apt-get update",
+               "source /etc/default/distro",
+               "cd ", INSTALL_PACKAGES_CONF_DIR,
+               "echo; echo ======================================",
+               "for modul in $(cat ",temp_file_packagelist,"); do ",
+               "   source ${modul}",
+               "   for pkgmod in ${FLL_PACKAGE_DEPMODS[@]}; do",
+               "	source packages.d/${pkgmod}.bm",
+               "   done",
+               "   source packages.d/i18n.bm",
+               "echo; echo ======================================",
+               "echo start installation for ${modul}",
+               "echo --------------------------------------",
+                   APT_GET_CALL," ${FLL_PACKAGES[@]}",
+               "   unset FLL_PACKAGES FLL_PACKAGE_DEPMODS;",
+               "done",
+               "echo; echo ======================================",
+               "echo; echo Hit a key; read key"
        );
 
        fclose( temp_file_aptgetcall_sh_fd );

@@ -1,6 +1,6 @@
 Install additonal metapackages to sidux.
 
-Put the <metapackage-description-files>.conf to /usr/share/install-meta/
+Put the <metapackage-description-files>.bm to /usr/share/install-meta/
 
 or use the --dir=<dir> option
 EXAMPLE:  su-me install-meta --dir=~/fullstory/fll-builder/trunk/etc/fll-builder/packages/
