@@ -1,0 +1,7 @@
+[Desktop Entry]
+Encoding=UTF-8
+Name=metapackage-installer
+Exec=su-me /usr/sbin/metapackage-installer
+Icon=sidux.png
+Type=Application
+Comment=Install metapackage

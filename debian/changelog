@@ -1,3 +1,9 @@
+install-meta (0.0.1-7) unstable; urgency=low
+
+  * add desktop symbol and live mode check 
+
+ -- Horst Tritremmel <peter_weber69@gmx.at>  Fri,  2 Feb 2007 14:23:17 +0100
+
 install-meta (0.0.1-6) unstable; urgency=low
 
   * second FLL_DESCRIPTION Variable fixes 

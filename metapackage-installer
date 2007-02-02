@@ -1,0 +1,14 @@
+#!/bin/sh
+
+if [ -s /etc/default/distro ]; then
+	. /etc/default/distro
+fi
+
+if [ "$FLL_DISTRO_MODE" = live ]; then
+	fix-unionfs
+fi
+
+if [ -x /usr/bin/install-meta ]; then
+	/usr/bin/install-meta "$@"
+fi
+
