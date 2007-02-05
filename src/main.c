@@ -8,9 +8,13 @@
 #endif
 
 #include <gtk/gtk.h>
+#include <string.h>
+#include <stdlib.h>
+#include <unistd.h>
 
 #include "interface.h"
 #include "support.h"
+
 
 
 extern char INSTALL_PACKAGES_CONF_DIR[1024];
@@ -21,7 +25,7 @@ main (int argc, char *argv[])
 {
   int r;
   GtkWidget *window1;
-  char option[6];
+  //char option[6];
 
 #ifdef ENABLE_NLS
   bindtextdomain (GETTEXT_PACKAGE, PACKAGE_LOCALE_DIR);
@@ -36,11 +40,11 @@ main (int argc, char *argv[])
   for (r=1; r<argc; r++)
   {
        // directory from the *.bm metapackage files
-       if ( strncmp( argv[r], "--dir=/", 7 )  == 0)
+       if ( strncmp( argv[r], "--dir=/", 7 )  == 0 )
             strncpy(INSTALL_PACKAGES_CONF_DIR, argv[r], 1024);
 
        // install the packages to chroot (for sidux-installer start)
-       if ( strncmp( argv[r], "--chroot=/", 10 )  == 0)
+       if ( strncmp( argv[r], "--chroot=/", 10 )  == 0 )
             strncpy( CHROOT, argv[r], 1024);
 
 
