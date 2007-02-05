@@ -1,0 +1,59 @@
+#!/bin/bash
+
+case ${FLL_PACKAGES[*]} in
+	*kde*)
+		for lang in ${FLL_I18N_SUPPORT[@]}; do
+			FLL_PACKAGES+=( kde-i18n-${lang} )
+		done
+		;;
+esac
+
+case ${FLL_PACKAGES[*]} in
+	*koffice*)
+		for lang in ${FLL_I18N_SUPPORT[@]}; do
+			FLL_PACKAGES+=( koffice-i18n-${lang} )
+		done
+		;;
+esac
+
+case ${FLL_PACKAGES[*]} in
+	*icedove*)
+		for lang in ${FLL_I18N_SUPPORT[@]}; do
+			FLL_PACKAGES+=( icedove-locale-${lang} )
+		done
+		;;
+esac
+
+case ${FLL_PACKAGES[*]} in
+	*iceweasel*)
+		for lang in ${FLL_I18N_SUPPORT[@]}; do
+			FLL_PACKAGES+=( iceweasel-l10n-${lang} )
+		done
+		;;
+esac
+
+case ${FLL_PACKAGES[*]} in
+	*openoffice.org*)
+		for lang in ${FLL_I18N_SUPPORT[@]}; do
+			FLL_PACKAGES+=( openoffice.org-l10n-${lang} )
+		done
+		;;
+esac
+
+case ${FLL_PACKAGES[*]} in
+	*myspell*)
+		for lang in ${FLL_I18N_SUPPORT[@]}; do
+			case $lang in
+				de)
+					FLL_PACKAGES+=( myspell-de-de )
+					;;
+				au|gb)
+					FLL_PACKAGES+=( myspell-en-${lang} )
+					;;
+				*)
+					FLL_PACKAGES+=( myspell-${lang} )
+					;;
+			esac
+		done
+		;;
+esac

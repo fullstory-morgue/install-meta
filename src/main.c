@@ -14,12 +14,14 @@
 
 
 extern char INSTALL_PACKAGES_CONF_DIR[1024];
+extern char CHROOT[1024];
 
 int
 main (int argc, char *argv[])
 {
-
+  int r;
   GtkWidget *window1;
+  char option[6];
 
 #ifdef ENABLE_NLS
   bindtextdomain (GETTEXT_PACKAGE, PACKAGE_LOCALE_DIR);
@@ -30,8 +32,20 @@ main (int argc, char *argv[])
   gtk_set_locale ();
   gtk_init (&argc, &argv);
 
-  if ( argv[1] ) 
-         strncpy(INSTALL_PACKAGES_CONF_DIR, argv[1], 1024);
+  //programm option handling
+  for (r=1; r<argc; r++)
+  {
+       // directory from the *.bm metapackage files
+       if ( strncmp( argv[r], "--dir=/", 7 )  == 0)
+            strncpy(INSTALL_PACKAGES_CONF_DIR, argv[r], 1024);
+
+       // install the packages to chroot (for sidux-installer start)
+       if ( strncmp( argv[r], "--chroot=/", 10 )  == 0)
+            strncpy( CHROOT, argv[r], 1024);
+
+
+  }
+
 
   add_pixmap_directory (PACKAGE_DATA_DIR "/" PACKAGE "/pixmaps");
 

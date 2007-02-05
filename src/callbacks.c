@@ -16,11 +16,13 @@
 #define STDLINE 80
 
 #define DEFAULT_CONF_DIR "/usr/share/install-meta"
-#define APT_GET_CALL "apt-get install"
+
 
 
 FILE *temp_create_package_list_sh_fd;
 char INSTALL_PACKAGES_CONF_DIR[MAXLINE];  // = extern variable argv[1] in main.c
+char APT_GET_CALL[MAXLINE];
+char CHROOT[MAXLINE];  // = extern variable argv[1] in main.c
 char temp_file_packagelist[STDLINE];
 int  do_it_at_first_time = 0;
 
@@ -283,6 +285,7 @@ on_button_install_clicked              (GtkButton       *button,
 
    FILE* temp_file_aptgetcall_sh_fd;
    char temp_file_aptgetcall_sh[STDLINE];
+   char *ptr_chroot, *target_mnt_point;
    int fd;
 
    // read the treeview1 (mountpoint) list
@@ -318,6 +321,41 @@ on_button_install_clicked              (GtkButton       *button,
       fclose( temp_create_package_list_sh_fd );
    }
 
+   // if packages should be install into normal system
+   strncpy( APT_GET_CALL, "apt-get install ${FLL_PACKAGES[@]}", MAXLINE );
+
+   // if otion --chroot=<device>  is given (life mode install to hd)
+   ptr_chroot = strtok(CHROOT, "=");
+   if ( strlen(CHROOT) > 0 && strcmp( ptr_chroot, "--chroot" )  == 0 ) {
+        target_mnt_point = strtok(NULL, "=");
+
+     /* strncpy( APT_GET_CALL, "mount -o loop ", MAXLINE );
+        strncat( APT_GET_CALL, target_mnt_point, MAXLINE );
+        strncat( APT_GET_CALL, " /var/cache/apt/archives\n", MAXLINE );
+        strncat( APT_GET_CALL, "[ -d /var/cache/apt/archives/partial ] && mkdir /var/cache/apt/archives/partial\n", MAXLINE );
+        strncat( APT_GET_CALL, "apt-get --download-only install ${FLL_PACKAGES[@]}\numount  ", MAXLINE );
+        strncat( APT_GET_CALL, target_mnt_point, MAXLINE );
+        strncat( APT_GET_CALL, "\nchroot ", MAXLINE );
+        strncat( APT_GET_CALL, target_mnt_point, MAXLINE );
+        strncat( APT_GET_CALL, " dpkg -i /var/cache/apt/archives/*.deb", MAXLINE );  */
+
+        char *entry1 = strtok(target_mnt_point, "/");
+        char *entry2 = strtok(NULL, "/");
+
+        strncpy( APT_GET_CALL, "mount /dev/", MAXLINE );
+        strncat( APT_GET_CALL, entry2, MAXLINE );
+        strncat( APT_GET_CALL, " /media/", MAXLINE );
+        strncat( APT_GET_CALL, entry2, MAXLINE );
+        strncat( APT_GET_CALL, "\nchroot /media/", MAXLINE );
+        strncat( APT_GET_CALL, entry2, MAXLINE );
+        strncat( APT_GET_CALL, " mount -a\n", MAXLINE );
+        strncat( APT_GET_CALL, "chroot /media/", MAXLINE );
+        strncat( APT_GET_CALL, entry2, MAXLINE );
+        strncat( APT_GET_CALL, " apt-get install ${FLL_PACKAGES[@]}\numount /media/", MAXLINE );
+        strncat( APT_GET_CALL, entry2, MAXLINE );
+
+   }
+
 
    // install the packages via apt-get, create the bash file to do that
    temp_file_aptgetcall_sh_fd = fopen( temp_file_aptgetcall_sh, "w+" );
@@ -325,10 +363,10 @@ on_button_install_clicked              (GtkButton       *button,
        printf( "The file %s was not opened\n", temp_file_aptgetcall_sh);
    else {
        //  create the bash file for install the packages
-       fprintf( temp_file_aptgetcall_sh_fd, "%s\n%s\n%s\n%s%s\n%s\n%s%s%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s%s\n%s\n%s\n%s\n%s\n",
+       fprintf( temp_file_aptgetcall_sh_fd, "%s\n%s\n%s\n%s%s\n%s\n%s%s%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n",
                "#!/bin/bash",
                "apt-get update",
-               "source /etc/default/distro",
+               "source /etc/default/distro\n[ \"$FLL_DISTRO_MODE\" = live ] && fix-unionfs",
                "cd ", INSTALL_PACKAGES_CONF_DIR,
                "echo; echo ======================================",
                "for modul in $(cat ",temp_file_packagelist,"); do ",
@@ -340,7 +378,7 @@ on_button_install_clicked              (GtkButton       *button,
                "echo; echo ======================================",
                "echo start installation for ${modul}",
                "echo --------------------------------------",
-                   APT_GET_CALL," ${FLL_PACKAGES[@]}",
+                   APT_GET_CALL,
                "   unset FLL_PACKAGES FLL_PACKAGE_DEPMODS FLL_DESCRIPTION",
                "done",
                "echo; echo ======================================",
@@ -349,6 +387,7 @@ on_button_install_clicked              (GtkButton       *button,
 
        fclose( temp_file_aptgetcall_sh_fd );
    }
+
 
    // run apt-get, (start the script above)
    strncpy(system_call, "x-terminal-emulator -e sh ", STDLINE);

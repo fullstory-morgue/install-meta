@@ -1,3 +1,10 @@
+install-meta (0.0.1-8) unstable; urgency=low
+
+  * add --chroot=<device> option, install from live mode to hd-installation
+    with chroot 
+
+ -- Horst Tritremmel <peter_weber69@gmx.at>  Mon,  5 Feb 2007 11:02:40 +0100
+
 install-meta (0.0.1-7) unstable; urgency=low
 
   * add desktop symbol and live mode check 
