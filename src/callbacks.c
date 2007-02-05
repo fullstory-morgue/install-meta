@@ -324,20 +324,10 @@ on_button_install_clicked              (GtkButton       *button,
    // if packages should be install into normal system
    strncpy( APT_GET_CALL, "apt-get install ${FLL_PACKAGES[@]}", MAXLINE );
 
-   // if otion --chroot=<device>  is given (life mode install to hd)
+   // if option --chroot=<device>  is given (life mode install to hd)
    ptr_chroot = strtok(CHROOT, "=");
    if ( strlen(CHROOT) > 0 && strcmp( ptr_chroot, "--chroot" )  == 0 ) {
         target_mnt_point = strtok(NULL, "=");
-
-     /* strncpy( APT_GET_CALL, "mount -o loop ", MAXLINE );
-        strncat( APT_GET_CALL, target_mnt_point, MAXLINE );
-        strncat( APT_GET_CALL, " /var/cache/apt/archives\n", MAXLINE );
-        strncat( APT_GET_CALL, "[ -d /var/cache/apt/archives/partial ] && mkdir /var/cache/apt/archives/partial\n", MAXLINE );
-        strncat( APT_GET_CALL, "apt-get --download-only install ${FLL_PACKAGES[@]}\numount  ", MAXLINE );
-        strncat( APT_GET_CALL, target_mnt_point, MAXLINE );
-        strncat( APT_GET_CALL, "\nchroot ", MAXLINE );
-        strncat( APT_GET_CALL, target_mnt_point, MAXLINE );
-        strncat( APT_GET_CALL, " dpkg -i /var/cache/apt/archives/*.deb", MAXLINE );  */
 
         char *entry1 = strtok(target_mnt_point, "/");
         char *entry2 = strtok(NULL, "/");
@@ -348,12 +338,9 @@ on_button_install_clicked              (GtkButton       *button,
         strncat( APT_GET_CALL, entry2, MAXLINE );
         strncat( APT_GET_CALL, "\nchroot /media/", MAXLINE );
         strncat( APT_GET_CALL, entry2, MAXLINE );
-        strncat( APT_GET_CALL, " mount -a\n", MAXLINE );
         strncat( APT_GET_CALL, "chroot /media/", MAXLINE );
         strncat( APT_GET_CALL, entry2, MAXLINE );
-        strncat( APT_GET_CALL, " apt-get install ${FLL_PACKAGES[@]}\numount /media/", MAXLINE );
-        strncat( APT_GET_CALL, entry2, MAXLINE );
-
+        strncat( APT_GET_CALL, " apt-get install ${FLL_PACKAGES[@]}", MAXLINE );
    }
 
 
