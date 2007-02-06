@@ -36,6 +36,21 @@ case ${FLL_PACKAGES[*]} in
 	*openoffice.org*)
 		for lang in ${FLL_I18N_SUPPORT[@]}; do
 			FLL_PACKAGES+=( openoffice.org-l10n-${lang} )
+			case $lang in
+				de)
+					FLL_PACKAGES+=( openoffice.org-thesaurus-de )
+					;;
+				us|gb)
+					FLL_PACKAGES+=( openoffice.org-thesaurus-en-us )
+					;;
+				au)
+					FLL_PACKAGES+=( openoffice.org-thesaurus-en-au )
+					;;
+				*)
+					FLL_PACKAGES+=( openoffice.org-thesaurus-${lang} )
+					;;
+			esac
+
 		done
 		;;
 esac
