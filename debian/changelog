@@ -1,3 +1,9 @@
+install-meta (0.0.13) UNRELEASED; urgency=low
+
+  * NOT RELEASED YET
+
+ -- Stefan Lippers-Hollmann <s.l-h@gmx.de>  Tue,  6 Feb 2007 16:49:30 +0100
+
 install-meta (0.0.12) unstable; urgency=low
 
   * move to native versioning for the time being.
