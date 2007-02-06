@@ -24,6 +24,7 @@ char INSTALL_PACKAGES_CONF_DIR[MAXLINE];  // = extern variable argv[1] in main.c
 char APT_GET_CALL[MAXLINE];
 char CHROOT[MAXLINE];  // = extern variable argv[1] in main.c
 char temp_file_packagelist[STDLINE];
+char *target_mnt_point, *hd_device, *ptr_chroot;
 int  do_it_at_first_time = 0;
 
 
@@ -193,6 +194,12 @@ on_window1_configure_event             (GtkWidget       *widget,
 
    do_it_at_first_time = 1;  // only at start
 
+   // handle the system call options
+   ptr_chroot = strtok(CHROOT, "=");
+   target_mnt_point = strtok(NULL, "=");
+   hd_device = strtok(target_mnt_point, "/");
+   hd_device = strtok(NULL, "/");
+
 
   /* ================================================== *
    *                   set treeviev                     *
@@ -285,13 +292,12 @@ on_button_install_clicked              (GtkButton       *button,
 
    FILE* temp_file_aptgetcall_sh_fd;
    char temp_file_aptgetcall_sh[STDLINE];
-   char *ptr_chroot, *target_mnt_point;
    int fd;
 
    // read the treeview1 (mountpoint) list
    GtkWidget *treeview1 = lookup_widget (GTK_WIDGET (button), "treeview1");
    GtkTreeModel *model = gtk_tree_view_get_model (GTK_TREE_VIEW(treeview1));
-   char system_call[STDLINE];
+   char system_call[MAXLINE];
 
    //  create selected package list tempfile
    strncpy(temp_file_packagelist, "/tmp/temp_packages_list.XXXXXX", STDLINE);
@@ -321,26 +327,23 @@ on_button_install_clicked              (GtkButton       *button,
       fclose( temp_create_package_list_sh_fd );
    }
 
-   // if packages should be install into normal system
-   strncpy( APT_GET_CALL, "apt-get install ${FLL_PACKAGES[@]}", MAXLINE );
 
    // if option --chroot=<device>  is given (life mode install to hd)
-   ptr_chroot = strtok(CHROOT, "=");
    if ( strlen(CHROOT) > 0 && strcmp( ptr_chroot, "--chroot" )  == 0 ) {
-        target_mnt_point = strtok(NULL, "=");
 
-        char *entry1 = strtok(target_mnt_point, "/");
-        char *entry2 = strtok(NULL, "/");
+        //strncpy( APT_GET_CALL, "mount /dev/", MAXLINE );
+        //strncat( APT_GET_CALL, hd_device, MAXLINE );
+        //strncat( APT_GET_CALL, " /media/", MAXLINE );
+        //strncat( APT_GET_CALL, hd_device, MAXLINE );
+        //strncat( APT_GET_CALL, "\nchroot /media/", MAXLINE );
 
-        strncpy( APT_GET_CALL, "mount /dev/", MAXLINE );
-        strncat( APT_GET_CALL, entry2, MAXLINE );
-        strncat( APT_GET_CALL, " /media/", MAXLINE );
-        strncat( APT_GET_CALL, entry2, MAXLINE );
-        strncat( APT_GET_CALL, "\nchroot /media/", MAXLINE );
-        strncat( APT_GET_CALL, entry2, MAXLINE );
-        strncat( APT_GET_CALL, "chroot /media/", MAXLINE );
-        strncat( APT_GET_CALL, entry2, MAXLINE );
-        strncat( APT_GET_CALL, " apt-get install ${FLL_PACKAGES[@]}", MAXLINE );
+        strncpy(system_call, "chroot /media/", MAXLINE );
+        strncat(system_call, hd_device, MAXLINE );
+        strncat(system_call, " apt-get install ${FLL_PACKAGES[@]}", MAXLINE );
+   }
+   else {
+        // if packages should be install into normal system
+        strncpy( system_call, "apt-get install ${FLL_PACKAGES[@]}", MAXLINE );
    }
 
 
@@ -352,8 +355,8 @@ on_button_install_clicked              (GtkButton       *button,
        //  create the bash file for install the packages
        fprintf( temp_file_aptgetcall_sh_fd, "%s\n%s\n%s\n%s%s\n%s\n%s%s%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n",
                "#!/bin/bash",
-               "apt-get update",
                "source /etc/default/distro\n[ \"$FLL_DISTRO_MODE\" = live ] && fix-unionfs",
+               "apt-get update",
                "cd ", INSTALL_PACKAGES_CONF_DIR,
                "echo; echo ======================================",
                "for modul in $(cat ",temp_file_packagelist,"); do ",
@@ -365,7 +368,7 @@ on_button_install_clicked              (GtkButton       *button,
                "echo; echo ======================================",
                "echo start installation for ${modul}",
                "echo --------------------------------------",
-                   APT_GET_CALL,
+                   system_call,
                "   unset FLL_PACKAGES FLL_PACKAGE_DEPMODS FLL_DESCRIPTION",
                "done",
                "echo; echo ======================================",
@@ -377,8 +380,8 @@ on_button_install_clicked              (GtkButton       *button,
 
 
    // run apt-get, (start the script above)
-   strncpy(system_call, "x-terminal-emulator -e sh ", STDLINE);
-   strncat(system_call, temp_file_aptgetcall_sh, STDLINE);
+   strncpy(system_call, "x-terminal-emulator -e sh ", MAXLINE);
+   strncat(system_call, temp_file_aptgetcall_sh, MAXLINE);
    system(system_call);
 
 
@@ -393,6 +396,20 @@ void
 on_exit_clicked                        (GtkButton       *button,
                                         gpointer         user_data)
 {
+   char system_call[MAXLINE];
+
+   // unmount for knx-installer
+   strncpy(system_call, "#!/bin/bash\n", MAXLINE );
+   strncat(system_call, "mounted=$(mount |grep \"hdinstall/\" |awk '{print $1}')\n", MAXLINE );
+   strncat(system_call, "if [ -n \"$mounted\" ]; then\n", MAXLINE );
+   strncat(system_call, "for i in $mounted; do\n", MAXLINE );
+   strncat(system_call, "    umount $i\n", MAXLINE );
+   strncat(system_call, "done\n", MAXLINE );
+   strncat(system_call, "fi\n", MAXLINE );
+   strncat(system_call, "umount /media/hdinstall\n", MAXLINE );
+
+   system(system_call);
+
    gtk_main_quit();
 }
 

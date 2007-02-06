@@ -1,3 +1,9 @@
+install-meta (0.0.1-11) unstable; urgency=low
+
+  * add umount hdinstall for knx-installer 
+
+ -- Horst Tritremmel <peter_weber69@gmx.at>  Tue,  6 Feb 2007 13:37:30 +0100
+
 install-meta (0.0.1-10) unstable; urgency=low
 
   * --chroot fixes 
