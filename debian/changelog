@@ -1,3 +1,9 @@
+install-meta (0.0.12) unstable; urgency=low
+
+  * move to native versioning for the time being.
+
+ -- Stefan Lippers-Hollmann <s.l-h@gmx.de>  Tue,  6 Feb 2007 16:46:59 +0100
+
 install-meta (0.0.1-12) unstable; urgency=low
 
   * add openoffice metapackage 
