@@ -1,0 +1,12 @@
+#!/bin/bash
+
+FLL_DESCRIPTION="A multiplatform and multilingual office suite and an open-source project"
+
+FLL_PACKAGE_DEPMODS=(
+)
+
+FLL_PACKAGES=(
+	openoffice.org
+	openoffice.org-kde
+	myspell-en-gb
+)
