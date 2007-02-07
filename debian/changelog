@@ -1,3 +1,9 @@
+install-meta (0.0.14) UNRELEASED; urgency=low
+
+  * add some metapacke modules 
+
+ -- Horst Tritremmel <peter_weber69@gmx.at>  Wed,  7 Feb 2007 16:59:28 +0100
+
 install-meta (0.0.13) UNRELEASED; urgency=low
 
   * NOT RELEASED YET

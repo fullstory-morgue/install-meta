@@ -1,0 +1,20 @@
+#!/bin/bash
+
+FLL_DESCRIPTION="MultiMedia Systems for Audio"
+
+FLL_PACKAGE_DEPMODS=(
+)
+
+FLL_PACKAGES=(
+	lmms
+	amarok
+	streamtuner
+	xmms
+	hydrogen
+	hydrogen-drumkits
+	rosegarden
+	ardour-gtk
+	gnusound
+	audacity
+	mhwaveedit
+)

@@ -1,0 +1,33 @@
+#!/bin/bash
+
+FLL_DESCRIPTION="Development Applications"
+
+FLL_PACKAGE_DEPMODS=(
+)
+
+FLL_PACKAGES=(
+	kdevelop3
+	qt3-designer
+	qt3-examples
+	qt3-doc
+	qt3-assistant
+	qt3-dev-tools
+	qt3-dev-tools-compat
+	qt3-dev-tools-embedded
+	kommander
+	fp-compiler
+	fp-units-gtk2
+	fp-units-base
+	fp-ide
+	fp-units-db
+	lazarus
+	gambas2
+	gambas2-gb-qt
+	glade-2
+	gnome-doc-tools
+	gnome-doc-utils
+	kbabel
+	subversion
+	subversion-tools
+	svn-buildpackage
+)

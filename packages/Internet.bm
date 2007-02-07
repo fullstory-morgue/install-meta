@@ -1,0 +1,27 @@
+#!/bin/bash
+
+FLL_DESCRIPTION="Internet Browser, Mail, Filestransfer, etc."
+
+FLL_PACKAGE_DEPMODS=(
+)
+
+FLL_PACKAGES=(
+	iceweasel
+	icedove
+	gftp
+	azureus
+	amule
+	d4x
+	wwwoffle
+	ktorrent
+	kget
+	KVpnc
+	filezilla
+	ssh
+	ekiga
+	amsn
+	gaim
+	kopete
+	gossip
+	licq
+)

@@ -1,0 +1,13 @@
+#!/bin/bash
+
+FLL_DESCRIPTION="Antivirus Scanner"
+
+FLL_PACKAGE_DEPMODS=(
+)
+
+FLL_PACKAGES=(
+	clamav
+	avscan
+	clamav-freshclam
+	klamav
+)

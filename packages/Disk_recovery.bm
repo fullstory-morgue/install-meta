@@ -1,0 +1,13 @@
+#!/bin/bash
+
+FLL_DESCRIPTION="Partition scanner and disk recovery"
+
+FLL_PACKAGE_DEPMODS=(
+)
+
+FLL_PACKAGES=(
+	partimage
+	gparted
+	testdisk
+	magicrescue
+)

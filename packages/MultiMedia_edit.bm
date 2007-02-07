@@ -1,0 +1,22 @@
+#!/bin/bash
+
+FLL_DESCRIPTION="Tools to edit MultiMedia files"
+
+FLL_PACKAGE_DEPMODS=(
+)
+
+FLL_PACKAGES=(
+	hydrogen
+	hydrogen-drumkits
+	rosegarden
+	ardour-gtk
+	gnusound
+	audacity
+	mhwaveedit
+	lmms
+	denemo
+	noteedit
+	lilypond
+	ecawave
+	easytag
+)

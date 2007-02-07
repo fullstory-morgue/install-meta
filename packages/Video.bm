@@ -1,0 +1,36 @@
+#!/bin/bash
+
+FLL_DESCRIPTION="Audio MultiMedia Systems"
+
+FLL_PACKAGE_DEPMODS=(
+)
+
+FLL_PACKAGES=(
+	avifile-player
+	avifile-utils
+	cdrdao
+	dvgrab
+	gstreamer-editor
+	gstreamer-tools
+	gstreamer0.10-doc
+	gstreamer0.10-gnonlin
+	gstreamer0.10-tools
+	ffmpeg
+	istanbul
+	mpeg2dec
+	mpg123
+	mpg321
+	kaffeine
+	kdetv
+	kino
+	kinoplus
+	pitivi
+	sidux-vdr
+	sidux-vdr-server-extra
+	teclasat
+	vcdimager
+	vdr-gui
+	vlc
+	xine-ui
+	xmovie
+)

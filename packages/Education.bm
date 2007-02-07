@@ -1,0 +1,21 @@
+#!/bin/bash
+
+FLL_DESCRIPTION="Suite of educational apps, games, geography, algebra"
+
+FLL_PACKAGE_DEPMODS=(
+)
+
+FLL_PACKAGES=(
+	kdeedu
+	wxmaxima
+	maxima
+	kgeography
+	gcompris
+	gnuplot
+	vym
+	bibletime
+	tuxtype
+	tuxmath
+	fp-compiler
+	fp-ide
+)

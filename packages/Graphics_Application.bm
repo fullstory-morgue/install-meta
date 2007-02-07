@@ -1,0 +1,32 @@
+#!/bin/bash
+
+FLL_DESCRIPTION="Viewer, Photo, Scanner, Printer"
+
+FLL_PACKAGE_DEPMODS=(
+)
+
+FLL_PACKAGES=(
+	kpdf
+	kghostview
+	gambas2-gb-pdf
+	gwenview
+	kuickshow
+	showimg
+	digikam
+	digikamimageplugins
+	krita
+	ksnapshot
+	gimp
+	gimp-gap
+	inkscape
+	karbon
+	ufraw
+	blender
+	kpovmodeler
+	kpovmodeler
+	k3d
+	kooka
+	xsane
+	photoprint
+	lyx
+)

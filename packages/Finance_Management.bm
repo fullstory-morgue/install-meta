@@ -1,0 +1,12 @@
+#!/bin/bash
+
+FLL_DESCRIPTION="Finance Management, Homebanking"
+
+FLL_PACKAGE_DEPMODS=(
+)
+
+FLL_PACKAGES=(
+	gnucash
+	kmymoney2
+	aqbanking-tool
+)

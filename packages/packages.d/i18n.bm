@@ -33,6 +33,22 @@ case ${FLL_PACKAGES[*]} in
 esac
 
 case ${FLL_PACKAGES[*]} in
+	*gimp*)
+		for lang in ${FLL_I18N_SUPPORT[@]}; do
+			FLL_PACKAGES+=( gimp-help-${lang} )
+		done
+		;;
+esac
+
+case ${FLL_PACKAGES[*]} in
+	*gcompris*)
+		for lang in ${FLL_I18N_SUPPORT[@]}; do
+			FLL_PACKAGES+=( gcompris-sound-${lang} )
+		done
+		;;
+esac
+
+case ${FLL_PACKAGES[*]} in
 	*openoffice.org*)
 		for lang in ${FLL_I18N_SUPPORT[@]}; do
 			FLL_PACKAGES+=( openoffice.org-l10n-${lang} )
