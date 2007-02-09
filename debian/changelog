@@ -1,3 +1,9 @@
+install-meta (0.0.16) UNRELEASED; urgency=low
+
+  * add xfce4.bm metapackage module
+
+ -- Horst Tritremmel <peter_weber69@gmx.at>  Fri,  9 Feb 2007 20:24:13 +0100
+
 install-meta (0.0.15) UNRELEASED; urgency=low
 
   * NOT RELEASED YET
