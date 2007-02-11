@@ -1,0 +1,13 @@
+#!/bin/bash
+
+FLL_DESCRIPTION="Development Applications"
+
+FLL_PACKAGE_DEPMODS=(
+)
+
+FLL_PACKAGES=(
+	cvs
+	subversion
+	subversion-tools
+	svn-buildpackage
+)

@@ -1,0 +1,15 @@
+#!/bin/bash
+
+FLL_DESCRIPTION="Development Applications"
+
+FLL_PACKAGE_DEPMODS=(
+)
+
+FLL_PACKAGES=(
+	fp-compiler
+	fp-units-gtk2
+	fp-units-base
+	fp-ide
+	fp-units-db
+	lazarus
+)

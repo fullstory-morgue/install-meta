@@ -15,19 +15,11 @@ FLL_PACKAGES=(
 	qt3-dev-tools-compat
 	qt3-dev-tools-embedded
 	kommander
-	fp-compiler
-	fp-units-gtk2
-	fp-units-base
-	fp-ide
-	fp-units-db
-	lazarus
 	gambas2
 	gambas2-gb-qt
-	glade-2
-	gnome-doc-tools
-	gnome-doc-utils
 	kbabel
-	subversion
-	subversion-tools
-	svn-buildpackage
+    kdebase-dev
+    kdelibs4-dev
+    kdeutils-dev
+    kommander-dev
 )
