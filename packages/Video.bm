@@ -1,6 +1,6 @@
 #!/bin/bash
 
-FLL_DESCRIPTION="Audio MultiMedia Systems"
+FLL_DESCRIPTION="Video MultiMedia Systems"
 
 FLL_PACKAGE_DEPMODS=(
 )
@@ -25,11 +25,8 @@ FLL_PACKAGES=(
 	kino
 	kinoplus
 	pitivi
-	sidux-vdr
-	sidux-vdr-server-extra
 	teclasat
 	vcdimager
-	vdr-gui
 	vlc
 	xine-ui
 	xmovie

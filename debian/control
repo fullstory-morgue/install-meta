@@ -8,7 +8,7 @@ Standards-Version: 3.7.2
 Package: install-meta
 Architecture: any
 Depends: ${shlibs:Depends}, ${misc:Depends}, x-terminal-emulator
-Description: install metapackages
- Install additonal metapackages to sidux.
- Put the <metapackage-description-files>.conf to /usr/share/install-meta/
+Description: Install additional metapackages to sidux
+ Install additional metapackages to sidux.
+ Put the <metapackage-description-files>.bm to /usr/share/install-meta/
  or use the --dir=<dir> option

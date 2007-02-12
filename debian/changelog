@@ -1,3 +1,10 @@
+install-meta (0.0.19) UNRELEASED; urgency=low
+
+  * add VDR.bm
+  * correct Video.bm, Internet.bm
+
+ -- hjt <hjt@siduxlap>  Mon, 12 Feb 2007 15:49:18 +0000
+
 install-meta (0.0.18) UNRELEASED; urgency=low
 
   * another bugfix for chroot install, add return after apt-get update 

@@ -6,6 +6,7 @@ FLL_PACKAGE_DEPMODS=(
 )
 
 FLL_PACKAGES=(
+	autotools-dev
 	cvs
 	subversion
 	subversion-tools

@@ -1,0 +1,12 @@
+#!/bin/bash
+
+FLL_DESCRIPTION="Video Disc Recorder"
+
+FLL_PACKAGE_DEPMODS=(
+)
+
+FLL_PACKAGES=(
+	sidux-vdr
+	sidux-vdr-server-extra
+	vdr-gui
+)
