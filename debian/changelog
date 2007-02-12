@@ -1,3 +1,9 @@
+install-meta (0.0.17) UNRELEASED; urgency=low
+
+  * add install successful dialog for live2hd call 
+
+ -- Horst Tritremmel <peter_weber69@gmx.at>  Mon, 12 Feb 2007 13:39:48 +0100
+
 install-meta (0.0.16) UNRELEASED; urgency=low
 
   * add xfce4.bm metapackage module

@@ -327,17 +327,13 @@ on_button_install_clicked              (GtkButton       *button,
       fclose( temp_create_package_list_sh_fd );
    }
 
-
    // if option --chroot=<device>  is given (life mode install to hd)
    if ( strlen(CHROOT) > 0 && strcmp( ptr_chroot, "--chroot" )  == 0 ) {
 
-        //strncpy( APT_GET_CALL, "mount /dev/", MAXLINE );
-        //strncat( APT_GET_CALL, hd_device, MAXLINE );
-        //strncat( APT_GET_CALL, " /media/", MAXLINE );
-        //strncat( APT_GET_CALL, hd_device, MAXLINE );
-        //strncat( APT_GET_CALL, "\nchroot /media/", MAXLINE );
-
         strncpy(system_call, "chroot /media/", MAXLINE );
+        strncat(system_call, hd_device, MAXLINE );
+        strncat(system_call, " apt-get update", MAXLINE );
+        strncat(system_call, "chroot /media/", MAXLINE );
         strncat(system_call, hd_device, MAXLINE );
         strncat(system_call, " apt-get install ${FLL_PACKAGES[@]}", MAXLINE );
    }
@@ -398,7 +394,7 @@ on_exit_clicked                        (GtkButton       *button,
 {
    char system_call[MAXLINE];
 
-   // unmount for knx-installer
+   // umount for knx-installer
    strncpy(system_call, "#!/bin/bash\n", MAXLINE );
    strncat(system_call, "mounted=$(mount |grep \"hdinstall/\" |awk '{print $1}')\n", MAXLINE );
    strncat(system_call, "if [ -n \"$mounted\" ]; then\n", MAXLINE );
@@ -410,7 +406,19 @@ on_exit_clicked                        (GtkButton       *button,
 
    system(system_call);
 
-   gtk_main_quit();
+   // install successful dialog
+   if ( strlen(CHROOT) > 0 && strcmp( ptr_chroot, "--chroot" )  == 0 ) {
+      // hide the main window
+      GtkWidget *window1 = lookup_widget(GTK_WIDGET(button),"window1");
+      gtk_widget_hide ( GTK_WIDGET (window1) ); 
+
+      // show the dialog window
+      GtkWidget *dialog2 = create_dialog2 ();
+      gtk_widget_show (dialog2);
+   }
+   else
+      gtk_main_quit();
+
 }
 
 
