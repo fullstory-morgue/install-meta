@@ -1,3 +1,9 @@
+install-meta (0.0.18) UNRELEASED; urgency=low
+
+  * another bugfix for chroot install, add return after apt-get update 
+
+ -- Horst Tritremmel <peter_weber69@gmx.at>  Mon, 12 Feb 2007 14:01:38 +0100
+
 install-meta (0.0.17) UNRELEASED; urgency=low
 
   * add install successful dialog for live2hd call 

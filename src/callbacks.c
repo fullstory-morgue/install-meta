@@ -332,7 +332,7 @@ on_button_install_clicked              (GtkButton       *button,
 
         strncpy(system_call, "chroot /media/", MAXLINE );
         strncat(system_call, hd_device, MAXLINE );
-        strncat(system_call, " apt-get update", MAXLINE );
+        strncat(system_call, " apt-get update\n", MAXLINE );
         strncat(system_call, "chroot /media/", MAXLINE );
         strncat(system_call, hd_device, MAXLINE );
         strncat(system_call, " apt-get install ${FLL_PACKAGES[@]}", MAXLINE );
