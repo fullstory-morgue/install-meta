@@ -8,42 +8,11 @@ FLL_PACKAGE_DEPMODS=(
 FLL_PACKAGES=(
 	apache2-mpm-prefork
 	bind9
-	courier-base
-	courier-authdaemon
-	courier-pop
-	courier-imap
-	courier-imap-ssl
-	courier-ssl
-	courier-webadmin
-	cryptsetup
 	dnsutils
 	dhcp3-server
 	mysql-server-5.0
-	mutt
-	inetutils-ftp
-	inetutils-ftpd
-	inetutils-inetd
-	inetutils-ping
-	inetutils-syslogd
-	inetutils-talk
-	inetutils-talkd
-	inetutils-telnet
-	inetutils-telnetd
-	inetutils-tools
-	netcat
-	nfs-common
-	nfs-kernel-server
-	nfs-user-server
-	nfsboot
-	nfsbooted
 	openssh-server
 	php5
 	postfix
 	samba
-	scponly
-	squirrelmail
-	squirrelmail-decode
-	squirrelmail-locales
-	lvm2
-	lvm-common
 )

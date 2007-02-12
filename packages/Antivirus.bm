@@ -6,8 +6,7 @@ FLL_PACKAGE_DEPMODS=(
 )
 
 FLL_PACKAGES=(
-	clamav
 	avscan
+	clamav
 	clamav-freshclam
-	klamav
 )

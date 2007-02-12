@@ -6,27 +6,11 @@ FLL_PACKAGE_DEPMODS=(
 )
 
 FLL_PACKAGES=(
-	avifile-player
-	avifile-utils
-	cdrdao
-	dvgrab
-	gstreamer-editor
-	gstreamer-tools
-	gstreamer0.10-doc
-	gstreamer0.10-gnonlin
-	gstreamer0.10-tools
-	ffmpeg
-	istanbul
-	mpeg2dec
-	mpg123
-	mpg321
 	kaffeine
 	kdetv
 	kino
 	kinoplus
-	pitivi
 	teclasat
-	vcdimager
 	vlc
 	xine-ui
 	xmovie

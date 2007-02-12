@@ -286,7 +286,51 @@ on_window1_configure_event             (GtkWidget       *widget,
 
 
 void
-on_button_install_clicked              (GtkButton       *button,
+on_exit_clicked                        (GtkButton       *button,
+                                        gpointer         user_data)
+{
+   char system_call[MAXLINE];
+
+   // umount for knx-installer
+   strncpy(system_call, "#!/bin/bash\n", MAXLINE );
+   strncat(system_call, "mounted=$(mount |grep \"hdinstall/\" |awk '{print $1}')\n", MAXLINE );
+   strncat(system_call, "if [ -n \"$mounted\" ]; then\n", MAXLINE );
+   strncat(system_call, "for i in $mounted; do\n", MAXLINE );
+   strncat(system_call, "    umount $i\n", MAXLINE );
+   strncat(system_call, "done\n", MAXLINE );
+   strncat(system_call, "fi\n", MAXLINE );
+   strncat(system_call, "umount /media/hdinstall\n", MAXLINE );
+
+   system(system_call);
+
+   // install successful dialog
+   if ( strlen(CHROOT) > 0 && strcmp( ptr_chroot, "--chroot" )  == 0 ) {
+      // hide the main window
+      GtkWidget *window1 = lookup_widget(GTK_WIDGET(button),"window1");
+      gtk_widget_hide ( GTK_WIDGET (window1) ); 
+
+      // show the dialog window
+      GtkWidget *dialog2 = create_dialog2 ();
+      gtk_widget_show (dialog2);
+   }
+   else
+      gtk_main_quit();
+
+}
+
+
+void
+on_button_install_pressed              (GtkButton       *button,
+                                        gpointer         user_data)
+{
+   // hide the main window
+   GtkWidget *window1 = lookup_widget(GTK_WIDGET(button),"window1");
+   gtk_widget_hide ( GTK_WIDGET (window1) ); 
+}
+
+
+void
+on_button_install_released             (GtkButton       *button,
                                         gpointer         user_data)
 {
 
@@ -298,6 +342,7 @@ on_button_install_clicked              (GtkButton       *button,
    GtkWidget *treeview1 = lookup_widget (GTK_WIDGET (button), "treeview1");
    GtkTreeModel *model = gtk_tree_view_get_model (GTK_TREE_VIEW(treeview1));
    char system_call[MAXLINE];
+
 
    //  create selected package list tempfile
    strncpy(temp_file_packagelist, "/tmp/temp_packages_list.XXXXXX", STDLINE);
@@ -378,6 +423,7 @@ on_button_install_clicked              (GtkButton       *button,
    // run apt-get, (start the script above)
    strncpy(system_call, "x-terminal-emulator -e sh ", MAXLINE);
    strncat(system_call, temp_file_aptgetcall_sh, MAXLINE);
+   // start the install via x-terminal-emulator
    system(system_call);
 
 
@@ -385,40 +431,9 @@ on_button_install_clicked              (GtkButton       *button,
    unlink(temp_file_packagelist);
    unlink(temp_file_aptgetcall_sh);
 
-}
-
-
-void
-on_exit_clicked                        (GtkButton       *button,
-                                        gpointer         user_data)
-{
-   char system_call[MAXLINE];
-
-   // umount for knx-installer
-   strncpy(system_call, "#!/bin/bash\n", MAXLINE );
-   strncat(system_call, "mounted=$(mount |grep \"hdinstall/\" |awk '{print $1}')\n", MAXLINE );
-   strncat(system_call, "if [ -n \"$mounted\" ]; then\n", MAXLINE );
-   strncat(system_call, "for i in $mounted; do\n", MAXLINE );
-   strncat(system_call, "    umount $i\n", MAXLINE );
-   strncat(system_call, "done\n", MAXLINE );
-   strncat(system_call, "fi\n", MAXLINE );
-   strncat(system_call, "umount /media/hdinstall\n", MAXLINE );
-
-   system(system_call);
-
-   // install successful dialog
-   if ( strlen(CHROOT) > 0 && strcmp( ptr_chroot, "--chroot" )  == 0 ) {
-      // hide the main window
-      GtkWidget *window1 = lookup_widget(GTK_WIDGET(button),"window1");
-      gtk_widget_hide ( GTK_WIDGET (window1) ); 
-
-      // show the dialog window
-      GtkWidget *dialog2 = create_dialog2 ();
-      gtk_widget_show (dialog2);
-   }
-   else
-      gtk_main_quit();
-
+   // show the main window
+   GtkWidget *window1 = lookup_widget(GTK_WIDGET(button),"window1");
+   gtk_widget_show ( GTK_WIDGET (window1) );
 }
 
 

@@ -9,7 +9,4 @@ FLL_PACKAGES=(
 	keep
 	konserve
 	ddrescue
-	unison
-	mondo
-	mindi
 )
