@@ -1,7 +1,7 @@
-install-meta (0.0.20) UNRELEASED; urgency=low
+install-meta (0.0.20) unstable; urgency=low
 
-  * made packages smaller 
-  * hide and show main-window by terminal start
+  * made packages smaller.
+  * hide and show main-window by terminal start.
 
  -- Horst Tritremmel <peter_weber69@gmx.at>  Mon, 12 Feb 2007 20:46:22 +0100
 
