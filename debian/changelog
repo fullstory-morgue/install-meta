@@ -1,3 +1,9 @@
+install-meta (0.0.24) UNRELEASED; urgency=low
+
+  * NOT RELEASED YET
+
+ -- Stefan Lippers-Hollmann <s.l-h@gmx.de>  Tue, 13 Feb 2007 23:00:32 +0100
+
 install-meta (0.0.23) unstable; urgency=low
 
   * add Disk_recovery.bm Generic_Server.bm 
