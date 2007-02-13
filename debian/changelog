@@ -1,3 +1,9 @@
+install-meta (0.0.23) UNRELEASED; urgency=low
+
+  * add Disk_recovery.bm Generic_Server.bm 
+
+ -- Horst Tritremmel <peter_weber69@gmx.at>  Tue, 13 Feb 2007 20:58:38 +0100
+
 install-meta (0.0.22) UNRELEASED; urgency=low
 
   * remove most packages 
