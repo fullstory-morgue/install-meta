@@ -1,4 +1,4 @@
-install-meta (0.0.23) UNRELEASED; urgency=low
+install-meta (0.0.23) unstable; urgency=low
 
   * add Disk_recovery.bm Generic_Server.bm 
 
