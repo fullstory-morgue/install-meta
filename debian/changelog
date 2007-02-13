@@ -1,3 +1,9 @@
+install-meta (0.0.22) UNRELEASED; urgency=low
+
+  * remove most packages 
+
+ -- Horst Tritremmel <peter_weber69@gmx.at>  Tue, 13 Feb 2007 20:53:28 +0100
+
 install-meta (0.0.21) UNRELEASED; urgency=low
 
   * NOT RELEASED YET
