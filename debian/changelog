@@ -1,3 +1,11 @@
+install-meta (0.0.26) UNRELEASED; urgency=low
+
+  * remove postfix from server package 
+  * change back to on_button_install_clicked instead
+    of on_button_install_released
+
+ -- Horst Tritremmel <peter_weber69@gmx.at>  Wed, 14 Feb 2007 13:12:01 +0100
+
 install-meta (0.0.25) UNRELEASED; urgency=low
 
   * add sidux-logo.png for Install successful message 

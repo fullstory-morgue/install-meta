@@ -334,6 +334,24 @@ on_button_install_released             (GtkButton       *button,
                                         gpointer         user_data)
 {
 
+
+}
+
+
+gboolean
+on_window1_delete_event                (GtkWidget       *widget,
+                                        GdkEvent        *event,
+                                        gpointer         user_data)
+{
+
+   gtk_main_quit();
+   return FALSE;
+}
+
+void
+on_button_install_clicked              (GtkButton       *button,
+                                        gpointer         user_data)
+{
    FILE* temp_file_aptgetcall_sh_fd;
    char temp_file_aptgetcall_sh[STDLINE];
    int fd;
@@ -394,7 +412,7 @@ on_button_install_released             (GtkButton       *button,
        printf( "The file %s was not opened\n", temp_file_aptgetcall_sh);
    else {
        //  create the bash file for install the packages
-       fprintf( temp_file_aptgetcall_sh_fd, "%s\n%s\n%s\n%s%s\n%s\n%s%s%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n",
+       fprintf( temp_file_aptgetcall_sh_fd, "%s\n%s\n%s\n%s%s\n%s\n%s%s%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n",
                "#!/bin/bash",
                "source /etc/default/distro\n[ \"$FLL_DISTRO_MODE\" = live ] && fix-unionfs",
                "apt-get update",
@@ -412,8 +430,14 @@ on_button_install_released             (GtkButton       *button,
                    system_call,
                "   unset FLL_PACKAGES FLL_PACKAGE_DEPMODS FLL_DESCRIPTION",
                "done",
-               "echo; echo ======================================",
-               "echo; echo Hit a key; read key"
+               "echo",
+               "i=_",
+               "while [ \"${i}\" != \"\" ]; do",
+               "      echo ==================================",
+               "      echo enter your code or return for exit",
+               "      read i",
+               "      ${i}",
+               "done"
        );
 
        fclose( temp_file_aptgetcall_sh_fd );
@@ -436,13 +460,3 @@ on_button_install_released             (GtkButton       *button,
    gtk_widget_show ( GTK_WIDGET (window1) );
 }
 
-
-gboolean
-on_window1_delete_event                (GtkWidget       *widget,
-                                        GdkEvent        *event,
-                                        gpointer         user_data)
-{
-
-   gtk_main_quit();
-   return FALSE;
-}

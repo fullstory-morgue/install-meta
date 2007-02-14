@@ -11,7 +11,6 @@
   <property name="modal">False</property>
   <property name="resizable">False</property>
   <property name="destroy_with_parent">False</property>
-  <property name="icon">sidux-meta-icon.png</property>
   <property name="icon_name"></property>
   <property name="decorated">True</property>
   <property name="skip_taskbar_hint">False</property>
@@ -192,8 +191,7 @@
 	  <property name="can_focus">True</property>
 	  <property name="relief">GTK_RELIEF_NORMAL</property>
 	  <property name="focus_on_click">True</property>
-	  <signal name="pressed" handler="on_button_install_pressed" last_modification_time="Mon, 12 Feb 2007 20:00:39 GMT"/>
-	  <signal name="released" handler="on_button_install_released" last_modification_time="Mon, 12 Feb 2007 20:00:45 GMT"/>
+	  <signal name="clicked" handler="on_button_install_clicked" last_modification_time="Wed, 14 Feb 2007 12:02:36 GMT"/>
 
 	  <child>
 	    <widget class="GtkAlignment" id="alignment4">

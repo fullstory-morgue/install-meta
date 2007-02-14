@@ -13,6 +13,5 @@ FLL_PACKAGES=(
 	mysql-server-5.0
 	openssh-server
 	php5
-	postfix
 	samba
 )

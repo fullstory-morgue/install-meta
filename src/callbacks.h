@@ -130,3 +130,7 @@ on_button_install_pressed              (GtkButton       *button,
 void
 on_button_install_released             (GtkButton       *button,
                                         gpointer         user_data);
+
+void
+on_button_install_clicked              (GtkButton       *button,
+                                        gpointer         user_data);
