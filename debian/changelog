@@ -1,4 +1,4 @@
-install-meta (0.0.27) UNRELEASED; urgency=low
+install-meta (0.0.27) unstable; urgency=low
 
   * add another bugfix for chroot install 
 
