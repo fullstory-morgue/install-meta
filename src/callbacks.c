@@ -412,7 +412,7 @@ on_button_install_clicked              (GtkButton       *button,
        printf( "The file %s was not opened\n", temp_file_aptgetcall_sh);
    else {
        //  create the bash file for install the packages
-       fprintf( temp_file_aptgetcall_sh_fd, "%s\n%s\n%s\n%s%s\n%s\n%s%s%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n",
+       fprintf( temp_file_aptgetcall_sh_fd, "%s\n%s\n%s\n%s%s\n%s\n%s%s%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n",
                "#!/bin/bash",
                "source /etc/default/distro\n[ \"$FLL_DISTRO_MODE\" = live ] && fix-unionfs",
                "apt-get update",
@@ -433,12 +433,21 @@ on_button_install_clicked              (GtkButton       *button,
                "echo",
                "i=_",
                "while [ \"${i}\" != \"\" ]; do",
-               "      echo ==================================",
+               "      echo -e \"\n==================================\"",
                "      echo enter your code or return for exit",
-               "      read i",
-               "      ${i}",
-               "done"
+               "      echo -n \"# \";read i"
        );
+
+               if ( strncmp( system_call, "chroot", 6 ) == 0 ) {
+                      fprintf( temp_file_aptgetcall_sh_fd, "%s%s%s\n",
+                              "      chroot /media/", 
+                                     hd_device,
+                              " ${i};done");
+               }
+               else {
+                      fprintf( temp_file_aptgetcall_sh_fd, "%s\n",
+                              "      ${i};done");
+               }
 
        fclose( temp_file_aptgetcall_sh_fd );
    }
