@@ -1,5 +1,5 @@
 Source: install-meta
-Section: unknown
+Section: admin
 Priority: extra
 Maintainer: Horst Tritremmel <peter_weber69@gmx.at>
 Build-Depends: debhelper (>= 5), autotools-dev, libgtk2.0-dev, libglade2-dev
@@ -8,7 +8,7 @@ Standards-Version: 3.7.2
 Package: install-meta
 Architecture: any
 Depends: ${shlibs:Depends}, ${misc:Depends}, x-terminal-emulator
-Description: Install additional metapackages to sidux
- Install additional metapackages to sidux.
+Description: Install additional meta tasks to sidux
+ Frontend for installing additional meta tasks.
  Put the <metapackage-description-files>.bm to /usr/share/install-meta/
- or use the --dir=<dir> option
+ or use the --dir=<dir> option.
