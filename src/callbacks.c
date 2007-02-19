@@ -79,7 +79,7 @@ void search_metapackages_names()
                "for modul in $(ls *.bm); do",
                "   source ${modul}",
                "   echo $(echo ${modul} | cut -d. -f1):${FLL_DESCRIPTION}",
-               "   unset FLL_PACKAGES FLL_PACKAGE_DEPMODS FLL_DESCRIPTION",
+               "   unset FLL_PACKAGES FLL_PACKAGE_DEPMODS FLL_DESCRIPTION FLL_PRE_PROCESSING FLL_POST_PROCESSING",
                "done > ",temp_file_packagelist
       );
 
@@ -199,7 +199,9 @@ on_window1_configure_event             (GtkWidget       *widget,
    target_mnt_point = strtok(NULL, "=");
    hd_device = strtok(target_mnt_point, "/");
    hd_device = strtok(NULL, "/");
-
+   if ( hd_device == NULL ) {
+        hd_device = "_";
+   }
 
   /* ================================================== *
    *                   set treeviev                     *
@@ -353,7 +355,7 @@ on_button_install_clicked              (GtkButton       *button,
                                         gpointer         user_data)
 {
    FILE* temp_file_aptgetcall_sh_fd;
-   char temp_file_aptgetcall_sh[STDLINE];
+   char temp_file_aptgetcall_sh[STDLINE], is_chroot[STDLINE];
    int fd;
 
    // read the treeview1 (mountpoint) list
@@ -392,6 +394,7 @@ on_button_install_clicked              (GtkButton       *button,
 
    // if option --chroot=<device>  is given (life mode install to hd)
    if ( strlen(CHROOT) > 0 && strcmp( ptr_chroot, "--chroot" )  == 0 ) {
+        strncpy(is_chroot, "CHROOT=y", STDLINE);
 
         strncpy(system_call, "chroot /media/", MAXLINE );
         strncat(system_call, hd_device, MAXLINE );
@@ -402,8 +405,10 @@ on_button_install_clicked              (GtkButton       *button,
    }
    else {
         // if packages should be install into normal system
+        strncpy(is_chroot, "CHROOT=n", STDLINE);
         strncpy( system_call, "apt-get install ${FLL_PACKAGES[@]}", MAXLINE );
    }
+
 
 
    // install the packages via apt-get, create the bash file to do that
@@ -412,8 +417,9 @@ on_button_install_clicked              (GtkButton       *button,
        printf( "The file %s was not opened\n", temp_file_aptgetcall_sh);
    else {
        //  create the bash file for install the packages
-       fprintf( temp_file_aptgetcall_sh_fd, "%s\n%s\n%s\n%s%s\n%s\n%s%s%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n",
+       fprintf( temp_file_aptgetcall_sh_fd, "%s\n%s\n%s\n%s\n%s%s\n%s\n%s%s%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s%s%s%s%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s%s%s%s%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s%s%s\n%s\n%s\n",
                "#!/bin/bash",
+               is_chroot,
                "source /etc/default/distro\n[ \"$FLL_DISTRO_MODE\" = live ] && fix-unionfs",
                "apt-get update",
                "cd ", INSTALL_PACKAGES_CONF_DIR,
@@ -424,30 +430,42 @@ on_button_install_clicked              (GtkButton       *button,
                "	source packages.d/${pkgmod}.bm",
                "   done",
                "   source packages.d/i18n.bm",
-               "echo; echo ======================================",
-               "echo start installation for ${modul}",
-               "echo --------------------------------------",
+               "   echo; echo ======================================",
+               "   echo start installation for ${modul}",
+               "   echo --------------------------------------",
+
+               "   TMP=\"$(mktemp -p /tmp/ install-meta-preprocessing-XXXXXXXXXX)\"",
+               "   IFS=$'\\n'",
+               "   for pre_processing in ${FLL_PRE_PROCESSING[@]}; do",
+               "        echo ${pre_processing} >> \"$TMP\"",
+               "   done",
+               "   IFS=$' \\t\\n'",
+               "   [ \"${CHROOT}\" = y ] && cp $TMP /media/", hd_device, "/tmp && chroot /media/", hd_device, " sh ${TMP} || sh ${TMP} ",
+               "   rm \"$TMP\"",
+
                    system_call,
-               "   unset FLL_PACKAGES FLL_PACKAGE_DEPMODS FLL_DESCRIPTION",
+               "   unset FLL_PACKAGES FLL_PACKAGE_DEPMODS FLL_DESCRIPTION FLL_PRE_PROCESSING",
+
+               "   TMP=\"$(mktemp -p /tmp/ install-meta-postprocessing-XXXXXXXXXX)\"",
+               "   IFS=$'\\n'",
+               "   for post_processing in ${FLL_POST_PROCESSING[@]}; do",
+               "        echo ${post_processing} >> \"$TMP\"",
+               "   done",
+               "   [ \"${CHROOT}\" = y ] && cp $TMP /media/", hd_device, "/tmp && chroot /media/", hd_device, " sh ${TMP} || sh ${TMP} ",
+               "   unset FLL_POST_PROCESSING",
+               "   rm \"$TMP\"",
+ 
                "done",
-               "echo",
+               "IFS=$' \\t\\n'",
                "i=_",
                "while [ \"${i}\" != \"\" ]; do",
-               "      echo -e \"\n==================================\"",
-               "      echo enter your code or return for exit",
-               "      echo -n \"# \";read i"
+               "      echo -e \"\\n==================================\"",
+               "      echo \"enter your code or close the window <ALT> + <F4>\"",
+               "      echo -n \"# \";read i",
+               "      [ \"${CHROOT}\" = y ] && chroot /media/", hd_device, " ${i} || ${i}",
+               "done",
+               "exit"
        );
-
-               if ( strncmp( system_call, "chroot", 6 ) == 0 ) {
-                      fprintf( temp_file_aptgetcall_sh_fd, "%s%s%s\n",
-                              "      chroot /media/", 
-                                     hd_device,
-                              " ${i};done");
-               }
-               else {
-                      fprintf( temp_file_aptgetcall_sh_fd, "%s\n",
-                              "      ${i};done");
-               }
 
        fclose( temp_file_aptgetcall_sh_fd );
    }

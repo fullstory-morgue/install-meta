@@ -4,3 +4,6 @@ Put the <metapackage-description-files>.bm to /usr/share/install-meta/
 
 or use the --dir=<dir> option
 EXAMPLE:  su-me install-meta --dir=~/fullstory/fll-builder/trunk/etc/fll-builder/packages/
+
+-q option
+show only Installation successful dialog

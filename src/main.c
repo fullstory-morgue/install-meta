@@ -36,9 +36,20 @@ main (int argc, char *argv[])
   gtk_set_locale ();
   gtk_init (&argc, &argv);
 
+  add_pixmap_directory (PACKAGE_DATA_DIR "/" PACKAGE "/pixmaps");
+
   //programm option handling
   for (r=1; r<argc; r++)
   {
+       // show only the dialog window Installation successful
+       if ( strncmp( argv[r], "-q", 2 )  == 0 ) {
+            GtkWidget *dialog2 = create_dialog2 ();
+            gtk_widget_show (dialog2);
+
+            gtk_main ();
+            return 0;
+       }
+
        // directory from the *.bm metapackage files
        if ( strncmp( argv[r], "--dir=/", 7 )  == 0 )
             strncpy(INSTALL_PACKAGES_CONF_DIR, argv[r], 1024);
@@ -46,12 +57,8 @@ main (int argc, char *argv[])
        // install the packages to chroot (for sidux-installer start)
        if ( strncmp( argv[r], "--chroot=/", 10 )  == 0 )
             strncpy( CHROOT, argv[r], 1024);
-
-
   }
 
-
-  add_pixmap_directory (PACKAGE_DATA_DIR "/" PACKAGE "/pixmaps");
 
   /*
    * The following code was added by Glade to create one of each component

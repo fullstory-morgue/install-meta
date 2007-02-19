@@ -11,6 +11,7 @@
   <property name="modal">False</property>
   <property name="resizable">False</property>
   <property name="destroy_with_parent">False</property>
+  <property name="icon">sidux-meta-icon.png</property>
   <property name="icon_name"></property>
   <property name="decorated">True</property>
   <property name="skip_taskbar_hint">False</property>
@@ -397,8 +398,8 @@ or use   --dir=&lt;dir&gt;
 	      <property name="visible">True</property>
 	      <property name="can_default">True</property>
 	      <property name="can_focus">True</property>
-	      <property name="label">gtk-ok</property>
-	      <property name="use_stock">True</property>
+	      <property name="label">OK</property>
+	      <property name="use_underline">True</property>
 	      <property name="relief">GTK_RELIEF_NORMAL</property>
 	      <property name="focus_on_click">True</property>
 	      <property name="response_id">-5</property>
@@ -439,7 +440,7 @@ or use   --dir=&lt;dir&gt;
 	  <child>
 	    <widget class="GtkLabel" id="label14">
 	      <property name="width_request">470</property>
-	      <property name="height_request">30</property>
+	      <property name="height_request">22</property>
 	      <property name="visible">True</property>
 	      <property name="label" translatable="yes">Installation successful</property>
 	      <property name="use_underline">False</property>
@@ -457,8 +458,34 @@ or use   --dir=&lt;dir&gt;
 	      <property name="angle">0</property>
 	    </widget>
 	    <packing>
-	      <property name="x">8</property>
-	      <property name="y">176</property>
+	      <property name="x">16</property>
+	      <property name="y">168</property>
+	    </packing>
+	  </child>
+
+	  <child>
+	    <widget class="GtkLabel" id="label15">
+	      <property name="width_request">470</property>
+	      <property name="height_request">22</property>
+	      <property name="visible">True</property>
+	      <property name="label" translatable="yes">http://sidux.com</property>
+	      <property name="use_underline">False</property>
+	      <property name="use_markup">False</property>
+	      <property name="justify">GTK_JUSTIFY_LEFT</property>
+	      <property name="wrap">False</property>
+	      <property name="selectable">False</property>
+	      <property name="xalign">0.5</property>
+	      <property name="yalign">0.5</property>
+	      <property name="xpad">0</property>
+	      <property name="ypad">0</property>
+	      <property name="ellipsize">PANGO_ELLIPSIZE_NONE</property>
+	      <property name="width_chars">-1</property>
+	      <property name="single_line_mode">True</property>
+	      <property name="angle">0</property>
+	    </widget>
+	    <packing>
+	      <property name="x">16</property>
+	      <property name="y">192</property>
 	    </packing>
 	  </child>
 	</widget>

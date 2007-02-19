@@ -30,6 +30,7 @@ GtkWidget*
 create_window1 (void)
 {
   GtkWidget *window1;
+  GdkPixbuf *window1_icon_pixbuf;
   GtkWidget *fixed1;
   GtkWidget *scrolledwindow1;
   GtkWidget *treeview1;
@@ -49,6 +50,12 @@ create_window1 (void)
   window1 = gtk_window_new (GTK_WINDOW_TOPLEVEL);
   gtk_window_set_title (GTK_WINDOW (window1), _("Install metapackages"));
   gtk_window_set_resizable (GTK_WINDOW (window1), FALSE);
+  window1_icon_pixbuf = create_pixbuf ("sidux-meta-icon.png");
+  if (window1_icon_pixbuf)
+    {
+      gtk_window_set_icon (GTK_WINDOW (window1), window1_icon_pixbuf);
+      gdk_pixbuf_unref (window1_icon_pixbuf);
+    }
 
   fixed1 = gtk_fixed_new ();
   gtk_widget_show (fixed1);
@@ -223,6 +230,7 @@ create_dialog2 (void)
   GtkWidget *fixed3;
   GtkWidget *image9;
   GtkWidget *label14;
+  GtkWidget *label15;
   GtkWidget *dialog_action_area2;
   GtkWidget *okbutton2;
 
@@ -251,14 +259,20 @@ create_dialog2 (void)
 
   label14 = gtk_label_new (_("Installation successful"));
   gtk_widget_show (label14);
-  gtk_fixed_put (GTK_FIXED (fixed3), label14, 8, 176);
-  gtk_widget_set_size_request (label14, 470, 30);
+  gtk_fixed_put (GTK_FIXED (fixed3), label14, 16, 168);
+  gtk_widget_set_size_request (label14, 470, 22);
+
+  label15 = gtk_label_new (_("http://sidux.com"));
+  gtk_widget_show (label15);
+  gtk_fixed_put (GTK_FIXED (fixed3), label15, 16, 192);
+  gtk_widget_set_size_request (label15, 470, 22);
+  gtk_label_set_single_line_mode (GTK_LABEL (label15), TRUE);
 
   dialog_action_area2 = GTK_DIALOG (dialog2)->action_area;
   gtk_widget_show (dialog_action_area2);
   gtk_button_box_set_layout (GTK_BUTTON_BOX (dialog_action_area2), GTK_BUTTONBOX_END);
 
-  okbutton2 = gtk_button_new_from_stock ("gtk-ok");
+  okbutton2 = gtk_button_new_with_mnemonic ("OK");
   gtk_widget_show (okbutton2);
   gtk_dialog_add_action_widget (GTK_DIALOG (dialog2), okbutton2, GTK_RESPONSE_OK);
   GTK_WIDGET_SET_FLAGS (okbutton2, GTK_CAN_DEFAULT);
@@ -273,6 +287,7 @@ create_dialog2 (void)
   GLADE_HOOKUP_OBJECT (dialog2, fixed3, "fixed3");
   GLADE_HOOKUP_OBJECT (dialog2, image9, "image9");
   GLADE_HOOKUP_OBJECT (dialog2, label14, "label14");
+  GLADE_HOOKUP_OBJECT (dialog2, label15, "label15");
   GLADE_HOOKUP_OBJECT_NO_REF (dialog2, dialog_action_area2, "dialog_action_area2");
   GLADE_HOOKUP_OBJECT (dialog2, okbutton2, "okbutton2");
 

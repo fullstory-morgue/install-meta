@@ -1,3 +1,10 @@
+install-meta (0.0.29) UNRELEASED; urgency=low
+
+  * add -q option who shows only the installation successful dialog
+  * add FLL_PRE_PROCESSING and FLL_POST_PROCESSING to modules
+
+ -- Horst Tritremmel <peter_weber69@gmx.at>  Mon, 19 Feb 2007 20:52:43 +0100
+
 install-meta (0.0.28) UNRELEASED; urgency=low
 
   * NOT RELEASED YET
