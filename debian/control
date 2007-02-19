@@ -7,7 +7,7 @@ Standards-Version: 3.7.2
 
 Package: install-meta
 Architecture: any
-Depends: ${shlibs:Depends}, ${misc:Depends}, x-terminal-emulator
+Depends: ${shlibs:Depends}, ${misc:Depends}, xterm | x-terminal-emulator
 Description: Install additional meta tasks to sidux
  Frontend for installing additional meta tasks.
  Put the <metapackage-description-files>.bm to /usr/share/install-meta/
