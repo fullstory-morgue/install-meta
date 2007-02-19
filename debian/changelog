@@ -1,4 +1,4 @@
-install-meta (0.0.29) UNRELEASED; urgency=low
+install-meta (0.0.29) unstable; urgency=low
 
   * add -q option who shows only the installation successful dialog
   * add FLL_PRE_PROCESSING and FLL_POST_PROCESSING to modules
