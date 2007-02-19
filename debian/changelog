@@ -1,8 +1,8 @@
-install-meta (0.0.31) UNRELEASED; urgency=low
+install-meta (0.0.31) unstable; urgency=low
 
-  * NOT RELEASED YET
+  * added fluxbox + wdm to install-meta
 
- -- Stefan Lippers-Hollmann <s.l-h@gmx.de>  Mon, 19 Feb 2007 21:34:41 +0100
+ -- Chris Hildebrandt <webmaster@sidux.com>  Mon, 19 Feb 2007 21:38:39 +0100
 
 install-meta (0.0.30) unstable; urgency=low
 
