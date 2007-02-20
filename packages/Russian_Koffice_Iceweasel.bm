@@ -1,6 +1,6 @@
 #!/bin/bash
 
-FLL_DESCRIPTION="Packages: koffice-i18n-ru, icedove-locale-ru, iceweasel-l10n-ru"
+FLL_DESCRIPTION="Packages  koffice-i18n-ru, icedove-locale-ru, iceweasel-l10n-ru"
 
 FLL_PRE_PROCESSING=(
 	"#!/bin/bash"
