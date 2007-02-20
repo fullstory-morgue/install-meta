@@ -298,10 +298,10 @@ on_exit_clicked                        (GtkButton       *button,
    strncat(system_call, "mounted=$(mount |grep \"hdinstall/\" |awk '{print $1}')\n", MAXLINE );
    strncat(system_call, "if [ -n \"$mounted\" ]; then\n", MAXLINE );
    strncat(system_call, "for i in $mounted; do\n", MAXLINE );
-   strncat(system_call, "    umount $i\n", MAXLINE );
+   strncat(system_call, "    umount $i > /dev/null 2>&1 >> /dev/null\n", MAXLINE );
    strncat(system_call, "done\n", MAXLINE );
    strncat(system_call, "fi\n", MAXLINE );
-   strncat(system_call, "umount /media/hdinstall\n", MAXLINE );
+   strncat(system_call, "umount /media/hdinstall > /dev/null 2>&1 >> /dev/null\n", MAXLINE );
 
    system(system_call);
 

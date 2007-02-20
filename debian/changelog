@@ -1,3 +1,10 @@
+install-meta (0.0.37) UNRELEASED; urgency=low
+
+  * add fvwm-crystal.bm
+  * umount message fix
+
+ -- Horst Tritremmel <peter_weber69@gmx.at>  Tue, 20 Feb 2007 22:06:11 +0100
+
 install-meta (0.0.36) UNRELEASED; urgency=low
 
   * rm : in Rassian modules 

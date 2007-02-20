@@ -14,9 +14,7 @@ FLL_PACKAGE_DEPMODS=(
 
 FLL_PACKAGES=(
       libxfce4mcs-client3
-      libxfce4mcs-dev
       libxfce4mcs-manager3
-      libxfce4util-dev
       libxfce4util4
       xfce4
       xfce4-appfinder
