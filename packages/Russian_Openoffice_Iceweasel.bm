@@ -1,0 +1,26 @@
+#!/bin/bash
+
+FLL_DESCRIPTION="Packages: openoffice.org-l10n-ru, icedove-locale-ru, iceweasel-l10n-ru"
+
+FLL_PRE_PROCESSING=(
+	"#!/bin/bash"
+	"echo \"---- in preprocessing ----\""
+	"# paste your code here"
+	"echo \"---- preprocessing done----\""
+)
+
+FLL_PACKAGE_DEPMODS=(
+)
+
+FLL_PACKAGES=(
+	openoffice.org-l10n-ru
+	icedove-locale-ru
+	iceweasel-l10n-ru
+)
+
+FLL_POST_PROCESSING=(
+	"#!/bin/bash"
+	"echo \"---- in postprocessing ----\""
+	"# paste your code here"
+	"echo \"---- postprocessing done----\""
+)

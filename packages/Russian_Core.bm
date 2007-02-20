@@ -1,6 +1,6 @@
 #!/bin/bash
 
-FLL_DESCRIPTION="Server Applications"
+FLL_DESCRIPTION="Packages: kde-i18n-ru, apt-howto-ru, aspell-ru, console-cyrillic, manpages-ru, myspell-ru, irussian"
 
 FLL_PRE_PROCESSING=(
 	"#!/bin/bash"
@@ -13,14 +13,13 @@ FLL_PACKAGE_DEPMODS=(
 )
 
 FLL_PACKAGES=(
-	apache2-mpm-prefork
-	bind9
-	dnsutils
-	dhcp3-server
-	mysql-server-5.0
-	openssh-server
-	php5
-	samba
+	kde-i18n-ru
+	apt-howto-ru
+	aspell-ru
+	console-cyrillic
+	manpages-ru
+	myspell-ru
+	irussian
 )
 
 FLL_POST_PROCESSING=(
