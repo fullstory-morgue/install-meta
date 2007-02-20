@@ -1,6 +1,6 @@
 install-meta (0.0.34) UNRELEASED; urgency=low
 
-* reverted to non-wdm solution, removing kde kdm and installing wdm needs more testing
+  * reverted to non-wdm solution, removing kde kdm and installing wdm needs more testing
 
  -- Chris Hildebrandt <webmaster@sidux.com>  Tue, 20 Feb 2007 09:36:00 +0100
 
