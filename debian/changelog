@@ -2,8 +2,10 @@ install-meta (0.0.37) UNRELEASED; urgency=low
 
   * add fvwm-crystal.bm
   * umount message fix
+  * added postprocess to fvwm and fluxbox so the get the sidux wallpaper as
+	default
 
- -- Horst Tritremmel <peter_weber69@gmx.at>  Tue, 20 Feb 2007 22:06:11 +0100
+ -- Joaquim Boura <x-un-i@sidux.com>  Wed, 21 Feb 2007 00:17:38 +0100
 
 install-meta (0.0.36) UNRELEASED; urgency=low
 
