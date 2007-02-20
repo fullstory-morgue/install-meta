@@ -5,9 +5,7 @@ FLL_DESCRIPTION="fluxbox with kde-lite"
 FLL_PRE_PROCESSING=(
 	"#!/bin/bash"
 	"echo \"---- in preprocessing ----\""
-	"apt-get update && apt-get remove --purge libasound2 kdm -y"
-	"while D=$(deborphan);test -n "$D"; do apt-get remove --purge --yes $D; done"
-	"remove-orphans"
+	"# paste your code here"
 	"echo \"---- preprocessing done----\""
 )
 
@@ -15,7 +13,6 @@ FLL_PACKAGE_DEPMODS=(
 )
 
 FLL_PACKAGES=(
-	wdm
 	fluxbox
 	bbtime
 	fbdesk
@@ -29,9 +26,6 @@ FLL_PACKAGES=(
 FLL_POST_PROCESSING=(
 	"#!/bin/bash"
 	"echo \"---- in postprocessing ----\""
-	"update-rc.d -f kdm remove"
-	"update-rc.d wdm start 99 5 . stop 01 0 1 2 3 4 6 ."
-	"rm -f /etc/X11/default-display-manager"
-	"echo /usr/bin/wdm >> /etc/X11/default-display-manager"
+	"# paste your code here"
 	"echo \"---- postprocessing done----\""
 )
