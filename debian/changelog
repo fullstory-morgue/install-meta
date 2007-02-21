@@ -1,36 +1,31 @@
-install-meta (0.0.37) UNRELEASED; urgency=low
+install-meta (0.0.37) unstable; urgency=low
 
   * add fvwm-crystal.bm
   * umount message fix
   * added postprocess to fvwm and fluxbox so the get the sidux wallpaper as
-	default
+    default.
 
  -- Joaquim Boura <x-un-i@sidux.com>  Wed, 21 Feb 2007 00:17:38 +0100
 
-install-meta (0.0.36) UNRELEASED; urgency=low
+install-meta (0.0.36) unstable; urgency=low
 
-  * rm : in Rassian modules 
+  * rm : in Russian modules 
 
  -- Horst Tritremmel <peter_weber69@gmx.at>  Tue, 20 Feb 2007 10:20:09 +0100
 
-install-meta (0.0.35) UNRELEASED; urgency=low
+install-meta (0.0.35) unstable; urgency=low
 
   * add Russian modules
   * remove Generic Server
 
  -- Horst Tritremmel <peter_weber69@gmx.at>  Tue, 20 Feb 2007 10:14:37 +0100
 
-install-meta (0.0.34) UNRELEASED; urgency=low
+install-meta (0.0.34) unstable; urgency=low
 
-  * reverted to non-wdm solution, removing kde kdm and installing wdm needs more testing
+  * reverted to non-wdm solution, removing kde kdm and installing wdm needs 
+    more testing
 
  -- Chris Hildebrandt <webmaster@sidux.com>  Tue, 20 Feb 2007 09:36:00 +0100
-
-install-meta (0.0.34) UNRELEASED; urgency=low
-
-  * NOT RELEASED YET
-
- -- Stefan Lippers-Hollmann <s.l-h@gmx.de>  Mon, 19 Feb 2007 22:14:15 +0100
 
 install-meta (0.0.33) unstable; urgency=low
 
