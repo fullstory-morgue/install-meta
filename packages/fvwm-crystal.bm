@@ -1,5 +1,3 @@
-#!/bin/bash
-
 FLL_DESCRIPTION="fvwm-crystal with kde-lite"
 
 FLL_PRE_PROCESSING=(

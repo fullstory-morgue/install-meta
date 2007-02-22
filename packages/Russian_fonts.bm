@@ -1,5 +1,3 @@
-#!/bin/bash
-
 FLL_DESCRIPTION="Packages  xfonts-cronyx-..."
 
 FLL_PRE_PROCESSING=(

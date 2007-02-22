@@ -1,5 +1,3 @@
-#!/bin/bash
-
 FLL_DESCRIPTION="Partition scanner and disk recovery"
 
 FLL_PRE_PROCESSING=(

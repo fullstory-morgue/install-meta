@@ -1,5 +1,3 @@
-#!/bin/bash
-
 FLL_DESCRIPTION="xfce4 with kde-lite"
 
 FLL_PRE_PROCESSING=(

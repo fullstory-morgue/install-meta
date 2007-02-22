@@ -1,5 +1,3 @@
-#!/bin/bash
-
 FLL_DESCRIPTION="A multiplatform and multilingual office suite and an open-source project"
 
 FLL_PRE_PROCESSING=(

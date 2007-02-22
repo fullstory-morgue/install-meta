@@ -1,5 +1,3 @@
-#!/bin/bash
-
 FLL_DESCRIPTION="Video Disc Recorder"
 
 FLL_PRE_PROCESSING=(

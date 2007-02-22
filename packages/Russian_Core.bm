@@ -1,5 +1,3 @@
-#!/bin/bash
-
 FLL_DESCRIPTION="Packages  kde-i18n-ru, apt-howto-ru, aspell-ru, console-cyrillic, manpages-ru, myspell-ru, irussian"
 
 FLL_PRE_PROCESSING=(

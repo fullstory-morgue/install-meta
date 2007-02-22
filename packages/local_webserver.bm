@@ -1,5 +1,3 @@
-#!/bin/bash
-
 FLL_DESCRIPTION="Server Applications"
 
 FLL_PRE_PROCESSING=(
