@@ -1,3 +1,9 @@
+install-meta (0.0.39) UNRELEASED; urgency=low
+
+  * made *bm files non executable 
+
+ -- Horst Tritremmel <peter_weber69@gmx.at>  Thu, 22 Feb 2007 14:25:59 +0100
+
 install-meta (0.0.38) UNRELEASED; urgency=low
 
   * NOT RELEASED YET
