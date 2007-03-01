@@ -134,3 +134,60 @@ on_button_install_released             (GtkButton       *button,
 void
 on_button_install_clicked              (GtkButton       *button,
                                         gpointer         user_data);
+
+
+gboolean
+on_treeview1_select_cursor_row         (GtkTreeView     *treeview,
+                                        gboolean         start_editing,
+                                        gpointer         user_data);
+
+gboolean
+on_treeview1_toggle_cursor_row         (GtkTreeView     *treeview,
+                                        gpointer         user_data);
+
+void
+on_treeview1_columns_changed           (GtkTreeView     *treeview,
+                                        gpointer         user_data);
+
+void
+on_treeview1_cursor_changed            (GtkTreeView     *treeview,
+                                        gpointer         user_data);
+
+gboolean
+on_treeview1_move_cursor               (GtkTreeView     *treeview,
+                                        GtkMovementStep  step,
+                                        gint             count,
+                                        gpointer         user_data);
+
+void
+on_treeview1_row_activated             (GtkTreeView     *treeview,
+                                        GtkTreePath     *path,
+                                        GtkTreeViewColumn *column,
+                                        gpointer         user_data);
+
+gboolean
+on_treeview1_select_all                (GtkTreeView     *treeview,
+                                        gpointer         user_data);
+
+gboolean
+on_treeview1_select_cursor_parent      (GtkTreeView     *treeview,
+                                        gpointer         user_data);
+
+gboolean
+on_treeview1_select_cursor_row         (GtkTreeView     *treeview,
+                                        gboolean         start_editing,
+                                        gpointer         user_data);
+
+gboolean
+on_treeview1_unselect_all              (GtkTreeView     *treeview,
+                                        gpointer         user_data);
+
+void
+on_treeview1_row_activated             (GtkTreeView     *treeview,
+                                        GtkTreePath     *path,
+                                        GtkTreeViewColumn *column,
+                                        gpointer         user_data);
+
+void
+on_button1_clicked                     (GtkButton       *button,
+                                        gpointer         user_data);

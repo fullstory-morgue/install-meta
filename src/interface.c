@@ -32,20 +32,22 @@ create_window1 (void)
   GtkWidget *window1;
   GdkPixbuf *window1_icon_pixbuf;
   GtkWidget *fixed1;
+  GtkWidget *image8;
   GtkWidget *scrolledwindow1;
   GtkWidget *treeview1;
-  GtkWidget *label_install;
-  GtkWidget *image8;
-  GtkWidget *exit;
-  GtkWidget *alignment2;
-  GtkWidget *hbox2;
-  GtkWidget *image5;
-  GtkWidget *label10;
   GtkWidget *button_install;
   GtkWidget *alignment4;
   GtkWidget *hbox4;
   GtkWidget *image7;
   GtkWidget *label12;
+  GtkWidget *exit;
+  GtkWidget *alignment2;
+  GtkWidget *hbox2;
+  GtkWidget *image5;
+  GtkWidget *label10;
+  GtkWidget *label_install;
+  GtkWidget *image10;
+  GtkWidget *label_info;
 
   window1 = gtk_window_new (GTK_WINDOW_TOPLEVEL);
   gtk_window_set_title (GTK_WINDOW (window1), _("Install metapackages"));
@@ -62,10 +64,15 @@ create_window1 (void)
   gtk_container_add (GTK_CONTAINER (window1), fixed1);
   gtk_container_set_border_width (GTK_CONTAINER (fixed1), 15);
 
+  image8 = create_pixmap (window1, "install-meta-title.png");
+  gtk_widget_show (image8);
+  gtk_fixed_put (GTK_FIXED (fixed1), image8, 480, 0);
+  gtk_widget_set_size_request (image8, 241, 33);
+
   scrolledwindow1 = gtk_scrolled_window_new (NULL, NULL);
   gtk_widget_show (scrolledwindow1);
-  gtk_fixed_put (GTK_FIXED (fixed1), scrolledwindow1, 16, 40);
-  gtk_widget_set_size_request (scrolledwindow1, 706, 462);
+  gtk_fixed_put (GTK_FIXED (fixed1), scrolledwindow1, 40, 40);
+  gtk_widget_set_size_request (scrolledwindow1, 721, 457);
 
   treeview1 = gtk_tree_view_new ();
   gtk_widget_show (treeview1);
@@ -74,41 +81,9 @@ create_window1 (void)
   gtk_tree_view_set_hover_selection (GTK_TREE_VIEW (treeview1), TRUE);
   gtk_tree_view_set_hover_expand (GTK_TREE_VIEW (treeview1), TRUE);
 
-  label_install = gtk_label_new (_("Install additional metapackages"));
-  gtk_widget_show (label_install);
-  gtk_fixed_put (GTK_FIXED (fixed1), label_install, 24, 0);
-  gtk_widget_set_size_request (label_install, 329, 33);
-  gtk_misc_set_alignment (GTK_MISC (label_install), 0, 0.5);
-
-  image8 = create_pixmap (window1, "install-meta-title.png");
-  gtk_widget_show (image8);
-  gtk_fixed_put (GTK_FIXED (fixed1), image8, 480, 0);
-  gtk_widget_set_size_request (image8, 241, 33);
-
-  exit = gtk_button_new ();
-  gtk_widget_show (exit);
-  gtk_fixed_put (GTK_FIXED (fixed1), exit, 32, 512);
-  gtk_widget_set_size_request (exit, 150, 28);
-
-  alignment2 = gtk_alignment_new (0.5, 0.5, 0, 0);
-  gtk_widget_show (alignment2);
-  gtk_container_add (GTK_CONTAINER (exit), alignment2);
-
-  hbox2 = gtk_hbox_new (FALSE, 2);
-  gtk_widget_show (hbox2);
-  gtk_container_add (GTK_CONTAINER (alignment2), hbox2);
-
-  image5 = gtk_image_new_from_stock ("gtk-quit", GTK_ICON_SIZE_BUTTON);
-  gtk_widget_show (image5);
-  gtk_box_pack_start (GTK_BOX (hbox2), image5, FALSE, FALSE, 0);
-
-  label10 = gtk_label_new_with_mnemonic (_("Exit"));
-  gtk_widget_show (label10);
-  gtk_box_pack_start (GTK_BOX (hbox2), label10, FALSE, FALSE, 0);
-
   button_install = gtk_button_new ();
   gtk_widget_show (button_install);
-  gtk_fixed_put (GTK_FIXED (fixed1), button_install, 552, 512);
+  gtk_fixed_put (GTK_FIXED (fixed1), button_install, 592, 512);
   gtk_widget_set_size_request (button_install, 150, 28);
 
   alignment4 = gtk_alignment_new (0.5, 0.5, 0, 0);
@@ -127,36 +102,77 @@ create_window1 (void)
   gtk_widget_show (label12);
   gtk_box_pack_start (GTK_BOX (hbox4), label12, FALSE, FALSE, 0);
 
+  exit = gtk_button_new ();
+  gtk_widget_show (exit);
+  gtk_fixed_put (GTK_FIXED (fixed1), exit, 40, 512);
+  gtk_widget_set_size_request (exit, 150, 28);
+
+  alignment2 = gtk_alignment_new (0.5, 0.5, 0, 0);
+  gtk_widget_show (alignment2);
+  gtk_container_add (GTK_CONTAINER (exit), alignment2);
+
+  hbox2 = gtk_hbox_new (FALSE, 2);
+  gtk_widget_show (hbox2);
+  gtk_container_add (GTK_CONTAINER (alignment2), hbox2);
+
+  image5 = gtk_image_new_from_stock ("gtk-quit", GTK_ICON_SIZE_BUTTON);
+  gtk_widget_show (image5);
+  gtk_box_pack_start (GTK_BOX (hbox2), image5, FALSE, FALSE, 0);
+
+  label10 = gtk_label_new_with_mnemonic (_("Exit"));
+  gtk_widget_show (label10);
+  gtk_box_pack_start (GTK_BOX (hbox2), label10, FALSE, FALSE, 0);
+
+  label_install = gtk_label_new (_("Install additional metapackages"));
+  gtk_widget_show (label_install);
+  gtk_fixed_put (GTK_FIXED (fixed1), label_install, 40, 1);
+  gtk_widget_set_size_request (label_install, 401, 32);
+  gtk_misc_set_alignment (GTK_MISC (label_install), 0, 0.5);
+
+  image10 = create_pixmap (window1, "install-meta-info.png");
+  gtk_widget_show (image10);
+  gtk_fixed_put (GTK_FIXED (fixed1), image10, 0, 63);
+  gtk_widget_set_size_request (image10, 21, 21);
+
+  label_info = gtk_label_new (_("Info Metapackage    \"DOUBLECLICK\"  ->"));
+  gtk_widget_show (label_info);
+  gtk_fixed_put (GTK_FIXED (fixed1), label_info, 0, 88);
+  gtk_widget_set_size_request (label_info, 33, 449);
+  gtk_misc_set_alignment (GTK_MISC (label_info), 0.2, 0);
+  gtk_label_set_angle (GTK_LABEL (label_info), 90);
+
   g_signal_connect ((gpointer) window1, "configure_event",
                     G_CALLBACK (on_window1_configure_event),
                     NULL);
   g_signal_connect ((gpointer) window1, "delete_event",
                     G_CALLBACK (on_window1_delete_event),
                     NULL);
-  g_signal_connect ((gpointer) exit, "clicked",
-                    G_CALLBACK (on_exit_clicked),
-                    NULL);
   g_signal_connect ((gpointer) button_install, "clicked",
                     G_CALLBACK (on_button_install_clicked),
+                    NULL);
+  g_signal_connect ((gpointer) exit, "clicked",
+                    G_CALLBACK (on_exit_clicked),
                     NULL);
 
   /* Store pointers to all widgets, for use by lookup_widget(). */
   GLADE_HOOKUP_OBJECT_NO_REF (window1, window1, "window1");
   GLADE_HOOKUP_OBJECT (window1, fixed1, "fixed1");
+  GLADE_HOOKUP_OBJECT (window1, image8, "image8");
   GLADE_HOOKUP_OBJECT (window1, scrolledwindow1, "scrolledwindow1");
   GLADE_HOOKUP_OBJECT (window1, treeview1, "treeview1");
-  GLADE_HOOKUP_OBJECT (window1, label_install, "label_install");
-  GLADE_HOOKUP_OBJECT (window1, image8, "image8");
-  GLADE_HOOKUP_OBJECT (window1, exit, "exit");
-  GLADE_HOOKUP_OBJECT (window1, alignment2, "alignment2");
-  GLADE_HOOKUP_OBJECT (window1, hbox2, "hbox2");
-  GLADE_HOOKUP_OBJECT (window1, image5, "image5");
-  GLADE_HOOKUP_OBJECT (window1, label10, "label10");
   GLADE_HOOKUP_OBJECT (window1, button_install, "button_install");
   GLADE_HOOKUP_OBJECT (window1, alignment4, "alignment4");
   GLADE_HOOKUP_OBJECT (window1, hbox4, "hbox4");
   GLADE_HOOKUP_OBJECT (window1, image7, "image7");
   GLADE_HOOKUP_OBJECT (window1, label12, "label12");
+  GLADE_HOOKUP_OBJECT (window1, exit, "exit");
+  GLADE_HOOKUP_OBJECT (window1, alignment2, "alignment2");
+  GLADE_HOOKUP_OBJECT (window1, hbox2, "hbox2");
+  GLADE_HOOKUP_OBJECT (window1, image5, "image5");
+  GLADE_HOOKUP_OBJECT (window1, label10, "label10");
+  GLADE_HOOKUP_OBJECT (window1, label_install, "label_install");
+  GLADE_HOOKUP_OBJECT (window1, image10, "image10");
+  GLADE_HOOKUP_OBJECT (window1, label_info, "label_info");
 
   return window1;
 }
@@ -292,5 +308,120 @@ create_dialog2 (void)
   GLADE_HOOKUP_OBJECT (dialog2, okbutton2, "okbutton2");
 
   return dialog2;
+}
+
+GtkWidget*
+create_package_info (void)
+{
+  GtkWidget *package_info;
+  GdkPixbuf *package_info_icon_pixbuf;
+  GtkWidget *fixed4;
+  GtkWidget *label_file;
+  GtkWidget *scrolledwindow4;
+  GtkWidget *textview_pre_processing;
+  GtkWidget *scrolledwindow2;
+  GtkWidget *treeview2;
+  GtkWidget *button1;
+  GtkWidget *scrolledwindow5;
+  GtkWidget *textview_post_processing;
+  GtkWidget *label_pre;
+  GtkWidget *label_list;
+  GtkWidget *label_post;
+
+  package_info = gtk_window_new (GTK_WINDOW_TOPLEVEL);
+  gtk_window_set_title (GTK_WINDOW (package_info), _("Package Info"));
+  package_info_icon_pixbuf = create_pixbuf ("sidux-meta-icon.png");
+  if (package_info_icon_pixbuf)
+    {
+      gtk_window_set_icon (GTK_WINDOW (package_info), package_info_icon_pixbuf);
+      gdk_pixbuf_unref (package_info_icon_pixbuf);
+    }
+
+  fixed4 = gtk_fixed_new ();
+  gtk_widget_show (fixed4);
+  gtk_container_add (GTK_CONTAINER (package_info), fixed4);
+  gtk_container_set_border_width (GTK_CONTAINER (fixed4), 15);
+
+  label_file = gtk_label_new ("");
+  gtk_widget_show (label_file);
+  gtk_fixed_put (GTK_FIXED (fixed4), label_file, 0, 0);
+  gtk_widget_set_size_request (label_file, 729, 25);
+  gtk_misc_set_alignment (GTK_MISC (label_file), 0, 0.5);
+
+  scrolledwindow4 = gtk_scrolled_window_new (NULL, NULL);
+  gtk_widget_show (scrolledwindow4);
+  gtk_fixed_put (GTK_FIXED (fixed4), scrolledwindow4, 0, 56);
+  gtk_widget_set_size_request (scrolledwindow4, 729, 113);
+
+  textview_pre_processing = gtk_text_view_new ();
+  gtk_widget_show (textview_pre_processing);
+  gtk_container_add (GTK_CONTAINER (scrolledwindow4), textview_pre_processing);
+  gtk_text_view_set_editable (GTK_TEXT_VIEW (textview_pre_processing), FALSE);
+
+  scrolledwindow2 = gtk_scrolled_window_new (NULL, NULL);
+  gtk_widget_show (scrolledwindow2);
+  gtk_fixed_put (GTK_FIXED (fixed4), scrolledwindow2, 0, 200);
+  gtk_widget_set_size_request (scrolledwindow2, 729, 169);
+
+  treeview2 = gtk_tree_view_new ();
+  gtk_widget_show (treeview2);
+  gtk_container_add (GTK_CONTAINER (scrolledwindow2), treeview2);
+
+  button1 = gtk_button_new_from_stock ("gtk-close");
+  gtk_widget_show (button1);
+  gtk_fixed_put (GTK_FIXED (fixed4), button1, 616, 520);
+  gtk_widget_set_size_request (button1, 97, 30);
+
+  scrolledwindow5 = gtk_scrolled_window_new (NULL, NULL);
+  gtk_widget_show (scrolledwindow5);
+  gtk_fixed_put (GTK_FIXED (fixed4), scrolledwindow5, 0, 400);
+  gtk_widget_set_size_request (scrolledwindow5, 729, 112);
+
+  textview_post_processing = gtk_text_view_new ();
+  gtk_widget_show (textview_post_processing);
+  gtk_container_add (GTK_CONTAINER (scrolledwindow5), textview_post_processing);
+  gtk_text_view_set_editable (GTK_TEXT_VIEW (textview_post_processing), FALSE);
+
+  label_pre = gtk_label_new (_("PRE PROCESSING script:"));
+  gtk_widget_show (label_pre);
+  gtk_fixed_put (GTK_FIXED (fixed4), label_pre, 0, 32);
+  gtk_widget_set_size_request (label_pre, 728, 24);
+  gtk_misc_set_alignment (GTK_MISC (label_pre), 0, 0.5);
+
+  label_list = gtk_label_new (_("PACKAGE LIST:"));
+  gtk_widget_show (label_list);
+  gtk_fixed_put (GTK_FIXED (fixed4), label_list, 0, 176);
+  gtk_widget_set_size_request (label_list, 728, 24);
+  gtk_misc_set_alignment (GTK_MISC (label_list), 0, 0.5);
+
+  label_post = gtk_label_new (_("POST PROCESSING sript:"));
+  gtk_widget_show (label_post);
+  gtk_fixed_put (GTK_FIXED (fixed4), label_post, 0, 376);
+  gtk_widget_set_size_request (label_post, 728, 24);
+  gtk_misc_set_alignment (GTK_MISC (label_post), 0, 0.5);
+
+  g_signal_connect ((gpointer) package_info, "delete_event",
+                    G_CALLBACK (gtk_widget_destroy),
+                    NULL);
+  g_signal_connect ((gpointer) button1, "clicked",
+                    G_CALLBACK (on_button1_clicked),
+                    NULL);
+
+  /* Store pointers to all widgets, for use by lookup_widget(). */
+  GLADE_HOOKUP_OBJECT_NO_REF (package_info, package_info, "package_info");
+  GLADE_HOOKUP_OBJECT (package_info, fixed4, "fixed4");
+  GLADE_HOOKUP_OBJECT (package_info, label_file, "label_file");
+  GLADE_HOOKUP_OBJECT (package_info, scrolledwindow4, "scrolledwindow4");
+  GLADE_HOOKUP_OBJECT (package_info, textview_pre_processing, "textview_pre_processing");
+  GLADE_HOOKUP_OBJECT (package_info, scrolledwindow2, "scrolledwindow2");
+  GLADE_HOOKUP_OBJECT (package_info, treeview2, "treeview2");
+  GLADE_HOOKUP_OBJECT (package_info, button1, "button1");
+  GLADE_HOOKUP_OBJECT (package_info, scrolledwindow5, "scrolledwindow5");
+  GLADE_HOOKUP_OBJECT (package_info, textview_post_processing, "textview_post_processing");
+  GLADE_HOOKUP_OBJECT (package_info, label_pre, "label_pre");
+  GLADE_HOOKUP_OBJECT (package_info, label_list, "label_list");
+  GLADE_HOOKUP_OBJECT (package_info, label_post, "label_post");
+
+  return package_info;
 }
 

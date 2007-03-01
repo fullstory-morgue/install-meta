@@ -12,6 +12,7 @@
 #include "interface.h"
 #include "support.h"
 
+
 #define MAXLINE 1024
 #define STDLINE 80
 
@@ -30,10 +31,214 @@ int  do_it_at_first_time = 0;
 
 enum
 {
+  COL_ICON = 0,
   COL_SELECTED,
   COL_SHORT_TEXT,
   COL_LONG_TEXT
 } ;
+
+enum
+{
+  PACKAGE_TEXT,
+  DESCRIPTION_TEXT
+} ;
+
+ void
+ onRowActivated (GtkTreeView        *view,
+                 GtkTreePath        *path,
+                 GtkTreeViewColumn  *col,
+                 gpointer            user_data)
+  {
+    GtkWidget *treeview2;
+    GtkListStore *model2;
+    GtkCellRenderer  *cell;
+    GtkTreeViewColumn  *package, *description;
+    GtkTreeModel *model;
+    GtkTreeIter   iter;
+    GtkTreeIter iter_tb;
+    gchar        *tree_path_str;
+    PangoFontDescription *font_desc;
+    GdkColor color;
+    FILE *temp_file_package;
+    int fd;
+    char temp_meta_filename[STDLINE], column[MAXLINE], *text_left, *text_right, *text_description;
+    char system_call[MAXLINE];
+
+    tree_path_str = gtk_tree_path_to_string(path); // linenumber of doubleclicked column
+    //g_print ("%s\n", tree_path_str);
+
+    // the model (treeview) from the main window
+    model = gtk_tree_view_get_model (view);
+
+    if (!gtk_tree_model_get_iter(model, &iter, path))
+      return; /* path describes a non-existing row - should not happen */
+
+
+   ///////////////// which package was doubleclicked /////////////////
+   //  create tempfile to search for the name of the clicked packages 
+   strncpy(temp_meta_filename, "/tmp/temp_meta_filename.XXXXXX", STDLINE);
+   fd = mkstemp(temp_meta_filename);  // make a tempfile
+   if( fd )
+      close(fd);
+   else
+      printf("error: mkstemp(temp_meta_filename_sh)\n");
+
+
+   strncpy(system_call, "#!/bin/bash", MAXLINE );
+   strncat(system_call, "\nBMFILE=$(ls ", MAXLINE );  // ~ field delimiter
+   strncat(system_call, DEFAULT_CONF_DIR, MAXLINE );
+   strncat(system_call, "/*.bm | head -$(((", MAXLINE );
+   strncat(system_call, tree_path_str, MAXLINE );         // tree_path_str = linenumber of doubleclicked column
+   strncat(system_call, "+1))) | tail -1 )", MAXLINE );  // tree_path_str +1 because count begins with 0
+   strncat(system_call, "\necho filename~${BMFILE} > ", MAXLINE);
+   strncat(system_call, temp_meta_filename, MAXLINE );
+   strncat(system_call, "\nsource ${BMFILE}", MAXLINE );
+   strncat(system_call, "\n   for pkgmod in ${FLL_PACKAGE_DEPMODS[@]}; do", MAXLINE );
+   strncat(system_call, "\nsource packages.d/${pkgmod}.bm", MAXLINE );
+   strncat(system_call, "\ndone", MAXLINE );
+   strncat(system_call, "\nsource packages.d/i18n.bm", MAXLINE );
+   strncat(system_call, "\nIFS=$'\\n'", MAXLINE );
+   strncat(system_call, "\nfor pre_processing in ${FLL_PRE_PROCESSING[@]}; do", MAXLINE );
+   strncat(system_call, "\n    echo pre~${pre_processing} >> ", MAXLINE );
+   strncat(system_call,           temp_meta_filename, MAXLINE );
+   strncat(system_call, "\ndone", MAXLINE );
+   strncat(system_call, "\nfor package_list in ${FLL_PACKAGES[@]}; do", MAXLINE );
+   strncat(system_call, "\n    echo package_list~${package_list}~$(apt-cache show ${package_list} |grep \"^Description:\" |sed 's/^Description: //') >> ", MAXLINE );
+   strncat(system_call,           temp_meta_filename, MAXLINE );
+   strncat(system_call, "\ndone", MAXLINE );
+   strncat(system_call, "\nfor post_processing in ${FLL_POST_PROCESSING[@]}; do", MAXLINE );
+   strncat(system_call, "\n    echo post~${post_processing} >> ", MAXLINE );
+   strncat(system_call,           temp_meta_filename, MAXLINE );
+   strncat(system_call, "\ndone", MAXLINE );
+   strncat(system_call, "\nIFS=$' \\t\\n'", MAXLINE );
+
+   strncat(system_call, temp_meta_filename, MAXLINE );
+
+   system(system_call);
+
+
+   ///////////////////////////////////////////////////////////////////////////
+   // open the package_info window
+   GtkWidget* package_info = create_package_info ();
+
+   // label_file sets, font, color, etc.
+   GtkWidget* label = lookup_widget ( GTK_WIDGET (package_info), "label_file");
+
+   gdk_color_parse ("blue", &color);
+   gtk_widget_modify_fg ( GTK_WIDGET(label), GTK_STATE_NORMAL, &color);
+   font_desc = pango_font_description_from_string ("14");
+   gtk_widget_modify_font ( GTK_WIDGET(label), font_desc);
+   pango_font_description_free (font_desc);
+
+
+   // textview_pre_processing
+   GtkWidget* textview_pre_processing = lookup_widget (GTK_WIDGET ( package_info ), "textview_pre_processing");
+   GtkTextBuffer* buffer_pre = gtk_text_view_get_buffer (GTK_TEXT_VIEW ( textview_pre_processing ));
+
+
+   // package list treeview
+   treeview2   = lookup_widget (GTK_WIDGET ( package_info ), "treeview2");
+   model2 = gtk_list_store_new(2, G_TYPE_STRING, G_TYPE_STRING);
+
+   gtk_tree_view_set_model(GTK_TREE_VIEW(treeview2), GTK_TREE_MODEL (model2));
+   cell = gtk_cell_renderer_text_new();
+
+   package     = gtk_tree_view_column_new_with_attributes("Package", cell, "text", 0, NULL);
+   description = gtk_tree_view_column_new_with_attributes("Description", cell, "text", 1, NULL);
+
+   gtk_tree_view_append_column(GTK_TREE_VIEW(treeview2), GTK_TREE_VIEW_COLUMN(package));
+   gtk_tree_view_append_column(GTK_TREE_VIEW(treeview2), GTK_TREE_VIEW_COLUMN(description));
+
+
+   // textview_post_processing
+   GtkWidget* textview_post_processing = lookup_widget (GTK_WIDGET ( package_info ), "textview_post_processing");
+   GtkTextBuffer* buffer_post = gtk_text_view_get_buffer (GTK_TEXT_VIEW ( textview_post_processing ));
+
+
+    // read the created tempfile
+    temp_file_package = fopen( temp_meta_filename, "r" );
+    if( temp_file_package == NULL ) {
+       printf( "The file %s was not opened\n", temp_meta_filename);
+    }
+    else {
+
+
+    fseek( temp_file_package, 0L, SEEK_SET );
+    while (fscanf(temp_file_package, "%[^\n]\n", column) != EOF) {
+             text_left = strtok(column, "~");
+             text_right = strtok(NULL, "~");
+
+             // read the metapackage filename from tempfile
+             if ( strcmp( text_left, "filename" )  == 0 )
+                      // write the filename(path) from doubleclicked metapackage in the label_file
+                      gtk_label_set_text( GTK_LABEL ( label ), text_right );
+
+
+             // read the prescript from tempfile
+             if ( strcmp( text_left, "pre" )  == 0 ) {
+                      gtk_text_buffer_insert_at_cursor (buffer_pre, text_right , -1);
+                      gtk_text_buffer_insert_at_cursor (buffer_pre, "\n" , -1);
+                }
+
+
+             // appand to treeview packagelist
+             if ( strcmp( text_left, "package_list" )  == 0 ) {
+                text_description = strtok(NULL, "~");
+
+                gtk_list_store_append ( GTK_LIST_STORE (model2), &iter_tb);
+                gtk_list_store_set ( GTK_LIST_STORE (model2), &iter_tb,
+                         PACKAGE_TEXT, text_right,
+                         DESCRIPTION_TEXT, text_description,
+                         -1);
+                }
+
+
+             // read the prescript from tempfile
+             if ( strcmp( text_left, "post" )  == 0 ) {
+                      gtk_text_buffer_insert_at_cursor (buffer_post, text_right , -1);
+                      gtk_text_buffer_insert_at_cursor (buffer_post, "\n" , -1);
+                }
+ 
+         }
+    }
+    fclose(temp_file_package);
+
+    /* remove the tempfile */
+    unlink( temp_meta_filename );
+
+
+    // label sets
+    label = lookup_widget ( GTK_WIDGET (package_info), "label_pre");
+    gdk_color_parse ("darkred", &color);
+    gtk_widget_modify_fg ( GTK_WIDGET(label), GTK_STATE_NORMAL, &color);
+    font_desc = pango_font_description_from_string ("11");
+    gtk_widget_modify_font ( GTK_WIDGET(label), font_desc);
+    pango_font_description_free (font_desc);
+
+    // label sets
+    label = lookup_widget ( GTK_WIDGET (package_info), "label_list");
+    gdk_color_parse ("darkred", &color);
+    gtk_widget_modify_fg ( GTK_WIDGET(label), GTK_STATE_NORMAL, &color);
+    font_desc = pango_font_description_from_string ("11");
+    gtk_widget_modify_font ( GTK_WIDGET(label), font_desc);
+    pango_font_description_free (font_desc);
+
+    // label sets
+    label = lookup_widget ( GTK_WIDGET (package_info), "label_post");
+    gdk_color_parse ("darkred", &color);
+    gtk_widget_modify_fg ( GTK_WIDGET(label), GTK_STATE_NORMAL, &color);
+    font_desc = pango_font_description_from_string ("11");
+    gtk_widget_modify_font ( GTK_WIDGET(label), font_desc);
+    pango_font_description_free (font_desc);
+
+
+    // show the info window
+    gtk_widget_show (package_info);
+
+    //gtk_list_store_remove(GTK_LIST_STORE(model), &iter);
+    g_free(tree_path_str);
+  }
+
 
 
 void search_metapackages_names()
@@ -78,7 +283,7 @@ void search_metapackages_names()
                "cd ", INSTALL_PACKAGES_CONF_DIR,
                "for modul in $(ls *.bm); do",
                "   source ${modul}",
-               "   echo $(echo ${modul} | cut -d. -f1):${FLL_DESCRIPTION}",
+               "   echo $(echo ${modul} | cut -d. -f1)~${FLL_DESCRIPTION}",
                "   unset FLL_PACKAGES FLL_PACKAGE_DEPMODS FLL_DESCRIPTION FLL_PRE_PROCESSING FLL_POST_PROCESSING",
                "done > ",temp_file_packagelist
       );
@@ -182,11 +387,15 @@ on_window1_configure_event             (GtkWidget       *widget,
 {
  FILE *temp_file_package;
  char *ptr_option, *ptr_confdir, longtext[MAXLINE], *shorttext_p, *longtext_p;
- GtkWidget *treeview1;
+ GtkWidget *label, *treeview1;
  GtkListStore *model;
- GtkCellRenderer *toggle, *cell;
- GtkTreeViewColumn *mointpoint, *fs, *device;
+ GtkCellRenderer *toggle, *pixrenderer, *cell;
+ GtkTreeViewColumn *mointpoint, *fs, *pixm, *device;
  GtkTreeIter iter_tb;
+ GdkPixbuf     *icon;
+ GError        *error = NULL;
+ PangoFontDescription *font_desc;
+ GdkColor color;
  long counter = 0;
 
 
@@ -209,16 +418,35 @@ on_window1_configure_event             (GtkWidget       *widget,
 
    /* treeview */
    treeview1   = lookup_widget (GTK_WIDGET (widget), "treeview1");
-   model = gtk_list_store_new(3, G_TYPE_BOOLEAN, G_TYPE_STRING, G_TYPE_STRING);
+   //model = gtk_list_store_new(3, G_TYPE_BOOLEAN, G_TYPE_STRING, G_TYPE_STRING);
+   model = gtk_list_store_new(4, GDK_TYPE_PIXBUF, G_TYPE_BOOLEAN, G_TYPE_STRING, G_TYPE_STRING);
 
    gtk_tree_view_set_model(GTK_TREE_VIEW(treeview1), GTK_TREE_MODEL (model));
    toggle = gtk_cell_renderer_toggle_new ();
+   pixrenderer = gtk_cell_renderer_pixbuf_new ();
    cell = gtk_cell_renderer_text_new();
 
-   device     = gtk_tree_view_column_new_with_attributes("", toggle, "active", COL_SELECTED, NULL);
-   fs         = gtk_tree_view_column_new_with_attributes("MetaPackage", cell, "text", 1, NULL);
-   mointpoint = gtk_tree_view_column_new_with_attributes("Description", cell, "text", 2, NULL);
 
+   g_signal_connect(treeview1, "row-activated", G_CALLBACK(onRowActivated), NULL);
+
+   icon = gdk_pixbuf_new_from_file("/usr/share/install-meta/pixmaps/install-meta-info.png", &error);
+   if (error)
+   {
+      g_warning ("Could not load icon: %s\n", error->message);
+      g_error_free(error);
+      error = NULL;
+   }
+
+
+   //g_object_set (pixrenderer, "clickable", TRUE, NULL);
+
+   pixm       = gtk_tree_view_column_new_with_attributes("Info", pixrenderer, "pixbuf", COL_ICON, NULL);
+                //gtk_tree_view_column_set_clickable ( GTK_TREE_VIEW_COLUMN (pixm), TRUE);
+   device     = gtk_tree_view_column_new_with_attributes("", toggle, "active", COL_SELECTED, NULL);
+   fs         = gtk_tree_view_column_new_with_attributes("MetaPackage", cell, "text", 2, NULL);
+   mointpoint = gtk_tree_view_column_new_with_attributes("Description", cell, "text", 3, NULL);
+
+   gtk_tree_view_append_column(GTK_TREE_VIEW(treeview1), GTK_TREE_VIEW_COLUMN(pixm));
    gtk_tree_view_append_column(GTK_TREE_VIEW(treeview1), GTK_TREE_VIEW_COLUMN(device));
    gtk_tree_view_append_column(GTK_TREE_VIEW(treeview1), GTK_TREE_VIEW_COLUMN(fs));
    gtk_tree_view_append_column(GTK_TREE_VIEW(treeview1), GTK_TREE_VIEW_COLUMN(mointpoint));
@@ -229,6 +457,8 @@ on_window1_configure_event             (GtkWidget       *widget,
                      model);
 
 
+   //g_signal_connect (pixm, "clicked", G_CALLBACK (on_info_click), model);
+   //g_signal_connect_object(pixm, "clicked", G_CALLBACK(on_info_click), treeview1, 0);
   /* ================================================================= *
    *         append rows and fill in some data  to the treeview        *
    * ================================================================= */
@@ -262,11 +492,12 @@ on_window1_configure_event             (GtkWidget       *widget,
      // appand to treeview
      fseek( temp_file_package, 0L, SEEK_SET );
      while (fscanf(temp_file_package, "%[^\n]\n", longtext) != EOF) {
-             shorttext_p = strtok(longtext, ":");
-             longtext_p = strtok(NULL, ":");
+             shorttext_p = strtok(longtext, "~");
+             longtext_p = strtok(NULL, "~");
 
              gtk_list_store_append ( GTK_LIST_STORE (model), &iter_tb);
              gtk_list_store_set ( GTK_LIST_STORE (model), &iter_tb,
+                         COL_ICON, icon,
                          COL_SHORT_TEXT, shorttext_p,
                          COL_LONG_TEXT, longtext_p,
                          -1);
@@ -279,10 +510,29 @@ on_window1_configure_event             (GtkWidget       *widget,
     unlink(temp_file_packagelist);
 
     // no metapackage description found, file empty
-    if( counter < 1) 
+    if( counter < 1) {
             no_file_dialog (GTK_WIDGET (widget));
+    }
 
-  }
+  /* ============================================================= *
+   *           Label sets, font, color, etc.                       *
+   * ============================================================= */
+   label = lookup_widget ( GTK_WIDGET (widget), "label_install");
+   gdk_color_parse ("darkred", &color);
+   gtk_widget_modify_fg ( GTK_WIDGET(label), GTK_STATE_NORMAL, &color);
+   font_desc = pango_font_description_from_string ("20");
+   gtk_widget_modify_font ( GTK_WIDGET(label), font_desc);
+   pango_font_description_free (font_desc);
+
+   label = lookup_widget ( GTK_WIDGET (widget), "label_info");
+   gdk_color_parse ("blue", &color);
+   gtk_widget_modify_fg ( GTK_WIDGET(label), GTK_STATE_NORMAL, &color);
+   font_desc = pango_font_description_from_string ("14");
+   gtk_widget_modify_font ( GTK_WIDGET(label), font_desc);
+   pango_font_description_free (font_desc);
+
+ }
+
  return FALSE;
 }
 
@@ -485,5 +735,14 @@ on_button_install_clicked              (GtkButton       *button,
    // show the main window
    GtkWidget *window1 = lookup_widget(GTK_WIDGET(button),"window1");
    gtk_widget_show ( GTK_WIDGET (window1) );
+}
+
+
+void
+on_button1_clicked                     (GtkButton       *button,
+                                        gpointer         user_data)
+{
+     GtkWidget *window = lookup_widget(GTK_WIDGET( button ),"package_info");
+     gtk_widget_destroy ( GTK_WIDGET (window) );
 }
 

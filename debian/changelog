@@ -1,3 +1,9 @@
+install-meta (0.0.41) UNRELEASED; urgency=low
+
+  * add meta-package info 
+
+ -- Horst Tritremmel <hjt@sidux.com>  Thu,  1 Mar 2007 22:07:31 +0100
+
 install-meta (0.0.40) UNRELEASED; urgency=low
 
   * NOT RELEASED YET
