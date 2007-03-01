@@ -1,4 +1,4 @@
-install-meta (0.0.41) UNRELEASED; urgency=low
+install-meta (0.0.41) unstable; urgency=low
 
   * add meta-package info 
 
