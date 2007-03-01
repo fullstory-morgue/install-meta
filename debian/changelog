@@ -1,14 +1,14 @@
+install-meta (0.0.42) UNRELEASED; urgency=low
+
+  * NOT RELEASED YET
+
+ -- Stefan Lippers-Hollmann <s.l-h@gmx.de>  Thu,  1 Mar 2007 22:34:44 +0100
+
 install-meta (0.0.41) unstable; urgency=low
 
   * add meta-package info 
 
  -- Horst Tritremmel <hjt@sidux.com>  Thu,  1 Mar 2007 22:07:31 +0100
-
-install-meta (0.0.40) UNRELEASED; urgency=low
-
-  * NOT RELEASED YET
-
- -- Stefan Lippers-Hollmann <s.l-h@gmx.de>  Thu, 22 Feb 2007 16:02:54 +0100
 
 install-meta (0.0.39) unstable; urgency=low
 
