@@ -1,8 +1,12 @@
 install-meta (0.0.42) UNRELEASED; urgency=low
 
+  [ Stefan Lippers-Hollmann ]
   * NOT RELEASED YET
 
- -- Stefan Lippers-Hollmann <s.l-h@gmx.de>  Thu,  1 Mar 2007 22:34:44 +0100
+  [ Horst Tritremmel ]
+  * add categories
+
+ -- Horst Tritremmel <hjt@sidux.com>  Sat,  3 Mar 2007 18:18:47 +0100
 
 install-meta (0.0.41) unstable; urgency=low
 

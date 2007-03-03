@@ -31,11 +31,12 @@ int  do_it_at_first_time = 0;
 
 enum
 {
-  COL_ICON = 0,
+  COL_ICON,
   COL_SELECTED,
   COL_SHORT_TEXT,
   COL_LONG_TEXT
 } ;
+
 
 enum
 {
@@ -54,9 +55,8 @@ enum
     GtkCellRenderer  *cell;
     GtkTreeViewColumn  *package, *description;
     GtkTreeModel *model;
-    GtkTreeIter   iter;
-    GtkTreeIter iter_tb;
-    gchar        *tree_path_str;
+    GtkTreeIter   iter, iter_parent, iter_tb;
+    gchar  *package_name, *category_name;
     PangoFontDescription *font_desc;
     GdkColor color;
     FILE *temp_file_package;
@@ -64,8 +64,6 @@ enum
     char temp_meta_filename[STDLINE], column[MAXLINE], *text_left, *text_right, *text_description;
     char system_call[MAXLINE];
 
-    tree_path_str = gtk_tree_path_to_string(path); // linenumber of doubleclicked column
-    //g_print ("%s\n", tree_path_str);
 
     // the model (treeview) from the main window
     model = gtk_tree_view_get_model (view);
@@ -73,6 +71,18 @@ enum
     if (!gtk_tree_model_get_iter(model, &iter, path))
       return; /* path describes a non-existing row - should not happen */
 
+    // get name of doubleclicked metapackage
+    gtk_tree_model_get (model, &iter,
+	                    COL_SHORT_TEXT, &package_name,
+	                    -1);
+    // get name of category, parent line
+    gboolean has_parent = gtk_tree_model_iter_parent (model, &iter_parent ,&iter);
+    if (!has_parent)
+      return;
+
+    gtk_tree_model_get (model, &iter_parent,
+	                    COL_SHORT_TEXT, &category_name,
+	                    -1);
 
    ///////////////// which package was doubleclicked /////////////////
    //  create tempfile to search for the name of the clicked packages 
@@ -85,11 +95,14 @@ enum
 
 
    strncpy(system_call, "#!/bin/bash", MAXLINE );
-   strncat(system_call, "\nBMFILE=$(ls ", MAXLINE );  // ~ field delimiter
+   strncpy(system_call, "set -e", MAXLINE );
+   strncat(system_call, "\nBMFILE=", MAXLINE );
    strncat(system_call, DEFAULT_CONF_DIR, MAXLINE );
-   strncat(system_call, "/*.bm | head -$(((", MAXLINE );
-   strncat(system_call, tree_path_str, MAXLINE );         // tree_path_str = linenumber of doubleclicked column
-   strncat(system_call, "+1))) | tail -1 )", MAXLINE );  // tree_path_str +1 because count begins with 0
+   strncat(system_call, "/", MAXLINE );
+   strncat(system_call, category_name, MAXLINE );
+   strncat(system_call, "-", MAXLINE );
+   strncat(system_call, package_name, MAXLINE );
+   strncat(system_call, ".bm", MAXLINE );
    strncat(system_call, "\necho filename~${BMFILE} > ", MAXLINE);
    strncat(system_call, temp_meta_filename, MAXLINE );
    strncat(system_call, "\nsource ${BMFILE}", MAXLINE );
@@ -111,8 +124,6 @@ enum
    strncat(system_call,           temp_meta_filename, MAXLINE );
    strncat(system_call, "\ndone", MAXLINE );
    strncat(system_call, "\nIFS=$' \\t\\n'", MAXLINE );
-
-   strncat(system_call, temp_meta_filename, MAXLINE );
 
    system(system_call);
 
@@ -236,7 +247,7 @@ enum
     gtk_widget_show (package_info);
 
     //gtk_list_store_remove(GTK_LIST_STORE(model), &iter);
-    g_free(tree_path_str);
+    //g_free(tree_path_str);
   }
 
 
@@ -311,7 +322,7 @@ void toggle_selected (GtkCellRendererToggle *toggle,
    // store the toggle selection if it is selected
    GtkTreeModel *model;
    GtkTreePath  *path;
-   GtkTreeIter   iter;
+   GtkTreeIter   iter, child_iter;
    gboolean      selected;
 
    model  = (GtkTreeModel *) data;
@@ -324,10 +335,21 @@ void toggle_selected (GtkCellRendererToggle *toggle,
                        COL_SELECTED, &selected,
                        -1);
 
-   gtk_list_store_set ((GtkListStore *) model,
+   gtk_tree_store_set ((GtkTreeStore *) model,
                         &iter,
                         COL_SELECTED, !selected,
                         -1);
+
+   if ( gtk_tree_model_iter_has_child ( model, &iter ) ) {
+        gtk_tree_model_iter_children (model, &child_iter, &iter);
+
+             do {
+              gtk_tree_store_set ((GtkTreeStore *) model,
+                        &child_iter,
+                        COL_SELECTED, !selected,
+                        -1);
+             } while(gtk_tree_model_iter_next(model, &child_iter));
+      }
 
    gtk_tree_path_free (path);
 }
@@ -339,9 +361,11 @@ foreach_func (GtkTreeModel *model,
               GtkTreeIter  *iter,
               gpointer      user_data)
 {
-  // read each line in the treeview and create the packagelist tempfile for selected metapackages
+  GtkTreeIter iter_parent;
   gboolean *toggle;
-  gchar *short_text, *long_text;
+  gchar *short_text, *long_text, * category_name;
+  // read each line in the treeview and create the packagelist tempfile for selected metapackages
+
 
   /* Note: here we use 'iter' and not '&iter', because we did not allocate
    *  the iter on the stack and are already getting the pointer to a tree iter */
@@ -351,10 +375,20 @@ foreach_func (GtkTreeModel *model,
                       COL_SHORT_TEXT, &short_text,
                       COL_LONG_TEXT, &long_text,
                       -1);
+
+    // get name of category, parent line
+    gboolean has_parent = gtk_tree_model_iter_parent (model, &iter_parent ,iter);
+    if (!has_parent)
+      return FALSE;
+
+    gtk_tree_model_get (model, &iter_parent,
+	                    COL_SHORT_TEXT, &category_name,
+	                    -1);
+
   // if the metapackage was selected
   if ( toggle )
-      fprintf( temp_create_package_list_sh_fd, "%s.bm\n", 
-                                                short_text);
+      fprintf( temp_create_package_list_sh_fd, "%s-%s.bm\n", 
+                                         category_name, short_text);
 
 
   g_free(short_text);  /* the strings for us when retrieving them */
@@ -386,13 +420,13 @@ on_window1_configure_event             (GtkWidget       *widget,
                                         gpointer         user_data)
 {
  FILE *temp_file_package;
- char *ptr_option, *ptr_confdir, longtext[MAXLINE], *shorttext_p, *longtext_p;
+ char *ptr_option, *ptr_confdir, longtext[MAXLINE], category_last[STDLINE], *shorttext_p, *longtext_p, *category_p;
  GtkWidget *label, *treeview1;
- GtkListStore *model;
- GtkCellRenderer *toggle, *pixrenderer, *cell;
+ GtkTreeStore *model;
+ GtkCellRenderer *toggle, *pixrenderer, *cell, *cell2;
  GtkTreeViewColumn *mointpoint, *fs, *pixm, *device;
- GtkTreeIter iter_tb;
- GdkPixbuf     *icon;
+ GtkTreeIter iter_tb, iter_category;
+ GdkPixbuf     *icon, *icon_package;
  GError        *error = NULL;
  PangoFontDescription *font_desc;
  GdkColor color;
@@ -418,16 +452,17 @@ on_window1_configure_event             (GtkWidget       *widget,
 
    /* treeview */
    treeview1   = lookup_widget (GTK_WIDGET (widget), "treeview1");
-   //model = gtk_list_store_new(3, G_TYPE_BOOLEAN, G_TYPE_STRING, G_TYPE_STRING);
-   model = gtk_list_store_new(4, GDK_TYPE_PIXBUF, G_TYPE_BOOLEAN, G_TYPE_STRING, G_TYPE_STRING);
+   model = gtk_tree_store_new(4, GDK_TYPE_PIXBUF, G_TYPE_BOOLEAN, G_TYPE_STRING, G_TYPE_STRING);
 
    gtk_tree_view_set_model(GTK_TREE_VIEW(treeview1), GTK_TREE_MODEL (model));
    toggle = gtk_cell_renderer_toggle_new ();
    pixrenderer = gtk_cell_renderer_pixbuf_new ();
    cell = gtk_cell_renderer_text_new();
+   cell2 = gtk_cell_renderer_text_new();
 
 
    g_signal_connect(treeview1, "row-activated", G_CALLBACK(onRowActivated), NULL);
+//   g_object_set (treeview1, "enable-tree-lines" , TRUE, NULL);
 
    icon = gdk_pixbuf_new_from_file("/usr/share/install-meta/pixmaps/install-meta-info.png", &error);
    if (error)
@@ -437,14 +472,22 @@ on_window1_configure_event             (GtkWidget       *widget,
       error = NULL;
    }
 
+   icon_package = gdk_pixbuf_new_from_file("/usr/share/install-meta/pixmaps/install-meta-package.png", &error);
+   if (error)
+   {
+      g_warning ("Could not load icon: %s\n", error->message);
+      g_error_free(error);
+      error = NULL;
+   }
+
 
    //g_object_set (pixrenderer, "clickable", TRUE, NULL);
-
    pixm       = gtk_tree_view_column_new_with_attributes("Info", pixrenderer, "pixbuf", COL_ICON, NULL);
                 //gtk_tree_view_column_set_clickable ( GTK_TREE_VIEW_COLUMN (pixm), TRUE);
    device     = gtk_tree_view_column_new_with_attributes("", toggle, "active", COL_SELECTED, NULL);
-   fs         = gtk_tree_view_column_new_with_attributes("MetaPackage", cell, "text", 2, NULL);
-   mointpoint = gtk_tree_view_column_new_with_attributes("Description", cell, "text", 3, NULL);
+   fs         = gtk_tree_view_column_new_with_attributes("MetaPackage", cell, "text", COL_SHORT_TEXT, NULL);
+   mointpoint = gtk_tree_view_column_new_with_attributes("Description", cell2, "text", COL_LONG_TEXT, NULL);
+
 
    gtk_tree_view_append_column(GTK_TREE_VIEW(treeview1), GTK_TREE_VIEW_COLUMN(pixm));
    gtk_tree_view_append_column(GTK_TREE_VIEW(treeview1), GTK_TREE_VIEW_COLUMN(device));
@@ -457,8 +500,6 @@ on_window1_configure_event             (GtkWidget       *widget,
                      model);
 
 
-   //g_signal_connect (pixm, "clicked", G_CALLBACK (on_info_click), model);
-   //g_signal_connect_object(pixm, "clicked", G_CALLBACK(on_info_click), treeview1, 0);
   /* ================================================================= *
    *         append rows and fill in some data  to the treeview        *
    * ================================================================= */
@@ -488,19 +529,42 @@ on_window1_configure_event             (GtkWidget       *widget,
       printf( "The file %s was not opened\n", temp_file_packagelist);
    }
    else {
-
+     strncpy( category_last, "", STDLINE);
      // appand to treeview
      fseek( temp_file_package, 0L, SEEK_SET );
      while (fscanf(temp_file_package, "%[^\n]\n", longtext) != EOF) {
+
              shorttext_p = strtok(longtext, "~");
              longtext_p = strtok(NULL, "~");
+             //look for category = - in filename
+             if ( strpbrk( shorttext_p, "-" ) == NULL )
+                  printf("category \\(- in filename\\) not found\n");
+             else {
+                  category_p  = strtok(shorttext_p, "-");
+                  shorttext_p = strtok(NULL, "-");
+             }
 
-             gtk_list_store_append ( GTK_LIST_STORE (model), &iter_tb);
-             gtk_list_store_set ( GTK_LIST_STORE (model), &iter_tb,
+
+             if ( strcmp( category_last, category_p ) != 0 ) {
+                //category
+                gtk_tree_store_append(GTK_TREE_STORE (model), &iter_category, NULL);
+                gtk_tree_store_set(GTK_TREE_STORE (model), &iter_category, 
+                         COL_ICON, icon_package, 
+                         COL_SHORT_TEXT, category_p, 
+                         -1);
+             }
+
+             //data 
+             gtk_tree_store_append ( GTK_TREE_STORE (model), &iter_tb, &iter_category);
+             gtk_tree_store_set ( GTK_TREE_STORE (model), &iter_tb,
                          COL_ICON, icon,
+                         COL_SELECTED, FALSE,
                          COL_SHORT_TEXT, shorttext_p,
                          COL_LONG_TEXT, longtext_p,
                          -1);
+
+             strncpy ( category_last, category_p, STDLINE );
+
              counter++;
             }
     }

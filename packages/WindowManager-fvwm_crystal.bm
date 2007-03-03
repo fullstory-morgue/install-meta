@@ -1,0 +1,46 @@
+FLL_DESCRIPTION="fvwm-crystal with kde-lite"
+
+FLL_PRE_PROCESSING=(
+	"#!/bin/bash"
+	"echo \"---- in preprocessing ----\""
+	"# paste your code here"
+	"echo \"---- preprocessing done----\""
+)
+
+FLL_PACKAGE_DEPMODS=(
+)
+
+FLL_PACKAGES=(
+       fvwm
+       fvwm-crystal
+       fvwm-icons
+       rox-filer
+       xmms 
+       xmms2
+       xmms-shell
+       xmms-find  
+       mpd
+       trayer
+       quodlibet
+       cdcd
+       debhelper 
+       dpatch
+       xsltproc
+       docbook-xsl
+       python
+       python-dev
+       python-support 
+       habak
+       imagemagick
+       rxvt-unicode
+       xterm
+       xscreensaver
+       sudo
+)
+
+FLL_POST_PROCESSING=(
+	"#!/bin/bash"
+	"echo \"---- in postprocessing ----\""
+	"echo Wallpaper-Set '/usr/share/wallpapers/sidux.jpg' > /usr/share/fvwm-crystal/fvwm/preferences/LastChoosenWallpaper"	
+	"echo \"---- postprocessing done----\""
+)
