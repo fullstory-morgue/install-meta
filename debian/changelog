@@ -1,9 +1,5 @@
-install-meta (0.0.42) UNRELEASED; urgency=low
+install-meta (0.0.42) unstable; urgency=low
 
-  [ Stefan Lippers-Hollmann ]
-  * NOT RELEASED YET
-
-  [ Horst Tritremmel ]
   * add categories
 
  -- Horst Tritremmel <hjt@sidux.com>  Sat,  3 Mar 2007 18:18:47 +0100
