@@ -420,7 +420,7 @@ on_window1_configure_event             (GtkWidget       *widget,
                                         gpointer         user_data)
 {
  FILE *temp_file_package;
- char *ptr_option, *ptr_confdir, longtext[MAXLINE], category_last[STDLINE], *shorttext_p, *longtext_p, *category_p;
+ char *ptr_option, *ptr_confdir, category[MAXLINE], longtext[MAXLINE], category_last[STDLINE], *shorttext_p, *longtext_p;
  GtkWidget *label, *treeview1;
  GtkTreeStore *model;
  GtkCellRenderer *toggle, *pixrenderer, *cell, *cell2;
@@ -540,17 +540,16 @@ on_window1_configure_event             (GtkWidget       *widget,
              if ( strpbrk( shorttext_p, "-" ) == NULL )
                   printf("category \\(- in filename\\) not found\n");
              else {
-                  category_p  = strtok(shorttext_p, "-");
+                  strncpy(category, strtok(shorttext_p, "-") , MAXLINE);
                   shorttext_p = strtok(NULL, "-");
              }
 
-
-             if ( strcmp( category_last, category_p ) != 0 ) {
+             if ( strcmp( category_last, category ) != 0 ) {
                 //category
                 gtk_tree_store_append(GTK_TREE_STORE (model), &iter_category, NULL);
                 gtk_tree_store_set(GTK_TREE_STORE (model), &iter_category, 
                          COL_ICON, icon_package, 
-                         COL_SHORT_TEXT, category_p, 
+                         COL_SHORT_TEXT, category, 
                          -1);
              }
 
@@ -563,7 +562,7 @@ on_window1_configure_event             (GtkWidget       *widget,
                          COL_LONG_TEXT, longtext_p,
                          -1);
 
-             strncpy ( category_last, category_p, STDLINE );
+             strncpy ( category_last, category, STDLINE );
 
              counter++;
             }
