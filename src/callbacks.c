@@ -485,7 +485,7 @@ on_window1_configure_event             (GtkWidget       *widget,
    pixm       = gtk_tree_view_column_new_with_attributes("Info", pixrenderer, "pixbuf", COL_ICON, NULL);
                 //gtk_tree_view_column_set_clickable ( GTK_TREE_VIEW_COLUMN (pixm), TRUE);
    device     = gtk_tree_view_column_new_with_attributes("", toggle, "active", COL_SELECTED, NULL);
-   fs         = gtk_tree_view_column_new_with_attributes("MetaPackage", cell, "text", COL_SHORT_TEXT, NULL);
+   fs         = gtk_tree_view_column_new_with_attributes("MetaPackage", cell, "markup", COL_SHORT_TEXT, NULL);
    mointpoint = gtk_tree_view_column_new_with_attributes("Description", cell2, "text", COL_LONG_TEXT, NULL);
 
 
@@ -540,7 +540,9 @@ on_window1_configure_event             (GtkWidget       *widget,
              if ( strpbrk( shorttext_p, "-" ) == NULL )
                   printf("category \\(- in filename\\) not found\n");
              else {
-                  strncpy(category, strtok(shorttext_p, "-") , MAXLINE);
+                  strncpy(category, "<b><span color=\"darkgray\">" , MAXLINE);
+                  strncat(category, strtok(shorttext_p, "-") , MAXLINE);
+                  strncat(category, "</span></b>" , MAXLINE);
                   shorttext_p = strtok(NULL, "-");
              }
 
