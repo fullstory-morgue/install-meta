@@ -6,9 +6,10 @@ install-meta (0.0.43) UNRELEASED; urgency=low
   [ Horst Tritremmel ]
   * compiler warning shut up
   * category text is now bold
-  * bugfix for bold category text 
+  * bugfix for bold category text
+  * new icons for category 
 
- -- Horst Tritremmel <hjt@sidux.com>  Tue,  6 Mar 2007 08:44:34 +0100
+ -- Horst Tritremmel <hjt@sidux.com>  Tue,  6 Mar 2007 12:19:09 +0100
 
 install-meta (0.0.42) unstable; urgency=low
 

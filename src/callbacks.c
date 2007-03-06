@@ -427,6 +427,59 @@ no_file_dialog(GtkWidget *widget)
 }
 
 
+static void
+tree_expand(GtkTreeView * treeview1,  GtkTreeIter   *iter, 
+                GtkTreePath * path, gpointer data)
+{
+
+   GdkPixbuf     *icon;
+   GError        *error = NULL;
+
+   GtkTreeModel *model = gtk_tree_view_get_model(treeview1);
+
+   gtk_tree_model_get(model, iter, COL_ICON, &icon, -1);
+
+   icon = gdk_pixbuf_new_from_file("/usr/share/install-meta/pixmaps/install-meta-folder-open.png", &error);
+   if (error)
+   {
+      g_warning ("Could not load icon: %s\n", error->message);
+      g_error_free(error);
+      error = NULL;
+   }
+
+   gtk_tree_store_set(GTK_TREE_STORE(model), iter,
+                       COL_ICON, icon, 
+                       -1);
+
+}
+
+
+static void
+tree_collapse(GtkTreeView * treeview1, GtkTreeIter * iter,
+                    GtkTreePath * path, gpointer data)
+{
+   GdkPixbuf     *icon;
+   GError        *error = NULL;
+
+   GtkTreeModel *model = gtk_tree_view_get_model(treeview1);
+
+   gtk_tree_model_get(model, iter, COL_ICON, &icon, -1);
+
+   icon = gdk_pixbuf_new_from_file("/usr/share/install-meta/pixmaps/install-meta-folder.png", &error);
+   if (error)
+   {
+      g_warning ("Could not load icon: %s\n", error->message);
+      g_error_free(error);
+      error = NULL;
+   }
+
+   gtk_tree_store_set(GTK_TREE_STORE(model), iter,
+                       COL_ICON, icon, 
+                       -1);
+
+}
+
+
 gboolean
 on_window1_configure_event             (GtkWidget       *widget,
                                         GdkEventConfigure *event,
@@ -485,7 +538,7 @@ on_window1_configure_event             (GtkWidget       *widget,
       error = NULL;
    }
 
-   icon_package = gdk_pixbuf_new_from_file("/usr/share/install-meta/pixmaps/install-meta-package.png", &error);
+   icon_package = gdk_pixbuf_new_from_file("/usr/share/install-meta/pixmaps/install-meta-folder.png", &error);
    if (error)
    {
       g_warning ("Could not load icon: %s\n", error->message);
@@ -511,6 +564,14 @@ on_window1_configure_event             (GtkWidget       *widget,
    g_signal_connect (toggle, "toggled",
                      G_CALLBACK (toggle_selected),
                      model);
+
+   // when tree was expanden
+   g_signal_connect_after(G_OBJECT(treeview1), "row-expanded",
+                           G_CALLBACK(tree_expand), NULL);
+
+   // when tree was collapsed
+   g_signal_connect(G_OBJECT(treeview1), "row-collapsed",
+                     G_CALLBACK(tree_collapse), NULL);
 
 
   /* ================================================================= *
@@ -553,7 +614,7 @@ on_window1_configure_event             (GtkWidget       *widget,
              if ( strpbrk( shorttext_p, "-" ) == NULL )
                   printf("category \\(- in filename\\) not found\n");
              else {
-                  strncpy(category, "<b><span color=\"darkgray\">" , MAXLINE);
+                  strncpy(category, "<b><span color=\"darkgreen\">" , MAXLINE);
                   strncat(category, strtok(shorttext_p, "-") , MAXLINE);
                   strncat(category, "</span></b>" , MAXLINE);
                   shorttext_p = strtok(NULL, "-");
