@@ -93,7 +93,13 @@ enum
    else
       printf("error: mkstemp(temp_meta_filename_sh)\n");
 
+   // get the real category name without <b>, <span ...
+   category_name = strtok(category_name, "<");
+   category_name = strtok(NULL, "<");
+   category_name = strtok(category_name, ">");
+   category_name = strtok(NULL, ">");
 
+   // create systemcall
    strncpy(system_call, "#!/bin/bash", MAXLINE );
    strncpy(system_call, "set -e", MAXLINE );
    strncat(system_call, "\nBMFILE=", MAXLINE );
@@ -384,6 +390,13 @@ foreach_func (GtkTreeModel *model,
     gtk_tree_model_get (model, &iter_parent,
 	                    COL_SHORT_TEXT, &category_name,
 	                    -1);
+
+   // get the real category name without <b>, <span ...
+   category_name = strtok(category_name, "<");
+   category_name = strtok(NULL, "<");
+   category_name = strtok(category_name, ">");
+   category_name = strtok(NULL, ">");
+
 
   // if the metapackage was selected
   if ( toggle )
