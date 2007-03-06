@@ -1,4 +1,25 @@
 case ${FLL_PACKAGES[*]} in
+	*childsplay*)
+		for lang in ${FLL_I18N_SUPPORT[@]}; do
+			FLL_PACKAGES+=( childsplay-alphabet-sounds-${lang} )
+			case $lang in
+				ca|fr|nl)
+					FLL_PACKAGES+=( childsplay-lfc-names-${lang} )
+					;;
+			esac
+		done
+		;;
+esac
+
+case ${FLL_PACKAGES[*]} in
+	gcompris)
+		for lang in ${FLL_I18N_SUPPORT[@]}; do
+			FLL_PACKAGES+=( gcompris-sound-${lang} )
+		done
+		;;
+esac
+
+case ${FLL_PACKAGES[*]} in
 	*kde*)
 		for lang in ${FLL_I18N_SUPPORT[@]}; do
 			FLL_PACKAGES+=( kde-i18n-${lang} )

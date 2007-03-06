@@ -1,4 +1,4 @@
-FLL_DESCRIPTION="Packages  xfonts-cronyx-..."
+FLL_DESCRIPTION="Top 5, Highend games"
 
 FLL_PRE_PROCESSING=(
 	"#!/bin/bash"
@@ -11,15 +11,15 @@ FLL_PACKAGE_DEPMODS=(
 )
 
 FLL_PACKAGES=(
-	xfonts-cronyx-100dpi
-	xfonts-cronyx-75dpi
-	xfonts-cronyx-isocyr-100dpi
-	xfonts-cronyx-isocyr-75dpi
-	xfonts-cronyx-isocyr-misc
-	xfonts-cronyx-koi8r-100dpi
-	xfonts-cronyx-koi8r-75dpi
-	xfonts-cronyx-koi8r-misc
-	xfonts-cronyx-misc
+      nexuiz
+             nexuiz-music
+             nexuiz-server
+       vegastrike
+             vegastrike-music
+       planetpenguin-racer
+             planetpenguin-racer-extras
+       scorched3d
+             scorched3d-doc
 )
 
 FLL_POST_PROCESSING=(

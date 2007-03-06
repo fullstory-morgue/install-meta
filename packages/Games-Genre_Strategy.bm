@@ -1,4 +1,4 @@
-FLL_DESCRIPTION="Packages  xfonts-cronyx-..."
+FLL_DESCRIPTION="Strategy Games"
 
 FLL_PRE_PROCESSING=(
 	"#!/bin/bash"
@@ -11,15 +11,16 @@ FLL_PACKAGE_DEPMODS=(
 )
 
 FLL_PACKAGES=(
-	xfonts-cronyx-100dpi
-	xfonts-cronyx-75dpi
-	xfonts-cronyx-isocyr-100dpi
-	xfonts-cronyx-isocyr-75dpi
-	xfonts-cronyx-isocyr-misc
-	xfonts-cronyx-koi8r-100dpi
-	xfonts-cronyx-koi8r-75dpi
-	xfonts-cronyx-koi8r-misc
-	xfonts-cronyx-misc
+       stratagus
+       bos
+       widelands
+       wesnoth
+       freeciv-client-gtk
+       bzflag
+              bzflag-server
+       scorched3d
+              scorched3d-doc
+       netpanzer
 )
 
 FLL_POST_PROCESSING=(

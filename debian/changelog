@@ -9,8 +9,9 @@ install-meta (0.0.43) UNRELEASED; urgency=low
   * bugfix for bold category text
   * new icons for category
   * source packages.d bugfix for info window
+  * add game packages
 
- -- Horst Tritremmel <hjt@sidux.com>  Tue,  6 Mar 2007 12:43:03 +0100
+ -- Horst Tritremmel <hjt@sidux.com>  Tue,  6 Mar 2007 15:22:20 +0100
 
 install-meta (0.0.42) unstable; urgency=low
 

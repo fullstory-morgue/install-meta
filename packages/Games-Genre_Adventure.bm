@@ -1,4 +1,4 @@
-FLL_DESCRIPTION="Packages  xfonts-cronyx-..."
+FLL_DESCRIPTION="Adventure Games"
 
 FLL_PRE_PROCESSING=(
 	"#!/bin/bash"
@@ -11,15 +11,12 @@ FLL_PACKAGE_DEPMODS=(
 )
 
 FLL_PACKAGES=(
-	xfonts-cronyx-100dpi
-	xfonts-cronyx-75dpi
-	xfonts-cronyx-isocyr-100dpi
-	xfonts-cronyx-isocyr-75dpi
-	xfonts-cronyx-isocyr-misc
-	xfonts-cronyx-koi8r-100dpi
-	xfonts-cronyx-koi8r-75dpi
-	xfonts-cronyx-koi8r-misc
-	xfonts-cronyx-misc
+       beneath-a-steel-sky
+       flight-of-the-amazon-queen
+       adonthell
+       freedroidrpg
+       balazar
+       egoboo
 )
 
 FLL_POST_PROCESSING=(
