@@ -99,12 +99,13 @@ enum
    category_name = strtok(category_name, ">");
    category_name = strtok(NULL, ">");
 
+
    // create systemcall
    strncpy(system_call, "#!/bin/bash", MAXLINE );
-   strncpy(system_call, "set -e", MAXLINE );
+   strncat(system_call, "\nsource /etc/default/distro", MAXLINE );
+   strncat(system_call, "\ncd ", MAXLINE );
+   strncat(system_call, INSTALL_PACKAGES_CONF_DIR, MAXLINE );
    strncat(system_call, "\nBMFILE=", MAXLINE );
-   strncat(system_call, DEFAULT_CONF_DIR, MAXLINE );
-   strncat(system_call, "/", MAXLINE );
    strncat(system_call, category_name, MAXLINE );
    strncat(system_call, "-", MAXLINE );
    strncat(system_call, package_name, MAXLINE );
