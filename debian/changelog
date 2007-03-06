@@ -1,9 +1,5 @@
-install-meta (0.0.43) UNRELEASED; urgency=low
+install-meta (0.0.43) unstable; urgency=low
 
-  [ Stefan Lippers-Hollmann ]
-  * NOT RELEASED YET
-
-  [ Horst Tritremmel ]
   * compiler warning shut up
   * category text is now bold
   * bugfix for bold category text
