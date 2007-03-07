@@ -1,8 +1,12 @@
 install-meta (0.0.44) UNRELEASED; urgency=low
 
+  [ Stefan Lippers-Hollmann ]
   * NOT RELEASED YET
 
- -- Stefan Lippers-Hollmann <s.l-h@gmx.de>  Tue,  6 Mar 2007 21:47:02 +0100
+  [ Horst Tritremmel ]
+  * add Office-Koffice.bm Office-Gnumeric_Abiword.bm
+
+ -- Horst Tritremmel <hjt@sidux.com>  Wed,  7 Mar 2007 09:12:52 +0100
 
 install-meta (0.0.43) unstable; urgency=low
 
