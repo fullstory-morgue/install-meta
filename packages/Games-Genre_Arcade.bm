@@ -13,6 +13,7 @@ FLL_PACKAGE_DEPMODS=(
 FLL_PACKAGES=(
        liquidwar
        blobwars
+       bloboats
        neverball
        armagetron
        briquolo
@@ -22,6 +23,7 @@ FLL_PACKAGES=(
        wormux
        luola
               luola-nostalgy
+       bomberclone
 )
 
 FLL_POST_PROCESSING=(

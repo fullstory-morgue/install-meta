@@ -791,14 +791,22 @@ on_button_install_clicked              (GtkButton       *button,
         strncat(system_call, " apt-get update\n", MAXLINE );
         strncat(system_call, "chroot /media/", MAXLINE );
         strncat(system_call, hd_device, MAXLINE );
-        strncat(system_call, " apt-get install ${FLL_PACKAGES[@]}", MAXLINE );
+
+        strncat(system_call, " apt-get install ", MAXLINE );
+
    }
    else {
         // if packages should be install into normal system
         strncpy(is_chroot, "CHROOT=n", STDLINE);
-        strncpy( system_call, "apt-get install ${FLL_PACKAGES[@]}", MAXLINE );
+
+        strncpy(system_call, "apt-get install ", MAXLINE );
    }
 
+   GtkWidget* checkbutton = lookup_widget( GTK_WIDGET(button),"checkbutton_yes");
+   if( gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON( checkbutton )) == TRUE ) {
+       strncat(system_call,  "--yes ", MAXLINE );
+   }
+   strncat(system_call, "${FLL_PACKAGES[@]}", MAXLINE );
 
 
    // install the packages via apt-get, create the bash file to do that

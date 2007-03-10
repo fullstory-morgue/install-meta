@@ -1,8 +1,13 @@
 install-meta (0.0.45) UNRELEASED; urgency=low
 
+  [ Stefan Lippers-Hollmann ]
   * NOT RELEASED YET
 
- -- Stefan Lippers-Hollmann <s.l-h@gmx.de>  Wed,  7 Mar 2007 20:13:20 +0100
+  [ Horst Tritremmel ]
+  * add checkbutton for --yes option
+  * games packages update
+
+ -- Horst Tritremmel <hjt@sidux.com>  Sat, 10 Mar 2007 22:58:27 +0100
 
 install-meta (0.0.44) unstable; urgency=low
 

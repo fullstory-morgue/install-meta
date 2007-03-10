@@ -1,4 +1,4 @@
-FLL_DESCRIPTION="Puzzle Games"
+FLL_DESCRIPTION="Cardgames for KDE"
 
 FLL_PRE_PROCESSING=(
 	"#!/bin/bash"
@@ -11,14 +11,9 @@ FLL_PACKAGE_DEPMODS=(
 )
 
 FLL_PACKAGES=(
-       flobopuyo
-       frozen-bubble
-       ltris
-       pingus
-       enigma
-              enigma-doc
-       fillets-ng
-       pathological
+      kpat
+      kmahjongg
+      kshisen
 )
 
 FLL_POST_PROCESSING=(

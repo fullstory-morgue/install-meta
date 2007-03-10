@@ -306,6 +306,26 @@
 	  <property name="y">88</property>
 	</packing>
       </child>
+
+      <child>
+	<widget class="GtkCheckButton" id="checkbutton_yes">
+	  <property name="width_request">297</property>
+	  <property name="height_request">28</property>
+	  <property name="visible">True</property>
+	  <property name="can_focus">True</property>
+	  <property name="label" translatable="yes">use option --yes for apt-get install</property>
+	  <property name="use_underline">True</property>
+	  <property name="relief">GTK_RELIEF_NORMAL</property>
+	  <property name="focus_on_click">True</property>
+	  <property name="active">True</property>
+	  <property name="inconsistent">False</property>
+	  <property name="draw_indicator">True</property>
+	</widget>
+	<packing>
+	  <property name="x">288</property>
+	  <property name="y">512</property>
+	</packing>
+      </child>
     </widget>
   </child>
 </widget>

@@ -48,6 +48,7 @@ create_window1 (void)
   GtkWidget *label_install;
   GtkWidget *image10;
   GtkWidget *label_info;
+  GtkWidget *checkbutton_yes;
 
   window1 = gtk_window_new (GTK_WINDOW_TOPLEVEL);
   gtk_window_set_title (GTK_WINDOW (window1), _("Install metapackages"));
@@ -141,6 +142,12 @@ create_window1 (void)
   gtk_misc_set_alignment (GTK_MISC (label_info), 0.2, 0);
   gtk_label_set_angle (GTK_LABEL (label_info), 90);
 
+  checkbutton_yes = gtk_check_button_new_with_mnemonic (_("use option --yes for apt-get install"));
+  gtk_widget_show (checkbutton_yes);
+  gtk_fixed_put (GTK_FIXED (fixed1), checkbutton_yes, 288, 512);
+  gtk_widget_set_size_request (checkbutton_yes, 297, 28);
+  gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (checkbutton_yes), TRUE);
+
   g_signal_connect ((gpointer) window1, "configure_event",
                     G_CALLBACK (on_window1_configure_event),
                     NULL);
@@ -173,6 +180,7 @@ create_window1 (void)
   GLADE_HOOKUP_OBJECT (window1, label_install, "label_install");
   GLADE_HOOKUP_OBJECT (window1, image10, "image10");
   GLADE_HOOKUP_OBJECT (window1, label_info, "label_info");
+  GLADE_HOOKUP_OBJECT (window1, checkbutton_yes, "checkbutton_yes");
 
   return window1;
 }

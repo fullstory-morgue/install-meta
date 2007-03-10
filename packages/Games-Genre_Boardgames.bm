@@ -12,6 +12,8 @@ FLL_PACKAGE_DEPMODS=(
 
 FLL_PACKAGES=(
        eboard
+              gnuchess
+              gnuchess-book
        gnubg
 )
 
