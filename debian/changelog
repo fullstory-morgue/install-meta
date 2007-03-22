@@ -1,8 +1,12 @@
 install-meta (0.0.46) UNRELEASED; urgency=low
 
+  [ Stefan Lippers-Hollmann ]
   * NOT RELEASED YET
 
- -- Stefan Lippers-Hollmann <s.l-h@gmx.de>  Sat, 10 Mar 2007 23:18:39 +0100
+  [ Horst Tritremmel ]
+  * all windows not resizeable
+
+ -- Horst Tritremmel <hjt@sidux.com>  Thu, 22 Mar 2007 18:15:42 +0100
 
 install-meta (0.0.45) unstable; urgency=low
 

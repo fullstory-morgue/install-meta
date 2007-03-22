@@ -30,7 +30,6 @@ GtkWidget*
 create_window1 (void)
 {
   GtkWidget *window1;
-  GdkPixbuf *window1_icon_pixbuf;
   GtkWidget *fixed1;
   GtkWidget *image8;
   GtkWidget *scrolledwindow1;
@@ -53,12 +52,6 @@ create_window1 (void)
   window1 = gtk_window_new (GTK_WINDOW_TOPLEVEL);
   gtk_window_set_title (GTK_WINDOW (window1), _("Install metapackages"));
   gtk_window_set_resizable (GTK_WINDOW (window1), FALSE);
-  window1_icon_pixbuf = create_pixbuf ("sidux-meta-icon.png");
-  if (window1_icon_pixbuf)
-    {
-      gtk_window_set_icon (GTK_WINDOW (window1), window1_icon_pixbuf);
-      gdk_pixbuf_unref (window1_icon_pixbuf);
-    }
 
   fixed1 = gtk_fixed_new ();
   gtk_widget_show (fixed1);
@@ -260,6 +253,7 @@ create_dialog2 (void)
 
   dialog2 = gtk_dialog_new ();
   gtk_window_set_title (GTK_WINDOW (dialog2), _("Install successful"));
+  gtk_window_set_resizable (GTK_WINDOW (dialog2), FALSE);
   dialog2_icon_pixbuf = create_pixbuf ("sidux-meta-icon.png");
   if (dialog2_icon_pixbuf)
     {
@@ -338,6 +332,7 @@ create_package_info (void)
 
   package_info = gtk_window_new (GTK_WINDOW_TOPLEVEL);
   gtk_window_set_title (GTK_WINDOW (package_info), _("Package Info"));
+  gtk_window_set_resizable (GTK_WINDOW (package_info), FALSE);
   package_info_icon_pixbuf = create_pixbuf ("sidux-meta-icon.png");
   if (package_info_icon_pixbuf)
     {
