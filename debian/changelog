@@ -1,10 +1,10 @@
-install-meta (0.0.46) UNRELEASED; urgency=low
+install-meta (0.0.46) unstable; urgency=low
 
-  [ Stefan Lippers-Hollmann ]
-  * NOT RELEASED YET
-
+  [ Chris Hildebrandt ]
+  * meta-package tor/privoxy added, post-install configs to be added.
+  
   [ Horst Tritremmel ]
-  * all windows not resizeable
+  * all windows not resizeable.
 
  -- Horst Tritremmel <hjt@sidux.com>  Thu, 22 Mar 2007 18:15:42 +0100
 
@@ -53,12 +53,6 @@ install-meta (0.0.39) unstable; urgency=low
   * strip #!/bin/bash from *.bm files to shut up lintian.
 
  -- Stefan Lippers-Hollmann <s.l-h@gmx.de>  Thu, 22 Feb 2007 15:52:41 +0100
-
-install-meta (0.0.38) UNRELEASED; urgency=low
-
-  * NOT RELEASED YET
-
- -- Stefan Lippers-Hollmann <s.l-h@gmx.de>  Wed, 21 Feb 2007 02:21:35 +0100
 
 install-meta (0.0.37) unstable; urgency=low
 
