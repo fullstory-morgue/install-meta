@@ -1,8 +1,12 @@
 install-meta (0.0.47) UNRELEASED; urgency=low
 
+  [ Stefan Lippers-Hollmann ]
   * NOT RELEASED YET
 
- -- Stefan Lippers-Hollmann <s.l-h@gmx.de>  Thu, 22 Mar 2007 23:32:47 +0100
+  [ Joaquim Boura ]
+  * moving to xdg-menus
+
+ -- Joaquim Boura <x-un-i@sidux.com>  Wed, 28 Mar 2007 22:50:24 +0200
 
 install-meta (0.0.46) unstable; urgency=low
 
