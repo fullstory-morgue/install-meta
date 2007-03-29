@@ -30,6 +30,7 @@ GtkWidget*
 create_window1 (void)
 {
   GtkWidget *window1;
+  GdkPixbuf *window1_icon_pixbuf;
   GtkWidget *fixed1;
   GtkWidget *image8;
   GtkWidget *scrolledwindow1;
@@ -45,13 +46,24 @@ create_window1 (void)
   GtkWidget *image5;
   GtkWidget *label10;
   GtkWidget *label_install;
-  GtkWidget *image10;
-  GtkWidget *label_info;
   GtkWidget *checkbutton_yes;
+  GtkWidget *button_expand;
+  GtkWidget *image10;
+  GtkWidget *button_collapse;
+  GtkWidget *image11;
+  GtkTooltips *tooltips;
+
+  tooltips = gtk_tooltips_new ();
 
   window1 = gtk_window_new (GTK_WINDOW_TOPLEVEL);
   gtk_window_set_title (GTK_WINDOW (window1), _("Install metapackages"));
   gtk_window_set_resizable (GTK_WINDOW (window1), FALSE);
+  window1_icon_pixbuf = create_pixbuf ("sidux-meta-icon.png");
+  if (window1_icon_pixbuf)
+    {
+      gtk_window_set_icon (GTK_WINDOW (window1), window1_icon_pixbuf);
+      gdk_pixbuf_unref (window1_icon_pixbuf);
+    }
 
   fixed1 = gtk_fixed_new ();
   gtk_widget_show (fixed1);
@@ -72,8 +84,6 @@ create_window1 (void)
   gtk_widget_show (treeview1);
   gtk_container_add (GTK_CONTAINER (scrolledwindow1), treeview1);
   gtk_widget_set_size_request (treeview1, 248, 136);
-  gtk_tree_view_set_hover_selection (GTK_TREE_VIEW (treeview1), TRUE);
-  gtk_tree_view_set_hover_expand (GTK_TREE_VIEW (treeview1), TRUE);
 
   button_install = gtk_button_new ();
   gtk_widget_show (button_install);
@@ -123,23 +133,31 @@ create_window1 (void)
   gtk_widget_set_size_request (label_install, 401, 32);
   gtk_misc_set_alignment (GTK_MISC (label_install), 0, 0.5);
 
-  image10 = create_pixmap (window1, "install-meta-info.png");
-  gtk_widget_show (image10);
-  gtk_fixed_put (GTK_FIXED (fixed1), image10, 0, 63);
-  gtk_widget_set_size_request (image10, 21, 21);
-
-  label_info = gtk_label_new (_("Info Metapackage    \"DOUBLECLICK\"  ->"));
-  gtk_widget_show (label_info);
-  gtk_fixed_put (GTK_FIXED (fixed1), label_info, 0, 88);
-  gtk_widget_set_size_request (label_info, 33, 449);
-  gtk_misc_set_alignment (GTK_MISC (label_info), 0.2, 0);
-  gtk_label_set_angle (GTK_LABEL (label_info), 90);
-
   checkbutton_yes = gtk_check_button_new_with_mnemonic (_("use option --yes for apt-get install"));
   gtk_widget_show (checkbutton_yes);
   gtk_fixed_put (GTK_FIXED (fixed1), checkbutton_yes, 288, 512);
   gtk_widget_set_size_request (checkbutton_yes, 297, 28);
   gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (checkbutton_yes), TRUE);
+
+  button_expand = gtk_button_new ();
+  gtk_widget_show (button_expand);
+  gtk_fixed_put (GTK_FIXED (fixed1), button_expand, 0, 64);
+  gtk_widget_set_size_request (button_expand, 25, 25);
+  gtk_tooltips_set_tip (tooltips, button_expand, _("expand all"), NULL);
+
+  image10 = gtk_image_new_from_stock ("gtk-add", GTK_ICON_SIZE_BUTTON);
+  gtk_widget_show (image10);
+  gtk_container_add (GTK_CONTAINER (button_expand), image10);
+
+  button_collapse = gtk_button_new ();
+  gtk_widget_show (button_collapse);
+  gtk_fixed_put (GTK_FIXED (fixed1), button_collapse, 0, 96);
+  gtk_widget_set_size_request (button_collapse, 25, 25);
+  gtk_tooltips_set_tip (tooltips, button_collapse, _("collapse all "), NULL);
+
+  image11 = gtk_image_new_from_stock ("gtk-remove", GTK_ICON_SIZE_BUTTON);
+  gtk_widget_show (image11);
+  gtk_container_add (GTK_CONTAINER (button_collapse), image11);
 
   g_signal_connect ((gpointer) window1, "configure_event",
                     G_CALLBACK (on_window1_configure_event),
@@ -147,11 +165,20 @@ create_window1 (void)
   g_signal_connect ((gpointer) window1, "delete_event",
                     G_CALLBACK (on_window1_delete_event),
                     NULL);
+  g_signal_connect ((gpointer) treeview1, "button_press_event",
+                    G_CALLBACK (on_treeview1_button_press_event),
+                    NULL);
   g_signal_connect ((gpointer) button_install, "clicked",
                     G_CALLBACK (on_button_install_clicked),
                     NULL);
   g_signal_connect ((gpointer) exit, "clicked",
                     G_CALLBACK (on_exit_clicked),
+                    NULL);
+  g_signal_connect ((gpointer) button_expand, "clicked",
+                    G_CALLBACK (on_button_expand_clicked),
+                    NULL);
+  g_signal_connect ((gpointer) button_collapse, "clicked",
+                    G_CALLBACK (on_button_collapse_clicked),
                     NULL);
 
   /* Store pointers to all widgets, for use by lookup_widget(). */
@@ -171,9 +198,12 @@ create_window1 (void)
   GLADE_HOOKUP_OBJECT (window1, image5, "image5");
   GLADE_HOOKUP_OBJECT (window1, label10, "label10");
   GLADE_HOOKUP_OBJECT (window1, label_install, "label_install");
-  GLADE_HOOKUP_OBJECT (window1, image10, "image10");
-  GLADE_HOOKUP_OBJECT (window1, label_info, "label_info");
   GLADE_HOOKUP_OBJECT (window1, checkbutton_yes, "checkbutton_yes");
+  GLADE_HOOKUP_OBJECT (window1, button_expand, "button_expand");
+  GLADE_HOOKUP_OBJECT (window1, image10, "image10");
+  GLADE_HOOKUP_OBJECT (window1, button_collapse, "button_collapse");
+  GLADE_HOOKUP_OBJECT (window1, image11, "image11");
+  GLADE_HOOKUP_OBJECT_NO_REF (window1, tooltips, "tooltips");
 
   return window1;
 }

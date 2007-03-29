@@ -14,6 +14,7 @@ FLL_PACKAGES=(
        beneath-a-steel-sky
        flight-of-the-amazon-queen
        adonthell
+              adonthell-data
        freedroidrpg
        balazar
        egoboo

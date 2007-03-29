@@ -1,4 +1,5 @@
-FLL_DESCRIPTION="Arcade Games"
+FLL_DESCRIPTION="Must_have_for_older_computers"
+           
 
 FLL_PRE_PROCESSING=(
 	"#!/bin/bash"
@@ -11,20 +12,19 @@ FLL_PACKAGE_DEPMODS=(
 )
 
 FLL_PACKAGES=(
-       liquidwar
-       blobwars
-       bloboats
-       neverball
-       armagetron
-       briquolo
-       gl-117
-       trackballs
-       lbreakout2
-       wormux
-       luola
-              luola-nostalgy
-       bomberclone
-       tomatoes
+         epiphany-browser
+         epiphany-extensions
+         sylpheed
+         graveman
+         scite
+         xine-ui
+         gimageview
+         xpaint
+         thunar
+         thunar-archive-plugin
+         file-roller 
+         filezilla
+         xfce4-terminal  
 )
 
 FLL_POST_PROCESSING=(

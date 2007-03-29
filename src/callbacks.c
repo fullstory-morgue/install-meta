@@ -528,7 +528,7 @@ on_window1_configure_event             (GtkWidget       *widget,
    cell2 = gtk_cell_renderer_text_new();
 
 
-   g_signal_connect(treeview1, "row-activated", G_CALLBACK(onRowActivated), NULL);
+//   g_signal_connect(treeview1, "row-activated", G_CALLBACK(onRowActivated), NULL);
 //   g_object_set (treeview1, "enable-tree-lines" , TRUE, NULL);
 
    icon = gdk_pixbuf_new_from_file("/usr/share/install-meta/pixmaps/install-meta-info.png", &error);
@@ -664,12 +664,6 @@ on_window1_configure_event             (GtkWidget       *widget,
    gtk_widget_modify_font ( GTK_WIDGET(label), font_desc);
    pango_font_description_free (font_desc);
 
-   label = lookup_widget ( GTK_WIDGET (widget), "label_info");
-   gdk_color_parse ("blue", &color);
-   gtk_widget_modify_fg ( GTK_WIDGET(label), GTK_STATE_NORMAL, &color);
-   font_desc = pango_font_description_from_string ("14");
-   gtk_widget_modify_font ( GTK_WIDGET(label), font_desc);
-   pango_font_description_free (font_desc);
 
  }
 
@@ -892,5 +886,60 @@ on_button1_clicked                     (GtkButton       *button,
 {
      GtkWidget *window = lookup_widget(GTK_WIDGET( button ),"package_info");
      gtk_widget_destroy ( GTK_WIDGET (window) );
+}
+
+
+gboolean
+on_treeview1_button_press_event        (GtkWidget       *widget,
+                                        GdkEventButton  *event,
+                                        gpointer         user_data)
+{
+   GtkWidget *view = lookup_widget (GTK_WIDGET (widget), "treeview1");
+   GtkTreeModel *model1;
+   GtkTreePath *path;
+   GtkTreeViewColumn *column;
+   GtkTreeIter iter;
+   gint cx, cy;
+
+   gtk_tree_view_get_path_at_pos( GTK_TREE_VIEW( view ), event->x, event->y, &path, &column, &cx, &cy);
+   if (path == NULL)
+       return FALSE;
+
+   model1 = gtk_tree_view_get_model ( GTK_TREE_VIEW( view ) );
+
+   gtk_tree_model_get_iter(model1, &iter, path);
+
+   const gchar* title = gtk_tree_view_column_get_title ( column );
+
+
+   if( strncmp( title, "Info", 4) == 0 && cx > 33 )   // position x from the i icon in Info column
+        onRowActivated ( GTK_TREE_VIEW( view ), path, NULL, user_data );
+
+   gtk_tree_path_free (path);
+
+
+   //if (event->type == GDK_2BUTTON_PRESS)
+   //    toggle_sym_value(menu);
+
+
+   return FALSE;
+}
+
+
+void
+on_button_expand_clicked               (GtkButton       *button,
+                                        gpointer         user_data)
+{
+   GtkWidget *view = lookup_widget (GTK_WIDGET (button), "treeview1");
+   gtk_tree_view_expand_all ( GTK_TREE_VIEW( view ) );
+}
+
+
+void
+on_button_collapse_clicked             (GtkButton       *button,
+                                        gpointer         user_data)
+{
+   GtkWidget *view = lookup_widget (GTK_WIDGET (button), "treeview1");
+   gtk_tree_view_collapse_all ( GTK_TREE_VIEW( view ) );
 }
 

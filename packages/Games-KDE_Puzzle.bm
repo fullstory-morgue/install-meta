@@ -1,4 +1,4 @@
-FLL_DESCRIPTION="Arcade Games"
+FLL_DESCRIPTION="Puzzle Games for KDE"
 
 FLL_PRE_PROCESSING=(
 	"#!/bin/bash"
@@ -11,20 +11,11 @@ FLL_PACKAGE_DEPMODS=(
 )
 
 FLL_PACKAGES=(
-       liquidwar
-       blobwars
-       bloboats
-       neverball
-       armagetron
-       briquolo
-       gl-117
-       trackballs
-       lbreakout2
-       wormux
-       luola
-              luola-nostalgy
-       bomberclone
-       tomatoes
+      katomic
+      ksokoban
+      ksudoku
+      klickety
+      kmines
 )
 
 FLL_POST_PROCESSING=(

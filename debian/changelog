@@ -6,7 +6,13 @@ install-meta (0.0.47) UNRELEASED; urgency=low
   [ Joaquim Boura ]
   * moving to xdg-menus
 
- -- Joaquim Boura <x-un-i@sidux.com>  Wed, 28 Mar 2007 22:50:24 +0200
+  [ Horst Tritremmel ]
+  * add new metapackages Education, Games V3, Older Computer
+  * add buttons expand and collapse all
+  * singleclick instead of doubleclick for metapackage info
+  * disable auto expand or collapse on mouse over
+
+ -- Horst Tritremmel <hjt@sidux.com>  Thu, 29 Mar 2007 13:13:48 +0200
 
 install-meta (0.0.46) unstable; urgency=low
 

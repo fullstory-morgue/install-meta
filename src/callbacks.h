@@ -191,3 +191,20 @@ on_treeview1_row_activated             (GtkTreeView     *treeview,
 void
 on_button1_clicked                     (GtkButton       *button,
                                         gpointer         user_data);
+
+gboolean
+on_treeview1_button_press_event        (GtkWidget       *widget,
+                                        GdkEventButton  *event,
+                                        gpointer         user_data);
+
+void
+on_button_expand_clicked               (GtkButton       *button,
+                                        gpointer         user_data);
+
+void
+on_button_minimize_clicked             (GtkButton       *button,
+                                        gpointer         user_data);
+
+void
+on_button_collapse_clicked             (GtkButton       *button,
+                                        gpointer         user_data);

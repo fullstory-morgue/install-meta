@@ -1,4 +1,5 @@
-FLL_DESCRIPTION="Arcade Games"
+FLL_DESCRIPTION="applications for education"
+           
 
 FLL_PRE_PROCESSING=(
 	"#!/bin/bash"
@@ -11,20 +12,19 @@ FLL_PACKAGE_DEPMODS=(
 )
 
 FLL_PACKAGES=(
-       liquidwar
-       blobwars
-       bloboats
-       neverball
-       armagetron
-       briquolo
-       gl-117
-       trackballs
-       lbreakout2
-       wormux
-       luola
-              luola-nostalgy
-       bomberclone
-       tomatoes
+         kdeedu 
+         wxmaxima
+         maxima
+         gnuplot
+         kgeography
+         gcompris
+         vym
+         bibletime
+         bibletime-i18n
+         tuxtype
+         tuxmath
+         fp-compiler
+         fp-ide
 )
 
 FLL_POST_PROCESSING=(

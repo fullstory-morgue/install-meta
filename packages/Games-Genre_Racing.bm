@@ -12,7 +12,9 @@ FLL_PACKAGE_DEPMODS=(
 
 FLL_PACKAGES=(
        vdrift
+              vdrift-full
        xmoto
+              xmoto-edit
        trigger
        torcs
        slune

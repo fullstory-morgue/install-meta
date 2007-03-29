@@ -1,4 +1,4 @@
-FLL_DESCRIPTION="Arcade Games"
+FLL_DESCRIPTION="fluxbox with kde-lite"
 
 FLL_PRE_PROCESSING=(
 	"#!/bin/bash"
@@ -11,25 +11,19 @@ FLL_PACKAGE_DEPMODS=(
 )
 
 FLL_PACKAGES=(
-       liquidwar
-       blobwars
-       bloboats
-       neverball
-       armagetron
-       briquolo
-       gl-117
-       trackballs
-       lbreakout2
-       wormux
-       luola
-              luola-nostalgy
-       bomberclone
-       tomatoes
+	fluxbox
+	bbtime
+	fbdesk
+	fbpager
+	fluxconf
+	bbrun
+	bbmail
+	rox-filer
 )
 
 FLL_POST_PROCESSING=(
 	"#!/bin/bash"
 	"echo \"---- in postprocessing ----\""
-	"# paste your code here (not necessary for normal install, only for preconfigs)"
+	"perl -pi -e \"s% fbsetroot .*%fbsetbg /usr/share/wallpapers/sidux.jpg%\" /usr/share/fluxbox/styles/Meta"
 	"echo \"---- postprocessing done----\""
 )
