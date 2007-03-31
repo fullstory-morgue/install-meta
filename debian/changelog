@@ -1,7 +1,4 @@
-install-meta (0.0.47) UNRELEASED; urgency=low
-
-  [ Stefan Lippers-Hollmann ]
-  * NOT RELEASED YET
+install-meta (0.0.47) unstable; urgency=low
 
   [ Joaquim Boura ]
   * moving to xdg-menus
@@ -11,9 +8,12 @@ install-meta (0.0.47) UNRELEASED; urgency=low
   * add buttons expand and collapse all
   * singleclick instead of doubleclick for metapackage info
   * disable auto expand or collapse on mouse over
-  * add MultiMedia-sound_studies.bm 
+  * add MultiMedia-sound_studies.bm
 
- -- Horst Tritremmel <hjt@sidux.com>  Fri, 30 Mar 2007 09:41:27 +0200
+  [ Stefan Lippers-Hollmann ]
+  * fix *.desktop location.
+
+ -- Stefan Lippers-Hollmann <s.l-h@gmx.de>  Sat, 31 Mar 2007 04:04:23 +0200
 
 install-meta (0.0.46) unstable; urgency=low
 

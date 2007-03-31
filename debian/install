@@ -1,5 +1,5 @@
 *-installer			usr/sbin/
-*.desktop			usr/share/applications
+*.desktop			usr/share/applications/sidux/
 pixmaps/*.png			usr/share/pixmaps/
 packages/*.bm			usr/share/install-meta/
 packages/packages.d/*.bm	usr/share/install-meta/packages.d/
