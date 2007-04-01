@@ -400,9 +400,10 @@ foreach_func (GtkTreeModel *model,
 
 
   // if the metapackage was selected
-  if ( toggle )
+  if ( toggle == TRUE ) {
       fprintf( temp_create_package_list_sh_fd, "%s-%s.bm\n", 
                                          category_name, short_text);
+  }
 
 
   g_free(short_text);  /* the strings for us when retrieving them */
