@@ -1,9 +1,5 @@
-install-meta (0.0.48) UNRELEASED; urgency=low
+install-meta (0.0.48) unstable; urgency=low
 
-  [ Stefan Lippers-Hollmann ]
-  * NOT RELEASED YET
-
-  [ Horst Tritremmel ]
   * hopefully fixed 64bit problem 
 
  -- Horst Tritremmel <hjt@sidux.com>  Sun,  1 Apr 2007 22:17:51 +0200
