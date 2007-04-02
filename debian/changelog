@@ -1,10 +1,6 @@
-install-meta (0.0.49) UNRELEASED; urgency=low
+install-meta (0.0.49) unstable; urgency=low
 
-  [ Stefan Lippers-Hollmann ]
-  * NOT RELEASED YET
-
-  [ Horst Tritremmel ]
-  * next try for 64bit systems
+  * next try for 64bit systems.
 
  -- Horst Tritremmel <hjt@sidux.com>  Mon, 02 Apr 2007 09:21:28 +0200
 
