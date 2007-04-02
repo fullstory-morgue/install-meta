@@ -2,6 +2,7 @@
 #  include <config.h>
 #endif
 
+#include <glib.h>
 #include <gtk/gtk.h>
 #include <string.h>
 #include <stdlib.h>
@@ -263,13 +264,13 @@ void search_metapackages_names()
 {
 
     // put the search_metapackages_names in a tempfile
-
+   FILE *temp_create_package_list_at_start_fd;
    int fd;
    char temp_create_package_list_sh[STDLINE];
    char system_call[STDLINE];
 
    //  create first tempfile for the packages search
-   strncpy(temp_create_package_list_sh, "/tmp/temp_create_package_list_sh_fd.XXXXXX", STDLINE);
+   strncpy(temp_create_package_list_sh, "/tmp/temp_create_package_list_at_start_fd.XXXXXX", STDLINE);
    fd = mkstemp(temp_create_package_list_sh);  // make a tempfile
    if( fd )
       close(fd);
@@ -287,13 +288,13 @@ void search_metapackages_names()
 
 
    // fill the first tempfile 
-   temp_create_package_list_sh_fd = fopen( temp_create_package_list_sh, "w+" );
-   if( temp_create_package_list_sh_fd == NULL )
+   temp_create_package_list_at_start_fd = fopen( temp_create_package_list_sh, "w+" );
+   if( temp_create_package_list_at_start_fd == NULL )
       printf( "The file %s was not opened\n", temp_create_package_list_sh);
    else
    {
       // build the script who creates the packagelist
-     fprintf( temp_create_package_list_sh_fd, "%s\n%s\n%s\n%s\n%s%s\n%s\n%s\n%s\n%s\n%s%s\n", 
+     fprintf( temp_create_package_list_at_start_fd, "%s\n%s\n%s\n%s\n%s%s\n%s\n%s\n%s\n%s\n%s%s\n", 
                "#!/bin/bash",
                "set -e",
                "DPKG_ARCH=$(dpkg --print-installation-architecture)",
@@ -306,7 +307,7 @@ void search_metapackages_names()
                "done > ",temp_file_packagelist
       );
 
-   fclose( temp_create_package_list_sh_fd );
+   fclose( temp_create_package_list_at_start_fd );
    }
 
 
@@ -369,8 +370,9 @@ foreach_func (GtkTreeModel *model,
               gpointer      user_data)
 {
   GtkTreeIter iter_parent;
-  gboolean *toggle;
-  gchar *short_text, *long_text, * category_name;
+  //gboolean *toggle;
+  gint toggle;
+  gchar *short_text, *long_text, *category_name;
   // read each line in the treeview and create the packagelist tempfile for selected metapackages
 
 
@@ -398,11 +400,11 @@ foreach_func (GtkTreeModel *model,
    category_name = strtok(category_name, ">");
    category_name = strtok(NULL, ">");
 
+   printf( "%s-%s.bm:%i\n", category_name, short_text, toggle);
 
   // if the metapackage was selected
-  if ( toggle == TRUE ) {
-      fprintf( temp_create_package_list_sh_fd, "%s-%s.bm\n", 
-                                         category_name, short_text);
+  if ( toggle == 1 ) {
+      fprintf( temp_create_package_list_sh_fd, "%s-%s.bm\n", category_name, short_text);
   }
 
 
