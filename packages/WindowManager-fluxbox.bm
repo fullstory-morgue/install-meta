@@ -19,6 +19,7 @@ FLL_PACKAGES=(
 	bbrun
 	bbmail
 	rox-filer
+	idesk
 )
 
 FLL_POST_PROCESSING=(
