@@ -7,7 +7,8 @@
 #include <string.h>
 #include <stdlib.h>
 #include <unistd.h>
-
+//#include <gdk/gdk.h>
+//#include <gdk/gdkkeysyms.h>
 
 #include "callbacks.h"
 #include "interface.h"
@@ -44,6 +45,7 @@ enum
   PACKAGE_TEXT,
   DESCRIPTION_TEXT
 } ;
+
 
  void
  onRowActivated (GtkTreeView        *view,
@@ -663,7 +665,7 @@ on_window1_configure_event             (GtkWidget       *widget,
    label = lookup_widget ( GTK_WIDGET (widget), "label_install");
    gdk_color_parse ("darkred", &color);
    gtk_widget_modify_fg ( GTK_WIDGET(label), GTK_STATE_NORMAL, &color);
-   font_desc = pango_font_description_from_string ("20");
+   font_desc = pango_font_description_from_string ("16");
    gtk_widget_modify_font ( GTK_WIDGET(label), font_desc);
    pango_font_description_free (font_desc);
 
@@ -944,5 +946,53 @@ on_button_collapse_clicked             (GtkButton       *button,
 {
    GtkWidget *view = lookup_widget (GTK_WIDGET (button), "treeview1");
    gtk_tree_view_collapse_all ( GTK_TREE_VIEW( view ) );
+}
+
+
+gboolean
+on_treeview1_motion_notify_event       (GtkWidget       *widget,
+                                        GdkEventMotion  *event,
+                                        gpointer         user_data)
+{
+   GtkWidget *view = lookup_widget (GTK_WIDGET (widget), "treeview1");
+   GtkTreePath *path;
+   GtkTreeIter   iter, iter_parent;
+   GtkTreeModel *model;
+   GtkTreeViewColumn *column;
+   GdkCursor *cursor;
+   gint cx, cy;
+
+
+   cursor = gdk_cursor_new_for_display (gdk_display_get_default(), 132);
+   gdk_window_set_cursor (widget->window, cursor);
+
+
+   gtk_tree_view_get_path_at_pos( GTK_TREE_VIEW( view ), event->x, event->y, &path, &column, &cx, &cy);
+   if (path == NULL)
+      return FALSE;
+
+    // the model (treeview) from the main window
+    model = gtk_tree_view_get_model (GTK_TREE_VIEW( view ));
+
+    if (!gtk_tree_model_get_iter(model, &iter, path))
+      return FALSE; /* path describes a non-existing row - should not happen */
+
+    // get parent line
+    gboolean has_parent = gtk_tree_model_iter_parent (model, &iter_parent ,&iter);
+    if (!has_parent)
+       return FALSE;
+
+
+   const gchar* title = gtk_tree_view_column_get_title ( column );
+
+
+   if( strncmp( title, "Info", 4) == 0 && cx > 33 )  { // position x from the i icon in Info column
+       cursor = gdk_cursor_new_for_display (gdk_display_get_default(), 60);
+       gdk_window_set_cursor (widget->window, cursor);
+   }
+
+   gtk_tree_path_free (path);
+
+   return FALSE;
 }
 

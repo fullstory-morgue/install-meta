@@ -208,3 +208,8 @@ on_button_minimize_clicked             (GtkButton       *button,
 void
 on_button_collapse_clicked             (GtkButton       *button,
                                         gpointer         user_data);
+
+gboolean
+on_treeview1_motion_notify_event       (GtkWidget       *widget,
+                                        GdkEventMotion  *event,
+                                        gpointer         user_data);
