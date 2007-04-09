@@ -1,4 +1,4 @@
-﻿FLL_DESCRIPTION="Croatian Language Pack for sidux."
+FLL_DESCRIPTION="Croatian Language Pack for sidux"
 
 FLL_PRE_PROCESSING=(
 	"#!/bin/bash"
