@@ -1,9 +1,5 @@
-install-meta (0.0.50) UNRELEASED; urgency=low
+install-meta (0.0.50) unstable; urgency=low
 
-  [ Stefan Lippers-Hollmann ]
-  * NOT RELEASED YET
-
-  [ Horst Tritremmel ]
   * add idesk to fluxbox.bm
   * change mouse pointer if over info icon
   * add Croatian Package 
