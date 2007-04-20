@@ -213,3 +213,24 @@ gboolean
 on_treeview1_motion_notify_event       (GtkWidget       *widget,
                                         GdkEventMotion  *event,
                                         gpointer         user_data);
+
+void
+on_window_main_show                    (GtkWidget       *widget,
+                                        gpointer         user_data);
+
+gboolean
+on_window_main_delete_event            (GtkWidget       *widget,
+                                        GdkEvent        *event,
+                                        gpointer         user_data);
+
+void
+on_exit2_clicked                       (GtkButton       *button,
+                                        gpointer         user_data);
+
+void
+on_button_nonfree_clicked              (GtkButton       *button,
+                                        gpointer         user_data);
+
+void
+on_button_back_clicked                 (GtkButton       *button,
+                                        gpointer         user_data);

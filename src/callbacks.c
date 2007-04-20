@@ -28,7 +28,6 @@ char APT_GET_CALL[MAXLINE];
 char CHROOT[MAXLINE];  // = extern variable argv[1] in main.c
 char temp_file_packagelist[STDLINE];
 char *target_mnt_point, *hd_device, *ptr_chroot;
-int  do_it_at_first_time = 0;
 
 
 enum
@@ -423,8 +422,8 @@ no_file_dialog(GtkWidget *widget)
    //Error dialog window
 
    // hide the main window
-   GtkWidget *window1 = lookup_widget(GTK_WIDGET(widget),"window1");
-   gtk_widget_hide ( GTK_WIDGET (window1) ); 
+   GtkWidget *window_main = lookup_widget(GTK_WIDGET(widget),"window_main");
+   gtk_widget_hide ( GTK_WIDGET (window_main) ); 
 
    // show the dialog window
    GtkWidget *dialog1 = create_dialog1 ();
@@ -486,28 +485,342 @@ tree_collapse(GtkTreeView * treeview1, GtkTreeIter * iter,
 }
 
 
-gboolean
-on_window1_configure_event             (GtkWidget       *widget,
-                                        GdkEventConfigure *event,
+void
+if_exit (GtkWidget *widget)
+{
+   char system_call[MAXLINE];
+
+
+   // install successful dialog
+   if ( strlen(CHROOT) > 0 && strcmp( ptr_chroot, "--chroot" )  == 0 ) {
+
+      // umount for knx-installer
+      strncpy(system_call, "#!/bin/bash\n", MAXLINE );
+      strncat(system_call, "mounted=$(mount |grep \"hdinstall/\" |awk '{print $1}')\n", MAXLINE );
+      strncat(system_call, "if [ -n \"$mounted\" ]; then\n", MAXLINE );
+      strncat(system_call, "for i in $mounted; do\n", MAXLINE );
+      strncat(system_call, "    umount $i > /dev/null 2>&1 >> /dev/null\n", MAXLINE );
+      strncat(system_call, "done\n", MAXLINE );
+      strncat(system_call, "fi\n", MAXLINE );
+      strncat(system_call, "umount /media/hdinstall > /dev/null 2>&1 >> /dev/null\n", MAXLINE );
+
+      system(system_call);
+
+      // hide the main window
+      GtkWidget *window_main = lookup_widget(GTK_WIDGET(widget),"window_main");
+      gtk_widget_hide ( GTK_WIDGET (window_main) ); 
+
+      // show the dialog window
+      GtkWidget *dialog2 = create_dialog2 ();
+      gtk_widget_show (dialog2);
+   }
+   else
+      gtk_main_quit();
+}
+
+
+void
+on_exit_clicked                        (GtkButton       *button,
                                         gpointer         user_data)
 {
- FILE *temp_file_package;
- char *ptr_option, *ptr_confdir, category[MAXLINE], longtext[MAXLINE], category_last[STDLINE], *shorttext_p, *longtext_p;
- GtkWidget *label, *treeview1;
- GtkTreeStore *model;
- GtkCellRenderer *toggle, *pixrenderer, *cell, *cell2;
- GtkTreeViewColumn *mointpoint, *fs, *pixm, *device;
- GtkTreeIter iter_tb, iter_category;
- GdkPixbuf     *icon, *icon_package;
- GError        *error = NULL;
- PangoFontDescription *font_desc;
- GdkColor color;
- long counter = 0;
+   if_exit (GTK_WIDGET (button));
+}
 
 
- if( do_it_at_first_time < 1 ) {
+void
+on_button_install_pressed              (GtkButton       *button,
+                                        gpointer         user_data)
+{
+   // hide the main window
+   GtkWidget *window_main = lookup_widget(GTK_WIDGET(button),"window_main");
+   gtk_widget_hide ( GTK_WIDGET (window_main) ); 
+}
 
-   do_it_at_first_time = 1;  // only at start
+
+void
+on_button_install_released             (GtkButton       *button,
+                                        gpointer         user_data)
+{
+
+
+}
+
+
+void
+on_button_install_clicked              (GtkButton       *button,
+                                        gpointer         user_data)
+{
+   FILE* temp_file_aptgetcall_sh_fd;
+   char temp_file_aptgetcall_sh[STDLINE], is_chroot[STDLINE];
+   int fd;
+
+   // read the treeview1 (mountpoint) list
+   GtkWidget *treeview1 = lookup_widget (GTK_WIDGET (button), "treeview1");
+   GtkTreeModel *model = gtk_tree_view_get_model (GTK_TREE_VIEW(treeview1));
+   char system_call[MAXLINE];
+
+
+   //  create selected package list tempfile
+   strncpy(temp_file_packagelist, "/tmp/temp_packages_list.XXXXXX", STDLINE);
+   fd = mkstemp(temp_file_packagelist);  // make a tempfile
+   if( fd )
+      close(fd);
+   else
+      printf("mkstemp(temp_file_packagelist)\n");
+
+
+   // create apt-get systemcall tempfile
+   strncpy(temp_file_aptgetcall_sh, "/tmp/temp_aptgetcall.XXXXXX", STDLINE);
+   fd = mkstemp(temp_file_aptgetcall_sh);  // make a tempfile
+   if( fd )
+      close(fd);
+   else
+      printf("mkstemp(temp_file_aptgetcall_sh)\n");
+ 
+
+   // fill the tempfile with apt-get system call 
+   temp_create_package_list_sh_fd = fopen( temp_file_packagelist, "w+" );
+   if( temp_create_package_list_sh_fd == NULL )
+      printf( "The file %s was not opened\n", temp_file_packagelist);
+   else
+   {
+      gtk_tree_model_foreach(GTK_TREE_MODEL(model), foreach_func, NULL);  // put the selected meta packages to the tempfile
+      fclose( temp_create_package_list_sh_fd );
+   }
+
+   // if option --chroot=<device>  is given (life mode install to hd)
+   if ( strlen(CHROOT) > 0 && strcmp( ptr_chroot, "--chroot" )  == 0 ) {
+        strncpy(is_chroot, "CHROOT=y", STDLINE);
+
+        strncpy(system_call, "chroot /media/", MAXLINE );
+        strncat(system_call, hd_device, MAXLINE );
+        strncat(system_call, " apt-get update\n", MAXLINE );
+        strncat(system_call, "chroot /media/", MAXLINE );
+        strncat(system_call, hd_device, MAXLINE );
+
+        strncat(system_call, " apt-get install ", MAXLINE );
+
+   }
+   else {
+        // if packages should be install into normal system
+        strncpy(is_chroot, "CHROOT=n", STDLINE);
+
+        strncpy(system_call, "apt-get install ", MAXLINE );
+   }
+
+   GtkWidget* checkbutton = lookup_widget( GTK_WIDGET(button),"checkbutton_yes");
+   if( gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON( checkbutton )) == TRUE ) {
+       strncat(system_call,  "--yes ", MAXLINE );
+   }
+   strncat(system_call, "${FLL_PACKAGES[@]}", MAXLINE );
+
+
+   // install the packages via apt-get, create the bash file to do that
+   temp_file_aptgetcall_sh_fd = fopen( temp_file_aptgetcall_sh, "w+" );
+   if( temp_file_aptgetcall_sh_fd == NULL )
+       printf( "The file %s was not opened\n", temp_file_aptgetcall_sh);
+   else {
+       //  create the bash file for install the packages
+       fprintf( temp_file_aptgetcall_sh_fd, "%s\n%s\n%s\n%s\n%s%s\n%s\n%s%s%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s%s%s%s%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s%s%s%s%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s%s%s\n%s\n%s\n",
+               "#!/bin/bash",
+               is_chroot,
+               "source /etc/default/distro\n[ \"$FLL_DISTRO_MODE\" = live ] && fix-unionfs",
+               "apt-get update",
+               "cd ", INSTALL_PACKAGES_CONF_DIR,
+               "echo; echo ======================================",
+               "for modul in $(cat ",temp_file_packagelist,"); do ",
+               "   source ${modul}",
+               "   for pkgmod in ${FLL_PACKAGE_DEPMODS[@]}; do",
+               "	source packages.d/${pkgmod}.bm",
+               "   done",
+               "   source packages.d/i18n.bm",
+               "   echo; echo ======================================",
+               "   echo start installation for ${modul}",
+               "   echo --------------------------------------",
+
+               "   TMP=\"$(mktemp -p /tmp/ install-meta-preprocessing-XXXXXXXXXX)\"",
+               "   IFS=$'\\n'",
+               "   for pre_processing in ${FLL_PRE_PROCESSING[@]}; do",
+               "        echo ${pre_processing} >> \"$TMP\"",
+               "   done",
+               "   IFS=$' \\t\\n'",
+               "   [ \"${CHROOT}\" = y ] && cp $TMP /media/", hd_device, "/tmp && chroot /media/", hd_device, " sh ${TMP} || sh ${TMP} ",
+               "   rm \"$TMP\"",
+
+                   system_call,
+               "   unset FLL_PACKAGES FLL_PACKAGE_DEPMODS FLL_DESCRIPTION FLL_PRE_PROCESSING",
+
+               "   TMP=\"$(mktemp -p /tmp/ install-meta-postprocessing-XXXXXXXXXX)\"",
+               "   IFS=$'\\n'",
+               "   for post_processing in ${FLL_POST_PROCESSING[@]}; do",
+               "        echo ${post_processing} >> \"$TMP\"",
+               "   done",
+               "   [ \"${CHROOT}\" = y ] && cp $TMP /media/", hd_device, "/tmp && chroot /media/", hd_device, " sh ${TMP} || sh ${TMP} ",
+               "   unset FLL_POST_PROCESSING",
+               "   rm \"$TMP\"",
+ 
+               "done",
+               "IFS=$' \\t\\n'",
+               "i=_",
+               "while [ \"${i}\" != \"\" ]; do",
+               "      echo -e \"\\n==================================\"",
+               "      echo \"enter your code or close the window <ALT> + <F4>\"",
+               "      echo -n \"# \";read i",
+               "      [ \"${CHROOT}\" = y ] && chroot /media/", hd_device, " ${i} || ${i}",
+               "done",
+               "exit"
+       );
+
+       fclose( temp_file_aptgetcall_sh_fd );
+   }
+
+
+   // run apt-get, (start the script above)
+   strncpy(system_call, "x-terminal-emulator -e sh ", MAXLINE);
+   strncat(system_call, temp_file_aptgetcall_sh, MAXLINE);
+   // start the install via x-terminal-emulator
+   system(system_call);
+
+
+   // remove the tempfile
+   unlink(temp_file_packagelist);
+   unlink(temp_file_aptgetcall_sh);
+
+   // show the main window
+   GtkWidget *window_main = lookup_widget(GTK_WIDGET(button),"window_main");
+   gtk_widget_show ( GTK_WIDGET (window_main) );
+}
+
+
+void
+on_button1_clicked                     (GtkButton       *button,
+                                        gpointer         user_data)
+{
+     GtkWidget *window = lookup_widget(GTK_WIDGET( button ),"package_info");
+     gtk_widget_destroy ( GTK_WIDGET (window) );
+}
+
+
+gboolean
+on_treeview1_button_press_event        (GtkWidget       *widget,
+                                        GdkEventButton  *event,
+                                        gpointer         user_data)
+{
+   GtkWidget *view = lookup_widget (GTK_WIDGET (widget), "treeview1");
+   GtkTreeModel *model1;
+   GtkTreePath *path;
+   GtkTreeViewColumn *column;
+   GtkTreeIter iter;
+   gint cx, cy;
+
+   gtk_tree_view_get_path_at_pos( GTK_TREE_VIEW( view ), event->x, event->y, &path, &column, &cx, &cy);
+   if (path == NULL)
+       return FALSE;
+
+   model1 = gtk_tree_view_get_model ( GTK_TREE_VIEW( view ) );
+
+   gtk_tree_model_get_iter(model1, &iter, path);
+
+   const gchar* title = gtk_tree_view_column_get_title ( column );
+
+
+   if( strncmp( title, "Info", 4) == 0 && cx > 33 )   // position x from the i icon in Info column
+        onRowActivated ( GTK_TREE_VIEW( view ), path, NULL, user_data );
+
+   gtk_tree_path_free (path);
+
+
+   //if (event->type == GDK_2BUTTON_PRESS)
+   //    toggle_sym_value(menu);
+
+
+   return FALSE;
+}
+
+
+void
+on_button_expand_clicked               (GtkButton       *button,
+                                        gpointer         user_data)
+{
+   GtkWidget *view = lookup_widget (GTK_WIDGET (button), "treeview1");
+   gtk_tree_view_expand_all ( GTK_TREE_VIEW( view ) );
+}
+
+
+void
+on_button_collapse_clicked             (GtkButton       *button,
+                                        gpointer         user_data)
+{
+   GtkWidget *view = lookup_widget (GTK_WIDGET (button), "treeview1");
+   gtk_tree_view_collapse_all ( GTK_TREE_VIEW( view ) );
+}
+
+
+gboolean
+on_treeview1_motion_notify_event       (GtkWidget       *widget,
+                                        GdkEventMotion  *event,
+                                        gpointer         user_data)
+{
+   GtkWidget *view = lookup_widget (GTK_WIDGET (widget), "treeview1");
+   GtkTreePath *path;
+   GtkTreeIter   iter, iter_parent;
+   GtkTreeModel *model;
+   GtkTreeViewColumn *column;
+   GdkCursor *cursor;
+   gint cx, cy;
+
+
+   cursor = gdk_cursor_new_for_display (gdk_display_get_default(), 132);
+   gdk_window_set_cursor (widget->window, cursor);
+
+
+   gtk_tree_view_get_path_at_pos( GTK_TREE_VIEW( view ), event->x, event->y, &path, &column, &cx, &cy);
+   if (path == NULL)
+      return FALSE;
+
+    // the model (treeview) from the main window
+    model = gtk_tree_view_get_model (GTK_TREE_VIEW( view ));
+
+    if (!gtk_tree_model_get_iter(model, &iter, path))
+      return FALSE; /* path describes a non-existing row - should not happen */
+
+    // get parent line
+    gboolean has_parent = gtk_tree_model_iter_parent (model, &iter_parent ,&iter);
+    if (!has_parent)
+       return FALSE;
+
+
+   const gchar* title = gtk_tree_view_column_get_title ( column );
+
+
+   if( strncmp( title, "Info", 4) == 0 && cx > 33 )  { // position x from the i icon in Info column
+       cursor = gdk_cursor_new_for_display (gdk_display_get_default(), 60);
+       gdk_window_set_cursor (widget->window, cursor);
+   }
+
+   gtk_tree_path_free (path);
+
+   return FALSE;
+}
+
+
+void
+on_window_main_show                    (GtkWidget       *widget,
+                                        gpointer         user_data)
+{
+   FILE *temp_file_package;
+   char *ptr_option, *ptr_confdir, category[MAXLINE], longtext[MAXLINE], category_last[STDLINE], *shorttext_p, *longtext_p;
+   GtkWidget *label, *treeview1;
+   GtkTreeStore *model;
+   GtkCellRenderer *toggle, *pixrenderer, *cell, *cell2;
+   GtkTreeViewColumn *mointpoint, *fs, *pixm, *device;
+   GtkTreeIter iter_tb, iter_category;
+   GdkPixbuf     *icon, *icon_package;
+   GError        *error = NULL;
+   PangoFontDescription *font_desc;
+   GdkColor color;
+   long counter = 0;
+
 
    // handle the system call options
    ptr_chroot = strtok(CHROOT, "=");
@@ -669,330 +982,44 @@ on_window1_configure_event             (GtkWidget       *widget,
    gtk_widget_modify_font ( GTK_WIDGET(label), font_desc);
    pango_font_description_free (font_desc);
 
-
- }
-
- return FALSE;
-}
-
-
-void
-on_exit_clicked                        (GtkButton       *button,
-                                        gpointer         user_data)
-{
-   char system_call[MAXLINE];
-
-   // umount for knx-installer
-   strncpy(system_call, "#!/bin/bash\n", MAXLINE );
-   strncat(system_call, "mounted=$(mount |grep \"hdinstall/\" |awk '{print $1}')\n", MAXLINE );
-   strncat(system_call, "if [ -n \"$mounted\" ]; then\n", MAXLINE );
-   strncat(system_call, "for i in $mounted; do\n", MAXLINE );
-   strncat(system_call, "    umount $i > /dev/null 2>&1 >> /dev/null\n", MAXLINE );
-   strncat(system_call, "done\n", MAXLINE );
-   strncat(system_call, "fi\n", MAXLINE );
-   strncat(system_call, "umount /media/hdinstall > /dev/null 2>&1 >> /dev/null\n", MAXLINE );
-
-   system(system_call);
-
-   // install successful dialog
-   if ( strlen(CHROOT) > 0 && strcmp( ptr_chroot, "--chroot" )  == 0 ) {
-      // hide the main window
-      GtkWidget *window1 = lookup_widget(GTK_WIDGET(button),"window1");
-      gtk_widget_hide ( GTK_WIDGET (window1) ); 
-
-      // show the dialog window
-      GtkWidget *dialog2 = create_dialog2 ();
-      gtk_widget_show (dialog2);
-   }
-   else
-      gtk_main_quit();
-
-}
-
-
-void
-on_button_install_pressed              (GtkButton       *button,
-                                        gpointer         user_data)
-{
-   // hide the main window
-   GtkWidget *window1 = lookup_widget(GTK_WIDGET(button),"window1");
-   gtk_widget_hide ( GTK_WIDGET (window1) ); 
-}
-
-
-void
-on_button_install_released             (GtkButton       *button,
-                                        gpointer         user_data)
-{
-
-
 }
 
 
 gboolean
-on_window1_delete_event                (GtkWidget       *widget,
+on_window_main_delete_event            (GtkWidget       *widget,
                                         GdkEvent        *event,
                                         gpointer         user_data)
 {
 
-   gtk_main_quit();
-   return FALSE;
-}
-
-void
-on_button_install_clicked              (GtkButton       *button,
-                                        gpointer         user_data)
-{
-   FILE* temp_file_aptgetcall_sh_fd;
-   char temp_file_aptgetcall_sh[STDLINE], is_chroot[STDLINE];
-   int fd;
-
-   // read the treeview1 (mountpoint) list
-   GtkWidget *treeview1 = lookup_widget (GTK_WIDGET (button), "treeview1");
-   GtkTreeModel *model = gtk_tree_view_get_model (GTK_TREE_VIEW(treeview1));
-   char system_call[MAXLINE];
-
-
-   //  create selected package list tempfile
-   strncpy(temp_file_packagelist, "/tmp/temp_packages_list.XXXXXX", STDLINE);
-   fd = mkstemp(temp_file_packagelist);  // make a tempfile
-   if( fd )
-      close(fd);
-   else
-      printf("mkstemp(temp_file_packagelist)\n");
-
-
-   // create apt-get systemcall tempfile
-   strncpy(temp_file_aptgetcall_sh, "/tmp/temp_aptgetcall.XXXXXX", STDLINE);
-   fd = mkstemp(temp_file_aptgetcall_sh);  // make a tempfile
-   if( fd )
-      close(fd);
-   else
-      printf("mkstemp(temp_file_aptgetcall_sh)\n");
- 
-
-   // fill the tempfile with apt-get system call 
-   temp_create_package_list_sh_fd = fopen( temp_file_packagelist, "w+" );
-   if( temp_create_package_list_sh_fd == NULL )
-      printf( "The file %s was not opened\n", temp_file_packagelist);
-   else
-   {
-      gtk_tree_model_foreach(GTK_TREE_MODEL(model), foreach_func, NULL);  // put the selected meta packages to the tempfile
-      fclose( temp_create_package_list_sh_fd );
-   }
-
-   // if option --chroot=<device>  is given (life mode install to hd)
-   if ( strlen(CHROOT) > 0 && strcmp( ptr_chroot, "--chroot" )  == 0 ) {
-        strncpy(is_chroot, "CHROOT=y", STDLINE);
-
-        strncpy(system_call, "chroot /media/", MAXLINE );
-        strncat(system_call, hd_device, MAXLINE );
-        strncat(system_call, " apt-get update\n", MAXLINE );
-        strncat(system_call, "chroot /media/", MAXLINE );
-        strncat(system_call, hd_device, MAXLINE );
-
-        strncat(system_call, " apt-get install ", MAXLINE );
-
-   }
-   else {
-        // if packages should be install into normal system
-        strncpy(is_chroot, "CHROOT=n", STDLINE);
-
-        strncpy(system_call, "apt-get install ", MAXLINE );
-   }
-
-   GtkWidget* checkbutton = lookup_widget( GTK_WIDGET(button),"checkbutton_yes");
-   if( gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON( checkbutton )) == TRUE ) {
-       strncat(system_call,  "--yes ", MAXLINE );
-   }
-   strncat(system_call, "${FLL_PACKAGES[@]}", MAXLINE );
-
-
-   // install the packages via apt-get, create the bash file to do that
-   temp_file_aptgetcall_sh_fd = fopen( temp_file_aptgetcall_sh, "w+" );
-   if( temp_file_aptgetcall_sh_fd == NULL )
-       printf( "The file %s was not opened\n", temp_file_aptgetcall_sh);
-   else {
-       //  create the bash file for install the packages
-       fprintf( temp_file_aptgetcall_sh_fd, "%s\n%s\n%s\n%s\n%s%s\n%s\n%s%s%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s%s%s%s%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s%s%s%s%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s%s%s\n%s\n%s\n",
-               "#!/bin/bash",
-               is_chroot,
-               "source /etc/default/distro\n[ \"$FLL_DISTRO_MODE\" = live ] && fix-unionfs",
-               "apt-get update",
-               "cd ", INSTALL_PACKAGES_CONF_DIR,
-               "echo; echo ======================================",
-               "for modul in $(cat ",temp_file_packagelist,"); do ",
-               "   source ${modul}",
-               "   for pkgmod in ${FLL_PACKAGE_DEPMODS[@]}; do",
-               "	source packages.d/${pkgmod}.bm",
-               "   done",
-               "   source packages.d/i18n.bm",
-               "   echo; echo ======================================",
-               "   echo start installation for ${modul}",
-               "   echo --------------------------------------",
-
-               "   TMP=\"$(mktemp -p /tmp/ install-meta-preprocessing-XXXXXXXXXX)\"",
-               "   IFS=$'\\n'",
-               "   for pre_processing in ${FLL_PRE_PROCESSING[@]}; do",
-               "        echo ${pre_processing} >> \"$TMP\"",
-               "   done",
-               "   IFS=$' \\t\\n'",
-               "   [ \"${CHROOT}\" = y ] && cp $TMP /media/", hd_device, "/tmp && chroot /media/", hd_device, " sh ${TMP} || sh ${TMP} ",
-               "   rm \"$TMP\"",
-
-                   system_call,
-               "   unset FLL_PACKAGES FLL_PACKAGE_DEPMODS FLL_DESCRIPTION FLL_PRE_PROCESSING",
-
-               "   TMP=\"$(mktemp -p /tmp/ install-meta-postprocessing-XXXXXXXXXX)\"",
-               "   IFS=$'\\n'",
-               "   for post_processing in ${FLL_POST_PROCESSING[@]}; do",
-               "        echo ${post_processing} >> \"$TMP\"",
-               "   done",
-               "   [ \"${CHROOT}\" = y ] && cp $TMP /media/", hd_device, "/tmp && chroot /media/", hd_device, " sh ${TMP} || sh ${TMP} ",
-               "   unset FLL_POST_PROCESSING",
-               "   rm \"$TMP\"",
- 
-               "done",
-               "IFS=$' \\t\\n'",
-               "i=_",
-               "while [ \"${i}\" != \"\" ]; do",
-               "      echo -e \"\\n==================================\"",
-               "      echo \"enter your code or close the window <ALT> + <F4>\"",
-               "      echo -n \"# \";read i",
-               "      [ \"${CHROOT}\" = y ] && chroot /media/", hd_device, " ${i} || ${i}",
-               "done",
-               "exit"
-       );
-
-       fclose( temp_file_aptgetcall_sh_fd );
-   }
-
-
-   // run apt-get, (start the script above)
-   strncpy(system_call, "x-terminal-emulator -e sh ", MAXLINE);
-   strncat(system_call, temp_file_aptgetcall_sh, MAXLINE);
-   // start the install via x-terminal-emulator
-   system(system_call);
-
-
-   // remove the tempfile
-   unlink(temp_file_packagelist);
-   unlink(temp_file_aptgetcall_sh);
-
-   // show the main window
-   GtkWidget *window1 = lookup_widget(GTK_WIDGET(button),"window1");
-   gtk_widget_show ( GTK_WIDGET (window1) );
-}
-
-
-void
-on_button1_clicked                     (GtkButton       *button,
-                                        gpointer         user_data)
-{
-     GtkWidget *window = lookup_widget(GTK_WIDGET( button ),"package_info");
-     gtk_widget_destroy ( GTK_WIDGET (window) );
-}
-
-
-gboolean
-on_treeview1_button_press_event        (GtkWidget       *widget,
-                                        GdkEventButton  *event,
-                                        gpointer         user_data)
-{
-   GtkWidget *view = lookup_widget (GTK_WIDGET (widget), "treeview1");
-   GtkTreeModel *model1;
-   GtkTreePath *path;
-   GtkTreeViewColumn *column;
-   GtkTreeIter iter;
-   gint cx, cy;
-
-   gtk_tree_view_get_path_at_pos( GTK_TREE_VIEW( view ), event->x, event->y, &path, &column, &cx, &cy);
-   if (path == NULL)
-       return FALSE;
-
-   model1 = gtk_tree_view_get_model ( GTK_TREE_VIEW( view ) );
-
-   gtk_tree_model_get_iter(model1, &iter, path);
-
-   const gchar* title = gtk_tree_view_column_get_title ( column );
-
-
-   if( strncmp( title, "Info", 4) == 0 && cx > 33 )   // position x from the i icon in Info column
-        onRowActivated ( GTK_TREE_VIEW( view ), path, NULL, user_data );
-
-   gtk_tree_path_free (path);
-
-
-   //if (event->type == GDK_2BUTTON_PRESS)
-   //    toggle_sym_value(menu);
-
+   if_exit (GTK_WIDGET (widget));
 
    return FALSE;
 }
 
 
 void
-on_button_expand_clicked               (GtkButton       *button,
+on_exit2_clicked                       (GtkButton       *button,
                                         gpointer         user_data)
 {
-   GtkWidget *view = lookup_widget (GTK_WIDGET (button), "treeview1");
-   gtk_tree_view_expand_all ( GTK_TREE_VIEW( view ) );
+   if_exit (GTK_WIDGET (button));
 }
 
 
 void
-on_button_collapse_clicked             (GtkButton       *button,
+on_button_nonfree_clicked              (GtkButton       *button,
                                         gpointer         user_data)
 {
-   GtkWidget *view = lookup_widget (GTK_WIDGET (button), "treeview1");
-   gtk_tree_view_collapse_all ( GTK_TREE_VIEW( view ) );
+
 }
 
 
-gboolean
-on_treeview1_motion_notify_event       (GtkWidget       *widget,
-                                        GdkEventMotion  *event,
+void
+on_button_back_clicked                 (GtkButton       *button,
                                         gpointer         user_data)
 {
-   GtkWidget *view = lookup_widget (GTK_WIDGET (widget), "treeview1");
-   GtkTreePath *path;
-   GtkTreeIter   iter, iter_parent;
-   GtkTreeModel *model;
-   GtkTreeViewColumn *column;
-   GdkCursor *cursor;
-   gint cx, cy;
+   GtkWidget *notebook1;
 
-
-   cursor = gdk_cursor_new_for_display (gdk_display_get_default(), 132);
-   gdk_window_set_cursor (widget->window, cursor);
-
-
-   gtk_tree_view_get_path_at_pos( GTK_TREE_VIEW( view ), event->x, event->y, &path, &column, &cx, &cy);
-   if (path == NULL)
-      return FALSE;
-
-    // the model (treeview) from the main window
-    model = gtk_tree_view_get_model (GTK_TREE_VIEW( view ));
-
-    if (!gtk_tree_model_get_iter(model, &iter, path))
-      return FALSE; /* path describes a non-existing row - should not happen */
-
-    // get parent line
-    gboolean has_parent = gtk_tree_model_iter_parent (model, &iter_parent ,&iter);
-    if (!has_parent)
-       return FALSE;
-
-
-   const gchar* title = gtk_tree_view_column_get_title ( column );
-
-
-   if( strncmp( title, "Info", 4) == 0 && cx > 33 )  { // position x from the i icon in Info column
-       cursor = gdk_cursor_new_for_display (gdk_display_get_default(), 60);
-       gdk_window_set_cursor (widget->window, cursor);
-   }
-
-   gtk_tree_path_free (path);
-
-   return FALSE;
+   notebook1 = lookup_widget (GTK_WIDGET (button), "notebook1");
+   gtk_notebook_prev_page ( GTK_NOTEBOOK(notebook1) );
 }
 
