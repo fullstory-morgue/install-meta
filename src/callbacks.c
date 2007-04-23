@@ -295,13 +295,15 @@ void search_metapackages_names()
    else
    {
       // build the script who creates the packagelist
-     fprintf( temp_create_package_list_at_start_fd, "%s\n%s\n%s\n%s\n%s%s\n%s\n%s\n%s\n%s\n%s%s\n", 
+     fprintf( temp_create_package_list_at_start_fd, "%s\n%s\n%s\n%s\n%s%s\n%s%s\n%s\n%s\n%s\n%s\n%s%s\n", 
                "#!/bin/bash",
                "set -e",
                "DPKG_ARCH=$(dpkg --print-installation-architecture)",
                "source /etc/default/distro",
                "cd ", INSTALL_PACKAGES_CONF_DIR,
-               "for modul in $(ls *.bm); do",
+               "[ -z \"$(grep deb\\ .*debian\\.org.*main.*contrib /etc/apt/sources.list)\" ] && ",
+               "list=\"$(ls *.bm|grep -v ^Non_free)\" || list=\"$(ls *.bm)\"",
+               "for modul in ${list}; do",
                "   source ${modul}",
                "   echo $(echo ${modul} | cut -d. -f1)~${FLL_DESCRIPTION}",
                "   unset FLL_PACKAGES FLL_PACKAGE_DEPMODS FLL_DESCRIPTION FLL_PRE_PROCESSING FLL_POST_PROCESSING",
@@ -805,21 +807,110 @@ on_treeview1_motion_notify_event       (GtkWidget       *widget,
 
 
 void
+append_data_to_tree_store (GtkWidget *widget)
+
+{
+   // fill the treestore new
+   FILE *temp_file_package;
+   char category[MAXLINE], longtext[MAXLINE], category_last[STDLINE], *shorttext_p, *longtext_p;
+   GtkTreeIter iter_tb, iter_category;
+   GdkPixbuf     *icon, *icon_package;
+   GError        *error = NULL;
+   long counter = 0;
+
+
+   // get treestore and model
+   GtkWidget* treeview1   = lookup_widget (GTK_WIDGET ( widget ), "treeview1");
+   GtkTreeModel *model = gtk_tree_view_get_model (GTK_TREE_VIEW(treeview1));
+
+
+   icon = gdk_pixbuf_new_from_file("/usr/share/install-meta/pixmaps/install-meta-info.png", &error);
+   if (error)
+   {
+      g_warning ("Could not load icon: %s\n", error->message);
+      g_error_free(error);
+      error = NULL;
+   }
+
+   icon_package = gdk_pixbuf_new_from_file("/usr/share/install-meta/pixmaps/install-meta-folder.png", &error);
+   if (error)
+   {
+      g_warning ("Could not load icon: %s\n", error->message);
+      g_error_free(error);
+      error = NULL;
+   }
+
+
+   // put the metapackages_names in a tempfile
+   search_metapackages_names();
+
+   // read the temp_file_packagelist temp file and fill the treeview
+   temp_file_package = fopen( temp_file_packagelist, "r" );
+   if( temp_file_package == NULL ) {
+      printf( "The file %s was not opened\n", temp_file_packagelist);
+   }
+   else {
+     strncpy( category_last, "", STDLINE);
+     // appand to treeview
+     fseek( temp_file_package, 0L, SEEK_SET );
+     while (fscanf(temp_file_package, "%[^\n]\n", longtext) != EOF) {
+
+             shorttext_p = strtok(longtext, "~");
+             longtext_p = strtok(NULL, "~");
+
+             //look for category = - in filename
+             if ( strpbrk( shorttext_p, "-" ) == NULL )
+                  printf("category \\(- in filename\\) not found\n");
+             else {
+
+                  strncpy(category, "<b><span color=\"darkgreen\">" , MAXLINE);
+                  strncat(category, strtok(shorttext_p, "-") , MAXLINE);
+                  strncat(category, "</span></b>" , MAXLINE);
+                  shorttext_p = strtok(NULL, "-");
+             }
+
+             if ( strcmp( category_last, category ) != 0 ) {
+                //category
+                gtk_tree_store_append(GTK_TREE_STORE (model), &iter_category, NULL);
+                gtk_tree_store_set(GTK_TREE_STORE (model), &iter_category, 
+                         COL_ICON, icon_package, 
+                         COL_SHORT_TEXT, category, 
+                         -1);
+             }
+
+             //data 
+             gtk_tree_store_append ( GTK_TREE_STORE (model), &iter_tb, &iter_category);
+             gtk_tree_store_set ( GTK_TREE_STORE (model), &iter_tb,
+                         COL_ICON, icon,
+                         COL_SELECTED, FALSE,
+                         COL_SHORT_TEXT, shorttext_p,
+                         COL_LONG_TEXT, longtext_p,
+                         -1);
+
+             strncpy ( category_last, category, STDLINE );
+
+             counter++;
+            }
+    }
+    fclose(temp_file_package);
+
+    /* remove the tempfile */
+    unlink(temp_file_packagelist);
+
+}
+
+
+void
 on_window_main_show                    (GtkWidget       *widget,
                                         gpointer         user_data)
 {
-   FILE *temp_file_package;
-   char *ptr_option, *ptr_confdir, category[MAXLINE], longtext[MAXLINE], category_last[STDLINE], *shorttext_p, *longtext_p;
+   char *ptr_option, *ptr_confdir;
    GtkWidget *label, *treeview1;
    GtkTreeStore *model;
    GtkCellRenderer *toggle, *pixrenderer, *cell, *cell2;
    GtkTreeViewColumn *mointpoint, *fs, *pixm, *device;
-   GtkTreeIter iter_tb, iter_category;
-   GdkPixbuf     *icon, *icon_package;
-   GError        *error = NULL;
    PangoFontDescription *font_desc;
    GdkColor color;
-   long counter = 0;
 
 
    // handle the system call options
@@ -837,6 +928,9 @@ on_window_main_show                    (GtkWidget       *widget,
 
    /* treeview */
    treeview1   = lookup_widget (GTK_WIDGET (widget), "treeview1");
+
+
+   // create new model
    model = gtk_tree_store_new(4, GDK_TYPE_PIXBUF, G_TYPE_BOOLEAN, G_TYPE_STRING, G_TYPE_STRING);
 
    gtk_tree_view_set_model(GTK_TREE_VIEW(treeview1), GTK_TREE_MODEL (model));
@@ -844,26 +938,6 @@ on_window_main_show                    (GtkWidget       *widget,
    pixrenderer = gtk_cell_renderer_pixbuf_new ();
    cell = gtk_cell_renderer_text_new();
    cell2 = gtk_cell_renderer_text_new();
-
-
-//   g_signal_connect(treeview1, "row-activated", G_CALLBACK(onRowActivated), NULL);
-//   g_object_set (treeview1, "enable-tree-lines" , TRUE, NULL);
-
-   icon = gdk_pixbuf_new_from_file("/usr/share/install-meta/pixmaps/install-meta-info.png", &error);
-   if (error)
-   {
-      g_warning ("Could not load icon: %s\n", error->message);
-      g_error_free(error);
-      error = NULL;
-   }
-
-   icon_package = gdk_pixbuf_new_from_file("/usr/share/install-meta/pixmaps/install-meta-folder.png", &error);
-   if (error)
-   {
-      g_warning ("Could not load icon: %s\n", error->message);
-      g_error_free(error);
-      error = NULL;
-   }
 
 
    //g_object_set (pixrenderer, "clickable", TRUE, NULL);
@@ -913,65 +987,6 @@ on_window_main_show                    (GtkWidget       *widget,
    }
 
 
-   // put the metapackages_names in a tempfile
-   search_metapackages_names();
-
-   // read the temp_file_packagelist temp file and fill the treeview
-   temp_file_package = fopen( temp_file_packagelist, "r" );
-   if( temp_file_package == NULL ) {
-      printf( "The file %s was not opened\n", temp_file_packagelist);
-   }
-   else {
-     strncpy( category_last, "", STDLINE);
-     // appand to treeview
-     fseek( temp_file_package, 0L, SEEK_SET );
-     while (fscanf(temp_file_package, "%[^\n]\n", longtext) != EOF) {
-
-             shorttext_p = strtok(longtext, "~");
-             longtext_p = strtok(NULL, "~");
-             //look for category = - in filename
-             if ( strpbrk( shorttext_p, "-" ) == NULL )
-                  printf("category \\(- in filename\\) not found\n");
-             else {
-                  strncpy(category, "<b><span color=\"darkgreen\">" , MAXLINE);
-                  strncat(category, strtok(shorttext_p, "-") , MAXLINE);
-                  strncat(category, "</span></b>" , MAXLINE);
-                  shorttext_p = strtok(NULL, "-");
-             }
-
-             if ( strcmp( category_last, category ) != 0 ) {
-                //category
-                gtk_tree_store_append(GTK_TREE_STORE (model), &iter_category, NULL);
-                gtk_tree_store_set(GTK_TREE_STORE (model), &iter_category, 
-                         COL_ICON, icon_package, 
-                         COL_SHORT_TEXT, category, 
-                         -1);
-             }
-
-             //data 
-             gtk_tree_store_append ( GTK_TREE_STORE (model), &iter_tb, &iter_category);
-             gtk_tree_store_set ( GTK_TREE_STORE (model), &iter_tb,
-                         COL_ICON, icon,
-                         COL_SELECTED, FALSE,
-                         COL_SHORT_TEXT, shorttext_p,
-                         COL_LONG_TEXT, longtext_p,
-                         -1);
-
-             strncpy ( category_last, category, STDLINE );
-
-             counter++;
-            }
-    }
-    fclose(temp_file_package);
-
-    /* remove the tempfile */
-    unlink(temp_file_packagelist);
-
-    // no metapackage description found, file empty
-    if( counter < 1) {
-            no_file_dialog (GTK_WIDGET (widget));
-    }
-
   /* ============================================================= *
    *           Label sets, font, color, etc.                       *
    * ============================================================= */
@@ -982,6 +997,9 @@ on_window_main_show                    (GtkWidget       *widget,
    gtk_widget_modify_font ( GTK_WIDGET(label), font_desc);
    pango_font_description_free (font_desc);
 
+
+   // append to treestore
+   append_data_to_tree_store  (GTK_WIDGET (widget));
 }
 
 
@@ -1009,6 +1027,28 @@ void
 on_button_nonfree_clicked              (GtkButton       *button,
                                         gpointer         user_data)
 {
+   system("[ -z \"$(grep deb\\ .*debian\\.org.*main.*contrib /etc/apt/sources.list)\" ] && \
+   sed -ie 's/deb \\(.*\\)debian.org\\/debian unstable \\(.*\\)/deb \\1debian.org\\/debian unstable main contrib non-free/' /etc/apt/sources.list || \
+   echo found deb *contrib in sources.list");
+
+   system("[ -z \"$(grep deb-src\\ .*debian\\.org.*main.*contrib /etc/apt/sources.list)\" ] && \
+   sed -ie 's/deb-src \\(.*\\)debian.org\\/debian unstable \\(.*\\)/deb-src \\1debian.org\\/debian unstable main contrib non-free/' /etc/apt/sources.list || \
+   echo found deb-src *contrib in sources.list");
+
+
+
+   // get treestore and model
+   GtkWidget* treeview1   = lookup_widget (GTK_WIDGET (button), "treeview1");
+   GtkTreeModel *model = gtk_tree_view_get_model (GTK_TREE_VIEW(treeview1));
+
+
+   //make treeview empty
+   gtk_tree_store_clear(GTK_TREE_STORE(model));
+
+
+   // append new data to treestore
+   append_data_to_tree_store  (GTK_WIDGET (button));
+
 
 }
 

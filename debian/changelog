@@ -1,8 +1,12 @@
 install-meta (0.0.51) UNRELEASED; urgency=low
 
+  [ Stefan Lippers-Hollmann ]
   * NOT RELEASED YET
 
- -- Stefan Lippers-Hollmann <s.l-h@gmx.de>  Tue, 10 Apr 2007 02:15:02 +0200
+  [ Horst Tritremmel ]
+  * handling for non-free sources
+
+ -- Horst Tritremmel <hjt@sidux.com>  Mon, 23 Apr 2007 21:59:46 +0200
 
 install-meta (0.0.50) unstable; urgency=low
 
