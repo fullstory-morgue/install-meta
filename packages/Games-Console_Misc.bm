@@ -17,6 +17,7 @@ FLL_PACKAGES=(
       moon-buggy
       nettoe
       ninvaders
+      scribble
 )
 
 FLL_POST_PROCESSING=(

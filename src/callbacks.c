@@ -626,7 +626,7 @@ on_button_install_clicked              (GtkButton       *button,
        fprintf( temp_file_aptgetcall_sh_fd, "%s\n%s\n%s\n%s\n%s%s\n%s\n%s%s%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s%s%s%s%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s%s%s%s%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s%s%s\n%s\n%s\n",
                "#!/bin/bash",
                is_chroot,
-               "source /etc/default/distro\n[ \"$FLL_DISTRO_MODE\" = live ] && fix-unionfs",
+               "source /etc/default/distro\n[ \"$FLL_DISTRO_MODE\" = live ] && [ -x /usr/sbin/fix-unionfs ] && fix-unionfs",
                "apt-get update",
                "cd ", INSTALL_PACKAGES_CONF_DIR,
                "echo; echo ======================================",
@@ -1027,14 +1027,50 @@ void
 on_button_nonfree_clicked              (GtkButton       *button,
                                         gpointer         user_data)
 {
+   char system_call[MAXLINE];
+
+
    system("[ -z \"$(grep deb\\ .*debian\\.org.*main.*contrib /etc/apt/sources.list)\" ] && \
    sed -ie 's/deb \\(.*\\)debian.org\\/debian unstable \\(.*\\)/deb \\1debian.org\\/debian unstable main contrib non-free/' /etc/apt/sources.list || \
-   echo found deb *contrib in sources.list");
+   echo found deb *contrib in sources.list for debian");
+
+   system("[ -z \"$(grep deb\\ .*debian\\.org.*main.*contrib /etc/apt/sources.list)\" ] && \
+   sed -ie 's/deb \\(.*\\)debian.org\\/debian\\/ sid \\(.*\\)/deb \\1debian.org\\/debian\\/ sid main contrib non-free/' /etc/apt/sources.list || \
+   echo found deb *contrib in sources.list for debian");
 
    system("[ -z \"$(grep deb-src\\ .*debian\\.org.*main.*contrib /etc/apt/sources.list)\" ] && \
    sed -ie 's/deb-src \\(.*\\)debian.org\\/debian unstable \\(.*\\)/deb-src \\1debian.org\\/debian unstable main contrib non-free/' /etc/apt/sources.list || \
-   echo found deb-src *contrib in sources.list");
+   echo found deb-src *contrib in sources.list for debian");
 
+   system("[ -z \"$(grep deb-src\\ .*debian\\.org.*main.*contrib /etc/apt/sources.list)\" ] && \
+   sed -ie 's/deb-src \\(.*\\)debian.org\\/debian\\/ sid \\(.*\\)/deb-src \\1debian.org\\/debian\\/ sid main contrib non-free/' /etc/apt/sources.list || \
+   echo found deb-src *contrib in sources.list for debian");
+
+   system("[ -z \"$(grep deb\\ .*sidux\\.com.*main.*contrib /etc/apt/sources.list)\" ] && \
+   sed -ie 's/deb \\(.*\\)sidux.com\\/debian\\/ sid \\(.*\\)/deb \\1sidux.com\\/debian\\/ sid main contrib non-free firmware fix.main fix.contrib fix.non-free/' /etc/apt/sources.list || \
+   echo found deb *contrib in sources.list for sidux");
+
+   system("[ -z \"$(grep deb-src\\ .*sidux\\.com.*main.*contrib /etc/apt/sources.list)\" ] && \
+   sed -ie 's/deb-src \\(.*\\)sidux.com\\/debian\\/ sid \\(.*\\)/deb-src \\1sidux.com\\/debian\\/ sid main contrib non-free firmware fix.main fix.contrib fix.non-free/' /etc/apt/sources.list || \
+   echo found deb-src *contrib in sources.list for sidux");
+
+
+   //copy sources.list if in install mode
+   if ( strlen(CHROOT) > 0 && strcmp( ptr_chroot, "--chroot" )  == 0 ) {
+
+      // umount for knx-installer
+      strncpy(system_call, "[ -f /media/", MAXLINE );
+      strncat(system_call, hd_device, MAXLINE );
+      strncat(system_call, "/etc/apt/sources.list.dfsg ] || cp /media/", MAXLINE );
+      strncat(system_call, hd_device, MAXLINE );
+      strncat(system_call, "/etc/apt/sources.list /media/", MAXLINE );
+      strncat(system_call, hd_device, MAXLINE );
+      strncat(system_call, "/etc/apt/sources.list.dfsg\ncp /etc/apt/sources.list /media/", MAXLINE );
+      strncat(system_call, hd_device, MAXLINE );
+      strncat(system_call, "/etc/apt/sources.list", MAXLINE );
+
+      system(system_call);
+   }
 
 
    // get treestore and model

@@ -15,7 +15,8 @@ FLL_PACKAGES=(
        blobwars
        bloboats
        neverball
-       armagetron
+       armagetronad
+              armagetronad-dedicated
        briquolo
        gl-117
        trackballs

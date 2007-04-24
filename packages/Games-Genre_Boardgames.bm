@@ -14,7 +14,9 @@ FLL_PACKAGES=(
        eboard
               gnuchess
               gnuchess-book
+       pouetchess
        gnubg
+       xarchon
 )
 
 FLL_POST_PROCESSING=(

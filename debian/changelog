@@ -1,8 +1,14 @@
 install-meta (0.0.52) UNRELEASED; urgency=low
 
+  [ Stefan Lippers-Hollmann ]
   * NOT RELEASED YET
 
- -- Stefan Lippers-Hollmann <s.l-h@gmx.de>  Mon, 23 Apr 2007 22:51:37 +0200
+  [ Horst Tritremmel ]
+  * add non-free handling for install to hd
+  * start fix-unionfs only if available
+  * games V3 metapackages
+
+ -- Horst Tritremmel <hjt@sidux.com>  Tue, 24 Apr 2007 14:30:07 +0200
 
 install-meta (0.0.51) unstable; urgency=low
 

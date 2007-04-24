@@ -16,6 +16,8 @@ FLL_PACKAGES=(
        childsplay
               childsplay-plugins
        gcompris
+       dossizola
+       hannah
 )
 
 FLL_POST_PROCESSING=(
