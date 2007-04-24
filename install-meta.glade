@@ -898,7 +898,7 @@ or use   --dir=&lt;dir&gt;
 			  <property name="visible">True</property>
 			  <property name="label" translatable="yes">&lt;span font_desc=&quot;11&quot;&gt;&lt;b&gt;&lt;u&gt;Hints for hardware with non-free needs:&lt;/u&gt;&lt;/b&gt;
 
-sidux contains &lt;b&gt;only dfsg free software&lt;/b&gt;, so you'll probably want to add &lt;b&gt;contrib&lt;/b&gt; and &lt;b&gt;non-free &lt;/b&gt;to your 
+sidux contains &lt;b&gt;only dfsg free software&lt;/b&gt;, so you may want to add &lt;b&gt;contrib&lt;/b&gt; and &lt;b&gt;non-free &lt;/b&gt;to your 
 &lt;b&gt;/etc/apt/sources.list&lt;/b&gt;.
 
 You can add contrib and non-free sources with the button &lt;b&gt;&quot;Install non-free&quot;&lt;/b&gt;. This will add more metapackages.

@@ -1,0 +1,22 @@
+FLL_DESCRIPTION="firmware files used by the linux-wlan-ng driver"
+
+FLL_PRE_PROCESSING=(
+	"#!/bin/bash"
+	"echo \"---- in preprocessing ----\""
+	"# paste your code here (not necessary for normal install, only for preconfigs)"
+	"echo \"---- preprocessing done----\""
+)
+
+FLL_PACKAGE_DEPMODS=(
+)
+
+FLL_PACKAGES=(
+	linux-wlan-ng-firmware
+)
+
+FLL_POST_PROCESSING=(
+	"#!/bin/bash"
+	"echo \"---- in postprocessing ----\""
+	"# paste your code here (not necessary for normal install, only for preconfigs)"
+	"echo \"---- postprocessing done----\""
+)

@@ -467,7 +467,7 @@ create_window_main (void)
   gtk_widget_show (viewport1);
   gtk_container_add (GTK_CONTAINER (scrolledwindow6), viewport1);
 
-  label19 = gtk_label_new (_("<span font_desc=\"11\"><b><u>Hints for hardware with non-free needs:</u></b>\n\nsidux contains <b>only dfsg free software</b>, so you'll probably want to add <b>contrib</b> and <b>non-free </b>to your \n<b>/etc/apt/sources.list</b>.\n\nYou can add contrib and non-free sources with the button <b>\"Install non-free\"</b>. This will add more metapackages.\n\nsee non-free category </span> "));
+  label19 = gtk_label_new (_("<span font_desc=\"11\"><b><u>Hints for hardware with non-free needs:</u></b>\n\nsidux contains <b>only dfsg free software</b>, so you may want to add <b>contrib</b> and <b>non-free </b>to your \n<b>/etc/apt/sources.list</b>.\n\nYou can add contrib and non-free sources with the button <b>\"Install non-free\"</b>. This will add more metapackages.\n\nsee non-free category </span> "));
   gtk_widget_show (label19);
   gtk_container_add (GTK_CONTAINER (viewport1), label19);
   gtk_label_set_use_markup (GTK_LABEL (label19), TRUE);
