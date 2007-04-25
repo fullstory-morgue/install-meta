@@ -1,9 +1,5 @@
-install-meta (0.0.52) UNRELEASED; urgency=low
+install-meta (0.1.0) unstable; urgency=low
 
-  [ Stefan Lippers-Hollmann ]
-  * NOT RELEASED YET
-
-  [ Horst Tritremmel ]
   * add non-free handling for install to hd
   * start fix-unionfs only if available
   * games V3 metapackages
