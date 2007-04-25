@@ -1,4 +1,4 @@
-FLL_DESCRIPTION="applications for education"
+FLL_DESCRIPTION="For 3-10 years old children"
            
 
 FLL_PRE_PROCESSING=(
@@ -12,19 +12,17 @@ FLL_PACKAGE_DEPMODS=(
 )
 
 FLL_PACKAGES=(
-         kdeedu 
-         wxmaxima
-         maxima
-         gnuplot
-         kgeography
-         gcompris
-         vym
-         bibletime
-         bibletime-i18n
-         tuxtype
-         tuxmath
-         fp-compiler
-         fp-ide
+	khangman
+	gcompris
+	tuxtype
+	tuxmath
+	tuxpaint
+	childsplay
+	lmemory
+	lletters
+	gtans
+	kanagram
+	ktuberling 
 )
 
 FLL_POST_PROCESSING=(

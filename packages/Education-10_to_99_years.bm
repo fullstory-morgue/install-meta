@@ -1,0 +1,45 @@
+FLL_DESCRIPTION="education for 10-99 years old children"
+           
+
+FLL_PRE_PROCESSING=(
+	"#!/bin/bash"
+	"echo \"---- in preprocessing ----\""
+	"# paste your code here (not necessary for normal install, only for preconfigs)"
+	"echo \"---- preprocessing done----\""
+)
+
+FLL_PACKAGE_DEPMODS=(
+)
+
+FLL_PACKAGES=(
+	kdeedu 
+	wxmaxima
+	maxima
+	gnuplot
+	kgeography
+	vym
+	katomic 
+	bibletime
+	bibletime-i18n
+	fp-compiler
+	fp-ide
+	fp-units-base
+	fp-units-gfx
+	fp-utils   
+	fp-units-gtk2
+	fp-docs
+	lazarus
+	einstein
+	tipptrainer-data-de
+	tipptrainer-data-en
+	gtans
+	ksudoku
+	kanagram
+)
+
+FLL_POST_PROCESSING=(
+	"#!/bin/bash"
+	"echo \"---- in postprocessing ----\""
+	"# paste your code here (not necessary for normal install, only for preconfigs)"
+	"echo \"---- postprocessing done----\""
+)
