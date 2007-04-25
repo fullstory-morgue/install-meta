@@ -1,3 +1,9 @@
+install-meta (0.1.1) UNRELEASED; urgency=low
+
+  * NOT RELEASED YET
+
+ -- Stefan Lippers-Hollmann <s.l-h@gmx.de>  Wed, 25 Apr 2007 10:47:40 +0200
+
 install-meta (0.1.0) unstable; urgency=low
 
   * add non-free handling for install to hd
