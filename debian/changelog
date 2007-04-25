@@ -1,9 +1,5 @@
-install-meta (0.1.1) UNRELEASED; urgency=low
+install-meta (0.1.1) unstable; urgency=low
 
-  [ Stefan Lippers-Hollmann ]
-  * NOT RELEASED YET
-
-  [ Horst Tritremmel ]
   * Metapackage Education V2
 
  -- Horst Tritremmel <hjt@sidux.com>  Wed, 25 Apr 2007 21:08:01 +0200
