@@ -3,3 +3,4 @@
 pixmaps/*.png			usr/share/pixmaps/
 packages/*.bm			usr/share/install-meta/
 packages/packages.d/*.bm	usr/share/install-meta/packages.d/
+icons				usr/share/
