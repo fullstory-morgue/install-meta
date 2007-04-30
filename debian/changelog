@@ -1,3 +1,9 @@
+install-meta (0.1.5) UNRELEASED; urgency=low
+
+  * NOT RELEASED YET
+
+ -- Stefan Lippers-Hollmann <s.l-h@gmx.de>  Mon, 30 Apr 2007 02:50:58 +0200
+
 install-meta (0.1.4) unstable; urgency=low
 
   * really install icons where they belong.
