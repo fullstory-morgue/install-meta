@@ -18,9 +18,8 @@ FLL_PACKAGES=(
        freeciv-client-gtk
        bzflag
               bzflag-server
-       scorched3d
-              scorched3d-doc
        netpanzer
+       glob2
 )
 
 FLL_POST_PROCESSING=(

@@ -12,6 +12,8 @@ FLL_PACKAGE_DEPMODS=(
 )
 
 FLL_PACKAGES=(
+	gnuchess
+	gnucap
 	khangman
 	gcompris
 	tuxtype
@@ -22,7 +24,7 @@ FLL_PACKAGES=(
 	lletters
 	gtans
 	kanagram
-	ktuberling 
+	ktuberling
 )
 
 FLL_POST_PROCESSING=(
