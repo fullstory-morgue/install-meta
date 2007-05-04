@@ -1,3 +1,9 @@
+install-meta (0.1.6) UNRELEASED; urgency=low
+
+  * NOT RELEASED YET
+
+ -- Stefan Lippers-Hollmann <s.l-h@gmx.de>  Fri, 04 May 2007 18:09:33 +0200
+
 install-meta (0.1.5) unstable; urgency=low
 
   * new/update metapackages
