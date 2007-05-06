@@ -1,9 +1,5 @@
-install-meta (0.1.6) UNRELEASED; urgency=low
+install-meta (0.1.6) unstable; urgency=low
 
-  [ Stefan Lippers-Hollmann ]
-  * NOT RELEASED YET
-
-  [ Joaquim Boura ]
   * use new icon
 
  -- Joaquim Boura <x-un-i@sidux.com>  Sun, 06 May 2007 21:14:44 +0200
