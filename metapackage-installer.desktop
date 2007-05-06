@@ -2,7 +2,7 @@
 Encoding=UTF-8
 Type=Application
 Exec=su-me /usr/sbin/metapackage-installer
-Icon=sidux
+Icon=sidux-meta
 Name=metapackage-installer
 Name[de]=metapackage-installer
 Categories=sidux
