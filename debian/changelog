@@ -1,8 +1,12 @@
 install-meta (0.1.7) UNRELEASED; urgency=low
 
+  [ Stefan Lippers-Hollmann ]
   * NOT RELEASED YET
 
- -- Stefan Lippers-Hollmann <s.l-h@gmx.de>  Mon, 07 May 2007 01:46:39 +0200
+  [ Horst Tritremmel ]
+  * new meta icon fix 
+
+ -- Horst Tritremmel <hjt@sidux.com>  Mon, 07 May 2007 10:28:41 +0200
 
 install-meta (0.1.6) unstable; urgency=low
 
