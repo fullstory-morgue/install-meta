@@ -12,19 +12,20 @@ FLL_PACKAGE_DEPMODS=(
 )
 
 FLL_PACKAGES=(
-         epiphany-browser
-         epiphany-extensions
-         sylpheed
-         graveman
-         scite
-         xine-ui
-         gimageview
-         xpaint
-         thunar
-         thunar-archive-plugin
-         file-roller 
-         filezilla
-         xfce4-terminal  
+	epiphany-browser
+	epiphany-extensions
+	sylpheed
+	graveman
+	scite
+	xine-ui
+	gimageview
+	xpaint
+	thunar
+	thunar-archive-plugin
+	file-roller
+	filezilla
+	xfce4-terminal
+	xpdf
 )
 
 FLL_POST_PROCESSING=(

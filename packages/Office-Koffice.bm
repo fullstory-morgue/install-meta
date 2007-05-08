@@ -11,19 +11,7 @@ FLL_PACKAGE_DEPMODS=(
 )
 
 FLL_PACKAGES=(
-        kchart
-        kexi-mdb-plugin
-        kformula
-        koffice
-        koffice-data
-        koffice-dbg
-        koffice-dev
-        koffice-doc
-        koffice-doc-html
-        koffice-libs
-        koshell
-        krita
-        libkscan1
+	koffice
 )
 
 FLL_POST_PROCESSING=(

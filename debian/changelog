@@ -1,8 +1,13 @@
 install-meta (0.1.10) UNRELEASED; urgency=low
 
+  [ Stefan Lippers-Hollmann ]
   * NOT RELEASED YET
 
- -- Stefan Lippers-Hollmann <s.l-h@gmx.de>  Tue, 08 May 2007 12:31:33 +0200
+  [ Horst Tritremmel ]
+  * update packages
+  * not resizeable
+
+ -- Horst Tritremmel <hjt@sidux.com>  Tue, 08 May 2007 14:21:13 +0200
 
 install-meta (0.1.9) unstable; urgency=low
 

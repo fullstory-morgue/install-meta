@@ -1,4 +1,4 @@
-FLL_DESCRIPTION="Applications and fonts for doing sound studies or phonetics"
+FLL_DESCRIPTION="Applications and fonts for doing phonetics"
 
 FLL_PRE_PROCESSING=(
 	"#!/bin/bash"
@@ -11,14 +11,13 @@ FLL_PACKAGE_DEPMODS=(
 )
 
 FLL_PACKAGES=(
-       praat
-       tipa
-              tipa-doc
-       transcriber
-       audacity
-       xfonts-tipa
-       xfonts-intl-phonetic
-       ttf-thryomanes
+	praat
+	tipa
+	tipa-doc
+	transcriber
+	xfonts-tipa
+	xfonts-intl-phonetic
+	ttf-thryomanes
 )
 
 FLL_POST_PROCESSING=(

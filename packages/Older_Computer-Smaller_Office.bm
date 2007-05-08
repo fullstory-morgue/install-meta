@@ -12,8 +12,8 @@ FLL_PACKAGE_DEPMODS=(
 
 FLL_PACKAGES=(
 	abiword
-        gnumeric
-        dia
+	gnumeric
+	dia
 )
 
 FLL_POST_PROCESSING=(

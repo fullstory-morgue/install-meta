@@ -336,6 +336,7 @@ create_window_main (void)
 
   window_main = gtk_window_new (GTK_WINDOW_TOPLEVEL);
   gtk_window_set_title (GTK_WINDOW (window_main), _("Install metapackages"));
+  gtk_window_set_resizable (GTK_WINDOW (window_main), FALSE);
   window_main_icon_pixbuf = create_pixbuf ("sidux-meta.png");
   if (window_main_icon_pixbuf)
     {
