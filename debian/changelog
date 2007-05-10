@@ -1,9 +1,5 @@
-install-meta (0.1.10) UNRELEASED; urgency=low
+install-meta (0.1.10) unstable; urgency=low
 
-  [ Stefan Lippers-Hollmann ]
-  * NOT RELEASED YET
-
-  [ Horst Tritremmel ]
   * update packages
   * not resizeable
   * change sidux.jpg to sidux.png 
