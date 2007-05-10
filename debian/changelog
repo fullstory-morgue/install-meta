@@ -6,8 +6,9 @@ install-meta (0.1.10) UNRELEASED; urgency=low
   [ Horst Tritremmel ]
   * update packages
   * not resizeable
+  * change sidux.jpg to sidux.png 
 
- -- Horst Tritremmel <hjt@sidux.com>  Tue, 08 May 2007 14:21:13 +0200
+ -- Horst Tritremmel <hjt@sidux.com>  Thu, 10 May 2007 12:59:34 +0200
 
 install-meta (0.1.9) unstable; urgency=low
 

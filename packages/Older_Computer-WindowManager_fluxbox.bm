@@ -24,6 +24,6 @@ FLL_PACKAGES=(
 FLL_POST_PROCESSING=(
 	"#!/bin/bash"
 	"echo \"---- in postprocessing ----\""
-	"perl -pi -e \"s% fbsetroot .*%fbsetbg /usr/share/wallpapers/sidux.jpg%\" /usr/share/fluxbox/styles/Meta"
+	"echo 'DesktopBackgroundImage=/usr/share/wallpapers/sidux.png'>>/usr/share/icewm/preferences"
 	"echo \"---- postprocessing done----\""
 )

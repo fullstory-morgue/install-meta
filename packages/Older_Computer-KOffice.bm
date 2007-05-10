@@ -17,6 +17,6 @@ FLL_PACKAGES=(
 FLL_POST_PROCESSING=(
    "#!/bin/bash"
    "echo \"---- in postprocessing ----\""
-   "echo 'DesktopBackgroundImage=/usr/share/wallpapers/sidux.jpg'>>/usr/share/icewm/preferences"
+   "# paste your code here (not necessary for normal install, only for preconfigs)"
    "echo \"---- postprocessing done----\""
 ) 
