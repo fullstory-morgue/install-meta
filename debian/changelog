@@ -1,9 +1,5 @@
-install-meta (0.1.11) UNRELEASED; urgency=low
+install-meta (0.1.11) unstable; urgency=low
 
-  [ Stefan Lippers-Hollmann ]
-  * NOT RELEASED YET
-
-  [ Horst Tritremmel ]
   * add a warning label
 
  -- Horst Tritremmel <hjt@sidux.com>  Fri, 11 May 2007 22:35:35 +0200
