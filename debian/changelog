@@ -1,3 +1,9 @@
+install-meta (0.1.12) UNRELEASED; urgency=low
+
+  * NOT RELEASED YET
+
+ -- Stefan Lippers-Hollmann <s.l-h@gmx.de>  Fri, 11 May 2007 23:48:25 +0200
+
 install-meta (0.1.11) unstable; urgency=low
 
   * add a warning label
