@@ -1,9 +1,9 @@
-install-meta (0.1.12) UNRELEASED; urgency=low
+install-meta (0.1.12) unstable; urgency=low
 
-  * NOT RELEASED YET
   * fix the maintainer mail address.
+  * remove obsolete fix-unionfs functionality.
 
- -- Stefan Lippers-Hollmann <s.l-h@gmx.de>  Sat, 12 May 2007 00:00:44 +0200
+ -- Stefan Lippers-Hollmann <s.l-h@gmx.de>  Tue, 15 May 2007 13:21:38 +0200
 
 install-meta (0.1.11) unstable; urgency=low
 
