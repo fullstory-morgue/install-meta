@@ -623,7 +623,7 @@ on_button_install_clicked              (GtkButton       *button,
        printf( "The file %s was not opened\n", temp_file_aptgetcall_sh);
    else {
        //  create the bash file for install the packages
-       fprintf( temp_file_aptgetcall_sh_fd, "%s\n%s\n%s\n%s\n%s%s\n%s\n%s%s%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s%s%s%s%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s%s%s%s%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s%s%s\n%s\n%s\n",
+       fprintf( temp_file_aptgetcall_sh_fd, "%s\n%s\n%s\n%s%s\n%s\n%s%s%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s%s%s%s%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s%s%s%s%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s%s%s\n%s\n%s\n",
                "#!/bin/bash",
                is_chroot,
                "apt-get update",

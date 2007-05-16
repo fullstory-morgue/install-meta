@@ -1,8 +1,12 @@
 install-meta (0.1.13) UNRELEASED; urgency=low
 
+  [ Stefan Lippers-Hollmann ]
   * NOT RELEASED YET
 
- -- Stefan Lippers-Hollmann <s.l-h@gmx.de>  Tue, 15 May 2007 13:24:04 +0200
+  [ Horst Tritremmel ]
+  * delete a %s\n for fprintf 
+
+ -- Horst Tritremmel <hjt@sidux.com>  Wed, 16 May 2007 21:08:01 +0200
 
 install-meta (0.1.12) unstable; urgency=low
 
