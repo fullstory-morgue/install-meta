@@ -1,9 +1,5 @@
-install-meta (0.1.15) UNRELEASED; urgency=low
+install-meta (0.1.15) unstable; urgency=low
 
-  [ Stefan Lippers-Hollmann ]
-  * NOT RELEASED YET
-
-  [ Horst Tritremmel ]
   * new iwlwifi package
   * new ipw3945:  Reverting back from iwlwifi-ucode
 
