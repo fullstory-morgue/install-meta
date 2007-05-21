@@ -1,8 +1,12 @@
 install-meta (0.1.14) UNRELEASED; urgency=low
 
+  [ Stefan Lippers-Hollmann ]
   * NOT RELEASED YET
 
- -- Stefan Lippers-Hollmann <s.l-h@gmx.de>  Wed, 16 May 2007 22:02:28 +0200
+  [ Horst Tritremmel ]
+  * Croatian Language Pack update
+
+ -- Horst Tritremmel <hjt@sidux.com>  Mon, 21 May 2007 15:24:20 +0200
 
 install-meta (0.1.13) unstable; urgency=low
 

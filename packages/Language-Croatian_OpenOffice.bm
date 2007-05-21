@@ -1,4 +1,4 @@
-FLL_DESCRIPTION="Croatian Language Meta-Package for sidux."
+FLL_DESCRIPTION="Croatian OpenOffice Language Meta-Package for sidux."
 
 FLL_PRE_PROCESSING=(
 	"#!/bin/bash"
@@ -11,10 +11,9 @@ FLL_PACKAGE_DEPMODS=(
 )
 
 FLL_PACKAGES=(
-      kde-i18n-hr
-      aspell-hr
-      myspell-hr
-      
+
+      openoffice.org-l10n-hr
+
 )
 
 FLL_POST_PROCESSING=(
