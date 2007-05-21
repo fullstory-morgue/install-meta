@@ -1,0 +1,25 @@
+FLL_DESCRIPTION="Binary firmware for IPW3945, Reverting back from iwlwifi-ucode"
+
+FLL_PRE_PROCESSING=(
+	"#!/bin/bash"
+	"echo \"---- in preprocessing ----\""
+	"# paste your code here (not necessary for normal install, only for preconfigs)"
+	"echo \"---- preprocessing done----\""
+)
+
+FLL_PACKAGE_DEPMODS=(
+)
+
+FLL_PACKAGES=(
+	ipw3945d
+	firmware-ipw3945
+)
+
+FLL_POST_PROCESSING=(
+	"#!/bin/bash"
+	"echo \"---- in postprocessing ----\""
+	"echo \"blacklist iwlwifi\" > /etc/modprobe.d/mac80211"
+	"update-rc.d ipw3945d start 39 S . start 36 0 6 ."
+	"LANG= m-a a-i --text-mode ipw3945-source"
+	"echo \"---- postprocessing done----\""
+)
