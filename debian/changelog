@@ -1,9 +1,5 @@
-install-meta (0.1.16) UNRELEASED; urgency=low
+install-meta (0.1.16) unstable; urgency=low
 
-  [ Stefan Lippers-Hollmann ]
-  * NOT RELEASED YET
-
-  [ Horst Tritremmel ]
   * make window smaller for 800x600 res
 
  -- Horst Tritremmel <hjt@sidux.com>  Wed, 30 May 2007 09:40:51 +0200
