@@ -1,3 +1,9 @@
+install-meta (0.1.17) UNRELEASED; urgency=low
+
+  * NOT RELEASED YET
+
+ -- Stefan Lippers-Hollmann <s.l-h@gmx.de>  Tue, 05 Jun 2007 14:16:21 +0200
+
 install-meta (0.1.16) unstable; urgency=low
 
   * make window smaller for 800x600 res
