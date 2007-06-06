@@ -1,8 +1,12 @@
 install-meta (0.1.17) UNRELEASED; urgency=low
 
+  [ Stefan Lippers-Hollmann ]
   * NOT RELEASED YET
 
- -- Stefan Lippers-Hollmann <s.l-h@gmx.de>  Tue, 05 Jun 2007 14:16:21 +0200
+  [ Horst Tritremmel ]
+  * Games and Non-free_Games update
+
+ -- Horst Tritremmel <hjt@sidux.com>  Wed, 06 Jun 2007 23:56:32 +0200
 
 install-meta (0.1.16) unstable; urgency=low
 

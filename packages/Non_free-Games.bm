@@ -10,13 +10,11 @@ FLL_PACKAGE_DEPMODS=(
 )
 
 FLL_PACKAGES=(
-	sauerbraten
-	sauerbraten-server
-	tremulous
-	tremulous-server
-	tremulous-doc
-	oolite
-	oolite-data
+     sauerbraten
+            sauerbraten-server
+     tremulous
+            tremulous-server
+            tremulous-doc
 )
 
 FLL_POST_PROCESSING=(
