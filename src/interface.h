@@ -3,6 +3,5 @@
  */
 
 GtkWidget* create_dialog1 (void);
-GtkWidget* create_dialog2 (void);
 GtkWidget* create_package_info (void);
 GtkWidget* create_window_main (void);

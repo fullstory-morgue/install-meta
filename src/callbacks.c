@@ -28,6 +28,7 @@ char APT_GET_CALL[MAXLINE];
 char CHROOT[MAXLINE];  // = extern variable argv[1] in main.c
 char temp_file_packagelist[STDLINE];
 char *target_mnt_point, *hd_device, *ptr_chroot;
+int  do_it_at_first_time = 0;
 
 
 enum
@@ -508,16 +509,9 @@ if_exit (GtkWidget *widget)
 
       system(system_call);
 
-      // hide the main window
-      GtkWidget *window_main = lookup_widget(GTK_WIDGET(widget),"window_main");
-      gtk_widget_hide ( GTK_WIDGET (window_main) ); 
-
-      // show the dialog window
-      GtkWidget *dialog2 = create_dialog2 ();
-      gtk_widget_show (dialog2);
    }
-   else
-      gtk_main_quit();
+
+   gtk_main_quit();
 }
 
 
@@ -553,13 +547,20 @@ on_button_install_clicked              (GtkButton       *button,
                                         gpointer         user_data)
 {
    FILE* temp_file_aptgetcall_sh_fd;
-   char temp_file_aptgetcall_sh[STDLINE], is_chroot[STDLINE];
+   char temp_file_aptgetcall_sh[STDLINE], is_chroot[STDLINE], system_call[MAXLINE];
    int fd;
+
+
+   // hide the main window after gparted has done
+   GtkWidget *window_main = lookup_widget(GTK_WIDGET(button),"window_main");
+   gtk_widget_hide ( GTK_WIDGET (window_main) );
+   while (gtk_events_pending ())
+          gtk_main_iteration ();
+
 
    // read the treeview1 (mountpoint) list
    GtkWidget *treeview1 = lookup_widget (GTK_WIDGET (button), "treeview1");
    GtkTreeModel *model = gtk_tree_view_get_model (GTK_TREE_VIEW(treeview1));
-   char system_call[MAXLINE];
 
 
    //  create selected package list tempfile
@@ -688,7 +689,6 @@ on_button_install_clicked              (GtkButton       *button,
    unlink(temp_file_aptgetcall_sh);
 
    // show the main window
-   GtkWidget *window_main = lookup_widget(GTK_WIDGET(button),"window_main");
    gtk_widget_show ( GTK_WIDGET (window_main) );
 }
 
@@ -903,6 +903,11 @@ void
 on_window_main_show                    (GtkWidget       *widget,
                                         gpointer         user_data)
 {
+
+ if( do_it_at_first_time < 1 ) {
+
+   do_it_at_first_time = 1;  // only at start
+
    char *ptr_option, *ptr_confdir;
    GtkWidget *label, *treeview1;
    GtkTreeStore *model;
@@ -999,6 +1004,8 @@ on_window_main_show                    (GtkWidget       *widget,
 
    // append to treestore
    append_data_to_tree_store  (GTK_WIDGET (widget));
+
+ }
 }
 
 

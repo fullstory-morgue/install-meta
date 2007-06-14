@@ -41,14 +41,6 @@ main (int argc, char *argv[])
   //programm option handling
   for (r=1; r<argc; r++)
   {
-       // show only the dialog window Installation successful
-       if ( strncmp( argv[r], "-q", 2 )  == 0 ) {
-            GtkWidget *dialog2 = create_dialog2 ();
-            gtk_widget_show (dialog2);
-
-            gtk_main ();
-            return 0;
-       }
 
        // directory from the *.bm metapackage files
        if ( strncmp( argv[r], "--dir=/", 7 )  == 0 )

@@ -1,10 +1,15 @@
 install-meta (0.1.18) UNRELEASED; urgency=low
 
+  [ Stefan Lippers-Hollmann ]
   * NOT RELEASED YET
   * do not advocate partimage as recovery tool, it is utterly broken crap and
     mustn't be used.
 
- -- Stefan Lippers-Hollmann <s.l-h@gmx.de>  Sun, 10 Jun 2007 20:32:01 +0200
+  [ Horst Tritremmel ]
+  * hide/show main window if installation is clicked 
+  * end dialog window removed, this handles install-meta
+
+ -- Horst Tritremmel <hjt@sidux.com>  Thu, 14 Jun 2007 15:29:01 +0200
 
 install-meta (0.1.17) unstable; urgency=low
 
