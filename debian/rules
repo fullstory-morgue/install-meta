@@ -60,6 +60,12 @@ install: build
 	$(MAKE) DESTDIR=$(CURDIR)/debian/install-meta install
 	DESTDIR=$(CURDIR)/debian/install-meta po/make_po.sh install-meta.mo
 
+	mkdir -p debian/install-meta/usr/share/pixmaps
+	convert icons/hicolor/32x32/apps/sidux-meta.png \
+		debian/install-meta/usr/share/pixmaps/install-meta.xpm
+	convert icons/hicolor/16x16/apps/sidux-meta.png \
+		debian/install-meta/usr/share/pixmaps/install-meta-16.xpm
+
 # Build architecture-independent files here.
 binary-indep: build install
 # We have nothing to do by default.

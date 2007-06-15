@@ -1,0 +1,7 @@
+?package(install-meta):needs="X11" \
+	section="Apps/System" \
+	hints="sidux,Config" \
+	title="metapackage-installer" \
+	icon32x32="/usr/share/pixmaps/install-meta.xpm" \
+	icon16x16="/usr/share/pixmaps/install-meta-16.xpm" \
+	command="su-to-root -X -c /usr/sbin/metapackage-installer"

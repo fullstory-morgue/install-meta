@@ -1,8 +1,8 @@
 install-meta (0.1.20) UNRELEASED; urgency=low
 
-  * NOT RELEASED YET
+  * Add debian menu entry. Build-Depend on imagemagick.
 
- -- Stefan Lippers-Hollmann <s.l-h@gmx.de>  Fri, 15 Jun 2007 15:39:47 +0200
+ -- Kel Modderman <kel@otaku42.de>  Sat, 16 Jun 2007 09:39:05 +1000
 
 install-meta (0.1.19) unstable; urgency=low
 
