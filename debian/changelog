@@ -1,9 +1,5 @@
-install-meta (0.1.19) UNRELEASED; urgency=low
+install-meta (0.1.19) unstable; urgency=low
 
-  [ Stefan Lippers-Hollmann ]
-  * NOT RELEASED YET
-
-  [ Horst Tritremmel ]
   * Polish language packages added
 
  -- Horst Tritremmel <hjt@sidux.com>  Fri, 15 Jun 2007 08:48:21 +0200
