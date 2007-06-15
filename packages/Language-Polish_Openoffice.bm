@@ -1,0 +1,25 @@
+FLL_DESCRIPTION="Packages  openoffice.org-l10n-pl,  openoffice.org-hyphenation-pl, openoffice.org-thesaurus-pl"
+
+FLL_PRE_PROCESSING=(
+	"#!/bin/bash"
+	"echo \"---- in preprocessing ----\""
+	"# paste your code here (not necessary for normal install, only for preconfigs)"
+	"echo \"---- preprocessing done----\""
+)
+
+FLL_PACKAGE_DEPMODS=(
+)
+
+FLL_PACKAGES=(
+	openoffice.org-l10n-pl
+	openoffice.org-hyphenation-pl
+	openoffice.org-thesaurus-pl
+	
+)
+
+FLL_POST_PROCESSING=(
+	"#!/bin/bash"
+	"echo \"---- in postprocessing ----\""
+	"# paste your code here (not necessary for normal install, only for preconfigs)"
+	"echo \"---- postprocessing done----\""
+)

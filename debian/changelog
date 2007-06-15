@@ -1,8 +1,12 @@
 install-meta (0.1.19) UNRELEASED; urgency=low
 
+  [ Stefan Lippers-Hollmann ]
   * NOT RELEASED YET
 
- -- Stefan Lippers-Hollmann <s.l-h@gmx.de>  Thu, 14 Jun 2007 16:50:10 +0200
+  [ Horst Tritremmel ]
+  * Polish language packages added
+
+ -- Horst Tritremmel <hjt@sidux.com>  Fri, 15 Jun 2007 08:48:21 +0200
 
 install-meta (0.1.18) unstable; urgency=low
 
