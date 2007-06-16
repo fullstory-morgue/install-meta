@@ -1,4 +1,4 @@
-install-meta (0.1.20) UNRELEASED; urgency=low
+install-meta (0.1.20) unstable; urgency=low
 
   * Add debian menu entry. Build-Depend on imagemagick.
 
