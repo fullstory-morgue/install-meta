@@ -1,3 +1,9 @@
+install-meta (0.1.22) UNRELEASED; urgency=low
+
+  * NOT RELEASED YET
+
+ -- Stefan Lippers-Hollmann <s.l-h@gmx.de>  Wed, 20 Jun 2007 20:43:40 +0200
+
 install-meta (0.1.21) unstable; urgency=low
 
   * show only firmwarepackages if install-gui starts install-meta 
