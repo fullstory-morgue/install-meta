@@ -265,6 +265,8 @@ enum
 void search_metapackages_names()
 {
 
+   char which_packages[80];
+
     // put the search_metapackages_names in a tempfile
    FILE *temp_create_package_list_at_start_fd;
    int fd;
@@ -295,15 +297,23 @@ void search_metapackages_names()
       printf( "The file %s was not opened\n", temp_create_package_list_sh);
    else
    {
+      // show only firmware if install-gui starts install-meta
+      if ( strlen(CHROOT) > 0 && strcmp( ptr_chroot, "--chroot" )  == 0 ) {
+           strncpy(which_packages, "list=\"\" || list=\"$(ls Non_free-Firmware*.bm)\"", 80);
+      }
+      else {
+           strncpy(which_packages, "list=\"$(ls *.bm|grep -v ^Non_free)\" || list=\"$(ls *.bm)\"", 80);
+      }
+
       // build the script who creates the packagelist
-     fprintf( temp_create_package_list_at_start_fd, "%s\n%s\n%s\n%s\n%s%s\n%s%s\n%s\n%s\n%s\n%s\n%s%s\n", 
+      fprintf( temp_create_package_list_at_start_fd, "%s\n%s\n%s\n%s\n%s%s\n%s%s\n%s\n%s\n%s\n%s\n%s%s\n", 
                "#!/bin/bash",
                "set -e",
                "DPKG_ARCH=$(dpkg --print-installation-architecture)",
                "source /etc/default/distro",
                "cd ", INSTALL_PACKAGES_CONF_DIR,
                "[ -z \"$(grep deb\\ .*debian\\.org.*main.*contrib /etc/apt/sources.list)\" ] && ",
-               "list=\"$(ls *.bm|grep -v ^Non_free)\" || list=\"$(ls *.bm)\"",
+               which_packages,
                "for modul in ${list}; do",
                "   source ${modul}",
                "   echo $(echo ${modul} | cut -d. -f1)~${FLL_DESCRIPTION}",
@@ -497,7 +507,7 @@ if_exit (GtkWidget *widget)
    // install successful dialog
    if ( strlen(CHROOT) > 0 && strcmp( ptr_chroot, "--chroot" )  == 0 ) {
 
-      // umount for knx-installer
+      // umount for fll-installer
       strncpy(system_call, "#!/bin/bash\n", MAXLINE );
       strncat(system_call, "mounted=$(mount |grep \"hdinstall/\" |awk '{print $1}')\n", MAXLINE );
       strncat(system_call, "if [ -n \"$mounted\" ]; then\n", MAXLINE );
@@ -909,13 +919,10 @@ on_window_main_show                    (GtkWidget       *widget,
    do_it_at_first_time = 1;  // only at start
 
    char *ptr_option, *ptr_confdir;
-   GtkWidget *label, *treeview1;
+   GtkWidget *treeview1;
    GtkTreeStore *model;
    GtkCellRenderer *toggle, *pixrenderer, *cell, *cell2;
    GtkTreeViewColumn *mointpoint, *fs, *pixm, *device;
-   PangoFontDescription *font_desc;
-   GdkColor color;
-
 
    // handle the system call options
    ptr_chroot = strtok(CHROOT, "=");
@@ -991,19 +998,17 @@ on_window_main_show                    (GtkWidget       *widget,
    }
 
 
-  /* ============================================================= *
-   *           Label sets, font, color, etc.                       *
-   * ============================================================= */
-   label = lookup_widget ( GTK_WIDGET (widget), "label_install");
-   gdk_color_parse ("darkred", &color);
-   gtk_widget_modify_fg ( GTK_WIDGET(label), GTK_STATE_NORMAL, &color);
-   font_desc = pango_font_description_from_string ("16");
-   gtk_widget_modify_font ( GTK_WIDGET(label), font_desc);
-   pango_font_description_free (font_desc);
-
 
    // append to treestore
    append_data_to_tree_store  (GTK_WIDGET (widget));
+
+   // switch to tab non-free if install-gui starts install-meta
+   if ( strlen(CHROOT) > 0 && strcmp( ptr_chroot, "--chroot" )  == 0 ) {
+       GtkWidget *notebook1 = lookup_widget (GTK_WIDGET (widget), "notebook1");
+       gtk_notebook_next_page ( GTK_NOTEBOOK(notebook1) );
+       //gtk_notebook_set_current_page( GTK_NOTEBOOK(notebook1) 2 );
+   }
+
 
  }
 }
@@ -1090,6 +1095,9 @@ on_button_nonfree_clicked              (GtkButton       *button,
 
    // append new data to treestore
    append_data_to_tree_store  (GTK_WIDGET (button));
+
+   GtkWidget *notebook1 = lookup_widget (GTK_WIDGET (button), "notebook1");
+   gtk_notebook_prev_page ( GTK_NOTEBOOK(notebook1) );
 
 
 }

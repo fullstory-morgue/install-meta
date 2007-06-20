@@ -1,8 +1,12 @@
 install-meta (0.1.21) UNRELEASED; urgency=low
 
+  [ Stefan Lippers-Hollmann ]
   * NOT RELEASED YET
 
- -- Stefan Lippers-Hollmann <s.l-h@gmx.de>  Sat, 16 Jun 2007 03:38:56 +0200
+  [ Horst Tritremmel ]
+  * show only firmwarepackages if install-gui starts install-meta 
+
+ -- Horst Tritremmel <hjt@sidux.com>  Wed, 20 Jun 2007 12:21:59 +0200
 
 install-meta (0.1.20) unstable; urgency=low
 
