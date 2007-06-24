@@ -1,4 +1,4 @@
-FLL_DESCRIPTION="Education for 3-10 years old children"
+FLL_DESCRIPTION="Education for young programmers"
 
 FLL_PRE_PROCESSING=(
 	"#!/bin/bash"
@@ -11,19 +11,29 @@ FLL_PACKAGE_DEPMODS=(
 )
 
 FLL_PACKAGES=(
-	khangman
-	gcompris
-	gnuchess
-	gnucap
-	tuxtype
-	tuxmath
-	tuxpaint
-	childsplay
-	lmemory
-	lletters
-	gtans
-	kanagram
-	ktuberling
+	fp-compiler
+	fp-ide
+	fp-units-base
+	fp-units-gfx
+	fp-utils
+	fp-units-gtk2
+	fp-docs
+	lazarus
+	gambas
+	quanta
+	quanta-data
+	sun-java6-bin 
+	sun-java6-demo 
+	sun-java6-fonts 
+	sun-java6-jdk
+	sun-java6-jre 
+	sun-java6-plugin 
+	sun-java6-source 
+	eclipse
+	bwbasic
+	ktechlab
+	klogic
+	kturtle
 )
 
 FLL_POST_PROCESSING=(

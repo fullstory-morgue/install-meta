@@ -1,5 +1,4 @@
-FLL_DESCRIPTION="education for 10-99 years old children"
-           
+FLL_DESCRIPTION="Education for 10-99 years old children"
 
 FLL_PRE_PROCESSING=(
 	"#!/bin/bash"
@@ -12,29 +11,22 @@ FLL_PACKAGE_DEPMODS=(
 )
 
 FLL_PACKAGES=(
-	kdeedu 
+	kdeedu
 	wxmaxima
 	maxima
 	gnuplot
 	kgeography
 	vym
-	katomic 
+	katomic
 	bibletime
 	bibletime-i18n
-	fp-compiler
-	fp-ide
-	fp-units-base
-	fp-units-gfx
-	fp-utils   
-	fp-units-gtk2
-	fp-docs
-	lazarus
 	einstein
 	tipptrainer-data-de
 	tipptrainer-data-en
 	gtans
 	ksudoku
 	kanagram
+	mysql-client
 )
 
 FLL_POST_PROCESSING=(

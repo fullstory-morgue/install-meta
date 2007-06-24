@@ -1,4 +1,4 @@
-FLL_DESCRIPTION="Education for 3-10 years old children"
+FLL_DESCRIPTION="Server for school"
 
 FLL_PRE_PROCESSING=(
 	"#!/bin/bash"
@@ -11,19 +11,21 @@ FLL_PACKAGE_DEPMODS=(
 )
 
 FLL_PACKAGES=(
-	khangman
-	gcompris
-	gnuchess
-	gnucap
-	tuxtype
-	tuxmath
-	tuxpaint
-	childsplay
-	lmemory
-	lletters
-	gtans
-	kanagram
-	ktuberling
+	phpmyadmin
+	php5
+	apache2
+	apache2-utils
+	mysql-server
+	mysql-client
+	mysql-admin
+	mysql-navigator
+	mysql-query-browser
+	squid
+	squid-cgi
+	squidclient
+	squid-common
+	squid-prefetch
+	squidguard
 )
 
 FLL_POST_PROCESSING=(
