@@ -1,10 +1,15 @@
 install-meta (0.1.24) UNRELEASED; urgency=low
 
+  [ Stefan Lippers-Hollmann ]
   * NOT RELEASED YET
   * Education-3_to_10_years.bm and Education-10_to_99_years.bm shouldn't be
     executable.
 
- -- Stefan Lippers-Hollmann <s.l-h@gmx.de>  Wed, 27 Jun 2007 02:50:44 +0200
+  [ Horst Tritremmel ]
+  * Fix in apt-cache show line
+  * Older computer packages update
+
+ -- Horst Tritremmel <hjt@sidux.com>  Wed, 27 Jun 2007 16:43:24 +0200
 
 install-meta (0.1.23) unstable; urgency=low
 

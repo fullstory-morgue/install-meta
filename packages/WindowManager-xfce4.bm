@@ -1,4 +1,4 @@
-FLL_DESCRIPTION="xfce4 with kde-lite"
+FLL_DESCRIPTION="xfce4 with KDE-lite"
 
 FLL_PRE_PROCESSING=(
 	"#!/bin/bash"

@@ -1,4 +1,4 @@
-FLL_DESCRIPTION="IceWM with kde-lite"
+FLL_DESCRIPTION="IceWM with KDE-lite"
 
 FLL_PRE_PROCESSING=(
 	"#!/bin/bash"
@@ -14,13 +14,31 @@ FLL_PACKAGES=(
 	icewm
 	icewm-common
 	icewm-themes
+	icewm-gnome-support
 	icemc
-	rox-filer
+	idesk
 )
 
 FLL_POST_PROCESSING=(
 	"#!/bin/bash"
 	"echo \"---- in postprocessing ----\""
 	"echo 'DesktopBackgroundImage=/usr/share/wallpapers/sidux.png'>>/usr/share/icewm/preferences"
-	"echo \"---- postprocessing done----\""
-) 
+#	"for i in \$(ls /home); do"
+#	"	printf \"========================\ncd /home/\${i}\n========================\n\""
+#	"	mkdir /home/\${i}/.icewm"
+#	"	mkdir /home/\${i}/.icewm/taskbar"
+#	"	cp /usr/share/install-meta/keys /home/\${i}/.icewm"
+#	"	cp /usr/share/install-meta/theme /home/\${i}/.icewm"
+#	"	cp /usr/share/install-meta/toolbar /home/\${i}/.icewm"
+#	"	cp /usr/share/install-meta/preferences /home/\${i}/.icewm"
+#	"	cp /usr/share/install-meta/menu /home/\${i}/.icewm"
+#	"	cp /usr/share/install-meta/startup /home/\${i}/.icewm"
+#	"	cp /usr/share/install-meta/.ideskrc /home/\${i}"
+#	"	cp /usr/share/install-meta/taskbar/*.* /home/\${i}/.icewm/taskbar"
+#	"	mkdir /home/\${i}/.idesktop"
+#	"	cp /usr/share/install-meta/siduxchat.Ink /home/\${i}/.idesktop"
+#	"	cp /usr/share/install-meta/trash.ink.Ink /home/\${i}/.idesktop"
+#	"	cp /usr/share/install-meta/home.Ink /home/\${i}/.idesktop"
+#	"done"
+)
+

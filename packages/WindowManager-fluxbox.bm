@@ -1,4 +1,4 @@
-FLL_DESCRIPTION="fluxbox with kde-lite"
+FLL_DESCRIPTION="fluxbox with KDE-lite"
 
 FLL_PRE_PROCESSING=(
 	"#!/bin/bash"

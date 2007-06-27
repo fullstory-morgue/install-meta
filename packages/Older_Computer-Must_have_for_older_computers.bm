@@ -1,5 +1,4 @@
-FLL_DESCRIPTION="Must_have_for_older_computers"
-           
+FLL_DESCRIPTION="Must have for older computers"
 
 FLL_PRE_PROCESSING=(
 	"#!/bin/bash"
@@ -15,10 +14,12 @@ FLL_PACKAGES=(
 	epiphany-browser
 	epiphany-extensions
 	sylpheed
+	sylpheed-i18n
 	graveman
 	scite
 	xine-ui
-	gimageview
+	albumshaper
+	gqview
 	xpaint
 	thunar
 	thunar-archive-plugin
@@ -26,11 +27,12 @@ FLL_PACKAGES=(
 	filezilla
 	xfce4-terminal
 	xpdf
+	xpp
 )
 
 FLL_POST_PROCESSING=(
 	"#!/bin/bash"
 	"echo \"---- in postprocessing ----\""
-	"# paste your code here (not necessary for normal install, only for preconfigs)"
+	"sed -ie 's/lpr/xpp/' /etc/xpdf/xpdfrc"
 	"echo \"---- postprocessing done----\""
 )

@@ -126,7 +126,7 @@ enum
    strncat(system_call,           temp_meta_filename, MAXLINE );
    strncat(system_call, "\ndone", MAXLINE );
    strncat(system_call, "\nfor package_list in ${FLL_PACKAGES[@]}; do", MAXLINE );
-   strncat(system_call, "\n    echo package_list~${package_list}~$(apt-cache show ${package_list} |grep \"^Description:\" |sed 's/^Description: //') >> ", MAXLINE );
+   strncat(system_call, "\n    echo package_list~${package_list}~$(apt-cache show ${package_list} |grep \"^Description\" |sed 's/^Descriptio.*: //') >> ", MAXLINE );
    strncat(system_call,           temp_meta_filename, MAXLINE );
    strncat(system_call, "\ndone", MAXLINE );
    strncat(system_call, "\nfor post_processing in ${FLL_POST_PROCESSING[@]}; do", MAXLINE );

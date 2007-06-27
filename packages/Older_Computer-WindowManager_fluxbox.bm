@@ -1,4 +1,4 @@
-FLL_DESCRIPTION="fluxbox with kde-lite"
+FLL_DESCRIPTION="fluxbox with KDE-lite"
 
 FLL_PRE_PROCESSING=(
 	"#!/bin/bash"
@@ -24,6 +24,6 @@ FLL_PACKAGES=(
 FLL_POST_PROCESSING=(
 	"#!/bin/bash"
 	"echo \"---- in postprocessing ----\""
-	"echo 'DesktopBackgroundImage=/usr/share/wallpapers/sidux.png'>>/usr/share/icewm/preferences"
+	"perl -pi -e \"s% fbsetroot .*%fbsetbg /usr/share/wallpapers/sidux.png%\" /usr/share/fluxbox/styles/Meta"
 	"echo \"---- postprocessing done----\""
 )

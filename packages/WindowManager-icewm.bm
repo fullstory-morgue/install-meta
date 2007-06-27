@@ -1,4 +1,4 @@
-FLL_DESCRIPTION="IceWM with kde-lite"
+FLL_DESCRIPTION="IceWM with KDE-lite"
 
 FLL_PRE_PROCESSING=(
 	"#!/bin/bash"
