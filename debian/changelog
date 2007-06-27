@@ -1,3 +1,9 @@
+install-meta (0.1.24) UNRELEASED; urgency=low
+
+  * NOT RELEASED YET
+
+ -- Stefan Lippers-Hollmann <s.l-h@gmx.de>  Wed, 27 Jun 2007 02:45:30 +0200
+
 install-meta (0.1.23) unstable; urgency=low
 
   * Games packages update 
