@@ -1,7 +1,6 @@
-install-meta (0.1.24) UNRELEASED; urgency=low
+install-meta (0.1.24) unstable; urgency=low
 
   [ Stefan Lippers-Hollmann ]
-  * NOT RELEASED YET
   * Education-3_to_10_years.bm and Education-10_to_99_years.bm shouldn't be
     executable.
 
