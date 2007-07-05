@@ -1,3 +1,9 @@
+install-meta (0.1.26) UNRELEASED; urgency=low
+
+  * NOT RELEASED YET
+
+ -- Stefan Lippers-Hollmann <s.l-h@gmx.de>  Fri, 06 Jul 2007 01:29:56 +0200
+
 install-meta (0.1.25) unstable; urgency=low
 
   * move to automake1.10.
