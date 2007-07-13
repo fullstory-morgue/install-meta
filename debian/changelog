@@ -1,8 +1,12 @@
 install-meta (0.1.26) UNRELEASED; urgency=low
 
+  [ Stefan Lippers-Hollmann ]
   * NOT RELEASED YET
 
- -- Stefan Lippers-Hollmann <s.l-h@gmx.de>  Fri, 06 Jul 2007 01:29:56 +0200
+  [ Horst Tritremmel ]
+  * openoffice.org-hyphenation-hr to Language-Croatian_OpenOffice.bm added
+
+ -- Horst Tritremmel <hjt@sidux.com>  Fri, 13 Jul 2007 08:57:10 +0200
 
 install-meta (0.1.25) unstable; urgency=low
 

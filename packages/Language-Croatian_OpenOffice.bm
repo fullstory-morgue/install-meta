@@ -11,9 +11,8 @@ FLL_PACKAGE_DEPMODS=(
 )
 
 FLL_PACKAGES=(
-
-      openoffice.org-l10n-hr
-
+	openoffice.org-l10n-hr
+	openoffice.org-hyphenation-hr
 )
 
 FLL_POST_PROCESSING=(
