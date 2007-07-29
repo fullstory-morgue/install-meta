@@ -1,3 +1,9 @@
+install-meta (0.1.29) UNRELEASED; urgency=low
+
+  * NOT RELEASED YET
+
+ -- Stefan Lippers-Hollmann <s.l-h@gmx.de>  Sun, 29 Jul 2007 18:14:06 +0200
+
 install-meta (0.1.28) unstable; urgency=low
 
   * Firmware for iwlwifi has a new package name.
