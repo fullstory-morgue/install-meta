@@ -1,9 +1,5 @@
-install-meta (0.1.29) UNRELEASED; urgency=low
+install-meta (0.1.29) unstable; urgency=low
 
-  [ Stefan Lippers-Hollmann ]
-  * NOT RELEASED YET
-
-  [ Horst Tritremmel ]
   * Must_have_for_older_computers updated
   * sidux logo replaced
 
