@@ -15,7 +15,7 @@ FLL_PACKAGES=(
 	epiphany-extensions
 	sylpheed
 	sylpheed-i18n
-	graveman
+	brasero
 	scite
 	xine-ui
 	albumshaper
