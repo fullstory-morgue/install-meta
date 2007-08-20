@@ -18,8 +18,8 @@ FLL_PACKAGES=(
 	kgeography
 	vym
 	katomic
-	bibletime
-	bibletime-i18n
+#	bibletime
+#	bibletime-i18n
 	einstein
 	tipptrainer-data-de
 	tipptrainer-data-en

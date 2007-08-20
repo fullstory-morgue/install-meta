@@ -17,7 +17,6 @@ FLL_PACKAGES=(
 	apache2-utils
 	mysql-server
 	mysql-client
-	mysql-admin
 	mysql-navigator
 	mysql-query-browser
 	squid
