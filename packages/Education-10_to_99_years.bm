@@ -18,8 +18,6 @@ FLL_PACKAGES=(
 	kgeography
 	vym
 	katomic
-#	bibletime
-#	bibletime-i18n
 	einstein
 	tipptrainer-data-de
 	tipptrainer-data-en
@@ -28,6 +26,9 @@ FLL_PACKAGES=(
 	kanagram
 	mysql-client
 )
+
+#	bibletime
+#	bibletime-i18n
 
 FLL_POST_PROCESSING=(
 	"#!/bin/bash"
