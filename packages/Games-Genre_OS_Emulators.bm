@@ -15,6 +15,7 @@ FLL_PACKAGES=(
        fceu
        dosbox
        visualboyadvance
+              visualboyadvance-gtk
        scummvm
        wine
               libwine-gl

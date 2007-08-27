@@ -14,6 +14,7 @@ FLL_PACKAGES=(
        eboard
               gnuchess
               gnuchess-book
+              eboard-extras-pack1
        pouetchess
        gnubg
        xarchon

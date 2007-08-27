@@ -15,6 +15,7 @@ FLL_PACKAGES=(
        blobwars
        bloboats
        neverball
+       neverputt
        armagetronad
               armagetronad-dedicated
        briquolo
@@ -26,7 +27,6 @@ FLL_PACKAGES=(
               luola-nostalgy
        bomberclone
        tomatoes
-       oolite
 )
 
 FLL_POST_PROCESSING=(
