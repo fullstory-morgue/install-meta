@@ -1,9 +1,5 @@
-install-meta (0.1.32) UNRELEASED; urgency=low
+install-meta (0.1.32) unstable; urgency=low
 
-  [ Stefan Lippers-Hollmann ]
-  * NOT RELEASED YET
-
-  [ Horst Tritremmel ]
   * Education packages updated
 
  -- Horst Tritremmel <hjt@sidux.com>  Tue, 28 Aug 2007 10:37:08 +0200
