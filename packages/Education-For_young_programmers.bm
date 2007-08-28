@@ -22,17 +22,16 @@ FLL_PACKAGES=(
 	gambas
 	quanta
 	quanta-data
-	sun-java6-bin 
-	sun-java6-demo 
-	sun-java6-fonts 
+	sun-java6-bin
+	sun-java6-demo
+	sun-java6-fonts
 	sun-java6-jdk
-	sun-java6-jre 
-	sun-java6-plugin 
-	sun-java6-source 
+	sun-java6-jre
+	sun-java6-plugin
+	sun-java6-source
 	eclipse
 	bwbasic
 	ktechlab
-	klogic
 	kturtle
 )
 

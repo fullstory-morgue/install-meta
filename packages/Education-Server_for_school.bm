@@ -18,13 +18,15 @@ FLL_PACKAGES=(
 	mysql-server
 	mysql-client
 	mysql-navigator
-	mysql-query-browser
 	squid
 	squid-cgi
 	squidclient
 	squid-common
 	squid-prefetch
 	squidguard
+	moodle
+	moodle-book
+	moodle-debian-edu-theme
 )
 
 FLL_POST_PROCESSING=(

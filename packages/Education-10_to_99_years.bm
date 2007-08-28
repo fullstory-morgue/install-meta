@@ -12,6 +12,8 @@ FLL_PACKAGE_DEPMODS=(
 
 FLL_PACKAGES=(
 	kdeedu
+	bibletime
+	bibletime-i18n
 	wxmaxima
 	maxima
 	gnuplot
@@ -27,8 +29,6 @@ FLL_PACKAGES=(
 	mysql-client
 )
 
-#	bibletime
-#	bibletime-i18n
 
 FLL_POST_PROCESSING=(
 	"#!/bin/bash"
