@@ -19,6 +19,7 @@ FLL_PACKAGES=(
               enigma-doc
        fillets-ng
        pathological
+       crack-attack
 )
 
 FLL_POST_PROCESSING=(

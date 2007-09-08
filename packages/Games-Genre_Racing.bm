@@ -19,6 +19,7 @@ FLL_PACKAGES=(
        supertuxkart
        planetpenguin-racer
               planetpenguin-racer-extras
+       stormbaancoureur
 )
 
 FLL_POST_PROCESSING=(
