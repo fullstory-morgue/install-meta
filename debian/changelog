@@ -1,9 +1,5 @@
-install-meta (0.1.33) UNRELEASED; urgency=low
+install-meta (0.1.33) unstable; urgency=low
 
-  [ Stefan Lippers-Hollmann ]
-  * NOT RELEASED YET
-
-  [ Horst Tritremmel ]
   * games metapackages updated
   * non_free games metapackages updated
 
