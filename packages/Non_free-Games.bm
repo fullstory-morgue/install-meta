@@ -15,6 +15,9 @@ FLL_PACKAGES=(
      tremulous
             tremulous-server
             tremulous-doc
+     alien-arena
+     warsow
+     glest
 )
 
 FLL_POST_PROCESSING=(
