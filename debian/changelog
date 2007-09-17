@@ -1,9 +1,5 @@
-install-meta (0.1.35) UNRELEASED; urgency=low
+install-meta (0.1.35) unstable; urgency=low
 
-  [ Stefan Lippers-Hollmann ]
-  * NOT RELEASED YET
-
-  [ Horst Tritremmel ]
   * Education-10_to_99_years.bm updated
 
  -- Horst Tritremmel <hjt@sidux.com>  Mon, 17 Sep 2007 14:39:12 +0200
