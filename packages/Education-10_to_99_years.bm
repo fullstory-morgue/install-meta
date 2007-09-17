@@ -27,6 +27,8 @@ FLL_PACKAGES=(
 	ksudoku
 	kanagram
 	mysql-client
+	xoscope
+	qcad
 )
 
 
