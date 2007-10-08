@@ -1,4 +1,4 @@
-FLL_DESCRIPTION="Adventure Games"
+FLL_DESCRIPTION="Adventure and Roleplaying Games"
 
 FLL_PRE_PROCESSING=(
 	"#!/bin/bash"
@@ -18,6 +18,17 @@ FLL_PACKAGES=(
        freedroidrpg
        balazar
        egoboo
+       falconseye
+       crossfire-common
+       crossfire-client
+           crossfire-client-gtk2
+           crossfire-client-x11
+           crossfire-client-images
+           crossfire-client-sounds
+           crossfire-maps
+           crossfire-doc
+           crossfire-server
+           crossfire-edit
 )
 
 FLL_POST_PROCESSING=(
