@@ -1,3 +1,9 @@
+install-meta (0.1.38) UNRELEASED; urgency=low
+
+  * NOT RELEASED YET
+
+ -- Stefan Lippers-Hollmann <s.l-h@gmx.de>  Tue, 09 Oct 2007 17:47:35 +0200
+
 install-meta (0.1.37) unstable; urgency=low
 
   * Non_free-Firmware_Intel_Wireless_ipw3945.bm Non_free-
