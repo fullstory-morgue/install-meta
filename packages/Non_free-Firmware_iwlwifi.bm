@@ -1,4 +1,4 @@
-FLL_DESCRIPTION="Switching from ipw3945 to the new iwlwifi"
+FLL_DESCRIPTION="iwlwifi firmware for Intel PRO Wireless 3945"
 
 FLL_PRE_PROCESSING=(
 	"#!/bin/bash"
