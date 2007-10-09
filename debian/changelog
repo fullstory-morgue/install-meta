@@ -1,8 +1,13 @@
 install-meta (0.1.37) UNRELEASED; urgency=low
 
+  [ Stefan Lippers-Hollmann ]
   * NOT RELEASED YET
 
- -- Stefan Lippers-Hollmann <s.l-h@gmx.de>  Mon, 08 Oct 2007 10:15:56 +0200
+  [ hjt ]
+  * Non_free-Firmware_Intel_Wireless_ipw3945.bm Non_free-
+    Firmware_iwlwifi_back_to_ipw3945.bm removed
+
+ -- hjt <hjt@siduxbox>  Tue, 09 Oct 2007 16:36:23 +0200
 
 install-meta (0.1.36) unstable; urgency=low
 
