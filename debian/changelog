@@ -1,8 +1,9 @@
 install-meta (0.1.38) UNRELEASED; urgency=low
 
   * NOT RELEASED YET
+  * Update debian menu section as per new subpolicy.
 
- -- Stefan Lippers-Hollmann <s.l-h@gmx.de>  Tue, 09 Oct 2007 17:47:35 +0200
+ -- Stefan Lippers-Hollmann <s.l-h@gmx.de>  Thu, 25 Oct 2007 22:12:03 +1000
 
 install-meta (0.1.37) unstable; urgency=low
 

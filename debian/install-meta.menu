@@ -1,5 +1,5 @@
 ?package(install-meta):needs="X11" \
-	section="Apps/System" \
+	section="Applications/System/Administration" \
 	hints="sidux,Config" \
 	title="metapackage-installer" \
 	icon32x32="/usr/share/pixmaps/install-meta.xpm" \
