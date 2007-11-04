@@ -17,7 +17,6 @@ FLL_PACKAGES=(
        wesnoth
        freeciv-client-gtk
        bzflag
-              bzflag-server
        netpanzer
        glob2
        warzone2100

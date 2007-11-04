@@ -17,7 +17,6 @@ FLL_PACKAGES=(
        neverball
        neverputt
        armagetronad
-              armagetronad-dedicated
        briquolo
        gl-117
        trackballs

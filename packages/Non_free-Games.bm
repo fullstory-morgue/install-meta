@@ -11,9 +11,7 @@ FLL_PACKAGE_DEPMODS=(
 
 FLL_PACKAGES=(
      sauerbraten
-            sauerbraten-server
      tremulous
-            tremulous-server
             tremulous-doc
      alien-arena
      warsow

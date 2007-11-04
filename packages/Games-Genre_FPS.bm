@@ -13,9 +13,7 @@ FLL_PACKAGE_DEPMODS=(
 FLL_PACKAGES=(
        nexuiz
               nexuiz-music
-              nexuiz-server
        openarena
-              openarena-server
 )
 
 FLL_POST_PROCESSING=(
