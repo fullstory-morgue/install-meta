@@ -1,9 +1,5 @@
-install-meta (0.1.39) UNRELEASED; urgency=low
+install-meta (0.1.39) unstable; urgency=low
 
-  [ Stefan Lippers-Hollmann ]
-  * NOT RELEASED YET
-
-  [ Horst Tritremmel ]
   * Games updated 
 
  -- Horst Tritremmel <hjt@sidux.com>  Sun, 04 Nov 2007 21:27:35 +0100
