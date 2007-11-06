@@ -1,4 +1,4 @@
-FLL_DESCRIPTION="Server for school"
+FLL_DESCRIPTION="3D programs"
 
 FLL_PRE_PROCESSING=(
 	"#!/bin/bash"
@@ -11,25 +11,15 @@ FLL_PACKAGE_DEPMODS=(
 )
 
 FLL_PACKAGES=(
-	phpmyadmin
-	php5
-	apache2
-	apache2-utils
-	mysql-server
-	mysql-client
-	mysql-navigator
-	squid
-	squid-cgi
-	squidclient
-	squid-common
-	squid-prefetch
-	squidguard
-	moodle
-	moodle-book
-	moodle-debian-edu-theme
-	komba2
-	samba
-	freenx
+	celestia
+	stellarium
+	earth3d
+	kpovmodeler
+	povray-3.6
+	povray-doc
+	povray-examples
+	povray-includes
+	stopmotion
 )
 
 FLL_POST_PROCESSING=(

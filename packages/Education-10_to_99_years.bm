@@ -29,6 +29,13 @@ FLL_PACKAGES=(
 	mysql-client
 	xoscope
 	qcad
+	sunclock
+	chemtool
+	noteedit
+	timidity
+	lilypond
+	stopmotion
+	tiemu
 )
 
 

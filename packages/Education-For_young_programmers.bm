@@ -33,6 +33,21 @@ FLL_PACKAGES=(
 	bwbasic
 	ktechlab
 	kturtle
+	kommander
+	tk8.5
+	tk8.5-doc
+	tk8.5-dev
+	tcl8.5
+	tcl8.5-doc
+	tcl8.5-dev
+	swi-prolog
+	swi-prolog-clib
+	swi-prolog-http
+	swi-prolog-semweb
+	swi-prolog-sgml
+	swi-prolog-table
+	swi-prolog-xpce
+	swi-prolog-doc
 )
 
 FLL_POST_PROCESSING=(
