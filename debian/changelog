@@ -5,8 +5,9 @@ install-meta (0.1.41) UNRELEASED; urgency=low
 
   [ Horst Tritremmel ]
   * new non-free [Button] handling for sources.list.d
+  * switch to mirror.debian.org.list
 
- -- Horst Tritremmel <hjt@sidux.com>  Wed, 07 Nov 2007 16:20:26 +0100
+ -- Horst Tritremmel <hjt@sidux.com>  Wed, 07 Nov 2007 16:44:22 +0100
 
 install-meta (0.1.40) unstable; urgency=low
 
