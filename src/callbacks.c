@@ -306,13 +306,14 @@ void search_metapackages_names()
       }
 
       // build the script who creates the packagelist
-      fprintf( temp_create_package_list_at_start_fd, "%s\n%s\n%s\n%s\n%s%s\n%s%s\n%s\n%s\n%s\n%s\n%s%s\n", 
+      fprintf( temp_create_package_list_at_start_fd, "%s\n%s\n%s\n%s\n%s%s\n%s\n%s%s\n%s\n%s\n%s\n%s\n%s%s\n", 
                "#!/bin/bash",
                "set -e",
                "DPKG_ARCH=$(dpkg --print-installation-architecture)",
                "source /etc/default/distro",
                "cd ", INSTALL_PACKAGES_CONF_DIR,
-               "[ -z \"$(grep deb\\ .*debian\\.org.*main.*contrib /etc/apt/sources.list)\" ] && ",
+               "[ -f \"/etc/apt/sources.list.d/mirror.debian.org.list\" ] && SRC=sources.list.d/mirror.debian.org.list || SRC=sources.list",
+               "[ -z \"$(grep deb\\ .*debian\\.org.*main.*contrib /etc/apt/${SRC})\" ] && ",
                which_packages,
                "for modul in ${list}; do",
                "   source ${modul}",
