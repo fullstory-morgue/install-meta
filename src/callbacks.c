@@ -1041,29 +1041,20 @@ on_button_nonfree_clicked              (GtkButton       *button,
    char system_call[MAXLINE];
 
 
-   system("[ -z \"$(grep deb\\ .*debian\\.org.*main.*contrib /etc/apt/sources.list)\" ] && \
-   sed -ie 's/deb \\(.*\\)debian.org\\/debian unstable \\(.*\\)/deb \\1debian.org\\/debian unstable main contrib non-free/' /etc/apt/sources.list || \
-   echo found deb *contrib in sources.list for debian");
+   strncpy(system_call, "for SOURCESLIST in /etc/apt/sources.list ", MAXLINE );
+   strncat(system_call, "                   /etc/apt/sources.list.d/mirror.debian.org ", MAXLINE );
+   strncat(system_call, "                   /etc/apt/sources.list.d/mirror.sidux.com ", MAXLINE );
+   strncat(system_call, "; do\n" , MAXLINE );
+   strncat(system_call, "    [ -z \"$(grep deb\\ .*debian\\.org.*main.*contrib ${SOURCESLIST})\" ] && ", MAXLINE );
+   strncat(system_call, "         sed -ie 's|\\(.*\\)debian\\.org\\(.*\\)main\\(.*\\)|", MAXLINE );
+   strncat(system_call,                     "\\1debian\\.org\\2main contrib non-free|' ${SOURCESLIST}\n", MAXLINE );
+   strncat(system_call, "    [ -z \"$(grep deb\\ .*sidux\\.com.*main.*contrib ${SOURCESLIST})\" ] && ", MAXLINE );
+   strncat(system_call, "         sed -ie 's|\\(.*\\)sidux\\.com\\(.*\\) main\\(.*\\)|", MAXLINE );
+   strncat(system_call,                     "\\1sidux\\.com\\2 main contrib non-free firmware fix.main fix.contrib fix.non-free|'", MAXLINE);
+   strncat(system_call, "          ${SOURCESLIST}\n", MAXLINE );
+   strncat(system_call, "done", MAXLINE );
 
-   system("[ -z \"$(grep deb\\ .*debian\\.org.*main.*contrib /etc/apt/sources.list)\" ] && \
-   sed -ie 's/deb \\(.*\\)debian.org\\/debian\\/ sid \\(.*\\)/deb \\1debian.org\\/debian\\/ sid main contrib non-free/' /etc/apt/sources.list || \
-   echo found deb *contrib in sources.list for debian");
-
-   system("[ -z \"$(grep deb-src\\ .*debian\\.org.*main.*contrib /etc/apt/sources.list)\" ] && \
-   sed -ie 's/deb-src \\(.*\\)debian.org\\/debian unstable \\(.*\\)/deb-src \\1debian.org\\/debian unstable main contrib non-free/' /etc/apt/sources.list || \
-   echo found deb-src *contrib in sources.list for debian");
-
-   system("[ -z \"$(grep deb-src\\ .*debian\\.org.*main.*contrib /etc/apt/sources.list)\" ] && \
-   sed -ie 's/deb-src \\(.*\\)debian.org\\/debian\\/ sid \\(.*\\)/deb-src \\1debian.org\\/debian\\/ sid main contrib non-free/' /etc/apt/sources.list || \
-   echo found deb-src *contrib in sources.list for debian");
-
-   system("[ -z \"$(grep deb\\ .*sidux\\.com.*main.*contrib /etc/apt/sources.list)\" ] && \
-   sed -ie 's/deb \\(.*\\)sidux.com\\/debian\\/ sid \\(.*\\)/deb \\1sidux.com\\/debian\\/ sid main contrib non-free firmware fix.main fix.contrib fix.non-free/' /etc/apt/sources.list || \
-   echo found deb *contrib in sources.list for sidux");
-
-   system("[ -z \"$(grep deb-src\\ .*sidux\\.com.*main.*contrib /etc/apt/sources.list)\" ] && \
-   sed -ie 's/deb-src \\(.*\\)sidux.com\\/debian\\/ sid \\(.*\\)/deb-src \\1sidux.com\\/debian\\/ sid main contrib non-free firmware fix.main fix.contrib fix.non-free/' /etc/apt/sources.list || \
-   echo found deb-src *contrib in sources.list for sidux");
+   system(system_call);
 
 
    //copy sources.list if in install mode

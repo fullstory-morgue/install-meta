@@ -1,8 +1,12 @@
 install-meta (0.1.41) UNRELEASED; urgency=low
 
+  [ Stefan Lippers-Hollmann ]
   * NOT RELEASED YET
 
- -- Stefan Lippers-Hollmann <s.l-h@gmx.de>  Tue, 06 Nov 2007 22:43:15 +0100
+  [ Horst Tritremmel ]
+  * new non-free [Button] handling for sources.list.d
+
+ -- Horst Tritremmel <hjt@sidux.com>  Wed, 07 Nov 2007 16:20:26 +0100
 
 install-meta (0.1.40) unstable; urgency=low
 
