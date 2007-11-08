@@ -12,8 +12,6 @@ FLL_PACKAGE_DEPMODS=(
 
 FLL_PACKAGES=(
 	kdeedu
-	bibletime
-	bibletime-i18n
 	wxmaxima
 	maxima
 	gnuplot
