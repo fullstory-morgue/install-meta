@@ -7,8 +7,9 @@ install-meta (0.1.41) unstable; urgency=low
 
   [ Stefan Lippers-Hollmann ]
   * remove bibletime again, it really doesn't belong there!
+  * switch to debian.list and sidux.list.
 
- -- Stefan Lippers-Hollmann <s.l-h@gmx.de>  Fri, 09 Nov 2007 00:49:10 +0100
+ -- Stefan Lippers-Hollmann <s.l-h@gmx.de>  Fri, 09 Nov 2007 00:52:36 +0100
 
 install-meta (0.1.40) unstable; urgency=low
 

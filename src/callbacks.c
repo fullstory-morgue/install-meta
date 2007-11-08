@@ -312,7 +312,7 @@ void search_metapackages_names()
                "DPKG_ARCH=$(dpkg --print-installation-architecture)",
                "source /etc/default/distro",
                "cd ", INSTALL_PACKAGES_CONF_DIR,
-               "[ -f \"/etc/apt/sources.list.d/mirror.debian.org.list\" ] && SRC=sources.list.d/mirror.debian.org.list || SRC=sources.list",
+               "[ -f \"/etc/apt/sources.list.d/debian.list\" ] && SRC=sources.list.d/debian.list || SRC=sources.list",
                "[ -z \"$(grep deb\\ .*debian\\.org.*main.*contrib /etc/apt/${SRC})\" ] && ",
                which_packages,
                "for modul in ${list}; do",
@@ -1043,8 +1043,8 @@ on_button_nonfree_clicked              (GtkButton       *button,
 
 
    strncpy(system_call, "for SOURCESLIST in /etc/apt/sources.list ", MAXLINE );
-   strncat(system_call, "                   /etc/apt/sources.list.d/mirror.debian.org.list ", MAXLINE );
-   strncat(system_call, "                   /etc/apt/sources.list.d/mirror.sidux.com ", MAXLINE );
+   strncat(system_call, "                   /etc/apt/sources.list.d/debian.list ", MAXLINE );
+   strncat(system_call, "                   /etc/apt/sources.list.d/sidux.list ", MAXLINE );
    strncat(system_call, "; do\n" , MAXLINE );
    strncat(system_call, "    [ -z \"$(grep deb\\ .*debian\\.org.*main.*contrib ${SOURCESLIST})\" ] && ", MAXLINE );
    strncat(system_call, "         sed -ie 's|\\(.*\\)debian\\.org\\(.*\\)main\\(.*\\)|", MAXLINE );
