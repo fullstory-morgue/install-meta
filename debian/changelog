@@ -1,10 +1,9 @@
 install-meta (0.1.42) unstable; urgency=low
 
-  * NOT RELEASED YET
   * ensure to bail out on unsuitable packages.
   * COPYING belongs into the upstream source.
 
- -- Stefan Lippers-Hollmann <s.l-h@gmx.de>  Sat, 10 Nov 2007 14:20:24 +0100
+ -- Stefan Lippers-Hollmann <s.l-h@gmx.de>  Sat, 10 Nov 2007 14:25:56 +0100
 
 install-meta (0.1.41) unstable; urgency=low
 
