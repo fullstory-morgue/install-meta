@@ -1,3 +1,9 @@
+install-meta (0.1.43) UNRELEASED; urgency=low
+
+  * NOT RELEASED YET
+
+ -- Stefan Lippers-Hollmann <s.l-h@gmx.de>  Sat, 10 Nov 2007 14:28:02 +0100
+
 install-meta (0.1.42) unstable; urgency=low
 
   * ensure to bail out on unsuitable packages.
