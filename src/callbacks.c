@@ -119,7 +119,6 @@ enum
    strncat(system_call, "\n   for pkgmod in ${FLL_PACKAGE_DEPMODS[@]}; do", MAXLINE );
    strncat(system_call, "\nsource packages.d/${pkgmod}.bm", MAXLINE );
    strncat(system_call, "\ndone", MAXLINE );
-   strncat(system_call, "\nsource packages.d/i18n.bm", MAXLINE );
    strncat(system_call, "\nIFS=$'\\n'", MAXLINE );
    strncat(system_call, "\nfor pre_processing in ${FLL_PRE_PROCESSING[@]}; do", MAXLINE );
    strncat(system_call, "\n    echo pre~${pre_processing} >> ", MAXLINE );
@@ -635,7 +634,7 @@ on_button_install_clicked              (GtkButton       *button,
        printf( "The file %s was not opened\n", temp_file_aptgetcall_sh);
    else {
        //  create the bash file for install the packages
-       fprintf( temp_file_aptgetcall_sh_fd, "%s\n%s\n%s\n%s%s\n%s\n%s%s%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s%s%s%s%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s%s%s%s%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s%s%s\n%s\n%s\n",
+       fprintf( temp_file_aptgetcall_sh_fd, "%s\n%s\n%s\n%s%s\n%s\n%s%s%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s%s%s%s%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s%s%s%s%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s%s%s\n%s\n%s\n",
                "#!/bin/bash",
                is_chroot,
                "apt-get update",
@@ -646,7 +645,6 @@ on_button_install_clicked              (GtkButton       *button,
                "   for pkgmod in ${FLL_PACKAGE_DEPMODS[@]}; do",
                "	source packages.d/${pkgmod}.bm",
                "   done",
-               "   source packages.d/i18n.bm",
                "   echo; echo ======================================",
                "   echo start installation for ${modul}",
                "   echo --------------------------------------",
@@ -660,8 +658,23 @@ on_button_install_clicked              (GtkButton       *button,
                "   [ \"${CHROOT}\" = y ] && cp $TMP /media/", hd_device, "/tmp && chroot /media/", hd_device, " sh ${TMP} || sh ${TMP} ",
                "   rm \"$TMP\"",
 
-                   system_call,
-               "   unset FLL_PACKAGES FLL_PACKAGE_DEPMODS FLL_DESCRIPTION FLL_PRE_PROCESSING",
+                   system_call,     // install the packages
+
+               //  handle locale support packages
+               "   printf \"\\nsearch all installed packages who need locale packages, please wait ...\\n\"",
+               "   source packages.d/i18n.bm",
+               "   FLL_I18N_SUPPORT=$(echo ${LANG%.*})",
+               "   unset FLL_I18N_SUPPORT_PACKAGES",
+               "   if [[ $FLL_I18N_SUPPORT ]]; then",
+               "	FLL_I18N_SUPPORT=\"$(tr A-Z a-z <<<$FLL_I18N_SUPPORT)\"",
+               "	FLL_I18N_SUPPORT_PACKAGES=( $(detect_i18n_support_packages $FLL_I18N_SUPPORT) )",
+
+               "	if [[ ${FLL_I18N_SUPPORT_PACKAGES[@]} ]]; then",
+               "		apt-get --assume-yes install ${FLL_I18N_SUPPORT_PACKAGES[@]}",
+               "	fi",
+               "   fi",
+
+               "   unset FLL_PACKAGES FLL_PACKAGE_DEPMODS FLL_DESCRIPTION FLL_PRE_PROCESSING FLL_I18N_SUPPORT FLL_I18N_SUPPORT_PACKAGES",
 
                "   TMP=\"$(mktemp -p /tmp/ install-meta-postprocessing-XXXXXXXXXX)\"",
                "   IFS=$'\\n'",

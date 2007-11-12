@@ -1,112 +1,105 @@
-LANG_SUPPORT="$(printf "${LANG}\n" | cut -d\_ -f1)"
+installed_in_dpkg() {
+	[[ $1 && $(grep-dctrl -n -s Status -XP $1 "$FLL_BUILD_CHROOT"/var/lib/dpkg/status) == 'install ok installed' ]]
+	
+	return $?
+}
 
+grep_i18n_string() {
+	local STRING="$1"
+	shift
+	local AVAILABLE=( $(grep-dctrl -s Package -nP "$STRING" "$FLL_BUILD_CHROOT"/var/lib/apt/lists/*Packages) )
+	# Language and location parts, created sub-list and test value
+	local L1
+	local L2
+	local LL
+	local LT
 
-case ${FLL_PACKAGES[*]} in
-	*childsplay*)
-		for lang in ${LANG_SUPPORT[@]}; do
-			FLL_PACKAGES+=( childsplay-alphabet-sounds-${lang} )
-			case $lang in
-				ca|fr|nl)
-					FLL_PACKAGES+=( childsplay-lfc-names-${lang} )
-					;;
-			esac
+	[[ ${AVAILABLE[@]} ]] || return
+	
+	for l in $@; do
+		# split input around underscore
+		L1=$(tr [[:upper:]] [[:lower:]] <<< ${l%[_-]*})
+		L2=$(tr [[:upper:]] [[:lower:]] <<< ${l#*[_-]})
+		if [[ "$L1" = "$L2" ]]; then
+			# "en en-en enen"
+			LL="$L1 $L1-$L1 $L1$L1"
+		else
+			# "en-gb engb en en-en enen gb"
+			LL="$L1-$L2 $L1$L2 $L1 $L1-$L1 $L1$L1 $L2"
+		fi
+		LT=0
+		for L in $LL; do
+			if [[ $LT == 1 ]]; then
+				break;
+			fi
+			for a in ${AVAILABLE[@]}; do
+				if [[ $a =~ "^${STRING}-?${L}$" ]]; then
+					echo "$a"
+					LT=1
+					break
+				fi
+			done
 		done
-		;;
-esac
+	done
+}
 
-case ${FLL_PACKAGES[*]} in
-	gcompris)
-		for lang in ${LANG_SUPPORT[@]}; do
-			FLL_PACKAGES+=( gcompris-sound-${lang} )
-		done
-		;;
-esac
+detect_i18n_support_packages() {
+	for p in gcompris gimp gwenview icedove iceweasel k3b kdebase koffice myspell-en-us \
+		openoffice.org-core sidux-manual-en; do
 
-case ${FLL_PACKAGES[*]} in
-	*kde*)
-		for lang in ${LANG_SUPPORT[@]}; do
-			FLL_PACKAGES+=( kde-i18n-${lang} )
-		done
-		;;
-esac
+		if [[ $(type -t installed_in_chroot) == "function" ]]; then
+			installed_in_chroot "$p" || continue
+		fi
 
-case ${FLL_PACKAGES[*]} in
-	*koffice*)
-		for lang in ${LANG_SUPPORT[@]}; do
-			FLL_PACKAGES+=( koffice-i18n-${lang} )
-		done
-		;;
-esac
+		case "$p" in
+			k3b|gwenview)
+				for l in $@; do
+					[[ "$l" =~ '^en' ]] && continue
+					echo "${p}-i18n"
+					break
+				done
+				;;
+			gcompris)
+				grep_i18n_string gcompris-sound $@
+				;;
+			gimp)
+				grep_i18n_string gimp-help $@
+				;;
+			iceape)
+				grep_i18n_string iceape-locale $@
+				;;
+			icedove)
+				grep_i18n_string icedove-locale $@
+				;;
+			iceweasel)
+				grep_i18n_string iceweasel-l10n $@
+				;;
+			kdebase)
+				grep_i18n_string kde-i18n $@
+				;;
+			koffice)
+				grep_i18n_string koffice-i18n $@
+				;;
+			myspell-en-us)
+				grep_i18n_string myspell $@
+				;;
+			openoffice.org-core)
+				grep_i18n_string openoffice.org-l10n $@
+				grep_i18n_string openoffice.org-thesaurus $@
+				;;
+			sidux-manual-en)
+				grep_i18n_string sidux-manual $@
+				;;
+			sylpheed)
+				grep_i18n_string sylpheed-i18n $@
+				;;
+		esac
+	done
+}
 
-case ${FLL_PACKAGES[*]} in
-	*icedove*)
-		for lang in ${LANG_SUPPORT[@]}; do
-			FLL_PACKAGES+=( icedove-locale-${lang} )
-		done
-		;;
-esac
-
-case ${FLL_PACKAGES[*]} in
-	*iceweasel*)
-		for lang in ${LANG_SUPPORT[@]}; do
-			FLL_PACKAGES+=( iceweasel-l10n-${lang} )
-		done
-		;;
-esac
-
-case ${FLL_PACKAGES[*]} in
-	*gimp*)
-		for lang in ${LANG_SUPPORT[@]}; do
-			FLL_PACKAGES+=( gimp-help-${lang} )
-		done
-		;;
-esac
-
-case ${FLL_PACKAGES[*]} in
-	*gcompris*)
-		for lang in ${LANG_SUPPORT[@]}; do
-			FLL_PACKAGES+=( gcompris-sound-${lang} )
-		done
-		;;
-esac
-
-case ${FLL_PACKAGES[*]} in
-	*openoffice.org*)
-		for lang in ${LANG_SUPPORT[@]}; do
-			FLL_PACKAGES+=( openoffice.org-l10n-${lang} )
-			case $lang in
-				de)
-					FLL_PACKAGES+=( openoffice.org-thesaurus-de )
-					;;
-				us|gb)
-					FLL_PACKAGES+=( openoffice.org-thesaurus-en-us )
-					;;
-				au)
-					FLL_PACKAGES+=( openoffice.org-thesaurus-en-au )
-					;;
-				*)
-					FLL_PACKAGES+=( openoffice.org-thesaurus-${lang} )
-					;;
-			esac
-
-		done
-		;;
-esac
-
-case ${FLL_PACKAGES[*]} in
-	*myspell*)
-		for lang in ${LANG_SUPPORT[@]}; do
-			case $lang in
-				de)
-					FLL_PACKAGES+=( myspell-de-de )
-					;;
-				au|gb)
-					FLL_PACKAGES+=( myspell-en-${lang} )
-					;;
-				*)
-					FLL_PACKAGES+=( myspell-${lang} )
-					;;
-			esac
-		done
-		;;
-esac
+detect_i18n_test() {
+	for l in $(locale -a | sed -n 's/\.utf8//p'); do
+		echo "# $l"
+		detect_i18n_support_packages $l
+	done
+}
