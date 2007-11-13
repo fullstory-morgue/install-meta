@@ -1,5 +1,5 @@
 installed_in_dpkg() {
-	[[ $1 && $(grep-dctrl -n -s Status -XP $1 "$FLL_BUILD_CHROOT"/var/lib/dpkg/status) == 'install ok installed' ]]
+	[[ $1 && $(grep-dctrl -n -s Status -XP $1 /var/lib/dpkg/status) == 'install ok installed' ]]
 	
 	return $?
 }
@@ -7,7 +7,8 @@ installed_in_dpkg() {
 grep_i18n_string() {
 	local STRING="$1"
 	shift
-	local AVAILABLE=( $(grep-dctrl -s Package -nP "$STRING" "$FLL_BUILD_CHROOT"/var/lib/apt/lists/*Packages) )
+	local AVAILABLE=( $(grep-dctrl -s Package -nP "$STRING" /var/lib/apt/lists/*Packages) )
+
 	# Language and location parts, created sub-list and test value
 	local L1
 	local L2
@@ -47,8 +48,8 @@ detect_i18n_support_packages() {
 	for p in gcompris gimp gwenview icedove iceweasel k3b kdebase koffice myspell-en-us \
 		openoffice.org-core sidux-manual-en; do
 
-		if [[ $(type -t installed_in_chroot) == "function" ]]; then
-			installed_in_chroot "$p" || continue
+		if [[ $(type -t installed_in_dpkg) == "function" ]]; then
+			installed_in_dpkg "$p" || continue
 		fi
 
 		case "$p" in
