@@ -1,12 +1,8 @@
-install-meta (0.1.43) UNRELEASED; urgency=low
+install-meta (0.1.43) unstable; urgency=low
 
-  [ Stefan Lippers-Hollmann ]
-  * NOT RELEASED YET
-
-  [ Horst Tritremmel ]
-  * dctrl-tools to depands added
-  * i18n.bm updated, copied from fll-builder
-  * typo in i18n.bm
+  * dctrl-tools added to depends.
+  * i18n.bm updated, copied from fll-builder.
+  * typo in i18n.bm.
 
  -- Horst Tritremmel <hjt@sidux.com>  Tue, 13 Nov 2007 14:52:25 +0100
 
