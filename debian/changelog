@@ -1,6 +1,5 @@
-install-meta (0.1.43) UNRELEASED; urgency=low
+install-meta (0.1.43) unstable; urgency=low
 
-  * NOT RELEASED YET
   * dctrl-tools added to depends.
   * i18n.bm updated, copied from fll-builder.
   * typo in i18n.bm.
