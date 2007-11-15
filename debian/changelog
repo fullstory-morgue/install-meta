@@ -1,3 +1,9 @@
+install-meta (0.1.44) UNRELEASED; urgency=low
+
+  * NOT RELEASED YET
+
+ -- Stefan Lippers-Hollmann <s.l-h@gmx.de>  Fri, 16 Nov 2007 00:39:58 +0100
+
 install-meta (0.1.43) unstable; urgency=low
 
   * dctrl-tools added to depends.
