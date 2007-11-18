@@ -1,8 +1,10 @@
 install-meta (0.1.44) UNRELEASED; urgency=low
 
   * NOT RELEASED YET
+  * DON'T UPLOAD YET, BROKEN!
+  * try to fix non-free addition (incomplete!)
 
- -- Stefan Lippers-Hollmann <s.l-h@gmx.de>  Fri, 16 Nov 2007 00:39:58 +0100
+ -- Stefan Lippers-Hollmann <s.l-h@gmx.de>  Sun, 18 Nov 2007 22:55:53 +0100
 
 install-meta (0.1.43) unstable; urgency=low
 

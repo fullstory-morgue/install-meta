@@ -1054,36 +1054,22 @@ on_button_nonfree_clicked              (GtkButton       *button,
 {
    char system_call[MAXLINE];
 
-
-   strncpy(system_call, "for SOURCESLIST in /etc/apt/sources.list ", MAXLINE );
-   strncat(system_call, "                   /etc/apt/sources.list.d/debian.list ", MAXLINE );
-   strncat(system_call, "                   /etc/apt/sources.list.d/sidux.list ", MAXLINE );
-   strncat(system_call, "; do\n" , MAXLINE );
-   strncat(system_call, "    [ -z \"$(grep deb\\ .*debian\\.org.*main.*contrib ${SOURCESLIST})\" ] && ", MAXLINE );
-   strncat(system_call, "         sed -ie 's|\\(.*\\)debian\\.org\\(.*\\)main\\(.*\\)|", MAXLINE );
-   strncat(system_call,                     "\\1debian\\.org\\2main contrib non-free|' ${SOURCESLIST}\n", MAXLINE );
-   strncat(system_call, "    [ -z \"$(grep deb\\ .*sidux\\.com.*main.*contrib ${SOURCESLIST})\" ] && ", MAXLINE );
-   strncat(system_call, "         sed -ie 's|\\(.*\\)sidux\\.com\\(.*\\) main\\(.*\\)|", MAXLINE );
-   strncat(system_call,                     "\\1sidux\\.com\\2 main contrib non-free firmware fix.main fix.contrib fix.non-free|'", MAXLINE);
-   strncat(system_call, "          ${SOURCESLIST}\n", MAXLINE );
-   strncat(system_call, "done", MAXLINE );
-
-   system(system_call);
-
+   system("/bin/sed -i	-e 's|\\(.*deb.*debian\\.org.*main\\).*|\\1 contrib non-free|' \
+   			-e 's|\\(.*deb.*sidux.*main\\).*|\\1 contrib non-free firmware fix.main fix.contrib fix.non-free|' \
+				/etc/apt/sources.list \
+				/etc/apt/sources.list.d/*.list");
 
    //copy sources.list if in install mode
-   if ( strlen(CHROOT) > 0 && strcmp( ptr_chroot, "--chroot" )  == 0 ) {
+   if ( strlen(CHROOT) > 0 && strcmp( ptr_chroot, "--chroot" ) == 0 ) {
 
-      // umount for knx-installer
-      strncpy(system_call, "[ -f /media/", MAXLINE );
+      // umount for fll-installer
+      strncpy(system_call, "/bin/sed -i ", MAXLINE );
+      strncat(system_call, "-e 's|\\(.*deb.*debian\\.org.*main\\).*|\\1 contrib non-free|' ", MAXLINE );
+      strncat(system_call, "-e 's|\\(.*deb.*sidux.*main\\).*|\\1 contrib non-free firmware fix.main fix.contrib fix.non-free|' ", MAXLINE );
       strncat(system_call, hd_device, MAXLINE );
-      strncat(system_call, "/etc/apt/sources.list.dfsg ] || cp /media/", MAXLINE );
+      strncat(system_call, "/etc/apt/sources.list ", MAXLINE );
       strncat(system_call, hd_device, MAXLINE );
-      strncat(system_call, "/etc/apt/sources.list /media/", MAXLINE );
-      strncat(system_call, hd_device, MAXLINE );
-      strncat(system_call, "/etc/apt/sources.list.dfsg\ncp /etc/apt/sources.list /media/", MAXLINE );
-      strncat(system_call, hd_device, MAXLINE );
-      strncat(system_call, "/etc/apt/sources.list", MAXLINE );
+      strncat(system_call, "/etc/apt/sources.list.d/*.list", MAXLINE );
 
       system(system_call);
    }
