@@ -1,4 +1,4 @@
-install-meta (0.1.44) UNRELEASED; urgency=low
+install-meta (0.1.44) unstable; urgency=low
 
   [ Stefan Lippers-Hollmann ]
   * try to fix non-free addition (incomplete!)
