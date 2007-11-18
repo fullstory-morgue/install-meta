@@ -1065,9 +1065,9 @@ on_button_nonfree_clicked              (GtkButton       *button,
       // umount for fll-installer
       strncpy(system_call, "/bin/sed -i ", MAXLINE );
       strncat(system_call, "-e 's|\\(.*deb.*debian\\.org.*main\\).*|\\1 contrib non-free|' ", MAXLINE );
-      strncat(system_call, "-e 's|\\(.*deb.*sidux.*main\\).*|\\1 contrib non-free firmware fix.main fix.contrib fix.non-free|' ", MAXLINE );
+      strncat(system_call, "-e 's|\\(.*deb.*sidux.*main\\).*|\\1 contrib non-free firmware fix.main fix.contrib fix.non-free|' /media/", MAXLINE );
       strncat(system_call, hd_device, MAXLINE );
-      strncat(system_call, "/etc/apt/sources.list ", MAXLINE );
+      strncat(system_call, "/etc/apt/sources.list /media/", MAXLINE );
       strncat(system_call, hd_device, MAXLINE );
       strncat(system_call, "/etc/apt/sources.list.d/*.list", MAXLINE );
 
