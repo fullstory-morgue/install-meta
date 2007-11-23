@@ -1,8 +1,15 @@
 install-meta (0.1.45) UNRELEASED; urgency=low
 
+  [ Stefan Lippers-Hollmann ]
   * NOT RELEASED YET
 
- -- Stefan Lippers-Hollmann <s.l-h@gmx.de>  Mon, 19 Nov 2007 00:52:24 +0100
+  [ Horst Tritremmel ]
+  * mv Non_free-Firmware_Broadcom_Wireless_bcm43xx.bm Non_free-
+    Firmware_Broadcom.bm
+  * b43-fwcutter to Non_free-Firmware_Broadcom.bm added
+  * Non_free-Firmware_rt73fwcutter.bm added
+
+ -- Horst Tritremmel <hjt@sidux.com>  Fri, 23 Nov 2007 11:38:04 +0100
 
 install-meta (0.1.44) unstable; urgency=low
 

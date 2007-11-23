@@ -1,4 +1,4 @@
-FLL_DESCRIPTION="Broadcom/ bcm43xx wlan"
+FLL_DESCRIPTION="Utility for extracting Broadcom b43 and bcm43xx firmware"
 
 FLL_PRE_PROCESSING=(
 	"#!/bin/bash"
@@ -12,6 +12,7 @@ FLL_PACKAGE_DEPMODS=(
 
 FLL_PACKAGES=(
 	bcm43xx-fwcutter
+	b43-fwcutter
 )
 
 FLL_POST_PROCESSING=(
