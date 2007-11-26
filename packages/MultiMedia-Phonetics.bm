@@ -11,13 +11,26 @@ FLL_PACKAGE_DEPMODS=(
 )
 
 FLL_PACKAGES=(
-	praat
-	tipa
-	tipa-doc
-	transcriber
-	xfonts-tipa
-	xfonts-intl-phonetic
-	ttf-thryomanes
+       praat
+       wavesurfer
+       tipa
+              tipa-doc
+       transcriber
+       xfonts-tipa
+       xfonts-intl-phonetic
+       flite
+       festival
+              festvox-kallpc16k
+              festvox-rablpc16k
+              festvox-don
+       sphinx2-bin
+              sphinx2-hmm-6k
+       espeak
+              jackd
+       epos
+       kttsd
+              ksayit
+              kmouth
 )
 
 FLL_POST_PROCESSING=(
