@@ -1,8 +1,12 @@
 install-meta (0.1.47) UNRELEASED; urgency=low
 
+  [ Stefan Lippers-Hollmann ]
   * NOT RELEASED YET
 
- -- Stefan Lippers-Hollmann <s.l-h@gmx.de>  Mon, 26 Nov 2007 14:16:07 +0100
+  [ Horst Tritremmel ]
+  * MultiMedia-Phonetics updated again
+
+ -- Horst Tritremmel <hjt@sidux.com>  Tue, 27 Nov 2007 22:41:54 +0100
 
 install-meta (0.1.46) unstable; urgency=low
 

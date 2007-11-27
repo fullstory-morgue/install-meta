@@ -21,8 +21,7 @@ FLL_PACKAGES=(
        flite
        festival
               festvox-kallpc16k
-              festvox-rablpc16k
-              festvox-don
+              festival-freebsoft-utils
        sphinx2-bin
               sphinx2-hmm-6k
        espeak
