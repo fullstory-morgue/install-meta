@@ -1,4 +1,4 @@
-FLL_DESCRIPTION="Utility for extracting Ralink rt73 firmware"
+FLL_DESCRIPTION="Firmware for Ralink rt73 wireless networking chips."
 
 FLL_PRE_PROCESSING=(
 	"#!/bin/bash"
@@ -11,7 +11,7 @@ FLL_PACKAGE_DEPMODS=(
 )
 
 FLL_PACKAGES=(
-	rt73-fwcutter
+	firmware-rt73
 )
 
 FLL_POST_PROCESSING=(

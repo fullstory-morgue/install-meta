@@ -1,4 +1,4 @@
-FLL_DESCRIPTION="Utility for extracting Ralink rt61 firmware"
+FLL_DESCRIPTION="Firmware for Ralink rt61 wireless networking chips."
 
 FLL_PRE_PROCESSING=(
 	"#!/bin/bash"
@@ -11,7 +11,7 @@ FLL_PACKAGE_DEPMODS=(
 )
 
 FLL_PACKAGES=(
-	rt61-fwcutter
+	firmware-rt61
 )
 
 FLL_POST_PROCESSING=(

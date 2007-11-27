@@ -1,12 +1,12 @@
-install-meta (0.1.47) UNRELEASED; urgency=low
+install-meta (0.1.47) unstable; urgency=low
 
   [ Stefan Lippers-Hollmann ]
-  * NOT RELEASED YET
+  * switch over to firmware-rt61 and firmware-rt73.
 
   [ Horst Tritremmel ]
   * MultiMedia-Phonetics updated again
 
- -- Horst Tritremmel <hjt@sidux.com>  Tue, 27 Nov 2007 22:41:54 +0100
+ -- Stefan Lippers-Hollmann <s.l-h@gmx.de>  Wed, 28 Nov 2007 00:02:21 +0100
 
 install-meta (0.1.46) unstable; urgency=low
 
