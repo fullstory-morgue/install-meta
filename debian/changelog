@@ -1,8 +1,9 @@
 install-meta (0.1.48) UNRELEASED; urgency=low
 
   * NOT RELEASED YET
+  * switch from firmware-rt{61,73} to firmware-ralink.
 
- -- Stefan Lippers-Hollmann <s.l-h@gmx.de>  Wed, 28 Nov 2007 00:05:58 +0100
+ -- Stefan Lippers-Hollmann <s.l-h@gmx.de>  Thu, 29 Nov 2007 22:17:03 +0100
 
 install-meta (0.1.47) unstable; urgency=low
 

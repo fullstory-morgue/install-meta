@@ -1,4 +1,4 @@
-FLL_DESCRIPTION="Firmware for Ralink rt61 wireless networking chips."
+FLL_DESCRIPTION="Firmware for Ralink rt61 and rt73 wireless networking chips."
 
 FLL_PRE_PROCESSING=(
 	"#!/bin/bash"
@@ -11,7 +11,7 @@ FLL_PACKAGE_DEPMODS=(
 )
 
 FLL_PACKAGES=(
-	firmware-rt61
+	firmware-ralink
 )
 
 FLL_POST_PROCESSING=(
