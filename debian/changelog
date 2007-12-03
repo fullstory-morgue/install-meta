@@ -1,8 +1,9 @@
 install-meta (0.1.49) UNRELEASED; urgency=low
 
   * NOT RELEASED YET
+  * update to Standards-Version 3.7.3, no changes necessary.
 
- -- Stefan Lippers-Hollmann <s.l-h@gmx.de>  Fri, 30 Nov 2007 18:43:46 +0100
+ -- Stefan Lippers-Hollmann <s.l-h@gmx.de>  Mon, 03 Dec 2007 13:51:42 +0100
 
 install-meta (0.1.48) unstable; urgency=low
 
