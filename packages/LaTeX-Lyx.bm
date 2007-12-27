@@ -18,7 +18,7 @@ FLL_PACKAGES=(
 	libtiff-tools 
 	lyx 
 	lyx-common
-        lyx-qt 
+#        lyx-qt 
 	preview-latex-style 
 	texlive-latex-base 
 	texlive-latex-recommended 

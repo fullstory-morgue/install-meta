@@ -6,8 +6,9 @@ install-meta (0.1.51) UNRELEASED; urgency=low
   [ Horst Tritremmel ]
   * Games updated
   * LaTeX new, thx to konfuzius
+  * lyx-qt removed in LaTeX-Lyx
 
- -- Horst Tritremmel <hjt@sidux.com>  Thu, 27 Dec 2007 15:20:58 +0100
+ -- Horst Tritremmel <hjt@sidux.com>  Thu, 27 Dec 2007 15:26:26 +0100
 
 install-meta (0.1.50) unstable; urgency=low
 
