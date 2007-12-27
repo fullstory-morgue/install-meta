@@ -1,0 +1,27 @@
+FLL_DESCRIPTION="A emacs-like  WYSIWYG editor for LaTeX"
+
+FLL_PRE_PROCESSING=(
+   "#!/bin/bash"
+   "echo \"---- in preprocessing ----\""
+   "# paste your code here (not necessary for normal install, only for preconfigs)"
+   "echo \"---- preprocessing done----\""
+)
+
+FLL_PACKAGE_DEPMODS=(
+)
+
+FLL_PACKAGES=(	
+	groff 
+	gs-gpl 
+	guile-1.8-libs 
+	texlive-extra-utils 
+	texmacs 
+	texmacs-common
+)
+
+FLL_POST_PROCESSING=(
+   "#!/bin/bash"
+   "echo \"---- in postprocessing ----\""
+   "# paste your code here (not necessary for normal install, only for preconfigs)"
+   "echo \"---- postprocessing done----\""
+) 

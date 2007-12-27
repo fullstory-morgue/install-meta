@@ -1,0 +1,33 @@
+FLL_DESCRIPTION="A WYSIWYG editor for LaTeX"
+
+FLL_PRE_PROCESSING=(
+   "#!/bin/bash"
+   "echo \"---- in preprocessing ----\""
+   "# paste your code here (not necessary for normal install, only for preconfigs)"
+   "echo \"---- preprocessing done----\""
+)
+
+FLL_PACKAGE_DEPMODS=(
+)
+
+FLL_PACKAGES=(	
+	groff 
+	latex-xft-fonts 
+	libaiksaurus-1.2-0c2a 
+	libaiksaurus-1.2-data 
+	libtiff-tools 
+	lyx 
+	lyx-common
+        lyx-qt 
+	preview-latex-style 
+	texlive-latex-base 
+	texlive-latex-recommended 
+	xdg-utils
+)
+
+FLL_POST_PROCESSING=(
+   "#!/bin/bash"
+   "echo \"---- in postprocessing ----\""
+   "# paste your code here (not necessary for normal install, only for preconfigs)"
+   "echo \"---- postprocessing done----\""
+) 

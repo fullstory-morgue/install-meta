@@ -18,6 +18,7 @@ FLL_PACKAGES=(
        flightgear
               fgfs-atlas
        pinball
+       oolite
 )
 
 FLL_POST_PROCESSING=(

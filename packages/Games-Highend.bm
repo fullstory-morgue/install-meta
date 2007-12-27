@@ -18,7 +18,6 @@ FLL_PACKAGES=(
        planetpenguin-racer
              planetpenguin-racer-extras
        scorched3d
-             scorched3d-doc
 )
 
 FLL_POST_PROCESSING=(

@@ -14,7 +14,7 @@ FLL_PACKAGES=(
        stratagus
        bos
        widelands
-       wesnoth
+       wesnoth-all
        freeciv-client-gtk
        bzflag
        netpanzer

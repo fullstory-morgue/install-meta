@@ -1,0 +1,62 @@
+FLL_DESCRIPTION="Full LaTeX installation"
+
+FLL_PRE_PROCESSING=(
+   "#!/bin/bash"
+   "echo \"---- in preprocessing ----\""
+   "# paste your code here (not necessary for normal install, only for preconfigs)"
+   "echo \"---- preprocessing done----\""
+)
+
+FLL_PACKAGE_DEPMODS=(
+)
+
+FLL_PACKAGES=(
+	texlive
+	texlive-base
+	texlive-latex-base 
+	texlive-latex-recommended
+	texlive-fonts-recommended
+	texlive-doc-base
+	texlive-doc-en
+	preview-latex-style 
+	latex-ucs
+	latex-ucs-contrib
+	latex-beamer
+	latex-xcolor
+	latex-xft-fonts 
+	pgf
+	feynmf
+	cm-super
+	context
+	musixtex
+	preview-latex-style 
+	xdg-utils
+	texlive-font-utils
+	texlive-bibtex-extra
+	texlive-extra-utils
+	texlive-fonts-extra 
+	texlive-formats-extra
+	texlive-generic-extra
+	texlive-generic-recommended
+	texlive-latex3
+	texlive-pictures
+	texlive-latex-extra
+	texlive-math-extra
+	texlive-metapost
+	texlive-music
+	texlive-pstricks
+	texlive-publishers
+	texlive-science
+	texlive-omega
+	texlive-games
+	texlive-humanities
+	texlive-plain-extra
+	texlive-xetex
+)
+
+FLL_POST_PROCESSING=(
+   "#!/bin/bash"
+   "echo \"---- in postprocessing ----\""
+   "# paste your code here (not necessary for normal install, only for preconfigs)"
+   "echo \"---- postprocessing done----\""
+) 
