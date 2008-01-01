@@ -1,9 +1,5 @@
-install-meta (0.1.51) UNRELEASED; urgency=low
+install-meta (0.1.51) unstable; urgency=low
 
-  [ Stefan Lippers-Hollmann ]
-  * NOT RELEASED YET
-
-  [ Horst Tritremmel ]
   * Games updated
   * LaTeX new, thx to konfuzius
   * lyx-qt removed in LaTeX-Lyx
