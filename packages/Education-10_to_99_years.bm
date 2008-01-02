@@ -18,6 +18,10 @@ FLL_PACKAGES=(
 	kgeography
 	vym
 	katomic
+	sunclock
+	qgis
+	qgis-plugin-grass
+	gpx2shp
 	einstein
 	tipptrainer-data-de
 	tipptrainer-data-en
@@ -27,7 +31,6 @@ FLL_PACKAGES=(
 	mysql-client
 	xoscope
 	qcad
-	sunclock
 	chemtool
 	noteedit
 	timidity

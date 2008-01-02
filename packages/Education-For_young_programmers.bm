@@ -18,6 +18,14 @@ FLL_PACKAGES=(
 	fp-utils
 	fp-units-gtk2
 	fp-docs
+	fpc-source
+	fp-units-fcl
+	fp-units-i386
+	fp-units-multimedia
+	fp-units-misc
+	fp-units-net
+	fp-units-rtl
+	fp-units-fv
 	lazarus
 	gambas
 	quanta
@@ -55,4 +63,7 @@ FLL_POST_PROCESSING=(
 	"echo \"---- in postprocessing ----\""
 	"# paste your code here (not necessary for normal install, only for preconfigs)"
 	"echo \"---- postprocessing done----\""
+	"echo \"--please use the metapackage non-free at first for installing the non-free repo for the sun-java stuff--\"
+        "echo \"--nutze bitte zunächst das Metapaket non-free um für die sun-java-Installation das non-free-Ropository zu erhalten--\"
+
 )
