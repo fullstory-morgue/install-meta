@@ -17,7 +17,7 @@ endif
 config.status: configure
 	dh_testdir
 	
-	if grep -q -e bibletime -e partimage packages/*.bm packages/packages.d/*.bm; then \
+	if grep -q -e bibletime -e partimage -e freenx packages/*.bm packages/packages.d/*.bm; then \
 		echo "ERROR: unsuitable packages detected."; \
 		false; \
 	fi

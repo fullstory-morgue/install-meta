@@ -29,7 +29,6 @@ FLL_PACKAGES=(
 	moodle-debian-edu-theme
 	komba2
 	samba
-	freenx
 )
 
 FLL_POST_PROCESSING=(
