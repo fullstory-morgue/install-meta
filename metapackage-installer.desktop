@@ -1,7 +1,7 @@
 [Desktop Entry]
 Encoding=UTF-8
 Type=Application
-Exec=su-tu-root -X -c /usr/sbin/metapackage-installer
+Exec=su-to-root -X -c /usr/sbin/metapackage-installer
 Icon=sidux-meta
 Name=metapackage-installer
 Name[de]=metapackage-installer
