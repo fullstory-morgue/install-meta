@@ -1,8 +1,8 @@
-install-meta (0.2.2) UNRELEASED; urgency=low
+install-meta (0.2.2) unstable; urgency=low
 
-  * NOT RELEASED YET
+  * update to debhelper compat 6.
 
- -- Stefan Lippers-Hollmann <s.l-h@gmx.de>  Fri, 11 Jan 2008 16:58:35 +0100
+ -- Stefan Lippers-Hollmann <s.l-h@gmx.de>  Fri, 18 Jan 2008 23:58:00 +0100
 
 install-meta (0.2.1) unstable; urgency=low
 
