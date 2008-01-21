@@ -95,6 +95,31 @@ binary-arch: build install
 	dh_md5sums
 	dh_builddeb
 
+create-icons::
+	# requires inkscape and imagemagick to be installed
+		@if [ ! -x /usr/bin/convert ]; then \
+		echo "ERROR: imagemagick not installed!" ; \
+		false ; \
+	fi
+	@if [ ! -x /usr/bin/inkscape ]; then \
+		echo "ERROR: inkscape not installed!" ; \
+		false ; \
+	fi
+	
+	# create XDG compatible icons from SVG
+	for i in 16 22 32 48 64 128; do \
+		mkdir -p "icons/hicolor/$${i}x$${i}/apps" ; \
+		inkscape --export-width=$${i} \
+			 --export-height=$${i} \
+			 --export-png="$(CURDIR)/icons/hicolor/$${i}x$${i}/apps/sidux-meta.png" \
+				$(CURDIR)/icons/sidux-meta.svg ; \
+	done
+	
+	# create XPM icons for the debian menu system
+	mkdir -p icons/pixmaps
+	convert icons/hicolor/32x32/apps/sidux-meta.png icons/pixmaps/sidux-meta.xpm
+	convert icons/hicolor/16x16/apps/sidux-meta.png icons/pixmaps/sidux-meta-16.xpm
+
 binary: binary-indep binary-arch
 .PHONY: build clean binary-indep binary-arch binary install
 
