@@ -1,4 +1,4 @@
-install-meta (0.2.3) UNRELEASED; urgency=low
+install-meta (0.2.3) unstable; urgency=low
 
   [ Joaquim Boura ]
   * new icons. some still missing
@@ -12,7 +12,7 @@ install-meta (0.2.3) UNRELEASED; urgency=low
   * remove no longer required imagemagick build-dep.
   * pixmaps/sidux-meta-icon.png doesn't seem to be used, remove it.
 
- -- Stefan Lippers-Hollmann <s.l-h@gmx.de>  Tue, 29 Jan 2008 02:09:20 +0100
+ -- Stefan Lippers-Hollmann <s.l-h@gmx.de>  Tue, 29 Jan 2008 02:42:04 +0100
 
 install-meta (0.2.2) unstable; urgency=low
 
