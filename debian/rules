@@ -64,12 +64,6 @@ install: build
 	$(MAKE) DESTDIR=$(CURDIR)/debian/install-meta install
 	DESTDIR=$(CURDIR)/debian/install-meta po/make_po.sh install-meta.mo
 
-	mkdir -p debian/install-meta/usr/share/pixmaps
-	convert icons/hicolor/32x32/apps/sidux-meta.png \
-		debian/install-meta/usr/share/pixmaps/install-meta.xpm
-	convert icons/hicolor/16x16/apps/sidux-meta.png \
-		debian/install-meta/usr/share/pixmaps/install-meta-16.xpm
-
 # Build architecture-independent files here.
 binary-indep: build install
 # We have nothing to do by default.
@@ -111,14 +105,23 @@ create-icons::
 		mkdir -p "icons/hicolor/$${i}x$${i}/apps" ; \
 		inkscape --export-width=$${i} \
 			 --export-height=$${i} \
-			 --export-png="$(CURDIR)/icons/hicolor/$${i}x$${i}/apps/sidux-meta.png" \
-				$(CURDIR)/icons/sidux-meta.svg ; \
+			 --export-png="$(CURDIR)/icons/hicolor/$${i}x$${i}/apps/metapackage-installer.png" \
+				"$(CURDIR)/icons/metapackage-installer.svg" ; \
 	done
+	
+	# create GUI icons
+	mkdir -p icons/share
+	inkscape --export-width=16 \
+		 --export-height=16 \
+		 --export-png="$(CURDIR)/icons/share/install-meta-info.png" \
+		 	"$(CURDIR)/icons/install-meta-info.svg"
+	
+	cp icons/hicolor/128x128/apps/metapackage-installer.png "$(CURDIR)/icons/share/"
 	
 	# create XPM icons for the debian menu system
 	mkdir -p icons/pixmaps
-	convert icons/hicolor/32x32/apps/sidux-meta.png icons/pixmaps/sidux-meta.xpm
-	convert icons/hicolor/16x16/apps/sidux-meta.png icons/pixmaps/sidux-meta-16.xpm
+	convert icons/hicolor/32x32/apps/metapackage-installer.png icons/pixmaps/metapackage-installer.xpm
+	convert icons/hicolor/16x16/apps/metapackage-installer.png icons/pixmaps/metapackage-installer-16.xpm
 
 binary: binary-indep binary-arch
 .PHONY: build clean binary-indep binary-arch binary install

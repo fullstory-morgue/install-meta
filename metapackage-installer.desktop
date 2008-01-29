@@ -2,7 +2,7 @@
 Encoding=UTF-8
 Type=Application
 Exec=su-to-root -X -c /usr/sbin/metapackage-installer
-Icon=sidux-meta
+Icon=metapackage-installer
 Name=metapackage-installer
 Name[de]=metapackage-installer
 Name[pt]=instalar pacotes meta

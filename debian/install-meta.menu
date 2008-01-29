@@ -2,6 +2,6 @@
 	section="Applications/System/Administration" \
 	hints="sidux,Config" \
 	title="metapackage-installer" \
-	icon32x32="/usr/share/pixmaps/install-meta.xpm" \
-	icon16x16="/usr/share/pixmaps/install-meta-16.xpm" \
+	icon32x32="/usr/share/pixmaps/metapackage-installer.xpm" \
+	icon16x16="/usr/share/pixmaps/metapackage-installer-16.xpm" \
 	command="su-to-root -X -c /usr/sbin/metapackage-installer"

@@ -1,7 +1,8 @@
-*-installer			usr/sbin/
-*.desktop			usr/share/applications/sidux/
+metapackage-installer		usr/sbin/
+metapackage-installer.desktop	usr/share/applications/sidux/
 packages/*.bm			usr/share/install-meta/
 packages/packages.d/*.bm	usr/share/install-meta/packages.d/
-icons/sidux-meta.svg		usr/share/icons/hicolor/scalable/apps/
+icons/metapackage-installer.svg	usr/share/icons/hicolor/scalable/apps/
 icons/hicolor			usr/share/icons/
 icons/pixmaps			usr/share/
+icons/share/*			usr/share/install-meta/pixmaps/
