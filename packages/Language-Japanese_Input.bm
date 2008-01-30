@@ -1,0 +1,53 @@
+FLL_DESCRIPTION="Japanese IME: SCIM-Anthy, etc. "
+
+FLL_PRE_PROCESSING=(
+	"#!/bin/bash"
+	"echo \"---- in preprocessing ----\""
+	"# paste your code here (not necessary for normal install, only for preconfigs)"
+	"echo \"---- preprocessing done----\""
+)
+
+FLL_PACKAGE_DEPMODS=(
+)
+
+FLL_PACKAGES=(
+	scim
+	im-switch
+	scim-gtk2-immodule
+	scim-qtimm
+	scim-tables-ja
+	ttf-kochi-gothic
+	kasumi
+	anthy
+	skkdic
+	skkdic-cdb
+	skkdic-extra
+	scim-anthy
+	scim-skk
+	scim-uim
+	uim-anthy
+	jfbterm
+	unifont
+)
+
+FLL_POST_PROCESSING=(
+	"#!/bin/bash"
+	"echo \"---- in postprocessing ----\""
+	"# add locale ja_JP.UTF-8, if not installed "
+	"if [ \"$( locale -a | grep ja_JP.utf8 )\" ]" 
+	"then"
+	"   echo \"ja_JP.UTF-8 is already installed\""
+	"   else"
+	"      echo \"ja_JP.UTF-8 is not installed yet. installing...\""
+	"      sed -i 's/^# ja_JP.UTF-8/ja_JP.UTF-8/' /etc/locale.gen"
+	"      locale-gen"
+	"fi"
+	"# add xsessions entry to set env necessary for scim japanese input "
+	"# use no.78 because 80 is used by scim-m17n, we want this before it"
+	"echo 'export XMODIFIERS=\"@im=SCIM\"'  > /etc/X11/Xsession.d/78xinput"
+	"echo 'export GTK_IM_MODULE=\"scim\"'  >> /etc/X11/Xsession.d/78xinput"
+	"echo 'export QT_IM_MODULE=\"scim\"'   >> /etc/X11/Xsession.d/78xinput"
+	"echo 'export XIM_PROGRAM=\"scim -d\"' >> /etc/X11/Xsession.d/78xinput"
+	"echo \"---- postprocessing done----\""
+)
+

@@ -1,0 +1,43 @@
+FLL_DESCRIPTION="Korean localisation of kde & text mode console support"
+
+
+FLL_PRE_PROCESSING=(
+	"#!/bin/bash"
+	"echo \"---- in preprocessing ----\""
+	"# paste your code here (not necessary for normal install, only for preconfigs)"
+	"echo \"---- preprocessing done----\""
+)
+
+FLL_PACKAGE_DEPMODS=(
+)
+
+FLL_PACKAGES=(
+	unifont
+	jfbterm
+	ttf-alee
+	ttf-baemuk
+	kde-i18n-ko
+	manpages-ko
+)
+
+FLL_POST_PROCESSING=(
+	"#!/bin/bash"
+	"echo \"---- in postprocessing ----\""
+	"# add locale ko_KR.UTF-8, if not installed"
+	"if [ \"$( locale -a | grep ko_KR.utf8 )\" ]" 
+	"then"
+	"   echo \"ko_KR.UTF-8 is already installed\""
+	"   else"
+	"      echo \"ko_KR.UTF-8 is not installed yet. installing...\""
+	"      sed -i 's/^# ko_KR.UTF-8/ko_KR.UTF-8/' /etc/locale.gen"
+	"      locale-gen"
+	"fi"
+	"# and set it the default locale"
+	"update-locale LANG=ko_KR.UTF-8 LANGUAGE"
+	"# 1 line script to enable tty to show japanese output"
+	"echo '#!/bin/bash'   > /usr/local/bin/koconsole"
+	"echo 'LANG=ko_KR.UTF-8 LC_CTYPE=ko_KR.UTF-8 jfbterm -q -c UTF-8' >> /usr/local/bin/koconsole" 
+	"chmod +x /usr/local/bin/koconsole"
+	"echo \"---- postprocessing done----\""
+)
+

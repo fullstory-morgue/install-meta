@@ -1,0 +1,42 @@
+FLL_DESCRIPTION="Japanese localisation of kde & text mode console support"
+
+
+FLL_PRE_PROCESSING=(
+	"#!/bin/bash"
+	"echo \"---- in preprocessing ----\""
+	"# paste your code here (not necessary for normal install, only for preconfigs)"
+	"echo \"---- preprocessing done----\""
+)
+
+FLL_PACKAGE_DEPMODS=(
+)
+
+FLL_PACKAGES=(
+	unifont
+	jfbterm
+	ttf-kochi-gothic
+	kde-i18n-ja
+	manpages-ja
+)
+
+FLL_POST_PROCESSING=(
+	"#!/bin/bash"
+	"echo \"---- in postprocessing ----\""
+	"# add locale ja_JP.UTF-8, if not installed"
+	"if [ \"$( locale -a | grep ja_JP.utf8 )\" ]" 
+	"then"
+	"   echo \"ja_JP.UTF-8 is already installed\""
+	"   else"
+	"      echo \"ja_JP.UTF-8 is not installed yet. installing...\""
+	"      sed -i 's/^# ja_JP.UTF-8/ja_JP.UTF-8/' /etc/locale.gen"
+	"      locale-gen"
+	"fi"
+	"# and set it the default locale"
+	"update-locale LANG=ja_JP.UTF-8 LANGUAGE"
+	"# 1 line script to enable tty to show japanese output"
+	"echo '#!/bin/bash'   > /usr/local/bin/jpconsole"
+	"echo 'LANG=ja_JP.UTF-8 LC_CTYPE=ja_JP.UTF-8 jfbterm -q -c UTF-8' >> /usr/local/bin/jpconsole" 
+	"chmod +x /usr/local/bin/jpconsole"
+	"echo \"---- postprocessing done----\""
+)
+
