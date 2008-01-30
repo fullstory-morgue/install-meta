@@ -11,7 +11,7 @@
   <property name="modal">False</property>
   <property name="resizable">False</property>
   <property name="destroy_with_parent">False</property>
-  <property name="icon">metapackage-installer.png</property>
+  <property name="icon">metapackage-installer-16.xpm</property>
   <property name="decorated">True</property>
   <property name="skip_taskbar_hint">False</property>
   <property name="skip_pager_hint">False</property>
@@ -108,7 +108,7 @@ or use   --dir=&lt;dir&gt;
   <property name="modal">False</property>
   <property name="resizable">False</property>
   <property name="destroy_with_parent">False</property>
-  <property name="icon">metapackage-installer.png</property>
+  <property name="icon">metapackage-installer-16.xpm</property>
   <property name="decorated">True</property>
   <property name="skip_taskbar_hint">False</property>
   <property name="skip_pager_hint">False</property>
@@ -361,7 +361,7 @@ or use   --dir=&lt;dir&gt;
   <property name="modal">False</property>
   <property name="resizable">False</property>
   <property name="destroy_with_parent">False</property>
-  <property name="icon">metapackage-installer.png</property>
+  <property name="icon">metapackage-installer-16.xpm</property>
   <property name="decorated">True</property>
   <property name="skip_taskbar_hint">False</property>
   <property name="skip_pager_hint">False</property>
@@ -392,64 +392,6 @@ or use   --dir=&lt;dir&gt;
 	  <child>
 	    <widget class="GtkFixed" id="fixed6">
 	      <property name="visible">True</property>
-
-	      <child>
-		<widget class="GtkButton" id="button_collapse">
-		  <property name="width_request">28</property>
-		  <property name="height_request">28</property>
-		  <property name="visible">True</property>
-		  <property name="tooltip" translatable="yes">collapse all </property>
-		  <property name="can_focus">True</property>
-		  <property name="relief">GTK_RELIEF_NORMAL</property>
-		  <property name="focus_on_click">True</property>
-		  <signal name="clicked" handler="on_button_collapse_clicked" last_modification_time="Thu, 29 Mar 2007 10:48:47 GMT"/>
-
-		  <child>
-		    <widget class="GtkImage" id="image11">
-		      <property name="visible">True</property>
-		      <property name="stock">gtk-remove</property>
-		      <property name="icon_size">4</property>
-		      <property name="xalign">0.5</property>
-		      <property name="yalign">0.5</property>
-		      <property name="xpad">0</property>
-		      <property name="ypad">0</property>
-		    </widget>
-		  </child>
-		</widget>
-		<packing>
-		  <property name="x">8</property>
-		  <property name="y">48</property>
-		</packing>
-	      </child>
-
-	      <child>
-		<widget class="GtkButton" id="button_expand">
-		  <property name="width_request">28</property>
-		  <property name="height_request">28</property>
-		  <property name="visible">True</property>
-		  <property name="tooltip" translatable="yes">expand all</property>
-		  <property name="can_focus">True</property>
-		  <property name="relief">GTK_RELIEF_NORMAL</property>
-		  <property name="focus_on_click">True</property>
-		  <signal name="clicked" handler="on_button_expand_clicked" last_modification_time="Thu, 29 Mar 2007 10:40:11 GMT"/>
-
-		  <child>
-		    <widget class="GtkImage" id="image10">
-		      <property name="visible">True</property>
-		      <property name="stock">gtk-add</property>
-		      <property name="icon_size">4</property>
-		      <property name="xalign">0.5</property>
-		      <property name="yalign">0.5</property>
-		      <property name="xpad">0</property>
-		      <property name="ypad">0</property>
-		    </widget>
-		  </child>
-		</widget>
-		<packing>
-		  <property name="x">8</property>
-		  <property name="y">16</property>
-		</packing>
-	      </child>
 
 	      <child>
 		<widget class="GtkScrolledWindow" id="scrolledwindow1">
@@ -663,6 +605,64 @@ or use   --dir=&lt;dir&gt;
 		<packing>
 		  <property name="x">48</property>
 		  <property name="y">398</property>
+		</packing>
+	      </child>
+
+	      <child>
+		<widget class="GtkButton" id="button_collapse">
+		  <property name="width_request">28</property>
+		  <property name="height_request">28</property>
+		  <property name="visible">True</property>
+		  <property name="tooltip" translatable="yes">collapse all </property>
+		  <property name="can_focus">True</property>
+		  <property name="relief">GTK_RELIEF_NORMAL</property>
+		  <property name="focus_on_click">True</property>
+		  <signal name="clicked" handler="on_button_collapse_clicked" last_modification_time="Thu, 29 Mar 2007 10:48:47 GMT"/>
+
+		  <child>
+		    <widget class="GtkImage" id="image11">
+		      <property name="visible">True</property>
+		      <property name="stock">gtk-go-forward</property>
+		      <property name="icon_size">4</property>
+		      <property name="xalign">0.5</property>
+		      <property name="yalign">0.5</property>
+		      <property name="xpad">0</property>
+		      <property name="ypad">0</property>
+		    </widget>
+		  </child>
+		</widget>
+		<packing>
+		  <property name="x">8</property>
+		  <property name="y">48</property>
+		</packing>
+	      </child>
+
+	      <child>
+		<widget class="GtkButton" id="button_expand">
+		  <property name="width_request">28</property>
+		  <property name="height_request">28</property>
+		  <property name="visible">True</property>
+		  <property name="tooltip" translatable="yes">expand all</property>
+		  <property name="can_focus">True</property>
+		  <property name="relief">GTK_RELIEF_NORMAL</property>
+		  <property name="focus_on_click">True</property>
+		  <signal name="clicked" handler="on_button_expand_clicked" last_modification_time="Thu, 29 Mar 2007 10:40:11 GMT"/>
+
+		  <child>
+		    <widget class="GtkImage" id="image10">
+		      <property name="visible">True</property>
+		      <property name="stock">gtk-go-down</property>
+		      <property name="icon_size">4</property>
+		      <property name="xalign">0.5</property>
+		      <property name="yalign">0.5</property>
+		      <property name="xpad">0</property>
+		      <property name="ypad">0</property>
+		    </widget>
+		  </child>
+		</widget>
+		<packing>
+		  <property name="x">8</property>
+		  <property name="y">16</property>
 		</packing>
 	      </child>
 	    </widget>
@@ -1030,32 +1030,6 @@ see non-free category in the metapackages list &lt;/span&gt;
       </child>
 
       <child>
-	<widget class="GtkLabel" id="label22">
-	  <property name="width_request">734</property>
-	  <property name="height_request">30</property>
-	  <property name="visible">True</property>
-	  <property name="label" translatable="yes">&lt;span font_desc=&quot;Bold 12&quot;&gt;To use this feature, make sure you are connected to the internet!&lt;/span&gt;</property>
-	  <property name="use_underline">False</property>
-	  <property name="use_markup">True</property>
-	  <property name="justify">GTK_JUSTIFY_LEFT</property>
-	  <property name="wrap">False</property>
-	  <property name="selectable">False</property>
-	  <property name="xalign">0</property>
-	  <property name="yalign">0.5</property>
-	  <property name="xpad">0</property>
-	  <property name="ypad">0</property>
-	  <property name="ellipsize">PANGO_ELLIPSIZE_NONE</property>
-	  <property name="width_chars">-1</property>
-	  <property name="single_line_mode">False</property>
-	  <property name="angle">0</property>
-	</widget>
-	<packing>
-	  <property name="x">8</property>
-	  <property name="y">28</property>
-	</packing>
-      </child>
-
-      <child>
 	<widget class="GtkLabel" id="label_install">
 	  <property name="width_request">518</property>
 	  <property name="height_request">30</property>
@@ -1095,6 +1069,32 @@ see non-free category in the metapackages list &lt;/span&gt;
 	<packing>
 	  <property name="x">568</property>
 	  <property name="y">0</property>
+	</packing>
+      </child>
+
+      <child>
+	<widget class="GtkLabel" id="label22">
+	  <property name="width_request">734</property>
+	  <property name="height_request">30</property>
+	  <property name="visible">True</property>
+	  <property name="label" translatable="yes">To use this feature, make sure you are connected to the internet!</property>
+	  <property name="use_underline">False</property>
+	  <property name="use_markup">True</property>
+	  <property name="justify">GTK_JUSTIFY_LEFT</property>
+	  <property name="wrap">False</property>
+	  <property name="selectable">False</property>
+	  <property name="xalign">0</property>
+	  <property name="yalign">0.5</property>
+	  <property name="xpad">0</property>
+	  <property name="ypad">0</property>
+	  <property name="ellipsize">PANGO_ELLIPSIZE_NONE</property>
+	  <property name="width_chars">-1</property>
+	  <property name="single_line_mode">False</property>
+	  <property name="angle">0</property>
+	</widget>
+	<packing>
+	  <property name="x">8</property>
+	  <property name="y">30</property>
 	</packing>
       </child>
     </widget>

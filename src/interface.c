@@ -40,7 +40,7 @@ create_dialog1 (void)
   dialog1 = gtk_dialog_new ();
   gtk_window_set_title (GTK_WINDOW (dialog1), _("Info"));
   gtk_window_set_resizable (GTK_WINDOW (dialog1), FALSE);
-  dialog1_icon_pixbuf = create_pixbuf ("metapackage-installer.png");
+  dialog1_icon_pixbuf = create_pixbuf ("metapackage-installer-16.xpm");
   if (dialog1_icon_pixbuf)
     {
       gtk_window_set_icon (GTK_WINDOW (dialog1), dialog1_icon_pixbuf);
@@ -107,7 +107,7 @@ create_package_info (void)
   package_info = gtk_window_new (GTK_WINDOW_TOPLEVEL);
   gtk_window_set_title (GTK_WINDOW (package_info), _("Package Info"));
   gtk_window_set_resizable (GTK_WINDOW (package_info), FALSE);
-  package_info_icon_pixbuf = create_pixbuf ("metapackage-installer.png");
+  package_info_icon_pixbuf = create_pixbuf ("metapackage-installer-16.xpm");
   if (package_info_icon_pixbuf)
     {
       gtk_window_set_icon (GTK_WINDOW (package_info), package_info_icon_pixbuf);
@@ -216,10 +216,6 @@ create_window_main (void)
   GtkWidget *fixed5;
   GtkWidget *notebook1;
   GtkWidget *fixed6;
-  GtkWidget *button_collapse;
-  GtkWidget *image11;
-  GtkWidget *button_expand;
-  GtkWidget *image10;
   GtkWidget *scrolledwindow1;
   GtkWidget *treeview1;
   GtkWidget *button_install;
@@ -233,6 +229,10 @@ create_window_main (void)
   GtkWidget *hbox2;
   GtkWidget *image5;
   GtkWidget *label10;
+  GtkWidget *button_collapse;
+  GtkWidget *image11;
+  GtkWidget *button_expand;
+  GtkWidget *image10;
   GtkWidget *label16;
   GtkWidget *fixed7;
   GtkWidget *scrolledwindow6;
@@ -254,9 +254,9 @@ create_window_main (void)
   GtkWidget *image14;
   GtkWidget *label21;
   GtkWidget *label17;
-  GtkWidget *label22;
   GtkWidget *label_install;
   GtkWidget *image8;
+  GtkWidget *label22;
   GtkTooltips *tooltips;
 
   tooltips = gtk_tooltips_new ();
@@ -265,7 +265,7 @@ create_window_main (void)
   gtk_window_set_title (GTK_WINDOW (window_main), _("Install metapackages"));
   gtk_window_set_position (GTK_WINDOW (window_main), GTK_WIN_POS_CENTER_ALWAYS);
   gtk_window_set_resizable (GTK_WINDOW (window_main), FALSE);
-  window_main_icon_pixbuf = create_pixbuf ("metapackage-installer.png");
+  window_main_icon_pixbuf = create_pixbuf ("metapackage-installer-16.xpm");
   if (window_main_icon_pixbuf)
     {
       gtk_window_set_icon (GTK_WINDOW (window_main), window_main_icon_pixbuf);
@@ -286,26 +286,6 @@ create_window_main (void)
   fixed6 = gtk_fixed_new ();
   gtk_widget_show (fixed6);
   gtk_container_add (GTK_CONTAINER (notebook1), fixed6);
-
-  button_collapse = gtk_button_new ();
-  gtk_widget_show (button_collapse);
-  gtk_fixed_put (GTK_FIXED (fixed6), button_collapse, 8, 48);
-  gtk_widget_set_size_request (button_collapse, 28, 28);
-  gtk_tooltips_set_tip (tooltips, button_collapse, _("collapse all "), NULL);
-
-  image11 = gtk_image_new_from_stock ("gtk-remove", GTK_ICON_SIZE_BUTTON);
-  gtk_widget_show (image11);
-  gtk_container_add (GTK_CONTAINER (button_collapse), image11);
-
-  button_expand = gtk_button_new ();
-  gtk_widget_show (button_expand);
-  gtk_fixed_put (GTK_FIXED (fixed6), button_expand, 8, 16);
-  gtk_widget_set_size_request (button_expand, 28, 28);
-  gtk_tooltips_set_tip (tooltips, button_expand, _("expand all"), NULL);
-
-  image10 = gtk_image_new_from_stock ("gtk-add", GTK_ICON_SIZE_BUTTON);
-  gtk_widget_show (image10);
-  gtk_container_add (GTK_CONTAINER (button_expand), image10);
 
   scrolledwindow1 = gtk_scrolled_window_new (NULL, NULL);
   gtk_widget_show (scrolledwindow1);
@@ -366,6 +346,26 @@ create_window_main (void)
   label10 = gtk_label_new_with_mnemonic (_("Exit"));
   gtk_widget_show (label10);
   gtk_box_pack_start (GTK_BOX (hbox2), label10, FALSE, FALSE, 0);
+
+  button_collapse = gtk_button_new ();
+  gtk_widget_show (button_collapse);
+  gtk_fixed_put (GTK_FIXED (fixed6), button_collapse, 8, 48);
+  gtk_widget_set_size_request (button_collapse, 28, 28);
+  gtk_tooltips_set_tip (tooltips, button_collapse, _("collapse all "), NULL);
+
+  image11 = gtk_image_new_from_stock ("gtk-go-forward", GTK_ICON_SIZE_BUTTON);
+  gtk_widget_show (image11);
+  gtk_container_add (GTK_CONTAINER (button_collapse), image11);
+
+  button_expand = gtk_button_new ();
+  gtk_widget_show (button_expand);
+  gtk_fixed_put (GTK_FIXED (fixed6), button_expand, 8, 16);
+  gtk_widget_set_size_request (button_expand, 28, 28);
+  gtk_tooltips_set_tip (tooltips, button_expand, _("expand all"), NULL);
+
+  image10 = gtk_image_new_from_stock ("gtk-go-down", GTK_ICON_SIZE_BUTTON);
+  gtk_widget_show (image10);
+  gtk_container_add (GTK_CONTAINER (button_expand), image10);
 
   label16 = gtk_label_new (_("<b>Metapackages</b>"));
   gtk_widget_show (label16);
@@ -463,13 +463,6 @@ create_window_main (void)
   gtk_notebook_set_tab_label (GTK_NOTEBOOK (notebook1), gtk_notebook_get_nth_page (GTK_NOTEBOOK (notebook1), 1), label17);
   gtk_label_set_use_markup (GTK_LABEL (label17), TRUE);
 
-  label22 = gtk_label_new (_("<span font_desc=\"Bold 12\">To use this feature, make sure you are connected to the internet!</span>"));
-  gtk_widget_show (label22);
-  gtk_fixed_put (GTK_FIXED (fixed5), label22, 8, 28);
-  gtk_widget_set_size_request (label22, 734, 30);
-  gtk_label_set_use_markup (GTK_LABEL (label22), TRUE);
-  gtk_misc_set_alignment (GTK_MISC (label22), 0, 0.5);
-
   label_install = gtk_label_new (_("<span foreground=\"#A4A58B\" font_desc=\"Bold 14\">Install additional metapackages</span>"));
   gtk_widget_show (label_install);
   gtk_fixed_put (GTK_FIXED (fixed5), label_install, 8, 0);
@@ -482,17 +475,18 @@ create_window_main (void)
   gtk_fixed_put (GTK_FIXED (fixed5), image8, 568, 0);
   gtk_widget_set_size_request (image8, 160, 62);
 
+  label22 = gtk_label_new (_("To use this feature, make sure you are connected to the internet!"));
+  gtk_widget_show (label22);
+  gtk_fixed_put (GTK_FIXED (fixed5), label22, 8, 30);
+  gtk_widget_set_size_request (label22, 734, 30);
+  gtk_label_set_use_markup (GTK_LABEL (label22), TRUE);
+  gtk_misc_set_alignment (GTK_MISC (label22), 0, 0.5);
+
   g_signal_connect ((gpointer) window_main, "show",
                     G_CALLBACK (on_window_main_show),
                     NULL);
   g_signal_connect ((gpointer) window_main, "delete_event",
                     G_CALLBACK (on_window_main_delete_event),
-                    NULL);
-  g_signal_connect ((gpointer) button_collapse, "clicked",
-                    G_CALLBACK (on_button_collapse_clicked),
-                    NULL);
-  g_signal_connect ((gpointer) button_expand, "clicked",
-                    G_CALLBACK (on_button_expand_clicked),
                     NULL);
   g_signal_connect ((gpointer) treeview1, "button_press_event",
                     G_CALLBACK (on_treeview1_button_press_event),
@@ -505,6 +499,12 @@ create_window_main (void)
                     NULL);
   g_signal_connect ((gpointer) exit, "clicked",
                     G_CALLBACK (on_exit_clicked),
+                    NULL);
+  g_signal_connect ((gpointer) button_collapse, "clicked",
+                    G_CALLBACK (on_button_collapse_clicked),
+                    NULL);
+  g_signal_connect ((gpointer) button_expand, "clicked",
+                    G_CALLBACK (on_button_expand_clicked),
                     NULL);
   g_signal_connect ((gpointer) exit2, "clicked",
                     G_CALLBACK (on_exit2_clicked),
@@ -521,10 +521,6 @@ create_window_main (void)
   GLADE_HOOKUP_OBJECT (window_main, fixed5, "fixed5");
   GLADE_HOOKUP_OBJECT (window_main, notebook1, "notebook1");
   GLADE_HOOKUP_OBJECT (window_main, fixed6, "fixed6");
-  GLADE_HOOKUP_OBJECT (window_main, button_collapse, "button_collapse");
-  GLADE_HOOKUP_OBJECT (window_main, image11, "image11");
-  GLADE_HOOKUP_OBJECT (window_main, button_expand, "button_expand");
-  GLADE_HOOKUP_OBJECT (window_main, image10, "image10");
   GLADE_HOOKUP_OBJECT (window_main, scrolledwindow1, "scrolledwindow1");
   GLADE_HOOKUP_OBJECT (window_main, treeview1, "treeview1");
   GLADE_HOOKUP_OBJECT (window_main, button_install, "button_install");
@@ -538,6 +534,10 @@ create_window_main (void)
   GLADE_HOOKUP_OBJECT (window_main, hbox2, "hbox2");
   GLADE_HOOKUP_OBJECT (window_main, image5, "image5");
   GLADE_HOOKUP_OBJECT (window_main, label10, "label10");
+  GLADE_HOOKUP_OBJECT (window_main, button_collapse, "button_collapse");
+  GLADE_HOOKUP_OBJECT (window_main, image11, "image11");
+  GLADE_HOOKUP_OBJECT (window_main, button_expand, "button_expand");
+  GLADE_HOOKUP_OBJECT (window_main, image10, "image10");
   GLADE_HOOKUP_OBJECT (window_main, label16, "label16");
   GLADE_HOOKUP_OBJECT (window_main, fixed7, "fixed7");
   GLADE_HOOKUP_OBJECT (window_main, scrolledwindow6, "scrolledwindow6");
@@ -559,9 +559,9 @@ create_window_main (void)
   GLADE_HOOKUP_OBJECT (window_main, image14, "image14");
   GLADE_HOOKUP_OBJECT (window_main, label21, "label21");
   GLADE_HOOKUP_OBJECT (window_main, label17, "label17");
-  GLADE_HOOKUP_OBJECT (window_main, label22, "label22");
   GLADE_HOOKUP_OBJECT (window_main, label_install, "label_install");
   GLADE_HOOKUP_OBJECT (window_main, image8, "image8");
+  GLADE_HOOKUP_OBJECT (window_main, label22, "label22");
   GLADE_HOOKUP_OBJECT_NO_REF (window_main, tooltips, "tooltips");
 
   return window_main;
