@@ -17,6 +17,7 @@ FLL_PACKAGES=(
 	ttf-kochi-gothic
 	kde-i18n-ja
 	manpages-ja
+	sidux-manual-ja
 )
 
 FLL_POST_PROCESSING=(

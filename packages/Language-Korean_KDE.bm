@@ -15,7 +15,7 @@ FLL_PACKAGES=(
 	unifont
 	jfbterm
 	ttf-alee
-	ttf-baemuk
+	ttf-baekmuk
 	kde-i18n-ko
 	manpages-ko
 )
