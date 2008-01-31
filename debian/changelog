@@ -1,9 +1,5 @@
-install-meta (0.2.5) UNRELEASED; urgency=low
+install-meta (0.2.5) unstable; urgency=low
 
-  [ Stefan Lippers-Hollmann ]
-  * NOT RELEASED YET
-
-  [ Joaquim Boura ]
   * Fixed typo on Language-Korean_KDE.bm, added sidux-manaul-ja. New files to
     install openoffice localisation
 
