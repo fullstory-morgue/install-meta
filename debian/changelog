@@ -1,8 +1,12 @@
 install-meta (0.2.6) UNRELEASED; urgency=low
 
+  [ Stefan Lippers-Hollmann ]
   * NOT RELEASED YET
 
- -- Stefan Lippers-Hollmann <s.l-h@gmx.de>  Fri, 01 Feb 2008 00:17:45 +0100
+  [ Joaquim Boura ]
+  * japanese text file. Thks to muchan
+
+ -- Joaquim Boura <x-un-i@sidux.com>  Sun, 03 Feb 2008 15:47:29 +0100
 
 install-meta (0.2.5) unstable; urgency=low
 
