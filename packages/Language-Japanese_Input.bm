@@ -24,8 +24,10 @@ FLL_PACKAGES=(
 	skkdic-extra
 	scim-anthy
 	scim-skk
-	scim-uim
-	uim-anthy
+	scim-bridge-agent
+	scim-bridge-client-gtk
+	scim-bridge-client-qt
+	scim-bridge-client-qt4
 	jfbterm
 	unifont
 )
@@ -34,20 +36,25 @@ FLL_POST_PROCESSING=(
 	"#!/bin/bash"
 	"echo \"---- in postprocessing ----\""
 	"# add locale ja_JP.UTF-8, if not installed "
-	"if [ \"$( locale -a | grep ja_JP.utf8 )\" ]" 
+	"if [ -z \"\$( locale -a | grep ja_JP.utf8 )\" ]" 
 	"then"
-	"   echo \"ja_JP.UTF-8 is already installed\""
-	"   else"
 	"      echo \"ja_JP.UTF-8 is not installed yet. installing...\""
 	"      sed -i 's/^# ja_JP.UTF-8/ja_JP.UTF-8/' /etc/locale.gen"
+	"      if [ -z \"\$( grep ^ja_JP.utf8 /etc/locale.gen )\" ]"
+	"      then"
+	"           echo ja_JP.UTF-8 UTF-8 >> /etc/locale.gen"
+	"      fi"
 	"      locale-gen"
 	"fi"
-	"# add xsessions entry to set env necessary for scim japanese input "
-	"# use no.78 because 80 is used by scim-m17n, we want this before it"
-	"echo 'export XMODIFIERS=\"@im=SCIM\"'  > /etc/X11/Xsession.d/78xinput"
-	"echo 'export GTK_IM_MODULE=\"scim\"'  >> /etc/X11/Xsession.d/78xinput"
-	"echo 'export QT_IM_MODULE=\"scim\"'   >> /etc/X11/Xsession.d/78xinput"
-	"echo 'export XIM_PROGRAM=\"scim -d\"' >> /etc/X11/Xsession.d/78xinput"
+	"# for Japanese IME, scim-bridge has less problems with applications "
+	"# for scim-bridge symbolic links of alternatives are necessary "
+	"update-alternatives --install /etc/X11/xinit/xinput.d/all_ALL \\"
+	"  xinput-all_ALL /etc/X11/xinit/xinput.d/scim-bridge 50 "
+	"update-alternatives --install /etc/X11/xinit/xinput.d/ja_JP \\"
+	"  xinput-ja_JP   /etc/X11/xinit/xinput.d/scim-bridge 50 "
+	"# set im-switch to use scim for all_ALL, scim-bridge for ja_JP"
+	"im-switch -z all_ALL -s scim "
+	"im-switch -z ja_JP   -s scim-bridge "
 	"echo \"---- postprocessing done----\""
 )
 

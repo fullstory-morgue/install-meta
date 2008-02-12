@@ -18,7 +18,6 @@ FLL_PACKAGES=(
 	scim-tables-ko
 	ttf-alee
 	ttf-baekmuk
-	ttf-unfonts
 	scim-hangul
 	scim-uim
 	uim-hangul
@@ -28,20 +27,19 @@ FLL_POST_PROCESSING=(
 	"#!/bin/bash"
 	"echo \"---- in postprocessing ----\""
 	"# add locale ko_KR.UTF-8, if not installed "
-	"if [ \"$( locale -a | grep ko_KR.utf8 )\" ]" 
+	"if [ -z \"\$( locale -a | grep ko_KR.utf8 )\" ]" 
 	"then"
-	"   echo \"ko_KR.UTF-8 is already installed\""
-	"   else"
 	"      echo \"ko_KR.UTF-8 is not installed yet. installing...\""
 	"      sed -i 's/^# ko_KR.UTF-8/ko_KR.UTF-8/' /etc/locale.gen"
+	"      if [ -z \"\$( grep ^ko_KR.UTF-8 /etc/locale.gen )\" ]"
+	"      then"
+	"           echo ko_KR.UTF-8 UTF-8 >> /etc/locale.gen "
+	"      fi"
 	"      locale-gen"
 	"fi"
-	"# add xsessions entry to set env necessary for scim japanese input "
-	"# use no.78 because 80 is used by scim-m17n, we want this before it"
-	"echo 'export XMODIFIERS=\"@im=SCIM\"'  > /etc/X11/Xsession.d/78xinput"
-	"echo 'export GTK_IM_MODULE=\"scim\"'  >> /etc/X11/Xsession.d/78xinput"
-	"echo 'export QT_IM_MODULE=\"scim\"'   >> /etc/X11/Xsession.d/78xinput"
-	"echo 'export XIM_PROGRAM=\"scim -d\"' >> /etc/X11/Xsession.d/78xinput"
+	"# set im-switch to use scim"
+	"im-switch -z all_ALL -s scim"
+	"im-switch -z ko_KR   -s scim"
 	"echo \"---- postprocessing done----\""
 )
 
