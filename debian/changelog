@@ -1,9 +1,5 @@
-install-meta (0.2.7) UNRELEASED; urgency=low
+install-meta (0.2.7) unstable; urgency=low
 
-  [ Stefan Lippers-Hollmann ]
-  * NOT RELEASED YET
-
-  [ Joaquim Boura ]
   * fixed some issues when installong meta-packages on old systems. Changed
     SCIM settings using now debian recommended way. Use SCIM-bridge method
     which integrates better with some applications (thks to muchan)
