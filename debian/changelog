@@ -1,3 +1,9 @@
+install-meta (0.2.9) UNRELEASED; urgency=low
+
+  * NOT RELEASED YET
+
+ -- Stefan Lippers-Hollmann <s.l-h@gmx.de>  Mon, 18 Feb 2008 16:06:17 +0100
+
 install-meta (0.2.8) unstable; urgency=low
 
   * the "firmware" section is deprecated, don't promote it.
