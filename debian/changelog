@@ -1,8 +1,8 @@
-install-meta (0.2.9) UNRELEASED; urgency=low
+install-meta (0.2.9) unstable; urgency=low
 
-  * NOT RELEASED YET
+  * appease lintian and write (C) as © in debian/copyright.
 
- -- Stefan Lippers-Hollmann <s.l-h@gmx.de>  Mon, 18 Feb 2008 16:06:17 +0100
+ -- Stefan Lippers-Hollmann <s.l-h@gmx.de>  Wed, 20 Feb 2008 23:07:44 +0100
 
 install-meta (0.2.8) unstable; urgency=low
 
