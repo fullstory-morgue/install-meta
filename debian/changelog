@@ -1,8 +1,12 @@
 install-meta (0.2.10) UNRELEASED; urgency=low
 
+  [ Stefan Lippers-Hollmann ]
   * NOT RELEASED YET
 
- -- Stefan Lippers-Hollmann <s.l-h@gmx.de>  Wed, 20 Feb 2008 23:09:37 +0100
+  [ Horst Tritremmel ]
+  * Metapackages Games updated
+
+ -- Horst Tritremmel <hjt@sidux.com>  Thu, 21 Feb 2008 09:06:15 +0100
 
 install-meta (0.2.9) unstable; urgency=low
 

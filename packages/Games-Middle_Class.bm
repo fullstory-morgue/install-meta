@@ -16,7 +16,6 @@ FLL_PACKAGES=(
        neverputt
        frozen-bubble
        xmoto
-             xmoto-edit
        wormux
 )
 
