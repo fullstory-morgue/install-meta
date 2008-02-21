@@ -1,3 +1,9 @@
+install-meta (0.2.11) UNRELEASED; urgency=low
+
+  * NOT RELEASED YET
+
+ -- Stefan Lippers-Hollmann <s.l-h@gmx.de>  Fri, 22 Feb 2008 00:32:50 +0100
+
 install-meta (0.2.10) unstable; urgency=low
 
   * Metapackages Games updated
