@@ -11,7 +11,7 @@ msgstr ""
 
 #: install-meta.glade:8(property) 
 msgid "Install metapackages"
-msgstr "メタパッケージのインストール"
+msgstr "Install metapackages"
 
 #: install-meta.glade:79(property) 
 msgid "Exit"
