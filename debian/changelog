@@ -1,9 +1,5 @@
-install-meta (0.2.11) UNRELEASED; urgency=low
+install-meta (0.2.11) unstable; urgency=low
 
-  [ Stefan Lippers-Hollmann ]
-  * NOT RELEASED YET
-
-  [ Joaquim Boura ]
   * minimal ja font for kde does not support font used on window title so
     changed to plain english (muchan)
 
