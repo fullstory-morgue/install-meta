@@ -1,12 +1,12 @@
-install-meta (0.2.12) UNRELEASED; urgency=low
-
-  [ Stefan Lippers-Hollmann ]
-  * NOT RELEASED YET
+install-meta (0.2.12) unstable; urgency=low
 
   [ Horst Tritremmel ]
   * color and icon changed for nyx release
 
- -- Horst Tritremmel <hjt@sidux.com>  Mon, 03 Mar 2008 12:26:20 +0100
+  [ Stefan Lippers-Hollmann ]
+  * regenerate XPM icons.
+
+ -- Stefan Lippers-Hollmann <s.l-h@gmx.de>  Mon, 03 Mar 2008 15:42:01 +0100
 
 install-meta (0.2.11) unstable; urgency=low
 
