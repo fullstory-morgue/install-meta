@@ -40,7 +40,7 @@ create_dialog1 (void)
   dialog1 = gtk_dialog_new ();
   gtk_window_set_title (GTK_WINDOW (dialog1), _("Info"));
   gtk_window_set_resizable (GTK_WINDOW (dialog1), FALSE);
-  dialog1_icon_pixbuf = create_pixbuf ("metapackage-installer-16.xpm");
+  dialog1_icon_pixbuf = create_pixbuf ("metapackage-installer.xpm");
   if (dialog1_icon_pixbuf)
     {
       gtk_window_set_icon (GTK_WINDOW (dialog1), dialog1_icon_pixbuf);
@@ -255,8 +255,8 @@ create_window_main (void)
   GtkWidget *label21;
   GtkWidget *label17;
   GtkWidget *label_install;
-  GtkWidget *image8;
   GtkWidget *label22;
+  GtkWidget *image8;
   GtkTooltips *tooltips;
 
   tooltips = gtk_tooltips_new ();
@@ -387,7 +387,7 @@ create_window_main (void)
   gtk_container_add (GTK_CONTAINER (scrolledwindow6), viewport1);
   gtk_viewport_set_shadow_type (GTK_VIEWPORT (viewport1), GTK_SHADOW_ETCHED_IN);
 
-  label19 = gtk_label_new (_("<span font_desc=\"11\"><b><u>Hints for hardware with non-free needs:</u></b>\n\nsidux contains <b>only dfsg free software</b>, so you may want to add <b>contrib</b> and <b>non-free </b>to your \n<b>/etc/apt/sources.list</b>.\n\nYou can add contrib and non-free sources with the button <b>\"Install non-free\"</b>. This will add more metapackages.\n\nsee non-free category in the metapackages list </span> \n\n<span foreground=\"Red\" font_desc=\"12\"><b>firmware</b> needs non-free</span>\n\n<span foreground=\"Darkblue\" font_desc=\"12\">you can also try <b><i>\"smxi\"</i> script</b> for non free</span>"));
+  label19 = gtk_label_new (_("<span font_desc=\"11\"><b><u>Hints for hardware with non-free needs:</u></b>\n\nsidux contains <b>only dfsg free software</b>, so you may want to add <b>contrib</b> and <b>non-free </b>to your \n<b>/etc/apt/sources.list.d/debian.list</b> and <b>/etc/apt/sources.list.d/sidux.list</b>.\n\nYou can add contrib and non-free sources with the button <b>\"Install non-free\"</b>. This will add more metapackages.\n\nsee non-free category in the metapackages list </span> \n\n<span foreground=\"Red\" font_desc=\"12\"><b>firmware</b> needs non-free</span>\n\n<span foreground=\"Darkblue\" font_desc=\"12\">you can also try <b><i>\"smxi\"</i> script</b> for non free</span>"));
   gtk_widget_show (label19);
   gtk_container_add (GTK_CONTAINER (viewport1), label19);
   gtk_label_set_use_markup (GTK_LABEL (label19), TRUE);
@@ -463,17 +463,12 @@ create_window_main (void)
   gtk_notebook_set_tab_label (GTK_NOTEBOOK (notebook1), gtk_notebook_get_nth_page (GTK_NOTEBOOK (notebook1), 1), label17);
   gtk_label_set_use_markup (GTK_LABEL (label17), TRUE);
 
-  label_install = gtk_label_new (_("<span foreground=\"#A4A58B\" font_desc=\"Bold 14\">Install additional metapackages</span>"));
+  label_install = gtk_label_new (_("<span foreground=\"#455459\" font_desc=\"14\">Install additional metapackages</span>"));
   gtk_widget_show (label_install);
   gtk_fixed_put (GTK_FIXED (fixed5), label_install, 8, 0);
   gtk_widget_set_size_request (label_install, 518, 30);
   gtk_label_set_use_markup (GTK_LABEL (label_install), TRUE);
   gtk_misc_set_alignment (GTK_MISC (label_install), 0, 0.5);
-
-  image8 = create_pixmap (window_main, "install-meta-title.png");
-  gtk_widget_show (image8);
-  gtk_fixed_put (GTK_FIXED (fixed5), image8, 568, 0);
-  gtk_widget_set_size_request (image8, 160, 62);
 
   label22 = gtk_label_new (_("To use this feature, make sure you are connected to the internet!"));
   gtk_widget_show (label22);
@@ -481,6 +476,11 @@ create_window_main (void)
   gtk_widget_set_size_request (label22, 734, 30);
   gtk_label_set_use_markup (GTK_LABEL (label22), TRUE);
   gtk_misc_set_alignment (GTK_MISC (label22), 0, 0.5);
+
+  image8 = create_pixmap (window_main, "install-meta-title.png");
+  gtk_widget_show (image8);
+  gtk_fixed_put (GTK_FIXED (fixed5), image8, 568, 0);
+  gtk_widget_set_size_request (image8, 160, 62);
 
   g_signal_connect ((gpointer) window_main, "show",
                     G_CALLBACK (on_window_main_show),
@@ -560,8 +560,8 @@ create_window_main (void)
   GLADE_HOOKUP_OBJECT (window_main, label21, "label21");
   GLADE_HOOKUP_OBJECT (window_main, label17, "label17");
   GLADE_HOOKUP_OBJECT (window_main, label_install, "label_install");
-  GLADE_HOOKUP_OBJECT (window_main, image8, "image8");
   GLADE_HOOKUP_OBJECT (window_main, label22, "label22");
+  GLADE_HOOKUP_OBJECT (window_main, image8, "image8");
   GLADE_HOOKUP_OBJECT_NO_REF (window_main, tooltips, "tooltips");
 
   return window_main;

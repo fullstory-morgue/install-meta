@@ -11,7 +11,7 @@
   <property name="modal">False</property>
   <property name="resizable">False</property>
   <property name="destroy_with_parent">False</property>
-  <property name="icon">metapackage-installer-16.xpm</property>
+  <property name="icon">metapackage-installer.xpm</property>
   <property name="decorated">True</property>
   <property name="skip_taskbar_hint">False</property>
   <property name="skip_pager_hint">False</property>
@@ -721,7 +721,7 @@ or use   --dir=&lt;dir&gt;
 			  <property name="label" translatable="yes">&lt;span font_desc=&quot;11&quot;&gt;&lt;b&gt;&lt;u&gt;Hints for hardware with non-free needs:&lt;/u&gt;&lt;/b&gt;
 
 sidux contains &lt;b&gt;only dfsg free software&lt;/b&gt;, so you may want to add &lt;b&gt;contrib&lt;/b&gt; and &lt;b&gt;non-free &lt;/b&gt;to your 
-&lt;b&gt;/etc/apt/sources.list&lt;/b&gt;.
+&lt;b&gt;/etc/apt/sources.list.d/debian.list&lt;/b&gt; and &lt;b&gt;/etc/apt/sources.list.d/sidux.list&lt;/b&gt;.
 
 You can add contrib and non-free sources with the button &lt;b&gt;&quot;Install non-free&quot;&lt;/b&gt;. This will add more metapackages.
 
@@ -1034,7 +1034,7 @@ see non-free category in the metapackages list &lt;/span&gt;
 	  <property name="width_request">518</property>
 	  <property name="height_request">30</property>
 	  <property name="visible">True</property>
-	  <property name="label" translatable="yes">&lt;span foreground=&quot;#A4A58B&quot; font_desc=&quot;Bold 14&quot;&gt;Install additional metapackages&lt;/span&gt;</property>
+	  <property name="label" translatable="yes">&lt;span foreground=&quot;#455459&quot; font_desc=&quot;14&quot;&gt;Install additional metapackages&lt;/span&gt;</property>
 	  <property name="use_underline">False</property>
 	  <property name="use_markup">True</property>
 	  <property name="justify">GTK_JUSTIFY_LEFT</property>
@@ -1051,23 +1051,6 @@ see non-free category in the metapackages list &lt;/span&gt;
 	</widget>
 	<packing>
 	  <property name="x">8</property>
-	  <property name="y">0</property>
-	</packing>
-      </child>
-
-      <child>
-	<widget class="GtkImage" id="image8">
-	  <property name="width_request">160</property>
-	  <property name="height_request">62</property>
-	  <property name="visible">True</property>
-	  <property name="pixbuf">install-meta-title.png</property>
-	  <property name="xalign">0.5</property>
-	  <property name="yalign">0.5</property>
-	  <property name="xpad">0</property>
-	  <property name="ypad">0</property>
-	</widget>
-	<packing>
-	  <property name="x">568</property>
 	  <property name="y">0</property>
 	</packing>
       </child>
@@ -1095,6 +1078,23 @@ see non-free category in the metapackages list &lt;/span&gt;
 	<packing>
 	  <property name="x">8</property>
 	  <property name="y">30</property>
+	</packing>
+      </child>
+
+      <child>
+	<widget class="GtkImage" id="image8">
+	  <property name="width_request">160</property>
+	  <property name="height_request">62</property>
+	  <property name="visible">True</property>
+	  <property name="pixbuf">install-meta-title.png</property>
+	  <property name="xalign">0.5</property>
+	  <property name="yalign">0.5</property>
+	  <property name="xpad">0</property>
+	  <property name="ypad">0</property>
+	</widget>
+	<packing>
+	  <property name="x">568</property>
+	  <property name="y">0</property>
 	</packing>
       </child>
     </widget>
