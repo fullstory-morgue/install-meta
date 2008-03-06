@@ -11,12 +11,11 @@ FLL_PACKAGE_DEPMODS=(
 )
 
 FLL_PACKAGES=(
-      nexuiz
+       nexuiz
              nexuiz-music
        vegastrike
              vegastrike-music
-       planetpenguin-racer
-             planetpenguin-racer-extras
+       extremetuxracer
        scorched3d
 )
 

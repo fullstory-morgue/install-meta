@@ -16,8 +16,7 @@ FLL_PACKAGES=(
        torcs
        slune
        supertuxkart
-       planetpenguin-racer
-              planetpenguin-racer-extras
+       extremetuxracer
        stormbaancoureur
 )
 
