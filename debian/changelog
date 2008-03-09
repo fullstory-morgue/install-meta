@@ -1,8 +1,12 @@
 install-meta (0.2.14) UNRELEASED; urgency=low
 
+  [ Stefan Lippers-Hollmann ]
   * NOT RELEASED YET
 
- -- Stefan Lippers-Hollmann <s.l-h@gmx.de>  Fri, 07 Mar 2008 00:30:25 +0100
+  [ Joaquim Boura ]
+  * pt language files. Thanks to Rui Umbelino (VaMPiRiC_CRoW)
+
+ -- Joaquim Boura <x-un-i@sidux.com>  Sun, 09 Mar 2008 17:27:10 +0100
 
 install-meta (0.2.13) unstable; urgency=low
 

@@ -1,0 +1,37 @@
+# translation of pt.po to
+msgid ""
+msgstr ""
+"Project-Id-Version: pt\n"
+"POT-Creation-Date: 2007-01-30 14:20+0000\n"
+"PO-Revision-Date: 2008-03-08 20:28+0000\n"
+"Last-Translator: Rui Umbelino(VaMPiRiC_CRow)\n"
+"Language-Team:  <en@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: KBabel 1.11.4\n"
+
+#: install-meta.glade:8(property)
+msgid "Install metapackages"
+msgstr "Instalar Pacotes-Adicionais"
+
+#: install-meta.glade:79(property)
+msgid "Exit"
+msgstr "Sair"
+
+#: install-meta.glade:192(property)
+msgid "Install"
+msgstr "Instalar"
+
+#: install-meta.glade:330(property)
+msgid ""
+"no metapackage description files found\n"
+"or metapackage list empty.\n\n"
+"default directory is /usr/share/install-meta/\n"
+"or use --dir=&lt;dir&gt;"
+msgstr ""
+"Não se encontra os ficheiros de descrição\n"
+"dos pacotes-adicionais ou a lista está vazia.\n\n"
+"A pasta por omissão é /usr/share/install-meta/\n"
+"ou use --dir=&lt;dir&gt;"
+
