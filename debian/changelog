@@ -1,3 +1,9 @@
+install-meta (0.2.15) UNRELEASED; urgency=low
+
+  * NOT RELEASED YET
+
+ -- Stefan Lippers-Hollmann <s.l-h@gmx.de>  Sun, 09 Mar 2008 21:02:12 +0100
+
 install-meta (0.2.14) unstable; urgency=low
 
   * pt language files. Thanks to Rui Umbelino (VaMPiRiC_CRoW)
