@@ -26,6 +26,7 @@ FLL_PACKAGES=(
               luola-nostalgy
        bomberclone
        tomatoes
+       btanks
 )
 
 FLL_POST_PROCESSING=(
