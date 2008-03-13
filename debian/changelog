@@ -1,9 +1,5 @@
-install-meta (0.2.15) UNRELEASED; urgency=low
+install-meta (0.2.15) unstable; urgency=low
 
-  [ Stefan Lippers-Hollmann ]
-  * NOT RELEASED YET
-
-  [ Horst Tritremmel ]
   * metapackages Games updated
 
  -- Horst Tritremmel <hjt@sidux.com>  Wed, 12 Mar 2008 19:48:13 +0100
