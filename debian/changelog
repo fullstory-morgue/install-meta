@@ -1,8 +1,8 @@
-install-meta (0.2.16) UNRELEASED; urgency=low
+install-meta (0.2.16) unstable; urgency=low
 
-  * NOT RELEASED YET
+  * fix bashisms.
 
- -- Stefan Lippers-Hollmann <s.l-h@gmx.de>  Thu, 13 Mar 2008 01:07:41 +0100
+ -- Stefan Lippers-Hollmann <s.l-h@gmx.de>  Fri, 14 Mar 2008 01:39:47 +0100
 
 install-meta (0.2.15) unstable; urgency=low
 
