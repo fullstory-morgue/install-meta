@@ -14,7 +14,6 @@ FLL_PACKAGES=(
       kpat
       kmahjongg
       kshisen
-      pokerth
 )
 
 FLL_POST_PROCESSING=(

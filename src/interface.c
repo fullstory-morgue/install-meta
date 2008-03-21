@@ -40,7 +40,7 @@ create_dialog1 (void)
   dialog1 = gtk_dialog_new ();
   gtk_window_set_title (GTK_WINDOW (dialog1), _("Info"));
   gtk_window_set_resizable (GTK_WINDOW (dialog1), FALSE);
-  dialog1_icon_pixbuf = create_pixbuf ("metapackage-installer.xpm");
+  dialog1_icon_pixbuf = create_pixbuf ("metapackage-installer.png");
   if (dialog1_icon_pixbuf)
     {
       gtk_window_set_icon (GTK_WINDOW (dialog1), dialog1_icon_pixbuf);
@@ -107,7 +107,7 @@ create_package_info (void)
   package_info = gtk_window_new (GTK_WINDOW_TOPLEVEL);
   gtk_window_set_title (GTK_WINDOW (package_info), _("Package Info"));
   gtk_window_set_resizable (GTK_WINDOW (package_info), FALSE);
-  package_info_icon_pixbuf = create_pixbuf ("metapackage-installer-16.xpm");
+  package_info_icon_pixbuf = create_pixbuf ("metapackage-installer.png");
   if (package_info_icon_pixbuf)
     {
       gtk_window_set_icon (GTK_WINDOW (package_info), package_info_icon_pixbuf);
@@ -265,7 +265,7 @@ create_window_main (void)
   gtk_window_set_title (GTK_WINDOW (window_main), _("Install metapackages"));
   gtk_window_set_position (GTK_WINDOW (window_main), GTK_WIN_POS_CENTER_ALWAYS);
   gtk_window_set_resizable (GTK_WINDOW (window_main), FALSE);
-  window_main_icon_pixbuf = create_pixbuf ("metapackage-installer-16.xpm");
+  window_main_icon_pixbuf = create_pixbuf ("metapackage-installer.png");
   if (window_main_icon_pixbuf)
     {
       gtk_window_set_icon (GTK_WINDOW (window_main), window_main_icon_pixbuf);

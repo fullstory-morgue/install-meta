@@ -14,7 +14,7 @@ FLL_PACKAGES=(
        xskat
        pysol
               pysol-cardsets
-       python-poker2d
+       pokerth
 )
 
 FLL_POST_PROCESSING=(
