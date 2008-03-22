@@ -1,0 +1,105 @@
+FLL_DESCRIPTION="sidux-Seminarix"
+
+FLL_PRE_PROCESSING=(
+	"#!/bin/bash"
+	"echo \"---- in preprocessing ----\""
+	"# paste your code here (not necessary for normal install, only for preconfigs)"
+	"echo \"---- preprocessing done----\""
+)
+
+FLL_PACKAGE_DEPMODS=(
+)
+
+FLL_PACKAGES=(
+
+	gfxboot-theme-sidux-2007-04-eros-de
+	seminarix-handbook
+	sidux-art-wallpaper-nyx-edu
+	ark
+	gtk2-engines-qtcurve
+	gwenview
+	k3b
+	kaffeine
+	kde-core
+	kdm
+	kmix
+	knemo
+	konversation
+	kpdf
+	kpowersave
+	kppp
+	ksnapshot
+	siduxcc
+	iceweasel
+	sidux-edu
+	audacity
+	inkscape
+	karbon
+	kchart
+	keduca
+	kexi
+	kformula
+	kimagemapeditor
+	kivio
+	koffice-i18n-de
+	koshell
+	kplato
+	kpresenter
+	kspread
+	krusader
+	ksociograma
+	kword
+	quanta
+	scribus
+	vym
+	chemtool
+	gperiodic
+	kalzium
+	katomic
+	kgeography
+	sunclock
+	kturtle
+	dia
+	digikam
+	kino
+	kolourpaint
+	krita
+	stopmotion
+	tuxpaint
+	childsplay
+	childsplay-alphabet-sounds-de
+	childsplay-plugins
+	ktuberling
+	ktouch
+	tuxmath
+	gnuplot
+	kbruch
+	kig
+	kmplot
+	kpercentage
+	wxmaxima
+	hydrogen
+	juk
+	kstars
+	bibletime
+	bibletime-i18n
+	itools
+	hebcal
+	hdate-applet
+	minbar
+	hanzim
+	kdict
+	klatin
+	kvoctrain
+	kwordquiz
+	klogic
+	ksimus
+
+)
+
+FLL_POST_PROCESSING=(
+	"#!/bin/bash"
+	"echo \"---- in postprocessing ----\""
+	"# paste your code here (not necessary for normal install, only for preconfigs)"
+	"echo \"---- postprocessing done----\""
+)

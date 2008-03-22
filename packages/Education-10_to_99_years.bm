@@ -32,11 +32,14 @@ FLL_PACKAGES=(
 	xoscope
 	qcad
 	chemtool
+	bkchem
 	noteedit
 	timidity
 	lilypond
 	stopmotion
 	tiemu
+	tiemu-skinedit
+	tilp
 )
 
 
