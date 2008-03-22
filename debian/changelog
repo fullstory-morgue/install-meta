@@ -7,8 +7,10 @@ install-meta (0.2.17) UNRELEASED; urgency=low
   * Meta-Package Games V 7.1
   * metapackage-installer.xpm changed to metapackage-installer.png
   * Mate-Package Education updated 
+  * b
+  * bibletime removed
 
- -- Horst Tritremmel <hjt@sidux.com>  Sat, 22 Mar 2008 20:43:53 +0100
+ -- Horst Tritremmel <hjt@sidux.com>  Sat, 22 Mar 2008 20:49:55 +0100
 
 install-meta (0.2.16) unstable; urgency=low
 

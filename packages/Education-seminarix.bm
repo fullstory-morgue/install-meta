@@ -1,4 +1,4 @@
-FLL_DESCRIPTION="sidux-Seminarix"
+FEFLL_DESCRIPTION="sidux-Seminarix"
 
 FLL_PRE_PROCESSING=(
 	"#!/bin/bash"
@@ -81,8 +81,6 @@ FLL_PACKAGES=(
 	hydrogen
 	juk
 	kstars
-	bibletime
-	bibletime-i18n
 	itools
 	hebcal
 	hdate-applet
