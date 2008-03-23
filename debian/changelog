@@ -1,13 +1,8 @@
-install-meta (0.2.17) UNRELEASED; urgency=low
+install-meta (0.2.17) unstable; urgency=low
 
-  [ Stefan Lippers-Hollmann ]
-  * NOT RELEASED YET
-
-  [ Horst Tritremmel ]
   * Meta-Package Games V 7.1
   * metapackage-installer.xpm changed to metapackage-installer.png
   * Mate-Package Education updated 
-  * b
   * bibletime removed
 
  -- Horst Tritremmel <hjt@sidux.com>  Sat, 22 Mar 2008 20:49:55 +0100
