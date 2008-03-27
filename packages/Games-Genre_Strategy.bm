@@ -11,8 +11,7 @@ FLL_PACKAGE_DEPMODS=(
 )
 
 FLL_PACKAGES=(
-       stratagus
-       bos
+       boswars
        widelands
        wesnoth-all
        freeciv-client-gtk

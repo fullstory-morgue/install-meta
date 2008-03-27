@@ -29,6 +29,8 @@ FLL_PACKAGES=(
            crossfire-doc
            crossfire-server
            crossfire-edit
+       tmw
+           tmw-music
 )
 
 FLL_POST_PROCESSING=(
