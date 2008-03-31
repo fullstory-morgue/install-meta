@@ -1,9 +1,5 @@
-install-meta (0.2.19) UNRELEASED; urgency=low
+install-meta (0.2.19) unstable; urgency=low
 
-  [ Stefan Lippers-Hollmann ]
-  * NOT RELEASED YET
-
-  [ Joaquim Boura ]
   * fixed the pt language files. Thanks to Rui Umbelino (VaMPiRiC_CRow)
 
  -- Joaquim Boura <x-un-i@sidux.com>  Mon, 31 Mar 2008 00:54:34 +0200
