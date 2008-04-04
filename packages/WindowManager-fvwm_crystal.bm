@@ -15,10 +15,7 @@ FLL_PACKAGES=(
 	fvwm-crystal
 	fvwm-icons
 	rox-filer
-	xmms 
 	xmms2
-	xmms-shell
-	xmms-find
 	mpd
 	trayer
 	quodlibet
