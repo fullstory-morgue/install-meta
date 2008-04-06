@@ -1,10 +1,6 @@
-install-meta (0.2.20) UNRELEASED; urgency=low
+install-meta (0.2.20) unstable; urgency=low
 
-  [ Stefan Lippers-Hollmann ]
-  * NOT RELEASED YET
-
-  [ Ferdinand Thommes ]
-  * * removed xmms from fvwm-meta
+  * removed xmms from fvwm-meta.
 
  -- Ferdinand Thommes <devil@sidux.com>  Sat, 05 Apr 2008 09:09:29 +0200
 
