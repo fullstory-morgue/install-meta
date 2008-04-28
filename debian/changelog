@@ -1,14 +1,8 @@
-install-meta (0.2.21+nmu1) UNRELEASED; urgency=low
+install-meta (0.2.21) unstable; urgency=low
 
   * Added Package for openoffice german
 
  -- Joaquim Boura <x-un-i@sidux.com>  Mon, 28 Apr 2008 22:59:44 +0200
-
-install-meta (0.2.21) UNRELEASED; urgency=low
-
-  * NOT RELEASED YET
-
- -- Stefan Lippers-Hollmann <s.l-h@gmx.de>  Sun, 06 Apr 2008 13:43:58 +0200
 
 install-meta (0.2.20) unstable; urgency=low
 
