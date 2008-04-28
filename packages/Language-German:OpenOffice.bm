@@ -1,0 +1,32 @@
+FLL_DESCRIPTION="German OpenOffice Language Meta-Package for sidux."
+
+FLL_PRE_PROCESSING=(
+	"#!/bin/bash"
+	"echo \"---- in preprocessing ----\""
+	"# paste your code here (not necessary for normal install, only for preconfigs)"
+	"echo \"---- preprocessing done----\""
+)
+
+FLL_PACKAGE_DEPMODS=(
+)
+
+FLL_PACKAGES=(
+	openoffice.org-kde
+	openoffice.org-calc
+	openoffice.org-core
+	openoffice.org-draw
+	openoffice.org-help-de
+	openoffice.org-hyphenation-de
+	openoffice.org-impress
+	openoffice.org-math
+	openoffice.org-thesaurus-de
+	openoffice.org-writer
+	myspell-de-de
+)
+
+FLL_POST_PROCESSING=(
+	"#!/bin/bash"
+	"echo \"---- in postprocessing ----\""
+	"# paste your code here (not necessary for normal install, only for preconfigs)"
+	"echo \"---- postprocessing done----\""
+)
