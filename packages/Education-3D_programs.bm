@@ -20,6 +20,7 @@ FLL_PACKAGES=(
 	povray-examples
 	povray-includes
 	stopmotion
+	blender
 )
 
 FLL_POST_PROCESSING=(

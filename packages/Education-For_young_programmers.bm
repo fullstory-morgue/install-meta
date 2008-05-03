@@ -27,7 +27,7 @@ FLL_PACKAGES=(
 	fp-units-rtl
 	fp-units-fv
 	lazarus
-	gambas
+	gambas2
 	quanta
 	quanta-data
 	sun-java6-bin
@@ -40,6 +40,7 @@ FLL_PACKAGES=(
 	eclipse
 	bwbasic
 	ktechlab
+	kicad
 	kturtle
 	kommander
 	tk8.5

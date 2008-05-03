@@ -1,4 +1,4 @@
-FEFLL_DESCRIPTION="sidux-Seminarix"
+FLL_DESCRIPTION="sidux-Seminarix"
 
 FLL_PRE_PROCESSING=(
 	"#!/bin/bash"

@@ -1,8 +1,12 @@
 install-meta (0.2.22) UNRELEASED; urgency=low
 
+  [ Stefan Lippers-Hollmann ]
   * NOT RELEASED YET
 
- -- Stefan Lippers-Hollmann <s.l-h@gmx.de>  Mon, 28 Apr 2008 23:35:06 +0200
+  [ Horst Tritremmel ]
+  * Education updated 
+
+ -- Horst Tritremmel <hjt@sidux.com>  Sat, 03 May 2008 21:38:11 +0200
 
 install-meta (0.2.21) unstable; urgency=low
 
