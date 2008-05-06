@@ -1,12 +1,12 @@
-install-meta (0.2.22) UNRELEASED; urgency=low
+install-meta (0.2.22) unstable; urgency=low
 
   [ Stefan Lippers-Hollmann ]
-  * NOT RELEASED YET
+  * bump compat level to 7.
 
   [ Horst Tritremmel ]
   * Education updated 
 
- -- Horst Tritremmel <hjt@sidux.com>  Sat, 03 May 2008 21:38:11 +0200
+ -- Stefan Lippers-Hollmann <s.l-h@gmx.de>  Wed, 07 May 2008 01:17:32 +0200
 
 install-meta (0.2.21) unstable; urgency=low
 
