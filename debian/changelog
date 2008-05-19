@@ -1,9 +1,5 @@
-install-meta (0.2.23) UNRELEASED; urgency=low
+install-meta (0.2.23) unstable; urgency=low
 
-  [ Stefan Lippers-Hollmann ]
-  * NOT RELEASED YET
-
-  [ Horst Tritremmel ]
   * bugfix for source, s/source/./g 
 
  -- Horst Tritremmel <hjt@sidux.com>  Mon, 19 May 2008 17:14:46 +0200
