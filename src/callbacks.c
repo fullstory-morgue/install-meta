@@ -62,10 +62,10 @@ enum
     gchar  *package_name, *category_name;
     PangoFontDescription *font_desc;
     GdkColor color;
-    FILE *temp_file_package;
+    FILE *temp_file_package, *temp_file_exec;
     int fd;
-    char temp_meta_filename[STDLINE], column[MAXLINE], *text_left, *text_right, *text_description;
-    char system_call[MAXLINE];
+    char temp_meta_filename[STDLINE], temp_info_file[STDLINE], column[MAXLINE], *text_left, *text_right, *text_description;
+    char system_call[MAXLINE], system_call2[MAXLINE];
 
 
     // the model (treeview) from the main window
@@ -105,7 +105,7 @@ enum
 
    // create systemcall
    strncpy(system_call, "#!/bin/bash", MAXLINE );
-   strncat(system_call, "\nsource /etc/default/distro", MAXLINE );
+   strncat(system_call, "\n. /etc/default/distro", MAXLINE );
    strncat(system_call, "\ncd ", MAXLINE );
    strncat(system_call, INSTALL_PACKAGES_CONF_DIR, MAXLINE );
    strncat(system_call, "\nBMFILE=", MAXLINE );
@@ -115,9 +115,13 @@ enum
    strncat(system_call, ".bm", MAXLINE );
    strncat(system_call, "\necho filename~${BMFILE} > ", MAXLINE);
    strncat(system_call, temp_meta_filename, MAXLINE );
-   strncat(system_call, "\nsource ${BMFILE}", MAXLINE );
+   strncat(system_call, "\n. ", MAXLINE );
+   strncat(system_call, INSTALL_PACKAGES_CONF_DIR, MAXLINE );
+   strncat(system_call, "/${BMFILE}", MAXLINE );
    strncat(system_call, "\n   for pkgmod in ${FLL_PACKAGE_DEPMODS[@]}; do", MAXLINE );
-   strncat(system_call, "\nsource packages.d/${pkgmod}.bm", MAXLINE );
+   strncat(system_call, "\n. ", MAXLINE );
+   strncat(system_call, INSTALL_PACKAGES_CONF_DIR, MAXLINE );
+   strncat(system_call, "/packages.d/${pkgmod}.bm", MAXLINE );
    strncat(system_call, "\ndone", MAXLINE );
    strncat(system_call, "\nIFS=$'\\n'", MAXLINE );
    strncat(system_call, "\nfor pre_processing in ${FLL_PRE_PROCESSING[@]}; do", MAXLINE );
@@ -134,7 +138,36 @@ enum
    strncat(system_call, "\ndone", MAXLINE );
    strncat(system_call, "\nIFS=$' \\t\\n'", MAXLINE );
 
-   system(system_call);
+
+
+   strncpy(temp_info_file, "/tmp/temp_info_package.XXXXXX", STDLINE);
+   fd = mkstemp(temp_info_file);  // make a tempfile
+   if( fd )
+      close(fd);
+   else
+      printf("error: mkstemp(temp_info_file)\n");
+
+   // install the packages via apt-get, create the bash file to do that
+   temp_file_exec = fopen( temp_info_file, "w+" );
+   if( temp_file_exec == NULL )
+       printf( "The file %s was not opened\n", temp_info_file);
+   else {
+       //  create the bash file for install the packages
+       fprintf( temp_file_exec, "%s\n",
+               system_call
+       );
+
+       fclose( temp_file_exec );
+   }
+
+   // fill the second temp file with the name of packages (start the script above)
+   strncpy(system_call2, "chmod +x ", STDLINE);
+   strncat(system_call2, temp_info_file, STDLINE);
+   strncat(system_call2, "; ", STDLINE);
+   strncat(system_call2, temp_info_file, STDLINE);
+   system(system_call2);
+
+   unlink(temp_info_file);
 
 
    ///////////////////////////////////////////////////////////////////////////
@@ -305,17 +338,16 @@ void search_metapackages_names()
       }
 
       // build the script who creates the packagelist
-      fprintf( temp_create_package_list_at_start_fd, "%s\n%s\n%s\n%s\n%s%s\n%s\n%s%s\n%s\n%s\n%s\n%s\n%s%s\n", 
+      fprintf( temp_create_package_list_at_start_fd, "%s\n%s\n%s\n%s%s\n%s\n%s%s\n%s\n%s\n%s\n%s\n%s%s\n", 
                "#!/bin/bash",
-               "set -e",
                "DPKG_ARCH=$(dpkg --print-installation-architecture)",
-               "source /etc/default/distro",
+               ". /etc/default/distro",
                "cd ", INSTALL_PACKAGES_CONF_DIR,
                "[ -f \"/etc/apt/sources.list.d/debian.list\" ] && SRC=sources.list.d/debian.list || SRC=sources.list",
                "[ -z \"$(grep deb\\ .*debian\\.org.*main.*contrib /etc/apt/${SRC})\" ] && ",
                which_packages,
                "for modul in ${list}; do",
-               "   source ${modul}",
+               "   . ${modul}",
                "   echo $(echo ${modul} | cut -d. -f1)~${FLL_DESCRIPTION}",
                "   unset FLL_PACKAGES FLL_PACKAGE_DEPMODS FLL_DESCRIPTION FLL_PRE_PROCESSING FLL_POST_PROCESSING",
                "done > ",temp_file_packagelist
@@ -326,13 +358,14 @@ void search_metapackages_names()
 
 
    // fill the second temp file with the name of packages (start the script above)
-   strncpy(system_call, "sh ", STDLINE);
+   strncpy(system_call, "chmod +x ", STDLINE);
+   strncat(system_call, temp_create_package_list_sh, STDLINE);
+   strncat(system_call, "; ", STDLINE);
    strncat(system_call, temp_create_package_list_sh, STDLINE);
    system(system_call);
 
    /* remove the tempfile */
    unlink(temp_create_package_list_sh);
-
 
 }
 
@@ -634,16 +667,16 @@ on_button_install_clicked              (GtkButton       *button,
        printf( "The file %s was not opened\n", temp_file_aptgetcall_sh);
    else {
        //  create the bash file for install the packages
-       fprintf( temp_file_aptgetcall_sh_fd, "%s\n%s\n%s\n%s%s\n%s\n%s%s%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s%s%s%s%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s%s%s%s%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s%s%s\n%s\n%s\n",
+       fprintf( temp_file_aptgetcall_sh_fd, "%s\n%s\n%s\n%s%s\n%s\n%s%s%s\n%s%s%s\n%s\n%s%s%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s%s%s%s%s\n%s\n%s\n%s\n%s%s%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s%s%s%s%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s%s%s\n%s\n%s\n",
                "#!/bin/bash",
                is_chroot,
                "apt-get update",
                "cd ", INSTALL_PACKAGES_CONF_DIR,
                "echo; echo ======================================",
                "for modul in $(cat ",temp_file_packagelist,"); do ",
-               "   source ${modul}",
+               "   . ",INSTALL_PACKAGES_CONF_DIR,"/${modul}",
                "   for pkgmod in ${FLL_PACKAGE_DEPMODS[@]}; do",
-               "	source packages.d/${pkgmod}.bm",
+               "	. ",INSTALL_PACKAGES_CONF_DIR,"/packages.d/${pkgmod}.bm",
                "   done",
                "   echo; echo ======================================",
                "   echo start installation for ${modul}",
@@ -662,7 +695,7 @@ on_button_install_clicked              (GtkButton       *button,
 
                //  handle locale support packages
                "   printf \"\\nsearch all installed packages who need locale packages, please wait ...\\n\"",
-               "   source packages.d/i18n.bm",
+               "   . ",INSTALL_PACKAGES_CONF_DIR,"/packages.d/i18n.bm",
                "   FLL_I18N_SUPPORT=$(echo ${LANG%.*})",
                "   unset FLL_I18N_SUPPORT_PACKAGES",
                "   if [[ $FLL_I18N_SUPPORT ]]; then",
@@ -702,9 +735,10 @@ on_button_install_clicked              (GtkButton       *button,
 
 
    // run apt-get, (start the script above)
-   strncpy(system_call, "x-terminal-emulator -e sh ", MAXLINE);
-   strncat(system_call, temp_file_aptgetcall_sh, MAXLINE);
-   // start the install via x-terminal-emulator
+   strncpy(system_call, "chmod +x ", STDLINE);
+   strncat(system_call, temp_file_aptgetcall_sh, STDLINE);
+   strncat(system_call, "; x-terminal-emulator -e ", STDLINE);
+   strncat(system_call, temp_file_aptgetcall_sh, STDLINE);
    system(system_call);
 
 
