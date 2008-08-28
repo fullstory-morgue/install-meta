@@ -15,7 +15,7 @@ FLL_PACKAGES=(
 	stellarium
 	earth3d
 	kpovmodeler
-	povray-3.6
+	povray
 	povray-doc
 	povray-examples
 	povray-includes

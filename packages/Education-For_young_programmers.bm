@@ -5,6 +5,10 @@ FLL_PRE_PROCESSING=(
 	"echo \"---- in preprocessing ----\""
 	"# paste your code here (not necessary for normal install, only for preconfigs)"
 	"echo \"---- preprocessing done----\""
+	"echo \"---- es werden folgende Programmiersprachen installiert: FreePascal mit Lazarus, gambas2, quanta (HTML), Java auf Openjdk-Basis, tk/tcl (Scriptprogrammierung), prolog (deklarative Programmierung, swi), bwbasic----\""
+	"echo \"---- darüberhinaus folgende Programmier- bzw. Entwicklerwerkzeuge: eclipse, kommander, kturtle (Logo als Basis), kicad, ktechlab----\""
+	"echo \"---- the following programming languages will be installed: FreePascal with Lazarus, gambas2, quanta (HTML), Java based Openjdk, tk/tcl (script-programming), prolog (declarative programming, swi), bwbasic----\""
+	"echo \"---- about that to end the following programming or developer tools: eclipse, kommander, kturtle (Logo als Basis), kicad, ktechlab----\""
 )
 
 FLL_PACKAGE_DEPMODS=(
@@ -30,13 +34,15 @@ FLL_PACKAGES=(
 	gambas2
 	quanta
 	quanta-data
-	sun-java6-bin
-	sun-java6-demo
-	sun-java6-fonts
-	sun-java6-jdk
-	sun-java6-jre
-	sun-java6-plugin
-	sun-java6-source
+	openjdk-6-dbg
+	openjdk-6-demo
+	openjdk-6-doc
+	openjdk-6-jdk
+	openjdk-6-jre
+	openjdk-6-jre-headless
+	openjdk-6-jre-lib
+	openjdk-6-source
+	icedtea-gcjwebplugin 
 	eclipse
 	bwbasic
 	ktechlab
@@ -64,7 +70,10 @@ FLL_POST_PROCESSING=(
 	"echo \"---- in postprocessing ----\""
 	"# paste your code here (not necessary for normal install, only for preconfigs)"
 	"echo \"---- postprocessing done----\""
-	"echo \"--please use the metapackage non-free at first for installing the non-free repo for the sun-java stuff--\"
-        "echo \"--nutze bitte zunächst das Metapaket non-free um für die sun-java-Installation das non-free-Ropository zu erhalten--\"
-
+	"echo \"--ready--\"
+        "echo \"--fertig--\"
+	"echo \"---- es wurden folgende Programmiersprachen installiert: FreePascal mit Lazarus, gambas2, quanta (HTML), Java auf Openjdk-Basis, tk/tcl (Scriptprogrammierung), prolog (deklarative Programmierung, swi), bwbasic----\""
+	"echo \"---- darüberhinaus folgende Programmier- bzw. Entwicklerwerkzeuge: eclipse, kommander, kturtle (Logo als Basis), kicad, ktechlab----\""
+	"echo \"---- the following programming languages are installed: FreePascal with Lazarus, gambas2, quanta (HTML), Java based Openjdk, tk/tcl (script-programming), prolog (declarative programming, swi), bwbasic----\""
+	"echo \"---- about that to end the following programming or developer tools: eclipse, kommander, kturtle (Logo als Basis), kicad, ktechlab----\""
 )

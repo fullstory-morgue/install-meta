@@ -19,9 +19,10 @@ FLL_PACKAGES=(
 	vym
 	katomic
 	sunclock
-	qgis
-	qgis-plugin-grass
-	gpx2shp
+	#qgis
+	#qgis-plugin-grass
+	qalculate
+	#gpx2shp
 	einstein
 	tipptrainer-data-de
 	tipptrainer-data-en
@@ -40,6 +41,7 @@ FLL_PACKAGES=(
 	tiemu
 	tiemu-skinedit
 	tilp
+	xaos
 )
 
 
