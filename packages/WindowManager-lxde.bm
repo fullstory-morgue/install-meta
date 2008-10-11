@@ -1,0 +1,35 @@
+FLL_DESCRIPTION="LXDE with KDE-lite"
+
+FLL_PRE_PROCESSING=(
+	"#!/bin/bash"
+	"echo \"---- in preprocessing ----\""
+	"# paste your code here (not necessary for normal install, only for preconfigs)"
+	"echo \"---- preprocessing done----\""
+)
+
+FLL_PACKAGE_DEPMODS=(
+)
+
+FLL_PACKAGES=(
+        lxappearance
+	lxde
+	lxde-common
+	lxde-core
+	lxde-settings-daemon
+	lxnm
+	lxrandr
+	lxsession-lite
+	lxterminal
+	lxlauncher
+	pcmanfm
+	gpicview
+	obconf
+	tango-icon-theme
+)
+
+FLL_POST_PROCESSING=(
+	"#!/bin/bash"
+	"echo \"---- in postprocessing ----\""
+	"# paste your code here (not necessary for normal install, only for preconfigs)"
+	"echo \"---- postprocessing done----\""
+)
