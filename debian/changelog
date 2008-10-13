@@ -1,9 +1,5 @@
-install-meta (0.2.26) UNRELEASED; urgency=low
+install-meta (0.2.26) unstable; urgency=low
 
-  [ Stefan Lippers-Hollmann ]
-  * NOT RELEASED YET
-
-  [ Horst Tritremmel ]
   * WindowManager-lxde added 
 
  -- Horst Tritremmel <hjt@sidux.com>  Sat, 11 Oct 2008 19:58:31 +0200
