@@ -1,9 +1,5 @@
-install-meta (0.2.27) UNRELEASED; urgency=low
+install-meta (0.2.27) unstable; urgency=low
 
-  [ Stefan Lippers-Hollmann ]
-  * NOT RELEASED YET
-
-  [ Horst Tritremmel ]
   * Greek language packages added, thx to edhunter 
 
  -- Horst Tritremmel <hjt@sidux.com>  Wed, 29 Oct 2008 20:34:45 +0100
