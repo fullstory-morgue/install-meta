@@ -1,8 +1,8 @@
-install-meta (0.2.28) UNRELEASED; urgency=low
+install-meta (0.2.28) unstable; urgency=low
 
-  * NOT RELEASED YET
+  * bcm43xx-fwcutter doesn't exist anymore.
 
- -- Stefan Lippers-Hollmann <s.l-h@gmx.de>  Thu, 30 Oct 2008 12:04:23 +0100
+ -- Stefan Lippers-Hollmann <s.l-h@gmx.de>  Sun, 16 Nov 2008 00:29:19 +0100
 
 install-meta (0.2.27) unstable; urgency=low
 
