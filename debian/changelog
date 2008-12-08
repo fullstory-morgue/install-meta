@@ -1,7 +1,4 @@
-install-meta (0.2.29) UNRELEASED; urgency=low
-
-  [ Stefan Lippers-Hollmann ]
-  * NOT RELEASED YET
+install-meta (0.2.29) unstable; urgency=low
 
   [ Horst Tritremmel ]
   * WindowManager-kde.bm added 
