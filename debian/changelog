@@ -1,8 +1,13 @@
 install-meta (0.2.30) UNRELEASED; urgency=low
 
+  [ Stefan Lippers-Hollmann ]
   * NOT RELEASED YET
 
- -- Stefan Lippers-Hollmann <s.l-h@gmx.de>  Mon, 08 Dec 2008 01:37:34 +0100
+  [ Michael Deelwater ]
+  * Language-Japanese_Input.bm:
+    - Fix testing for ja_JP.UTF-8 in /etc/locale.gen. Thanks muchan!
+
+ -- Michael Deelwater <michael.deelwater@googlemail.com>  Tue, 16 Dec 2008 00:47:20 +0100
 
 install-meta (0.2.29) unstable; urgency=low
 
