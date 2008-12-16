@@ -1,4 +1,4 @@
-FLL_DESCRIPTION="Intel Pro/Wireless 2100 Driver Firmware"
+FLL_DESCRIPTION="Intel Pro/Wireless 2100/2200 Driver Firmware"
 
 FLL_PRE_PROCESSING=(
 	"#!/bin/bash"
@@ -11,7 +11,7 @@ FLL_PACKAGE_DEPMODS=(
 )
 
 FLL_PACKAGES=(
-	ipw2100-firmware
+	firmware-ipw2x00
 )
 
 FLL_POST_PROCESSING=(

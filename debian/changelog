@@ -1,8 +1,13 @@
 install-meta (0.2.31) UNRELEASED; urgency=low
 
+  [ Stefan Lippers-Hollmann ]
   * NOT RELEASED YET
 
- -- Stefan Lippers-Hollmann <s.l-h@gmx.de>  Tue, 16 Dec 2008 01:19:54 +0100
+  [ Michael Deelwater ]
+  * Non_free-Firmware_Intel_Wireless_ipw2x00.bm:
+    - New file replacing Non_free-Firmware_Intel_Wireless_ipw2{1,2}00.
+
+ -- Michael Deelwater <michael.deelwater@googlemail.com>  Tue, 16 Dec 2008 01:33:25 +0100
 
 install-meta (0.2.30) unstable; urgency=low
 
