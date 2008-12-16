@@ -1,0 +1,35 @@
+FLL_DESCRIPTION="Chinese IME: SCIM-PinYin"
+
+FLL_PRE_PROCESSING=(
+	"#!/bin/bash"
+	"echo \"---- in preprocessing ----\""
+	"# paste your code here (not necessary for normal install, only for preconfigs)"
+	"echo \"---- preprocessing done----\""
+)
+
+FLL_PACKAGE_DEPMODS=(
+)
+
+FLL_PACKAGES=(
+	scim
+	im-switch
+	scim-gtk2-immodule
+	scim-qtimm
+	scim-tables-zh
+	ttf-arphic-uming
+	scim-pinyin
+	scim-bridge-agent
+	scim-bridge-client-gtk
+	scim-bridge-client-qt
+	scim-bridge-client-qt4
+)
+
+FLL_POST_PROCESSING=(
+	"#!/bin/bash"
+	"echo \"---- in postprocessing ----\""
+	"update-alternatives --install /etc/X11/xinit/xinput.d/all_ALL \\"
+	"  xinput-all_ALL /etc/X11/xinit/xinput.d/scim-bridge 50 "
+	"im-switch -z all_ALL -s scim "
+	"echo \"---- postprocessing done----\""
+)
+

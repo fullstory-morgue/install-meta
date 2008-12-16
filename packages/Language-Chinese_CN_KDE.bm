@@ -1,0 +1,44 @@
+FLL_DESCRIPTION="Chinese_simplified localization of kde & text mode console support"
+
+
+FLL_PRE_PROCESSING=(
+	"#!/bin/bash"
+	"echo \"---- in preprocessing ----\""
+	"# paste your code here (not necessary for normal install, only for preconfigs)"
+	"echo \"---- preprocessing done----\""
+)
+
+FLL_PACKAGE_DEPMODS=(
+)
+
+FLL_PACKAGES=(
+	unifont
+	jfbterm
+	ttf-arphic-uming
+	kde-i18n-zhcn
+	manpages-zh
+)
+
+FLL_POST_PROCESSING=(
+	"#!/bin/bash"
+	"echo \"---- in postprocessing ----\""
+	"# add locale zh_CN.UTF-8, if not installed"
+	"if [ -z \"\$( locale -a | grep zh_CN.utf8 )\" ]" 
+	"then"
+	"      echo \"zh_CN.UTF-8 is not installed yet. installing...\""
+	"      sed -i 's/^# zh_CN.UTF-8/zh_CN.UTF-8/' /etc/locale.gen"
+	"      if [ -z \"\$( grep ^zh_CN.UTF-8 /etc/locale.gen )\" ]"
+	"      then"
+	"           echo zh_CN.UTF-8 UTF-8 >> /etc/locale.gen"
+	"      fi"
+	"      locale-gen"
+	"fi"
+	"# and set it the default locale"
+	"update-locale LANG=zh_CN.UTF-8 LANGUAGE"
+	"# 1 line script to enable tty to show Chinese output"
+	"echo '#!/bin/bash'   > /usr/local/bin/jpconsole"
+	"echo 'LANG=zh_CN.UTF-8 LC_CTYPE=zh_CN.UTF-8 jfbterm -q -c UTF-8' >> /usr/local/bin/zhconsole" 
+	"chmod +x /usr/local/bin/zhconsole"
+	"echo \"---- postprocessing done----\""
+)
+
