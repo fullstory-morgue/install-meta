@@ -1,14 +1,11 @@
-install-meta (0.2.31) UNRELEASED; urgency=low
-
-  [ Stefan Lippers-Hollmann ]
-  * NOT RELEASED YET
+install-meta (0.2.31) unstable; urgency=low
 
   [ Michael Deelwater ]
   * Non_free-Firmware_Intel_Wireless_ipw2x00.bm:
     - New file replacing Non_free-Firmware_Intel_Wireless_ipw2{1,2}00.
 
   [ Joaquim Boura ]
-  * addind packages for chinese language thanks to muchan
+  * adding packages for chinese language, thanks to muchan.
 
  -- Joaquim Boura <x-un-i@sidux.com>  Tue, 16 Dec 2008 21:28:18 +0100
 
