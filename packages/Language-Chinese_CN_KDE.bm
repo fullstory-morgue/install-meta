@@ -36,7 +36,7 @@ FLL_POST_PROCESSING=(
 	"# and set it the default locale"
 	"update-locale LANG=zh_CN.UTF-8 LANGUAGE"
 	"# 1 line script to enable tty to show Chinese output"
-	"echo '#!/bin/bash'   > /usr/local/bin/jpconsole"
+	"echo '#!/bin/sh'   > /usr/local/bin/zhconsole"
 	"echo 'LANG=zh_CN.UTF-8 LC_CTYPE=zh_CN.UTF-8 jfbterm -q -c UTF-8' >> /usr/local/bin/zhconsole" 
 	"chmod +x /usr/local/bin/zhconsole"
 	"echo \"---- postprocessing done----\""
