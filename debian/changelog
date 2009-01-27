@@ -1,8 +1,9 @@
-install-meta (0.2.33) UNRELEASED; urgency=low
+install-meta (0.2.33) unstable; urgency=low
 
-  * NOT RELEASED YET
+  * switch from dh_clean -k to dh_prep, to become compliant with debhelper 7
+    and to make lintian happy.
 
- -- Stefan Lippers-Hollmann <s.l-h@gmx.de>  Thu, 18 Dec 2008 00:18:01 +0100
+ -- Stefan Lippers-Hollmann <s.l-h@gmx.de>  Tue, 27 Jan 2009 17:11:02 +0100
 
 install-meta (0.2.32) unstable; urgency=low
 
