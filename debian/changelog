@@ -1,11 +1,7 @@
-install-meta (0.2.35) UNRELEASED; urgency=low
+install-meta (0.2.35) unstable; urgency=low
 
-  [ Stefan Lippers-Hollmann ]
-  * NOT RELEASED YET
-
-  [ Joaquim Boura ]
   * updated greek language metapackage (thks edhunter)
-    Added portuguese language meta package ((thks edhunter)
+    Added portuguese language meta package (thks edhunter)
 
  -- Joaquim Boura <x-un-i@sidux.com>  Tue, 28 Apr 2009 20:47:56 +0200
 
