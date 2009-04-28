@@ -11,7 +11,7 @@ FLL_PACKAGE_DEPMODS=(
 )
 
 FLL_PACKAGES=(
-      kde-i18n-el
+      kde-l10n-el
       aspell-el
       myspell-el-gr
       sidux-manual-el
