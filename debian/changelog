@@ -1,3 +1,9 @@
+install-meta (0.2.37) UNRELEASED; urgency=low
+
+  * NOT RELEASED YET
+
+ -- Stefan Lippers-Hollmann <s.l-h@gmx.de>  Sat, 30 May 2009 00:24:57 +0200
+
 install-meta (0.2.36) unstable; urgency=low
 
   [ Joaquim Boura ]
