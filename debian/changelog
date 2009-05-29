@@ -1,8 +1,12 @@
 install-meta (0.2.36) UNRELEASED; urgency=low
 
+  [ Stefan Lippers-Hollmann ]
   * NOT RELEASED YET
 
- -- Stefan Lippers-Hollmann <s.l-h@gmx.de>  Wed, 29 Apr 2009 01:21:27 +0200
+  [ Joaquim Boura ]
+  * some xfce packages no longer exist for current xfce. Added power-manager.
+
+ -- Joaquim Boura <x-un-i@sidux.com>  Fri, 29 May 2009 23:00:46 +0200
 
 install-meta (0.2.35) unstable; urgency=low
 
