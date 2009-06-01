@@ -16,7 +16,7 @@ FLL_PACKAGES=(
 	jfbterm
 	ttf-alee
 	ttf-baekmuk
-	kde-i18n-ko
+	kde-l10n-ko
 	manpages-ko
 )
 

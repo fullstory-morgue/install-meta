@@ -15,7 +15,7 @@ FLL_PACKAGES=(
 	unifont
 	jfbterm
 	ttf-kochi-gothic
-	kde-i18n-ja
+	kde-l10n-ja
 	manpages-ja
 	sidux-manual-ja
 )

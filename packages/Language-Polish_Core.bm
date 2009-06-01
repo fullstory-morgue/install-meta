@@ -1,4 +1,4 @@
-FLL_DESCRIPTION="Packages  kde-i18n-pl, aspell-pl, manpages-pl, myspell-pl, ipolish, k3b-i18n"
+FLL_DESCRIPTION="Packages  kde-l10n-pl, aspell-pl, manpages-pl, myspell-pl, ipolish, k3b-i18n"
 
 FLL_PRE_PROCESSING=(
 	"#!/bin/bash"
@@ -11,7 +11,7 @@ FLL_PACKAGE_DEPMODS=(
 )
 
 FLL_PACKAGES=(
-	kde-i18n-pl
+	kde-l10n-pl
 	aspell-pl
 	manpages-pl
 	myspell-pl

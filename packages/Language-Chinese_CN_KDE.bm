@@ -15,7 +15,7 @@ FLL_PACKAGES=(
 	unifont
 	jfbterm
 	ttf-arphic-uming
-	kde-i18n-zhcn
+	kde-l10n-zhcn
 	manpages-zh
 )
 

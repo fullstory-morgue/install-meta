@@ -1,4 +1,4 @@
-FLL_DESCRIPTION="Packages  kde-i18n-ru, apt-howto-ru, aspell-ru, console-cyrillic, manpages-ru, myspell-ru, irussian"
+FLL_DESCRIPTION="Packages  kde-l10n-ru, apt-howto-ru, aspell-ru, console-cyrillic, manpages-ru, myspell-ru, irussian"
 
 FLL_PRE_PROCESSING=(
 	"#!/bin/bash"
@@ -11,7 +11,7 @@ FLL_PACKAGE_DEPMODS=(
 )
 
 FLL_PACKAGES=(
-	kde-i18n-ru
+	kde-l10n-ru
 	apt-howto-ru
 	aspell-ru
 	console-cyrillic

@@ -11,7 +11,7 @@ FLL_PACKAGE_DEPMODS=(
 )
 
 FLL_PACKAGES=(
-      kde-i18n-hr
+      kde-l10n-hr
       aspell-hr
       myspell-hr
       
