@@ -1,3 +1,9 @@
+install-meta (0.2.38) UNRELEASED; urgency=low
+
+  * NOT RELEASED YET
+
+ -- Stefan Lippers-Hollmann <s.l-h@gmx.de>  Wed, 03 Jun 2009 00:20:40 +0200
+
 install-meta (0.2.37) unstable; urgency=low
 
   * actualized language packages for kde4. language file name has changed.
