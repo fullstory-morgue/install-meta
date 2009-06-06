@@ -387,7 +387,7 @@ create_window_main (void)
   gtk_container_add (GTK_CONTAINER (scrolledwindow6), viewport1);
   gtk_viewport_set_shadow_type (GTK_VIEWPORT (viewport1), GTK_SHADOW_ETCHED_IN);
 
-  label19 = gtk_label_new (_("<span font_desc=\"11\"><b><u>Hints for hardware with non-free needs:</u></b>\n\nsidux contains <b>only dfsg free software</b>, so you may want to add <b>contrib</b> and <b>non-free </b>to your \n<b>/etc/apt/sources.list.d/debian.list</b> and <b>/etc/apt/sources.list.d/sidux.list</b>.\n\nYou can add contrib and non-free sources with the button <b>\"Install non-free\"</b>. This will add more metapackages.\n\nsee non-free category in the metapackages list </span> \n\n<span foreground=\"Red\" font_desc=\"12\"><b>firmware</b> needs non-free</span>\n\n<span foreground=\"Darkblue\" font_desc=\"12\">you can also try <b><i>\"smxi\"</i> script</b> for non free</span>"));
+  label19 = gtk_label_new (_("<span font_desc=\"11\"><b><u>Hints for hardware with non-free needs:</u></b>\n\nsidux contains <b>only dfsg free software</b>, so you may want to add <b>contrib</b> and <b>non-free </b>to your \n<b>/etc/apt/sources.list.d/debian.list</b> and <b>/etc/apt/sources.list.d/sidux.list</b>.\n\nYou can add contrib and non-free sources with the button <b>\"Install non-free\"</b>. This will add more metapackages.\n\nsee non-free category in the metapackages list </span> \n\n<span foreground=\"Red\" font_desc=\"12\"><b>firmware</b> needs non-free</span>"));
   gtk_widget_show (label19);
   gtk_container_add (GTK_CONTAINER (viewport1), label19);
   gtk_label_set_use_markup (GTK_LABEL (label19), TRUE);
