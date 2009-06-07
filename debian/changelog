@@ -1,3 +1,9 @@
+install-meta (0.2.39) UNRELEASED; urgency=low
+
+  * NOT RELEASED YET
+
+ -- Stefan Lippers-Hollmann <s.l-h@gmx.de>  Sat, 06 Jun 2009 14:46:58 +0200
+
 install-meta (0.2.38) unstable; urgency=low
 
   * don't suggest dangerous 3rd party tools to the user.
