@@ -3,14 +3,22 @@ Section: admin
 Priority: extra
 Maintainer: Horst Tritremmel <hjt@sidux.com>
 Uploaders: Stefan Lippers-Hollmann <s.l-h@gmx.de>, Joaquim Boura <x-un-i@sidux.com>
-Build-Depends: debhelper (>= 7), automake1.10, autotools-dev, libgtk2.0-dev, libglade2-dev
-Standards-Version: 3.8.1
+Build-Depends: debhelper (>= 7),
+ automake1.10,
+ autotools-dev,
+ libgtk2.0-dev,
+ libglade2-dev
+Standards-Version: 3.8.2
 Vcs-Svn: svn://svn.berlios.de/fullstory/install-meta/trunk
 Vcs-Browser: http://svn.berlios.de/wsvn/fullstory/install-meta/trunk/
 
 Package: install-meta
 Architecture: any
-Depends: ${shlibs:Depends}, ${misc:Depends}, xterm | x-terminal-emulator, dctrl-tools, menu
+Depends: ${shlibs:Depends},
+ ${misc:Depends},
+ xterm | x-terminal-emulator,
+ dctrl-tools,
+ menu
 Description: Install additional meta tasks to sidux
  Frontend for installing additional meta tasks.
  Put the <metapackage-description-files>.bm to /usr/share/install-meta/
