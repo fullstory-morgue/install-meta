@@ -1,8 +1,9 @@
-install-meta (0.2.40) UNRELEASED; urgency=low
+install-meta (0.2.40) ORPHANED; urgency=low
 
   * NOT RELEASED YET
+  * ORPHAN PACKAGE.
 
- -- Stefan Lippers-Hollmann <s.l-h@gmx.de>  Thu, 02 Jul 2009 23:19:49 +0200
+ -- Stefan Lippers-Hollmann <s.l-h@gmx.de>  Tue, 07 Jul 2009 21:30:45 +0200
 
 install-meta (0.2.39) unstable; urgency=low
 
