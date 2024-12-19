@@ -2,6 +2,7 @@ install-meta (0.2.40) ORPHANED; urgency=low
 
   * NOT RELEASED YET
   * ORPHAN PACKAGE.
+  * refresh SVG graphics, shut up inkscape's migration from old versions.
 
  -- Stefan Lippers-Hollmann <s.l-h@gmx.de>  Tue, 07 Jul 2009 21:30:45 +0200
 
